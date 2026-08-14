@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savely Byzov — Linguist · EFL Teacher · Researcher</title>
+<meta name="description" content="Savely Byzov — university lecturer and researcher in English language teaching, sociolinguistics, and the history of English. Belgrade, Serbia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#E7F0F9;
+    --bg-soft:#DCE9F5;
+    --ink:#152433;
+    --muted:#4D6275;
+    --faint:#7B8EA0;
+    --hair:#C5D7E8;
+    --accent:#236A93;
+    --accent-warm:#B8622E;
+    --card:#ffffff;
+    --serif:"Instrument Serif", Georgia, serif;
+    --sans:"Inter", system-ui, -apple-system, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{background:#C7DCEE;}
+
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;text-underline-offset:3px;}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+
+  .wrap{
+    max-width:820px;
+    margin:0 auto;
+    padding:88px 32px 120px;
+  }
+
+  /* ---- Language switcher ---- */
+  .langbar{
+    position:fixed;
+    top:22px;
+    right:22px;
+    z-index:60;
+    display:flex;
+    gap:4px;
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--hair);
+    border-radius:999px;
+    padding:4px;
+    box-shadow:0 4px 18px rgba(20,50,80,.1);
+  }
+  .langbar button{
+    appearance:none;
+    border:none;
+    background:transparent;
+    font-family:var(--sans);
+    font-size:.76rem;
+    font-weight:600;
+    letter-spacing:.04em;
+    color:var(--faint);
+    padding:7px 13px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease;
+  }
+  .langbar button:hover{color:var(--accent);}
+  .langbar button.active{
+    background:var(--accent);
+    color:#fff;
+  }
+  @media (max-width:600px){
+    .langbar{top:14px;right:14px;}
+    .langbar button{padding:6px 10px;font-size:.7rem;}
+  }
+
+  /* ---- Header ---- */
+  .head{
+    display:flex;
+    align-items:center;
+    gap:36px;
+    margin-bottom:8px;
+  }
+  .head-text{flex:1;min-width:0;}
+
+  .topline{
+    font-size:.72rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--faint);
+    margin:0 0 18px;
+  }
+
+  .name{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2.8rem, 8vw, 4.6rem);
+    line-height:1.02;
+    letter-spacing:-.01em;
+    margin:0;
+  }
+
+  .role{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:clamp(1.2rem, 4vw, 1.55rem);
+    color:var(--accent);
+    margin:12px 0 0;
+  }
+
+  .photo{
+    width:148px;
+    height:148px;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+    box-shadow:0 6px 28px rgba(20,50,80,.18);
+    outline:4px solid rgba(255,255,255,.65);
+  }
+
+  .contacts{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 24px;
+    margin:30px 0 0;
+    font-size:.92rem;
+  }
+  .contacts span{color:var(--faint);}
+
+  .intro{
+    max-width:62ch;
+    color:var(--muted);
+    margin:30px 0 0;
+    font-size:1.05rem;
+  }
+
+  /* ---- Tabs ---- */
+  .tabbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:48px;
+    border-top:1px solid var(--hair);
+    padding-top:28px;
+  }
+  .tabbar button{
+    appearance:none;
+    border:1px solid var(--hair);
+    background:rgba(255,255,255,.55);
+    border-radius:999px;
+    padding:9px 18px;
+    font-family:var(--sans);
+    font-size:.74rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--muted);
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .tabbar button:hover{color:var(--accent);}
+  .tabbar button[aria-selected="true"]{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+  }
+  @media (max-width:600px){
+    .tabbar{gap:6px;padding-top:22px;}
+    .tabbar button{padding:8px 14px;font-size:.68rem;}
+  }
+
+  .tabpanel{
+    display:none;
+    padding-top:36px;
+  }
+  .tabpanel.active{
+    display:block;
+    animation:panelIn .35s ease;
+  }
+  @keyframes panelIn{
+    from{opacity:0;transform:translateY(8px);}
+    to{opacity:1;transform:none;}
+  }
+
+  .sub-label{
+    font-size:.68rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--faint);
+    font-weight:600;
+    margin:36px 0 22px;
+  }
+  .sub-label:first-child{margin-top:0;}
+
+  .entry{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:4px 28px;
+    margin-bottom:32px;
+    padding:14px;
+    margin-left:-14px;
+    margin-right:-14px;
+    border-radius:14px;
+  }
+  .entry:last-child{margin-bottom:0;}
+
+  .entry h3{
+    font-size:1.1rem;
+    font-weight:600;
+    margin:0;
+    line-height:1.35;
+  }
+  .entry .place{
+    color:var(--accent);
+    font-size:.95rem;
+    margin:2px 0 0;
+  }
+  .entry .date{
+    color:var(--faint);
+    font-size:.85rem;
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+    text-align:right;
+    padding-top:4px;
+  }
+  .entry ul{
+    grid-column:1 / -1;
+    margin:12px 0 0;
+    padding:0;
+    list-style:none;
+    color:var(--muted);
+  }
+  .entry li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:7px;
+    font-size:.96rem;
+  }
+  .entry li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:.7em;
+    width:8px;
+    height:1px;
+    background:var(--accent);
+  }
+  .entry .detail{
+    grid-column:1 / -1;
+    margin:8px 0 0;
+    color:var(--muted);
+    font-size:.96rem;
+  }
+  .entry .detail em{color:var(--ink);font-style:italic;}
+
+  /* ---- Festival / photo cards ---- */
+  .fest-entry{
+    display:grid;
+    grid-template-columns:132px 1fr auto;
+    grid-template-areas:
+      "photo title date"
+      "photo desc desc";
+    gap:4px 24px;
+    align-items:start;
+  }
+  .fest-photo-wrap{
+    grid-area:photo;
+    width:132px;
+    height:132px;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 16px rgba(20,50,80,.14);
+    cursor:zoom-in;
+    flex-shrink:0;
+  }
+  .fest-photo-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .5s ease;
+  }
+  .fest-photo-wrap:hover img{transform:scale(1.08);}
+  .fest-entry .head-block{grid-area:title;}
+  .fest-entry .date{grid-area:date;}
+  .fest-entry .detail{grid-area:desc;margin-top:8px;}
+
+  @media (max-width:600px){
+    .fest-entry{
+      grid-template-columns:88px 1fr;
+      grid-template-areas:
+        "photo title"
+        "desc desc";
+    }
+    .fest-entry .date{grid-column:2;grid-row:1;text-align:left;}
+    .fest-photo-wrap{width:88px;height:88px;}
+  }
+
+  /* ---- Lightbox ---- */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(10,20,32,.86);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    z-index:200;
+    cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:92vw;
+    max-height:88vh;
+    border-radius:10px;
+    box-shadow:0 24px 70px rgba(0,0,0,.5);
+  }
+
+  /* ---- Tag lists ---- */
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+  .tags li{
+    border:1px solid var(--hair);
+    border-radius:999px;
+    padding:7px 16px;
+    font-size:.9rem;
+    color:var(--ink);
+    background:rgba(255,255,255,.5);
+    transition:background .2s ease, border-color .2s ease, transform .2s ease, color .2s ease;
+    cursor:default;
+  }
+  .tags li:hover{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+    transform:translateY(-2px);
+  }
+  .tags.interests li:hover{
+    background:var(--accent-warm);
+    border-color:var(--accent-warm);
+  }
+
+  /* ---- Languages ---- */
+  .langs{margin:0;padding:0;list-style:none;}
+  .lang{
+    display:grid;
+    grid-template-columns:120px 1fr auto;
+    align-items:center;
+    gap:18px;
+    padding:14px 0;
+    border-bottom:1px solid var(--hair);
+  }
+  .lang:last-child{border-bottom:none;}
+  .lang .lname{font-weight:600;font-size:1rem;}
+  .lang .level{color:var(--muted);font-size:.88rem;white-space:nowrap;}
+  .track{height:2px;background:var(--hair);position:relative;border-radius:2px;}
+  .track i{position:absolute;left:0;top:0;height:100%;background:var(--accent);border-radius:2px;}
+
+  /* ---- Footer ---- */
+  footer{
+    margin-top:56px;
+    border-top:1px solid var(--hair);
+    padding-top:30px;
+    font-size:.85rem;
+    color:var(--faint);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:600px){
+    .wrap{padding:56px 22px 80px;}
+    .head{flex-direction:column-reverse;align-items:flex-start;gap:24px;}
+    .photo{width:120px;height:120px;}
+    .entry{grid-template-columns:1fr;}
+    .entry .date{text-align:left;padding-top:6px;order:3;}
+    .lang{grid-template-columns:96px 1fr;}
+    .lang .level{grid-column:1 / -1;}
+    .lang .track{grid-column:1 / -1;}
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(12px);animation:rise .7s ease forwards;}
+    @keyframes rise{to{opacity:1;transform:none;}}
+  }
+</style>
+</head>
+<body>
+
+<div class="langbar" role="group" aria-label="Language">
+  <button type="button" data-lang="en">EN</button>
+  <button type="button" data-lang="ru">RU</button>
+  <button type="button" data-lang="sr">SR</button>
+</div>
+
+<main class="wrap">
+
+  <header>
+    <div class="head reveal">
+      <div class="head-text">
+        <p class="topline" id="topline">Belgrade, Serbia</p>
+        <h1 class="name" id="name">Savely Byzov</h1>
+        <p class="role" id="role">Linguist · EFL Teacher · Researcher</p>
+      </div>
+      <img class="photo" src="https://drive.google.com/file/d/1hPi2Zl5zKp996AcWZwGDRVFGHkx_UIZD/view?usp=drive_link">
+    </div>
+
+    <nav class="contacts reveal" aria-label="Contact">
+      <a href="mailto:savage.avery@yandex.ru">hello@saveliybyzov.ru</a>
+      <a href="https://t.me/savageavery">Telegram <span>@savageavery</span></a>
+      <a href="tel:+381658389596">+381 65 8389596</a>
+    </nav>
+
+    <p class="intro reveal" id="intro"></p>
+  </header>
+
+  <nav class="tabbar" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" data-tab="experience" id="tab-experience" aria-selected="true"></button>
+    <button type="button" role="tab" data-tab="education" id="tab-education" aria-selected="false"></button>
+    <button type="button" role="tab" data-tab="skillslang" id="tab-skillslang" aria-selected="false"></button>
+    <button type="button" role="tab" data-tab="festivals" id="tab-festivals" aria-selected="false"></button>
+  </nav>
+
+  <div class="tabpanel active" id="panel-experience" role="tabpanel">
+      <article class="entry">
+        <div>
+          <h3 id="exp1-title"></h3>
+          <p class="place" id="exp1-place"></p>
+        </div>
+        <p class="date" id="exp1-date"></p>
+        <ul id="exp1-list"></ul>
+      </article>
+
+      <article class="entry">
+        <div>
+          <h3 id="exp2-title"></h3>
+          <p class="place" id="exp2-place"></p>
+        </div>
+        <p class="date" id="exp2-date"></p>
+        <ul id="exp2-list"></ul>
+      </article>
+
+      <h3 class="sub-label" id="sub-activity"></h3>
+      <article class="entry">
+        <ul style="margin-top:0;" id="activity-list"></ul>
+      </article></div>
+  <div class="tabpanel" id="panel-education" role="tabpanel">
+      <article class="entry">
+        <div>
+          <h3 id="edu1-title"></h3>
+          <p class="place" id="edu1-place"></p>
+        </div>
+        <p class="date" id="edu1-date"></p>
+        <p class="detail" id="edu1-detail"></p>
+      </article>
+
+      <article class="entry">
+        <div>
+          <h3 id="edu2-title"></h3>
+          <p class="place" id="edu2-place"></p>
+        </div>
+        <p class="date" id="edu2-date"></p>
+        <p class="detail" id="edu2-detail"></p>
+      </article></div>
+  <div class="tabpanel" id="panel-skillslang" role="tabpanel">
+      <h3 class="sub-label" id="sub-skills"></h3>
+      <ul class="tags" id="skills-list"></ul>
+
+      <h3 class="sub-label" id="sub-languages"></h3>
+      <ul class="langs" id="langs-list">
+        <li class="lang">
+          <span class="lname"></span>
+          <span class="track"><i style="width:90%"></i></span>
+          <span class="level"></span>
+        </li>
+        <li class="lang">
+          <span class="lname"></span>
+          <span class="track"><i style="width:100%"></i></span>
+          <span class="level"></span>
+        </li>
+        <li class="lang">
+          <span class="lname"></span>
+          <span class="track"><i style="width:55%"></i></span>
+          <span class="level"></span>
+        </li>
+      </ul>
+
+      <h3 class="sub-label" id="sub-interests"></h3>
+      <ul class="tags interests" id="interests-list"></ul></div>
+  <div class="tabpanel" id="panel-festivals" role="tabpanel">
+      <article class="entry fest-entry">
+        <div class="fest-photo-wrap"><img id="festA-img" src="assets/lighthouse.jpg" alt=""></div>
+        <div class="head-block">
+          <h3 id="festA-title"></h3>
+          <p class="place" id="festA-place"></p>
+        </div>
+        <p class="date" id="festA-date"></p>
+        <p class="detail" id="festA-desc"></p>
+      </article>
+
+      <article class="entry fest-entry">
+        <div class="fest-photo-wrap"><img id="festB-img" src="assets/street-theatre.jpg" alt=""></div>
+        <div class="head-block">
+          <h3 id="festB-title"></h3>
+          <p class="place" id="festB-place"></p>
+        </div>
+        <p class="date" id="festB-date"></p>
+        <p class="detail" id="festB-desc"></p>
+      </article>
+
+      <article class="entry fest-entry">
+        <div class="fest-photo-wrap"><img id="festC-img" src="assets/arctic-open.jpg" alt=""></div>
+        <div class="head-block">
+          <h3 id="festC-title"></h3>
+          <p class="place" id="festC-place"></p>
+        </div>
+        <p class="date" id="festC-date"></p>
+        <p class="detail" id="festC-desc"></p>
+      </article></div>
+
+  <footer>
+    <span id="footer-text"></span><a href="mailto:savage.avery@yandex.ru">hello@saveliybyzov.ru</a>
+  </footer>
+
+</main>
+
+<div class="lightbox" id="lightbox"><img src="" alt=""></div>
+
+<script>
+const T = {
+  "en": {
+    "topline": "Belgrade, Serbia",
+    "name": "Savely Byzov",
+    "role": "Linguist · EFL Teacher · Researcher",
+    "intro": "Linguist and university lecturer specialising in English language teaching, sociolinguistics, and the history of English, with a particular focus on Northern Europe. Calm, empathetic, and stress-resilient by nature, with a genuine curiosity for languages, cultures, and the history and geography of the places they come from. Two years of university-level instruction, curriculum design, and student research supervision, plus hands-on English–Russian interpreting at international festivals – and, one memorable summer, repairing a lighthouse at the edge of the world.",
+    "labels": {
+      "experience": "Experience",
+      "education": "Education",
+      "skillslang": "Skills, Languages &amp; Interests",
+      "festivals": "Festivals &amp; Volunteering",
+      "activity": "Academic Activity",
+      "languages": "Languages",
+      "skills": "Skills",
+      "interests": "Interests"
+    },
+    "exp1": {
+      "title": "University Lecturer",
+      "place": "Northern Arctic Federal University, Arkhangelsk",
+      "date": "2024 – present",
+      "li": [
+        "Teach English Language, Sociolinguistics, and History of the English Language to dozens of undergraduates across several groups",
+        "Designed course materials and assessments for Practical Course of English, Sociolinguistics, and History of the English Language",
+        "Supervise three student research projects in linguistics and regional geography"
+      ]
+    },
+    "exp2": {
+      "title": "Museum Guide · Tour Interpreter",
+      "place": "Nevyansky Historical and Architectural Museum, Nevyansk",
+      "date": "2023",
+      "li": [
+        "Delivered guided tours and thematic excursions on regional history and architecture for Russian-speaking and international visitors"
+      ]
+    },
+    "edu1": {
+      "title": "Master&rsquo;s Degree in Pedagogy",
+      "place": "Northern Arctic Federal University, Arkhangelsk",
+      "date": "2024 – 2026",
+      "pre": "Specialisation: Teaching Foreign Languages in a Digital Environment.",
+      "thesisLabel": "Dissertation:",
+      "thesis": "Teaching collaborative writing to university students majoring in Linguistics using digital tools."
+    },
+    "edu2": {
+      "title": "Bachelor&rsquo;s Degree in Linguistics",
+      "place": "Northern Arctic Federal University, Arkhangelsk",
+      "date": "2020 – 2024",
+      "pre": "Specialisation: Theory and Practice of Intercultural Communication. Languages of study: English and Norwegian.",
+      "thesisLabel": "Thesis:",
+      "thesis": "Communicative and speech tactics in the Old English text (based on the poem &ldquo;The Dream of the Rood&rdquo;)."
+    },
+    "activity": [
+      "Organised academic round tables and panel discussions on intercultural communication",
+      "Delivered open lectures for students and the wider academic community"
+    ],
+    "langs": [
+      {
+        "name": "English",
+        "level": "C1 · Advanced"
+      },
+      {
+        "name": "Russian",
+        "level": "Native"
+      },
+      {
+        "name": "Norwegian",
+        "level": "B1 · Intermediate"
+      }
+    ],
+    "skills": [
+      "University teaching &amp; curriculum development",
+      "Academic writing &amp; research (EN / RU)",
+      "Translation &amp; interpreting (EN–RU)",
+      "Digital learning &amp; EdTech tools",
+      "Public speaking"
+    ],
+    "festA": {
+      "title": "Volunteer – Lighthouse Restoration",
+      "place": "Zimnegorsky Lighthouse, White Sea coast",
+      "date": "Summer 2025",
+      "desc": "Spent a summer with a small volunteer crew restoring the wooden frame of the Zimnegorsky Lighthouse – one of the oldest beacons on the White Sea, standing at the very edge of the world. Days went into hauling timber, rebuilding stairs and rafters, and learning first-hand just how much carpentry a century-old lighthouse still needs.",
+      "alt": "Volunteers restoring the wooden structure of Zimnegorsky Lighthouse"
+    },
+    "festB": {
+      "title": "Interpreter · Volunteer",
+      "place": "International Street Theatre Festival, Arkhangelsk",
+      "date": "2024",
+      "desc": "Facilitated communication between foreign theatre companies and local volunteers, from rehearsals to late-night load-outs by the water.",
+      "alt": "View from the festival stage over the harbour at sunset"
+    },
+    "festC": {
+      "title": "Interpreter · Volunteer",
+      "place": "Arctic Open International Film Festival, Arkhangelsk",
+      "date": "2023",
+      "desc": "Provided English–Russian interpretation for international guests and film directors throughout the festival programme.",
+      "alt": "Savely on stage at the Arctic Open festival"
+    },
+    "interests": [
+      "Music – country genre",
+      "Reading",
+      "Hiking &amp; trekking",
+      "Travel",
+      "Woodworking &amp; carpentry"
+    ],
+    "footer": "Savely Byzov · Belgrade, Serbia · "
+  },
+  "ru": {
+    "topline": "Белград, Сербия",
+    "name": "Савелий Бызов",
+    "role": "Лингвист · Преподаватель английского · Исследователь",
+    "intro": "Лингвист и преподаватель университета: специализируюсь на преподавании английского языка, социолингвистике и истории английского языка, полем интереса является Северная Европа. По натуре спокойный, эмпатичный и стрессоустойчивый, питаю интерес к языкам и культурам разных стран, а заодно к их истории и географии. Два года преподавания в университете, разработки учебных программ и руководства студенческими исследованиями, плюс опыт устного перевода на международных фестивалях (а однажды вообще всё лето провёл, восстанавливая маяк на краю света).",
+    "labels": {
+      "experience": "Опыт работы",
+      "education": "Образование",
+      "skillslang": "Навыки, языки и увлечения",
+      "festivals": "Фестивали и волонтёрство",
+      "activity": "Академическая деятельность",
+      "languages": "Языки",
+      "skills": "Навыки",
+      "interests": "Увлечения"
+    },
+    "exp1": {
+      "title": "Преподаватель университета",
+      "place": "Северный (Арктический) федеральный университет, Архангельск",
+      "date": "2024 – 2026",
+      "li": [
+        "Преподавал английский язык, социолингвистику и историю английского языка десяткам студентов в нескольких группах",
+        "Разработал учебные материалы и систему оценивания для практического курса английского языка, социолингвистики и истории английского языка",
+        "Руководил студенческими исследовательскими проектами по лингвистике, истории языка и региональной географии"
+      ]
+    },
+    "exp2": {
+      "title": "Экскурсовод · Переводчик",
+      "place": "Невьянский государственный историко-архитектурный музей, Невьянск",
+      "date": "2023",
+      "li": [
+        "Проводил экскурсии и тематические туры по региональной истории и архитектуре для русскоязычных и иностранных посетителей"
+      ]
+    },
+    "edu1": {
+      "title": "Магистратура по педагогике",
+      "place": "Северный (Арктический) федеральный университет, Архангельск",
+      "date": "2024 – 2026",
+      "pre": "Специализация: обучение иностранным языкам в цифровой среде.",
+      "thesisLabel": "Диссертация:",
+      "thesis": "Обучение совместному письму студентов-лингвистов с использованием цифровых инструментов."
+    },
+    "edu2": {
+      "title": "Бакалавриат по лингвистике",
+      "place": "Северный (Арктический) федеральный университет, Архангельск",
+      "date": "2020 – 2024",
+      "pre": "Специализация: теория и практика межкультурной коммуникации. Изучаемые языки: английский и норвежский.",
+      "thesisLabel": "Дипломная работа:",
+      "thesis": "Коммуникативные и речевые тактики в древнеанглийском тексте (на материале поэмы «Видение Креста»)."
+    },
+    "activity": [
+      "Организовывал академические круглые столы и панельные дискуссии по межкультурной коммуникации",
+      "Читал открытые лекции для студентов и широкой академической аудитории",
+      "Участвовал в приемной компании в Северный Арктический Федеральный Университет"
+    ],
+    "langs": [
+      {
+        "name": "Английский",
+        "level": "C1 · Продвинутый"
+      },
+      {
+        "name": "Русский",
+        "level": "Родной"
+      },
+      {
+        "name": "Норвежский",
+        "level": "B1 · Средний"
+      }
+    ],
+    "skills": [
+      "Преподавание в вузе и разработка программ",
+      "Академическое письмо и исследования (рус./англ.)",
+      "Письменный и устный перевод (англ.–рус.)",
+      "Цифровое обучение и EdTech-инструменты",
+      "Публичные выступления"
+    ],
+    "festA": {
+      "title": "Волонтёр – реставрация маяка",
+      "place": "Зимнегорский маяк, побережье Белого моря",
+      "date": "Лето 2025",
+      "desc": "Летом вместе с небольшой командой волонтёров восстанавливал деревянный каркас Зимнегорского маяка – одного из старейших на Белом море, стоящего на самом краю земли. Таскал брёвна, восстанавливал лестницы и стропила – и на собственном опыте убедился, сколько плотницкой работы ещё требует вековой маяк.",
+      "alt": "Я с другом восстанавливаю деревянную конструкцию Зимнегорского маяка"
+    },
+    "festB": {
+      "title": "Переводчик · Волонтёр",
+      "place": "Международный фестиваль уличных театров, Архангельск",
+      "date": "2024",
+      "desc": "Обеспечивал коммуникацию между иностранными театральными труппами и местными волонтёрами – от репетиций до позднего разбора декораций у воды.",
+      "alt": "Вид со сцены фестиваля на гавань на закате"
+    },
+    "festC": {
+      "title": "Переводчик · Волонтёр",
+      "place": "Международный фестиваль «Arctic Open», Архангельск",
+      "date": "2023",
+      "desc": "Выполнял устный перевод с английского на русский для иностранных гостей и режиссёров на протяжении всей программы фестиваля.",
+      "alt": "Савелий на сцене фестиваля Arctic Open"
+    },
+    "interests": [
+      "Музыка – жанр кантри",
+      "Чтение",
+      "Пешие походы и треккинг",
+      "Путешествия",
+      "Резьба по дереву и столярное дело"
+    ],
+    "footer": "Савелий Бызов · Белград, Сербия · "
+  },
+  "sr": {
+    "topline": "Beograd, Srbija",
+    "name": "Saveliy Byzov",
+    "role": "Lingvista · Nastavnik engleskog jezika · Istraživač",
+    "intro": "Lingvista i univerzitetski predavač, specijalizovan za metodiku nastave engleskog jezika, sociolingvistiku i istoriju engleskog jezika, sa posebnim interesovanjem za Severnu Evropu. Po prirodi je miran, empatičan i otporan na stres, sa iskrenom radoznalošću prema jezicima i kulturama, kao i prema istoriji i geografiji krajeva iz kojih potiču. Dve godine univerzitetske nastave, kreiranja nastavnih programa i mentorstva studentskih istraživanja, uz praktično iskustvo usmenog prevođenja na međunarodnim festivalima – a jedno leto je proveo i popravljajući svetionik na kraju sveta.",
+    "labels": {
+      "experience": "Iskustvo",
+      "education": "Obrazovanje",
+      "skillslang": "Veštine, jezici i interesovanja",
+      "festivals": "Festivali i volontiranje",
+      "activity": "Akademske aktivnosti",
+      "languages": "Jezici",
+      "skills": "Veštine",
+      "interests": "Interesovanja"
+    },
+    "exp1": {
+      "title": "Univerzitetski predavač",
+      "place": "Severni arktički federalni univerzitet, Arhangelsk",
+      "date": "2024 – danas",
+      "li": [
+        "Predaje engleski jezik, sociolingvistiku i istoriju engleskog jezika za desetine studenata u nekoliko grupa",
+        "Kreirao nastavne materijale i sisteme ocenjivanja za praktični kurs engleskog jezika, sociolingvistiku i istoriju engleskog jezika",
+        "Mentoriše tri studentska istraživačka projekta iz lingvistike i regionalne geografije"
+      ]
+    },
+    "exp2": {
+      "title": "Muzejski vodič · Prevodilac",
+      "place": "Nevjanski istorijsko-arhitektonski muzej, Nevjansk",
+      "date": "2023",
+      "li": [
+        "Vodio ture i tematske obilaske o regionalnoj istoriji i arhitekturi za rusko govorne i strane posetioce"
+      ]
+    },
+    "edu1": {
+      "title": "Master studije pedagogije",
+      "place": "Severni arktički federalni univerzitet, Arhangelsk",
+      "date": "2024 – 2026",
+      "pre": "Specijalizacija: nastava stranih jezika u digitalnom okruženju.",
+      "thesisLabel": "Master rad:",
+      "thesis": "Podučavanje kolaborativnog pisanja studentima lingvistike uz pomoć digitalnih alata."
+    },
+    "edu2": {
+      "title": "Osnovne studije lingvistike",
+      "place": "Severni arktički federalni univerzitet, Arhangelsk",
+      "date": "2020 – 2024",
+      "pre": "Specijalizacija: teorija i praksa interkulturalne komunikacije. Jezici studija: engleski i norveški.",
+      "thesisLabel": "Diplomski rad:",
+      "thesis": "Komunikativne i govorne taktike u staroengleskom tekstu (na osnovu pesme „San o krstu&rdquo;)."
+    },
+    "activity": [
+      "Organizovao akademske okrugle stolove i panel diskusije o interkulturalnoj komunikaciji",
+      "Držao otvorena predavanja za studente i širu akademsku zajednicu"
+    ],
+    "langs": [
+      {
+        "name": "Engleski",
+        "level": "C1 · Napredni"
+      },
+      {
+        "name": "Ruski",
+        "level": "Maternji"
+      },
+      {
+        "name": "Norveški",
+        "level": "B1 · Srednji"
+      }
+    ],
+    "skills": [
+      "Univerzitetska nastava i razvoj kurikuluma",
+      "Akademsko pisanje i istraživanje (EN/RU)",
+      "Pismeno i usmeno prevođenje (EN–RU)",
+      "Digitalno učenje i EdTech alati",
+      "Javni nastup"
+    ],
+    "festA": {
+      "title": "Volonter – restauracija svetionika",
+      "place": "Zimnegorski svetionik, obala Belog mora",
+      "date": "Leto 2025",
+      "desc": "Proveo je čitavo leto sa malom ekipom volontera restaurirajući drvenu konstrukciju Zimnegorskog svetionika – jednog od najstarijih na Belom moru, na samom kraju sveta. Dani su prolazili u nošenju drvene građe i obnavljanju stepenica i krovnih greda, uz otkriće koliko stolarskih poslova još uvek traži vekovni svetionik.",
+      "alt": "Volonteri obnavljaju drvenu konstrukciju Zimnegorskog svetionika"
+    },
+    "festB": {
+      "title": "Prevodilac · Volonter",
+      "place": "Međunarodni festival uličnog pozorišta, Arhangelsk",
+      "date": "2024",
+      "desc": "Omogućavao komunikaciju između stranih pozorišnih trupa i lokalnih volontera, od proba do kasnonoćnog rastavljanja scenografije pored vode.",
+      "alt": "Pogled sa festivalske bine na luku u sumrak"
+    },
+    "festC": {
+      "title": "Prevodilac · Volonter",
+      "place": "Međunarodni festival „Arctic Open&rdquo;, Arhangelsk",
+      "date": "2023",
+      "desc": "Pružao usmeni prevod sa engleskog na ruski za strane goste i reditelje tokom celog programa festivala.",
+      "alt": "Saveliy na bini festivala Arctic Open"
+    },
+    "interests": [
+      "Muzika – žanr kantri",
+      "Čitanje",
+      "Planinarenje i pešačenje",
+      "Putovanja",
+      "Rezbarenje i stolarstvo"
+    ],
+    "footer": "Saveliy Byzov · Beograd, Srbija · "
+  }
+};
+
+function applyLang(lang){
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.getElementById('topline').textContent = t.topline;
+  document.getElementById('name').textContent = t.name;
+  document.getElementById('role').textContent = t.role;
+  document.getElementById('intro').textContent = t.intro;
+
+  document.getElementById('tab-experience').innerHTML = t.labels.experience;
+  document.getElementById('tab-education').innerHTML = t.labels.education;
+  document.getElementById('tab-skillslang').innerHTML = t.labels.skillslang;
+  document.getElementById('tab-festivals').innerHTML = t.labels.festivals;
+
+  document.getElementById('sub-activity').innerHTML = t.labels.activity;
+  document.getElementById('sub-skills').innerHTML = t.labels.skills;
+  document.getElementById('sub-languages').innerHTML = t.labels.languages;
+  document.getElementById('sub-interests').innerHTML = t.labels.interests;
+
+  fillEntry('exp1', t.exp1);
+  fillEntry('exp2', t.exp2);
+
+  fillEdu('edu1', t.edu1);
+  fillEdu('edu2', t.edu2);
+
+  fillList('activity', t.activity);
+
+  fillLangs(t.langs);
+
+  fillTags('skills', t.skills);
+  fillTags('interests', t.interests);
+
+  fillFest('festA', t.festA);
+  fillFest('festB', t.festB);
+  fillFest('festC', t.festC);
+
+  document.getElementById('footer-text').textContent = t.footer;
+
+  document.querySelectorAll('.langbar button').forEach(function(b){
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  try { localStorage.setItem('sb-lang', lang); } catch(e){}
+}
+
+function fillEntry(id, data){
+  document.getElementById(id + '-title').textContent = data.title.replace(/&rsquo;/g, '\u2019');
+  document.getElementById(id + '-place').textContent = data.place;
+  document.getElementById(id + '-date').textContent = data.date;
+  const ul = document.getElementById(id + '-list');
+  ul.innerHTML = '';
+  data.li.forEach(function(text){
+    const li = document.createElement('li');
+    li.textContent = text;
+    ul.appendChild(li);
+  });
+}
+
+function fillEdu(id, data){
+  document.getElementById(id + '-title').innerHTML = data.title;
+  document.getElementById(id + '-place').textContent = data.place;
+  document.getElementById(id + '-date').textContent = data.date;
+  document.getElementById(id + '-detail').innerHTML =
+    data.pre + '<br>' + data.thesisLabel + ' <em>' + data.thesis + '</em>';
+}
+
+function fillList(id, items){
+  const ul = document.getElementById(id + '-list');
+  ul.innerHTML = '';
+  items.forEach(function(text){
+    const li = document.createElement('li');
+    li.textContent = text;
+    ul.appendChild(li);
+  });
+}
+
+function fillLangs(langs){
+  const items = document.querySelectorAll('#langs-list .lang');
+  langs.forEach(function(l, i){
+    items[i].querySelector('.lname').textContent = l.name;
+    items[i].querySelector('.level').textContent = l.level;
+  });
+}
+
+function fillTags(id, items){
+  const ul = document.getElementById(id + '-list');
+  ul.innerHTML = '';
+  items.forEach(function(text){
+    const li = document.createElement('li');
+    li.innerHTML = text;
+    ul.appendChild(li);
+  });
+}
+
+function fillFest(id, data){
+  document.getElementById(id + '-title').textContent = data.title;
+  document.getElementById(id + '-place').textContent = data.place;
+  document.getElementById(id + '-date').textContent = data.date;
+  document.getElementById(id + '-desc').textContent = data.desc;
+  document.getElementById(id + '-img').alt = data.alt;
+}
+
+document.querySelectorAll('.langbar button').forEach(function(btn){
+  btn.addEventListener('click', function(){ applyLang(btn.dataset.lang); });
+});
+
+let initialLang = 'en';
+try {
+  const saved = localStorage.getItem('sb-lang');
+  if (saved && T[saved]) initialLang = saved;
+} catch(e){}
+applyLang(initialLang);
+
+document.querySelectorAll('.reveal').forEach(function(el, i){
+  el.style.animationDelay = (i * 0.1) + 's';
+});
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+document.querySelectorAll('.fest-photo-wrap img').forEach(function(img){
+  img.addEventListener('click', function(){
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('open');
+  });
+});
+lightbox.addEventListener('click', function(){ lightbox.classList.remove('open'); });
+
+/* ---- Exclusive tabs: opening one closes the others ---- */
+const tabButtons = document.querySelectorAll('.tabbar button');
+const tabPanels = document.querySelectorAll('.tabpanel');
+function activateTab(id){
+  tabButtons.forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.tab === id)); });
+  tabPanels.forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + id); });
+}
+tabButtons.forEach(function(btn){
+  btn.addEventListener('click', function(){ activateTab(btn.dataset.tab); });
+});
+activateTab('experience');
+
+</script>
+</body>
+</html>
