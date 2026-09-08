@@ -5,6 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Savely Byzov — Linguist · EFL Teacher · Researcher</title>
 <meta name="description" content="Savely Byzov — university lecturer and researcher in English language teaching, sociolinguistics, and the history of English. Belgrade, Serbia.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#E7F0F9">
+<link rel="canonical" href="https://saveliybyzov.github.io/cv/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23236A93'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fff' text-anchor='middle'%3ESB%3C/text%3E%3C/svg%3E">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Savely Byzov — Linguist · EFL Teacher · Researcher">
+<meta property="og:description" content="University lecturer and researcher in English language teaching, sociolinguistics, and the history of English. Belgrade, Serbia.">
+<meta property="og:url" content="https://saveliybyzov.github.io/cv/">
+<meta property="og:image" content="https://saveliybyzov.github.io/cv/assets/Byzov-S.S_.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="sr_RS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Savely Byzov — Linguist · EFL Teacher · Researcher">
+<meta name="twitter:description" content="University lecturer and researcher in English language teaching, sociolinguistics, and the history of English. Belgrade, Serbia.">
+<meta name="twitter:image" content="https://saveliybyzov.github.io/cv/assets/Byzov-S.S_.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Savely Byzov",
+  "url": "https://saveliybyzov.github.io/cv/",
+  "image": "https://saveliybyzov.github.io/cv/assets/Byzov-S.S_.jpg",
+  "jobTitle": "University Lecturer",
+  "email": "mailto:hello@saveliybyzov.ru",
+  "telephone": "+381658389596",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Belgrade",
+    "addressCountry": "RS"
+  },
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Northern Arctic Federal University"
+  },
+  "knowsLanguage": ["en", "ru", "no"],
+  "sameAs": ["https://t.me/savageavery"]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -294,6 +337,7 @@
     transition:transform .5s ease;
   }
   .fest-photo-wrap:hover img{transform:scale(1.08);}
+  .fest-photo-wrap img:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
   .fest-entry .head-block{grid-area:title;}
   .fest-entry .date{grid-area:date;}
   .fest-entry .detail{grid-area:desc;margin-top:8px;}
@@ -400,14 +444,33 @@
     .reveal{opacity:0;transform:translateY(12px);animation:rise .7s ease forwards;}
     @keyframes rise{to{opacity:1;transform:none;}}
   }
+
+  .tabbar button:focus-visible,
+  .langbar button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+  }
+
+  /* ---- Print ---- */
+  @media print{
+    body{background:#fff;}
+    .langbar,.tabbar,.lightbox{display:none !important;}
+    .wrap{padding:0 8px;max-width:100%;}
+    .photo{box-shadow:none;outline:none;}
+    .tabpanel{display:block !important;animation:none !important;opacity:1 !important;transform:none !important;}
+    .tabpanel + .tabpanel{margin-top:18px;border-top:1px solid var(--hair);padding-top:18px;}
+    .entry{break-inside:avoid;box-shadow:none;}
+    .fest-photo-wrap{box-shadow:none;cursor:default;}
+    a{color:var(--ink);text-decoration:underline;}
+  }
 </style>
 </head>
 <body>
 
 <div class="langbar" role="group" aria-label="Language">
-  <button type="button" data-lang="en">EN</button>
-  <button type="button" data-lang="ru">RU</button>
-  <button type="button" data-lang="sr">SR</button>
+  <button type="button" data-lang="en" aria-pressed="true">EN</button>
+  <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+  <button type="button" data-lang="sr" aria-pressed="false">SR</button>
 </div>
 
 <main class="wrap">
@@ -419,11 +482,11 @@
         <h1 class="name" id="name">Savely Byzov</h1>
         <p class="role" id="role">Linguist · EFL Teacher · Researcher</p>
       </div>
-      <img class="photo" src="assets/Byzov-S.S_.jpg">
+      <img class="photo" id="photo" src="assets/Byzov-S.S_.jpg" width="426" height="640" alt="" decoding="async" fetchpriority="high">
     </div>
 
     <nav class="contacts reveal" aria-label="Contact">
-      <a href="mailto:savage.avery@yandex.ru">hello@saveliybyzov.ru</a>
+      <a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>
       <a href="https://t.me/savageavery">Telegram <span>@savageavery</span></a>
       <a href="tel:+381658389596">+381 65 8389596</a>
     </nav>
@@ -506,7 +569,7 @@
       <ul class="tags interests" id="interests-list"></ul></div>
   <div class="tabpanel" id="panel-festivals" role="tabpanel">
       <article class="entry fest-entry">
-        <div class="fest-photo-wrap"><img id="festA-img" src="assets/lighthouse.jpg" alt=""></div>
+        <div class="fest-photo-wrap"><img id="festA-img" src="assets/lighthouse.jpg" width="800" height="1066" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
         <div class="head-block">
           <h3 id="festA-title"></h3>
           <p class="place" id="festA-place"></p>
@@ -516,7 +579,7 @@
       </article>
 
       <article class="entry fest-entry">
-        <div class="fest-photo-wrap"><img id="festB-img" src="assets/street-theatre.jpg" alt=""></div>
+        <div class="fest-photo-wrap"><img id="festB-img" src="assets/street-theatre.jpg" width="900" height="677" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
         <div class="head-block">
           <h3 id="festB-title"></h3>
           <p class="place" id="festB-place"></p>
@@ -526,7 +589,7 @@
       </article>
 
       <article class="entry fest-entry">
-        <div class="fest-photo-wrap"><img id="festC-img" src="assets/arctic-open.jpg" alt=""></div>
+        <div class="fest-photo-wrap"><img id="festC-img" src="assets/arctic-open.jpg" width="900" height="601" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
         <div class="head-block">
           <h3 id="festC-title"></h3>
           <p class="place" id="festC-place"></p>
@@ -536,12 +599,12 @@
       </article></div>
 
   <footer>
-    <span id="footer-text"></span><a href="mailto:savage.avery@yandex.ru">hello@saveliybyzov.ru</a>
+    <span id="footer-text"></span><a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>
   </footer>
 
 </main>
 
-<div class="lightbox" id="lightbox"><img src="" alt=""></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1"><img src="" alt=""></div>
 
 <script>
 const T = {
@@ -549,6 +612,7 @@ const T = {
     "topline": "Belgrade, Serbia",
     "name": "Savely Byzov",
     "role": "Linguist · EFL Teacher · Researcher",
+    "photoAlt": "Portrait of Savely Byzov",
     "intro": "Linguist and university lecturer specialising in English language teaching, sociolinguistics, and the history of English, with a particular focus on Northern Europe. Calm, empathetic, and stress-resilient by nature, with a genuine curiosity for languages, cultures, and the history and geography of the places they come from. Two years of university-level instruction, curriculum design, and student research supervision, plus hands-on English–Russian interpreting at international festivals – and, one memorable summer, repairing a lighthouse at the edge of the world.",
     "labels": {
       "experience": "Experience",
@@ -563,11 +627,11 @@ const T = {
     "exp1": {
       "title": "University Lecturer",
       "place": "Northern Arctic Federal University, Arkhangelsk",
-      "date": "2024 – present",
+      "date": "2024 – 2026",
       "li": [
-        "Teach English Language, Sociolinguistics, and History of the English Language to dozens of undergraduates across several groups",
+        "Taught English Language, Sociolinguistics, and History of the English Language to dozens of undergraduates across several groups",
         "Designed course materials and assessments for Practical Course of English, Sociolinguistics, and History of the English Language",
-        "Supervise three student research projects in linguistics and regional geography"
+        "Supervised three student research projects in linguistics and regional geography"
       ]
     },
     "exp2": {
@@ -653,6 +717,7 @@ const T = {
     "topline": "Белград, Сербия",
     "name": "Савелий Бызов",
     "role": "Лингвист · Преподаватель английского · Исследователь",
+    "photoAlt": "Портрет Савелия Бызова",
     "intro": "Лингвист и преподаватель университета: специализируюсь на преподавании английского языка, социолингвистике и истории английского языка, полем интереса является Северная Европа. По натуре спокойный, эмпатичный и стрессоустойчивый, питаю интерес к языкам и культурам разных стран, а заодно к их истории и географии. Два года преподавания в университете, разработки учебных программ и руководства студенческими исследованиями, плюс опыт устного перевода на международных фестивалях (а однажды вообще всё лето провёл, восстанавливая маяк на краю света).",
     "labels": {
       "experience": "Опыт работы",
@@ -758,6 +823,7 @@ const T = {
     "topline": "Beograd, Srbija",
     "name": "Saveliy Byzov",
     "role": "Lingvista · Nastavnik engleskog jezika · Istraživač",
+    "photoAlt": "Portret Saveliya Byzova",
     "intro": "Lingvista i univerzitetski predavač, specijalizovan za metodiku nastave engleskog jezika, sociolingvistiku i istoriju engleskog jezika, sa posebnim interesovanjem za Severnu Evropu. Po prirodi je miran, empatičan i otporan na stres, sa iskrenom radoznalošću prema jezicima i kulturama, kao i prema istoriji i geografiji krajeva iz kojih potiču. Dve godine univerzitetske nastave, kreiranja nastavnih programa i mentorstva studentskih istraživanja, uz praktično iskustvo usmenog prevođenja na međunarodnim festivalima – a jedno leto je proveo i popravljajući svetionik na kraju sveta.",
     "labels": {
       "experience": "Iskustvo",
@@ -772,11 +838,11 @@ const T = {
     "exp1": {
       "title": "Univerzitetski predavač",
       "place": "Severni arktički federalni univerzitet, Arhangelsk",
-      "date": "2024 – danas",
+      "date": "2024 – 2026",
       "li": [
-        "Predaje engleski jezik, sociolingvistiku i istoriju engleskog jezika za desetine studenata u nekoliko grupa",
+        "Predavao engleski jezik, sociolingvistiku i istoriju engleskog jezika za desetine studenata u nekoliko grupa",
         "Kreirao nastavne materijale i sisteme ocenjivanja za praktični kurs engleskog jezika, sociolingvistiku i istoriju engleskog jezika",
-        "Mentoriše tri studentska istraživačka projekta iz lingvistike i regionalne geografije"
+        "Mentorisao tri studentska istraživačka projekta iz lingvistike i regionalne geografije"
       ]
     },
     "exp2": {
@@ -867,6 +933,7 @@ function applyLang(lang){
   document.getElementById('name').textContent = t.name;
   document.getElementById('role').textContent = t.role;
   document.getElementById('intro').textContent = t.intro;
+  document.getElementById('photo').alt = t.photoAlt;
 
   document.getElementById('tab-experience').innerHTML = t.labels.experience;
   document.getElementById('tab-education').innerHTML = t.labels.education;
@@ -898,7 +965,9 @@ function applyLang(lang){
   document.getElementById('footer-text').textContent = t.footer;
 
   document.querySelectorAll('.langbar button').forEach(function(b){
-    b.classList.toggle('active', b.dataset.lang === lang);
+    const isActive = b.dataset.lang === lang;
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-pressed', String(isActive));
   });
 
   try { localStorage.setItem('sb-lang', lang); } catch(e){}
@@ -978,24 +1047,58 @@ document.querySelectorAll('.reveal').forEach(function(el, i){
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
+let lightboxOpener = null;
+function openLightbox(img){
+  lightboxOpener = img;
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt;
+  lightbox.classList.add('open');
+  lightbox.focus();
+}
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  if (lightboxOpener) { lightboxOpener.focus(); lightboxOpener = null; }
+}
 document.querySelectorAll('.fest-photo-wrap img').forEach(function(img){
-  img.addEventListener('click', function(){
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.classList.add('open');
+  img.addEventListener('click', function(){ openLightbox(img); });
+  img.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openLightbox(img);
+    }
   });
 });
-lightbox.addEventListener('click', function(){ lightbox.classList.remove('open'); });
+lightbox.addEventListener('click', closeLightbox);
+lightbox.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeLightbox();
+});
 
 /* ---- Exclusive tabs: opening one closes the others ---- */
-const tabButtons = document.querySelectorAll('.tabbar button');
+const tabButtons = Array.from(document.querySelectorAll('.tabbar button'));
 const tabPanels = document.querySelectorAll('.tabpanel');
-function activateTab(id){
-  tabButtons.forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.tab === id)); });
+function activateTab(id, focusButton){
+  tabButtons.forEach(function(b){
+    const selected = b.dataset.tab === id;
+    b.setAttribute('aria-selected', String(selected));
+    b.setAttribute('tabindex', selected ? '0' : '-1');
+    if (selected && focusButton) b.focus();
+  });
   tabPanels.forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + id); });
 }
 tabButtons.forEach(function(btn){
   btn.addEventListener('click', function(){ activateTab(btn.dataset.tab); });
+});
+document.querySelector('.tabbar').addEventListener('keydown', function(e){
+  const current = tabButtons.findIndex(function(b){ return b.getAttribute('aria-selected') === 'true'; });
+  let next = null;
+  if (e.key === 'ArrowRight') next = (current + 1) % tabButtons.length;
+  else if (e.key === 'ArrowLeft') next = (current - 1 + tabButtons.length) % tabButtons.length;
+  else if (e.key === 'Home') next = 0;
+  else if (e.key === 'End') next = tabButtons.length - 1;
+  if (next !== null){
+    e.preventDefault();
+    activateTab(tabButtons[next].dataset.tab, true);
+  }
 });
 activateTab('experience');
 
