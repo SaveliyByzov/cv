@@ -395,6 +395,27 @@
     font-size:.92rem;
   }
 
+  /* ---- Campus photo (Education tab) ---- */
+  .campus-photo{margin:0 0 36px;}
+  .campus-photo img{
+    width:100%;
+    height:auto;
+    aspect-ratio:3 / 2;
+    object-fit:cover;
+    display:block;
+    border:6px solid var(--card);
+    box-shadow:0 10px 22px -8px rgba(20,31,42,.35);
+  }
+  .campus-photo figcaption{
+    font-family:var(--mono);
+    font-size:.66rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:9px;
+    text-align:right;
+  }
+
   /* ---- Experience entry with a photo ---- */
   .entry.has-photo{
     display:flex;
@@ -695,6 +716,10 @@
       <h3 class="sub-label" id="sub-talks"></h3>
       <ul class="pub-list" id="talks-list"></ul></div>
   <div class="tabpanel" id="panel-education" role="tabpanel">
+      <figure class="campus-photo">
+        <img id="campus-img" src="assets/narfu-campus.jpg" width="1600" height="1067" loading="lazy" decoding="async" alt="">
+        <figcaption id="campus-caption"></figcaption>
+      </figure>
       <article class="entry">
         <div>
           <h3 id="edu1-title"></h3>
@@ -717,6 +742,11 @@
         <p class="workblurb" id="edu2-blurb"></p>
         <p class="detail thesis" id="edu2-thesis"></p>
         <p class="abstract" id="edu2-abstract"></p>
+      </article>
+
+      <h3 class="sub-label" id="sub-training"></h3>
+      <article class="entry">
+        <ul style="margin-top:0;" id="training-list"></ul>
       </article></div>
   <div class="tabpanel" id="panel-skillslang" role="tabpanel">
       <h3 class="sub-label" id="sub-skills"></h3>
@@ -790,7 +820,8 @@ const ICONS = {
   reading: '<path d="M12 6c-2-1.3-5-1.3-8 0v13c3-1.3 6-1.3 8 0Z"/><path d="M12 6c2-1.3 5-1.3 8 0v13c-3-1.3-6-1.3-8 0Z"/><line x1="12" y1="6" x2="12" y2="19"/>',
   hiking: '<path d="M2 20 8 8l3.5 6L14 10l8 10Z"/><circle cx="8" cy="4" r="1.6"/>',
   travel: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2Z"/>',
-  woodwork: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.4"/>'
+  woodwork: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.4"/>',
+  drawing: '<path d="M4 20l1.5-5.5L14 6l4 4-8.5 8.5L4 20Z"/><path d="M12.5 7.5l4 4"/><path d="M3 21h5"/>'
 };
 
 const T = {
@@ -809,16 +840,19 @@ const T = {
       "activity": "Academic Activity",
       "publications": "Publications",
       "talks": "Conference Talks",
+      "training": "Additional Training",
       "languages": "Languages",
       "skills": "Skills",
       "interests": "Interests"
     },
+    "campusAlt": "NArFU's main building in Arkhangelsk",
+    "campusCaption": "NArFU main building, Arkhangelsk — photo: Artem Kelarev / CC0, Wikimedia Commons",
     "exp1": {
       "title": "University Lecturer",
       "place": "Department of English Philology, Nordic Languages and Linguodidactics, Northern Arctic Federal University, Arkhangelsk",
       "date": "2024 – 2026",
       "imgAlt": "Giving a lecture to students",
-      "blurb": "I work (well, worked) at NArFU — the only major university based in mainland Russia's Arctic zone, and genuinely the country's institutional foothold for Arctic research: permafrost, forestry science, Northern-language studies, you name it, with partnerships across more than 70 institutions worldwide.",
+      "blurb": "I work (well, worked) at NArFU — the only major university based in mainland Russia's Arctic zone, and genuinely the country's institutional foothold for Arctic research: permafrost, forestry science, Northern-language studies, you name it. It has partnerships across more than 70 institutions worldwide.",
       "li": [
         "Taught English Language, Sociolinguistics, and History of the English Language to dozens of undergraduates across several groups",
         "Designed five full course curricula — spanning Practical English, Sociolinguistics, and the History of the English Language — complete with syllabi, materials, and assessment",
@@ -856,7 +890,13 @@ const T = {
     },
     "activity": [
       "Organised academic round tables and panel discussions on intercultural communication",
-      "Delivered open lectures for students and the wider academic community"
+      "Delivered open lectures for students and the wider academic community",
+      "Served on the university's admissions committee"
+    ],
+    "training": [
+      "Completed a course in inclusive education — working with people with disabilities",
+      "Completed a first-aid training course",
+      "Trained for years at an art school, and can still hold my own at academic drawing"
     ],
     "publications": [
       {
@@ -868,6 +908,11 @@ const T = {
         "title": "Digital Support for Teaching Collaborative Writing in English at a University",
         "meta": "Academic paper",
         "desc": "I look at how cloud editors and wiki platforms can help Linguistics students move from B1 to B2 in English writing, and offer concrete tasks and methodological tips for running collaborative work digitally."
+      },
+      {
+        "title": "The Intercultural Code in “The Dream of the Rood”: A Synthesis of Germanic and Christian Tradition",
+        "meta": "Academic paper",
+        "desc": "I show how the poem turns Christ into a hero out of Germanic saga while dressing Christian doctrine in the language of a warrior's retinue — and argue this code-switching is a deliberate device, not an accident."
       }
     ],
     "talks": [
@@ -877,23 +922,18 @@ const T = {
         "desc": "I break down two lexical-semantic fields in the poem — power and subordination — and show how the text pulls off a real inversion of power: Christ triumphs through voluntary suffering, and the Cross, as a loyal retainer, triumphs through submission."
       },
       {
-        "title": "The Intercultural Code in “The Dream of the Rood”: A Synthesis of Germanic and Christian Tradition",
-        "meta": "Conference paper, 2026",
-        "desc": "I show how the poem turns Christ into a hero out of Germanic saga while dressing Christian doctrine in the language of a warrior's retinue — and argue this code-switching is a deliberate device, not an accident."
-      },
-      {
         "title": "Toponymic Subordination: The Norwegianisation of Sámi Place Names on Maps (19th–21st Centuries)",
         "meta": "Arctic Readings",
         "desc": "Using maps of Finnmark and Troms, I argue that the Norwegianisation of Sámi place names wasn't an accidental by-product of cartography but a systematic process with a recognisable set of tactics: calquing, phonetic adaptation, outright replacement, orthographic normalisation, and toponymic silence."
       },
       {
         "title": "Norwegian in the Germanic Language Family: Classification, History, and the Current Situation",
-        "meta": "Conference paper, 2026",
+        "meta": "Lomonosov Readings",
         "desc": "I trace Norwegian's place among the Germanic languages — where it came from historically, and what's happening to it today, including the ongoing tug-of-war between Bokmål and Nynorsk."
       },
       {
         "title": "The 18th Century as a Transitional Period in Norwegian Visual Art",
-        "meta": "Arctic Readings",
+        "meta": "Language. Culture. Literature",
         "desc": "I trace how urbanisation and a new merchant elite turned 18th-century Norwegian art away from church wood-carving and toward portraiture — and, in painters like Peder Aadnes, toward landscape — laying the groundwork for the later flowering of Norwegian painting."
       }
     ],
@@ -942,9 +982,10 @@ const T = {
     "interests": [
       { "icon": "music", "title": "Music", "desc": "I'm a music fan in general, honestly, but I've got a real soft spot for Johnny Cash and country." },
       { "icon": "reading", "title": "Reading", "desc": "My favourite author is F. Scott Fitzgerald." },
+      { "icon": "drawing", "title": "Drawing", "desc": "Years of art-school training left their mark — I still like to sit down and draw when I get the chance." },
       { "icon": "hiking", "title": "Hiking &amp; trekking", "desc": "I spent my whole youth in a local hiking club, and I still head out on expeditions regularly." },
       { "icon": "travel", "title": "Travel", "desc": "I dream of Scandinavia and Alaska next — Serbia used to be the dream, before it became home." },
-      { "icon": "woodwork", "title": "Woodworking &amp; carpentry", "desc": "In my spare time, I build garden beds and greenhouses by hand." }
+      { "icon": "woodwork", "title": "Woodworking &amp; carpentry", "desc": "In my spare time, I make shields and build greenhouses by hand." }
     ],
     "footer": "Savely Byzov // Belgrade, Serbia // "
   },
@@ -963,16 +1004,19 @@ const T = {
       "activity": "Академическая деятельность",
       "publications": "Публикации",
       "talks": "Доклады на конференциях",
+      "training": "Дополнительная подготовка",
       "languages": "Языки",
       "skills": "Навыки",
       "interests": "Увлечения"
     },
+    "campusAlt": "Главный корпус САФУ в Архангельске",
+    "campusCaption": "Главный корпус САФУ, Архангельск — фото: Артём Келарев / CC0, Wikimedia Commons",
     "exp1": {
       "title": "Преподаватель университета",
       "place": "Кафедра английской филологии, языков северных стран и лингводидактики, Северный (Арктический) федеральный университет, Архангельск",
       "date": "2024 – 2026",
       "imgAlt": "Читаю лекцию студентам",
-      "blurb": "Я работаю (точнее, работал) в САФУ — единственном крупном вузе на материковой части арктической зоны России: настоящей опорной площадке для арктической науки, от вечной мерзлоты и лесной промышленности до языков Севера, с партнёрствами больше чем в 70 странах.",
+      "blurb": "Я работаю (точнее, работал) в САФУ — единственном крупном вузе на материковой части арктической зоны России, настоящей опорной площадке для арктической науки: вечная мерзлота, лесная промышленность, языки Севера — да что угодно. У университета партнёрства больше чем в 70 странах.",
       "li": [
         "Преподавал английский язык, социолингвистику и историю английского языка — через мои занятия прошли десятки студентов в нескольких группах",
         "С нуля разработал пять учебных программ — по практическому курсу английского языка, социолингвистике и истории английского языка — от структуры курса до системы оценивания",
@@ -1003,7 +1047,7 @@ const T = {
       "place": "Северный (Арктический) федеральный университет, Архангельск",
       "date": "2020 – 2024",
       "pre": "Специализация: теория и практика межкультурной коммуникации. Изучаемые языки: английский и норвежский.",
-      "programBlurb": "Здесь я сочетал углублённое изучение английского языка с теорией межкультурной коммуникации, переводческой практикой и вторым иностранным языком — в моём случае норвежским.",
+      "programBlurb": "На бакалавриате я сочетал углублённое изучение английского языка с теорией межкультурной коммуникации, переводческой практикой и вторым иностранным языком — в моём случае норвежским.",
       "thesisLabel": "Дипломная работа:",
       "thesis": "Коммуникативные и речевые тактики в древнеанглийском тексте (на материале поэмы «Видение Креста»).",
       "abstract": "Здесь я разбираю поэму «Видение Креста» — анонимную древнеанглийскую поэму VIII века о распятии — анализируя коммуникативно-речевые тактики и стилистические приёмы текста. А ещё сам перевёл поэму с древнеанглийского на русский язык — целиком, построчно."
@@ -1011,7 +1055,12 @@ const T = {
     "activity": [
       "Организовывал академические круглые столы и панельные дискуссии по межкультурной коммуникации",
       "Читал открытые лекции для студентов и широкой академической аудитории",
-      "Участвовал в приемной компании в Северный Арктический Федеральный Университет"
+      "Участвовал в работе приёмной комиссии университета"
+    ],
+    "training": [
+      "Прошёл курс по инклюзивному образованию — работе с людьми с ограниченными возможностями",
+      "Прошёл курсы оказания первой медицинской помощи",
+      "Много лет учился в художественной школе и до сих пор неплохо владею академическим рисунком"
     ],
     "publications": [
       {
@@ -1023,6 +1072,11 @@ const T = {
         "title": "Возможности организации цифровой поддержки обучения коллаборативному письму на английском языке в вузе",
         "meta": "Научная статья",
         "desc": "Смотрю, как облачные редакторы и вики-платформы помогают студентам-лингвистам подняться с уровня B1 до B2 в письме на английском — и предлагаю конкретные задания и методические приёмы для организации совместной работы в цифровой среде."
+      },
+      {
+        "title": "Межкультурный код в «The Dream of the Rood»: синтез германской и христианской традиций",
+        "meta": "Научная статья",
+        "desc": "Показываю, как поэма превращает Христа в героя германской саги, а христианский канон подаёт языком воинской дружины — и почему этот код-свитчинг работает не как случайность, а как осознанный приём."
       }
     ],
     "talks": [
@@ -1032,23 +1086,18 @@ const T = {
         "desc": "Разбираю два лексико-семантических поля поэмы — «власть» и «подчинение» — и показываю, как в тексте происходит настоящая инверсия власти: Христос побеждает через добровольное страдание, а Крест — верный дружинник — торжествует через покорность."
       },
       {
-        "title": "Межкультурный код в «The Dream of the Rood»: синтез германской и христианской традиций",
-        "meta": "Доклад, 2026",
-        "desc": "Показываю, как поэма превращает Христа в героя германской саги, а христианский канон подаёт языком воинской дружины — и почему этот код-свитчинг работает не как случайность, а как осознанный приём."
-      },
-      {
         "title": "Топонимическое подчинение: норвегизация саамских названий на картах (XIX–XXI вв.)",
         "meta": "Арктические чтения",
         "desc": "На материале карт Финнмарка и Тромса показываю, что норвегизация саамских топонимов — это не побочный эффект картографии, а системная процедура с узнаваемым набором приёмов: калька, фонетическая адаптация, замена, орфографическая нормализация и топонимическое умолчание."
       },
       {
         "title": "Норвежский язык в германской языковой семье: классификация, исторический путь и современная языковая ситуация",
-        "meta": "Доклад, 2026",
+        "meta": "Ломоносовские чтения",
         "desc": "Прослеживаю место норвежского среди германских языков — откуда он пришёл исторически и что происходит с ним сегодня, включая непростые отношения букмола и нюнорска."
       },
       {
         "title": "XVIII век как переходный период в норвежском изобразительном искусстве",
-        "meta": "Арктические чтения",
+        "meta": "Язык. Культура. Литература",
         "desc": "Прослеживаю, как урбанизация и рост новых элит в XVIII веке превратили норвежское искусство из церковной резьбы в портрет и, у художников вроде Педера Однеса, — в пейзаж, заложив основу для более позднего расцвета норвежской живописи."
       }
     ],
@@ -1097,9 +1146,10 @@ const T = {
     "interests": [
       { "icon": "music", "title": "Музыка", "desc": "Меломан во всех смыслах, но если позвать на концерт кантри — приду одним из первых: особенно неравнодушен к Джонни Кэшу." },
       { "icon": "reading", "title": "Чтение", "desc": "Любимый писатель — Фрэнсис Скотт Фицджеральд." },
+      { "icon": "drawing", "title": "Рисование", "desc": "Годы художественной школы не прошли даром — до сих пор люблю сесть и порисовать, когда выпадает случай." },
       { "icon": "hiking", "title": "Пешие походы и треккинг", "desc": "Всю юность провёл в туристическом кружке и до сих пор регулярно хожу в походы и экспедиции." },
       { "icon": "travel", "title": "Путешествия", "desc": "Мечтаю увидеть Скандинавию и Аляску — а Сербия была мечтой, пока не стала домом." },
-      { "icon": "woodwork", "title": "Резьба по дереву и столярное дело", "desc": "В свободное время своими руками строю грядки и теплицы." }
+      { "icon": "woodwork", "title": "Резьба по дереву и столярное дело", "desc": "В свободное время своими руками делаю щиты и строю теплицы." }
     ],
     "footer": "Савелий Бызов // Белград, Сербия // "
   },
@@ -1118,16 +1168,19 @@ const T = {
       "activity": "Akademske aktivnosti",
       "publications": "Publikacije",
       "talks": "Konferencijski nastupi",
+      "training": "Dodatna obuka",
       "languages": "Jezici",
       "skills": "Veštine",
       "interests": "Interesovanja"
     },
+    "campusAlt": "Glavna zgrada SAFU-a u Arhangelsku",
+    "campusCaption": "Glavna zgrada SAFU-a, Arhangelsk — foto: Artem Kelarev / CC0, Wikimedia Commons",
     "exp1": {
       "title": "Univerzitetski predavač",
       "place": "Katedra za englesku filologiju, jezike severnih zemalja i lingvodidaktiku, Severni arktički federalni univerzitet, Arhangelsk",
       "date": "2024 – 2026",
       "imgAlt": "Držim predavanje studentima",
-      "blurb": "Radim (tačnije, radio sam) na SAFU-u — jedinom većem univerzitetu na kontinentalnom delu ruske Arktike, i zaista nacionalnom uporištu za arktička istraživanja: permafrost, šumarstvo, proučavanje severnih jezika, štagod, sa partnerstvima u više od 70 institucija širom sveta.",
+      "blurb": "Radim (tačnije, radio sam) na SAFU-u — jedinom većem univerzitetu na kontinentalnom delu ruske Arktike, i zaista nacionalnom uporištu za arktička istraživanja: permafrost, šumarstvo, proučavanje severnih jezika, šta god poželite. Univerzitet ima partnerstva u više od 70 institucija širom sveta.",
       "li": [
         "Predavao engleski jezik, sociolingvistiku i istoriju engleskog jezika — kroz moju nastavu prošlo je na desetine studenata u nekoliko grupa",
         "Od nule kreirao pet nastavnih programa — iz praktičnog engleskog jezika, sociolingvistike i istorije engleskog jezika — od strukture kursa do sistema ocenjivanja",
@@ -1158,14 +1211,20 @@ const T = {
       "place": "Severni arktički federalni univerzitet, Arhangelsk",
       "date": "2020 – 2024",
       "pre": "Specijalizacija: teorija i praksa interkulturalne komunikacije. Jezici studija: engleski i norveški.",
-      "programBlurb": "Ovde sam kombinovao napredno učenje engleskog jezika sa teorijom interkulturalne komunikacije, prevodilačkom praksom i drugim stranim jezikom — u mom slučaju norveškim.",
+      "programBlurb": "Na osnovnim studijama sam kombinovao napredno učenje engleskog jezika sa teorijom interkulturalne komunikacije, prevodilačkom praksom i drugim stranim jezikom — u mom slučaju norveškim.",
       "thesisLabel": "Diplomski rad:",
       "thesis": "Komunikativne i govorne taktike u staroengleskom tekstu (na osnovu pesme „San o krstu&rdquo;).",
       "abstract": "Ovde detaljno analiziram pesmu „San o krstu“ — anonimnu staroenglesku pesmu iz VIII veka o raspeću — bavim se komunikativno-govornim taktikama i stilskim sredstvima teksta. Takođe sam sâm preveo celu pesmu, stih po stih, sa staroengleskog na ruski jezik."
     },
     "activity": [
       "Organizovao akademske okrugle stolove i panel diskusije o interkulturalnoj komunikaciji",
-      "Držao otvorena predavanja za studente i širu akademsku zajednicu"
+      "Držao otvorena predavanja za studente i širu akademsku zajednicu",
+      "Učestvovao u radu prijemne komisije univerziteta"
+    ],
+    "training": [
+      "Završio kurs inkluzivnog obrazovanja — rada sa osobama sa invaliditetom",
+      "Završio kurs prve pomoći",
+      "Godinama sam učio u umetničkoj školi i i dalje solidno vladam akademskim crtanjem"
     ],
     "publications": [
       {
@@ -1177,6 +1236,11 @@ const T = {
         "title": "Mogućnosti organizovanja digitalne podrške u nastavi kolaborativnog pisanja na engleskom jeziku na univerzitetu",
         "meta": "Naučni rad",
         "desc": "Istražujem kako cloud editori i wiki platforme pomažu studentima lingvistike da napreduju sa nivoa B1 na B2 u pisanju na engleskom, i predlažem konkretne zadatke i metodičke smernice za organizovanje zajedničkog rada u digitalnom okruženju."
+      },
+      {
+        "title": "Interkulturalni kod u „The Dream of the Rood“: sinteza germanske i hrišćanske tradicije",
+        "meta": "Naučni rad",
+        "desc": "Pokazujem kako pesma pretvara Hrista u junaka germanske sage, dok hrišćanski kanon oblači u jezik ratničke družine — i tvrdim da je taj code-switching svestan postupak, a ne slučajnost."
       }
     ],
     "talks": [
@@ -1186,23 +1250,18 @@ const T = {
         "desc": "Analiziram dva leksičko-semantička polja u pesmi — moć i pokornost — i pokazujem kako tekst ostvaruje pravu inverziju moći: Hrist trijumfuje kroz dobrovoljno stradanje, a Krst, kao veran vazal, trijumfuje kroz pokornost."
       },
       {
-        "title": "Interkulturalni kod u „The Dream of the Rood“: sinteza germanske i hrišćanske tradicije",
-        "meta": "Konferencijski rad, 2026",
-        "desc": "Pokazujem kako pesma pretvara Hrista u junaka germanske sage, dok hrišćanski kanon oblači u jezik ratničke družine — i tvrdim da je taj code-switching svestan postupak, a ne slučajnost."
-      },
-      {
         "title": "Toponimijska subordinacija: norveškizacija sami naziva na mapama (XIX–XXI vek)",
         "meta": "Arktička čitanja",
         "desc": "Na primeru mapa Finmarka i Tromsa, tvrdim da norveškizacija sami toponima nije bila slučajna posledica kartografije, već sistematski proces sa prepoznatljivim skupom taktika: kalkiranje, fonetska adaptacija, potpuna zamena, ortografska normalizacija i toponimijsko ćutanje."
       },
       {
         "title": "Norveški jezik u germanskoj jezičkoj porodici: klasifikacija, istorijski put i savremena jezička situacija",
-        "meta": "Konferencijski rad, 2026",
+        "meta": "Lomonosovska čitanja",
         "desc": "Pratim mesto norveškog među germanskim jezicima — odakle istorijski potiče i šta se sa njim dešava danas, uključujući stalno nadmetanje bukmola i ninorska."
       },
       {
         "title": "XVIII vek kao prelazni period u norveškoj likovnoj umetnosti",
-        "meta": "Arktička čitanja",
+        "meta": "Jezik. Kultura. Književnost",
         "desc": "Pratim kako su urbanizacija i nova trgovačka elita u XVIII veku odvele norvešku umetnost od crkvene rezbe ka portretu, a kod slikara poput Pedera Odnesa i ka pejzažu — postavljajući temelj za kasniji procvat norveškog slikarstva."
       }
     ],
@@ -1251,9 +1310,10 @@ const T = {
     "interests": [
       { "icon": "music", "title": "Muzika", "desc": "Veliki sam ljubitelj muzike uopšte, ali imam posebnu slabost prema Džoniju Kešu i kantri žanru." },
       { "icon": "reading", "title": "Čitanje", "desc": "Omiljeni pisac mi je Frensis Skot Ficdžerald." },
+      { "icon": "drawing", "title": "Crtanje", "desc": "Godine umetničke škole ostavile su trag — i dalje volim da sednem i crtam kad mi se ukaže prilika." },
       { "icon": "hiking", "title": "Planinarenje i pešačenje", "desc": "Čitavu mladost sam proveo u planinarskom klubu i i dalje redovno idem na ekspedicije." },
       { "icon": "travel", "title": "Putovanja", "desc": "Sledeće sanjam o Skandinaviji i Aljasci — Srbija je bila san, sve dok nije postala dom." },
-      { "icon": "woodwork", "title": "Rezbarenje i stolarstvo", "desc": "U slobodno vreme sopstvenim rukama pravim leje i staklenike." }
+      { "icon": "woodwork", "title": "Rezbarenje i stolarstvo", "desc": "U slobodno vreme sopstvenim rukama pravim štitove i gradim staklenike." }
     ],
     "footer": "Saveliy Byzov // Beograd, Srbija // "
   }
@@ -1277,6 +1337,7 @@ function applyLang(lang){
   document.getElementById('sub-activity').innerHTML = t.labels.activity;
   document.getElementById('sub-publications').innerHTML = t.labels.publications;
   document.getElementById('sub-talks').innerHTML = t.labels.talks;
+  document.getElementById('sub-training').innerHTML = t.labels.training;
   document.getElementById('sub-skills').innerHTML = t.labels.skills;
   document.getElementById('sub-languages').innerHTML = t.labels.languages;
   document.getElementById('sub-interests').innerHTML = t.labels.interests;
@@ -1288,8 +1349,11 @@ function applyLang(lang){
   fillEdu('edu2', t.edu2);
 
   fillList('activity', t.activity);
+  fillList('training', t.training);
   fillPubs('publications', t.publications);
   fillPubs('talks', t.talks);
+  document.getElementById('campus-img').alt = t.campusAlt;
+  document.getElementById('campus-caption').textContent = t.campusCaption;
 
   fillLangs(t.langs);
 
