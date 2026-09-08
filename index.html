@@ -364,30 +364,65 @@
     font-size:.94rem;
   }
 
-  /* ---- Experience entry with a photo (reuses the postcard treatment) ---- */
-  .entry.has-photo{
-    grid-template-columns:140px 1fr auto;
-    grid-template-areas:
-      "photo title date"
-      "photo place blurb";
-    gap:6px 24px;
+  /* ---- Publications & conference talks ---- */
+  .pub-list{list-style:none;margin:0;padding:0;}
+  .pub-list li{
+    padding-bottom:20px;
+    margin-bottom:20px;
+    border-bottom:1px solid var(--line);
   }
-  .entry.has-photo .fest-photo-wrap{grid-area:photo;width:140px;height:140px;}
-  .entry.has-photo h3{grid-area:title;}
-  .entry.has-photo .place{grid-area:place;margin-top:4px;}
-  .entry.has-photo .date{grid-area:date;}
-  .entry.has-photo .workblurb{grid-area:blurb;margin-top:0;}
-  .entry.has-photo ul{margin-top:20px;}
+  .pub-list li:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none;}
+  .pub-title{
+    display:block;
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:600;
+    font-size:1.02rem;
+    color:var(--ink);
+  }
+  .pub-meta{
+    display:block;
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-top:5px;
+  }
+  .pub-desc{
+    margin:8px 0 0;
+    color:var(--ink-soft);
+    font-size:.92rem;
+  }
+
+  /* ---- Experience entry with a photo ---- */
+  .entry.has-photo{
+    display:flex;
+    gap:30px;
+    align-items:flex-start;
+  }
+  .entry.has-photo .fest-photo-wrap{
+    width:168px;
+    aspect-ratio:4 / 5;
+    height:auto;
+    flex-shrink:0;
+  }
+  .entry.has-photo .entry-body{min-width:0;flex:1;}
+  .entry.has-photo .entry-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .entry.has-photo .entry-head h3{margin:0;}
+  .entry.has-photo .entry-head .date{margin:0;padding-top:0;}
+  .entry.has-photo .place{margin-top:4px;}
+  .entry.has-photo .workblurb{margin-top:14px;}
+  .entry.has-photo ul{margin-top:18px;}
   @media (max-width:600px){
-    .entry.has-photo{
-      grid-template-columns:96px 1fr;
-      grid-template-areas:
-        "photo title"
-        "photo place"
-        "blurb blurb";
-    }
-    .entry.has-photo .date{grid-column:2;grid-row:1;text-align:left;}
-    .entry.has-photo .fest-photo-wrap{width:96px;height:96px;}
+    .entry.has-photo{flex-direction:column;}
+    .entry.has-photo .fest-photo-wrap{width:100%;max-width:220px;aspect-ratio:4/5;}
   }
 
   /* ---- Festival / photo cards ---- */
@@ -627,12 +662,16 @@
 
   <div class="tabpanel active" id="panel-experience" role="tabpanel">
       <article class="entry has-photo">
-        <div class="fest-photo-wrap"><img id="exp1-img" src="assets/lecture.jpg" width="675" height="812" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
-        <h3 id="exp1-title"></h3>
-        <p class="place" id="exp1-place"></p>
-        <p class="date" id="exp1-date"></p>
-        <p class="workblurb" id="exp1-blurb"></p>
-        <ul id="exp1-list"></ul>
+        <div class="fest-photo-wrap"><img id="exp1-img" src="assets/lecture.jpg" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
+        <div class="entry-body">
+          <div class="entry-head">
+            <h3 id="exp1-title"></h3>
+            <p class="date" id="exp1-date"></p>
+          </div>
+          <p class="place" id="exp1-place"></p>
+          <p class="workblurb" id="exp1-blurb"></p>
+          <ul id="exp1-list"></ul>
+        </div>
       </article>
 
       <article class="entry">
@@ -648,7 +687,13 @@
       <h3 class="sub-label" id="sub-activity"></h3>
       <article class="entry">
         <ul style="margin-top:0;" id="activity-list"></ul>
-      </article></div>
+      </article>
+
+      <h3 class="sub-label" id="sub-publications"></h3>
+      <ul class="pub-list" id="publications-list"></ul>
+
+      <h3 class="sub-label" id="sub-talks"></h3>
+      <ul class="pub-list" id="talks-list"></ul></div>
   <div class="tabpanel" id="panel-education" role="tabpanel">
       <article class="entry">
         <div>
@@ -755,13 +800,15 @@ const T = {
     "role": "Linguist // EFL Teacher // Researcher",
     "photoAlt": "Portrait of Savely Byzov",
     "plateCaption": "Fig. 1 — S. Byzov",
-    "intro": "Linguist and university lecturer specialising in English language teaching, sociolinguistics, and the history of English, with a particular focus on Northern Europe. Calm, empathetic, and stress-resilient by nature, with a genuine curiosity for languages, cultures, and the history and geography of the places they come from. Two years of university-level instruction, curriculum design, and student research supervision, plus hands-on English–Russian interpreting at international festivals – and, one memorable summer, repairing a lighthouse at the edge of the world.",
+    "intro": "I'm a linguist and university lecturer — I specialise in English language teaching, sociolinguistics, and the history of English, and I'm genuinely fascinated by Northern Europe: its languages, its history, and the way cultures collide and intertwine across a map. I'm calm, empathetic, and stress-resilient by nature, and curious about pretty much everything — languages, cultures, and the history and geography of the places they come from. In two years at the university I taught, built several course curricula, and supervised student research, while also spending years interpreting at international festivals. And one memorable summer, I dropped all of that to go restore a lighthouse at the edge of the world – more on that below.",
     "labels": {
       "experience": "Experience",
       "education": "Education",
       "skillslang": "Skills, Languages &amp; Interests",
       "festivals": "Festivals &amp; Volunteering",
       "activity": "Academic Activity",
+      "publications": "Publications",
+      "talks": "Conference Talks",
       "languages": "Languages",
       "skills": "Skills",
       "interests": "Interests"
@@ -770,8 +817,8 @@ const T = {
       "title": "University Lecturer",
       "place": "Department of English Philology, Nordic Languages and Linguodidactics, Northern Arctic Federal University, Arkhangelsk",
       "date": "2024 – 2026",
-      "imgAlt": "Savely giving a lecture to students",
-      "blurb": "NArFU is the only major university based in mainland Russia's Arctic zone — the country's institutional foothold for Arctic research, from permafrost and forestry science to Northern-language studies, with partnerships across more than 70 institutions worldwide.",
+      "imgAlt": "Giving a lecture to students",
+      "blurb": "I work (well, worked) at NArFU — the only major university based in mainland Russia's Arctic zone, and genuinely the country's institutional foothold for Arctic research: permafrost, forestry science, Northern-language studies, you name it, with partnerships across more than 70 institutions worldwide.",
       "li": [
         "Taught English Language, Sociolinguistics, and History of the English Language to dozens of undergraduates across several groups",
         "Designed five full course curricula — spanning Practical English, Sociolinguistics, and the History of the English Language — complete with syllabi, materials, and assessment",
@@ -782,7 +829,7 @@ const T = {
       "title": "Museum Guide // Tour Interpreter",
       "place": "Nevyansky Historical and Architectural Museum, Nevyansk",
       "date": "2023",
-      "blurb": "The museum is built around the Nevyansk Leaning Tower — a 57.5-metre bell tower raised in 1725 for the industrialist Akinfiy Demidov, tilted almost two metres off vertical, and wrapped in legends of a secret mint hidden in its flooded basement.",
+      "blurb": "The museum I worked at is built around the Nevyansk Leaning Tower — a 57.5-metre bell tower raised in 1725 for the industrialist Akinfiy Demidov, tilted almost two metres off vertical, and wrapped in legends of a secret mint hidden in its flooded basement.",
       "li": [
         "Delivered guided tours and thematic excursions on regional history and architecture for Russian-speaking and international visitors"
       ]
@@ -792,24 +839,63 @@ const T = {
       "place": "Northern Arctic Federal University, Arkhangelsk",
       "date": "2024 – 2026",
       "pre": "Specialisation: Teaching Foreign Languages in a Digital Environment.",
-      "programBlurb": "The programme trains language teachers to design courses for blended and fully digital formats — from choosing EdTech platforms and building multimedia materials to formative assessment and running collaborative writing projects online.",
+      "programBlurb": "This is where I learned to design courses for blended and fully digital formats — everything from choosing EdTech platforms and building multimedia materials to formative assessment and running collaborative writing projects online.",
       "thesisLabel": "Dissertation:",
       "thesis": "Teaching collaborative writing to university students majoring in Linguistics using digital tools.",
-      "abstract": "Looks at how collaborative writing — co-authoring, peer review, iterative editing in a shared document — can be taught alongside teamwork skills to second-year Linguistics students, using the Russian platform Yandex.Documents. Draws on socio-cultural writing theory and genre-based pedagogy, and reports on a trial course run with three student teams, analysed through their document version histories and reflections."
+      "abstract": "In it, I look at how collaborative writing — co-authoring, peer review, iterative editing in a shared document — can be taught alongside teamwork skills to second-year Linguistics students, using the Russian platform Yandex.Documents. I draw on socio-cultural writing theory and genre-based pedagogy, and ran a trial course with three student teams, which I analysed through their document version histories and reflections."
     },
     "edu2": {
       "title": "Bachelor&rsquo;s Degree in Linguistics",
       "place": "Northern Arctic Federal University, Arkhangelsk",
       "date": "2020 – 2024",
       "pre": "Specialisation: Theory and Practice of Intercultural Communication. Languages of study: English and Norwegian.",
-      "programBlurb": "Combines advanced English-language training with the theory of intercultural communication, translation practice, and a second foreign language — Norwegian, in his case — to prepare graduates to work across languages and cultures.",
+      "programBlurb": "Here I combined advanced English-language training with the theory of intercultural communication, translation practice, and a second foreign language — Norwegian, in my case — to prepare for work across languages and cultures.",
       "thesisLabel": "Thesis:",
       "thesis": "Communicative and speech tactics in the Old English text (based on the poem &ldquo;The Dream of the Rood&rdquo;).",
-      "abstract": "A close reading of The Dream of the Rood — an anonymous 8th-century Old English poem on the Crucifixion — analysing its communicative and rhetorical tactics alongside its stylistic devices. Includes his own line-by-line translation of the poem from Old English into Russian."
+      "abstract": "Here I take a close look at The Dream of the Rood — an anonymous 8th-century Old English poem on the Crucifixion — analysing its communicative and rhetorical tactics alongside its stylistic devices. I also translated the whole poem myself, line by line, from Old English into Russian."
     },
     "activity": [
       "Organised academic round tables and panel discussions on intercultural communication",
       "Delivered open lectures for students and the wider academic community"
+    ],
+    "publications": [
+      {
+        "title": "The Place of Foreign-Language Writing in the System of Collaborative Learning at University",
+        "meta": "Academic paper",
+        "desc": "I look at where foreign-language writing actually fits within a university's collaborative-learning system, drawing on the course syllabi and curriculum of our own Linguistics programme. I walk through the stages of teaching writing and what really gets in students' way when they write together — from missing team roles to gaps in language level — and what digital tools can do about it."
+      },
+      {
+        "title": "Digital Support for Teaching Collaborative Writing in English at a University",
+        "meta": "Academic paper",
+        "desc": "I look at how cloud editors and wiki platforms can help Linguistics students move from B1 to B2 in English writing, and offer concrete tasks and methodological tips for running collaborative work digitally."
+      }
+    ],
+    "talks": [
+      {
+        "title": "A Semantic Analysis of Power and Subordination Vocabulary in the Old English Poem “The Dream of the Rood”",
+        "meta": "Arctic Readings",
+        "desc": "I break down two lexical-semantic fields in the poem — power and subordination — and show how the text pulls off a real inversion of power: Christ triumphs through voluntary suffering, and the Cross, as a loyal retainer, triumphs through submission."
+      },
+      {
+        "title": "The Intercultural Code in “The Dream of the Rood”: A Synthesis of Germanic and Christian Tradition",
+        "meta": "Conference paper, 2026",
+        "desc": "I show how the poem turns Christ into a hero out of Germanic saga while dressing Christian doctrine in the language of a warrior's retinue — and argue this code-switching is a deliberate device, not an accident."
+      },
+      {
+        "title": "Toponymic Subordination: The Norwegianisation of Sámi Place Names on Maps (19th–21st Centuries)",
+        "meta": "Arctic Readings",
+        "desc": "Using maps of Finnmark and Troms, I argue that the Norwegianisation of Sámi place names wasn't an accidental by-product of cartography but a systematic process with a recognisable set of tactics: calquing, phonetic adaptation, outright replacement, orthographic normalisation, and toponymic silence."
+      },
+      {
+        "title": "Norwegian in the Germanic Language Family: Classification, History, and the Current Situation",
+        "meta": "Conference paper, 2026",
+        "desc": "I trace Norwegian's place among the Germanic languages — where it came from historically, and what's happening to it today, including the ongoing tug-of-war between Bokmål and Nynorsk."
+      },
+      {
+        "title": "The 18th Century as a Transitional Period in Norwegian Visual Art",
+        "meta": "Arctic Readings",
+        "desc": "I trace how urbanisation and a new merchant elite turned 18th-century Norwegian art away from church wood-carving and toward portraiture — and, in painters like Peder Aadnes, toward landscape — laying the groundwork for the later flowering of Norwegian painting."
+      }
     ],
     "langs": [
       {
@@ -826,11 +912,11 @@ const T = {
       }
     ],
     "skills": [
-      { "icon": "teaching", "title": "University teaching &amp; curriculum development", "desc": "Built five course curricula from the ground up, spanning practical English and the history of the language." },
-      { "icon": "writing", "title": "Academic writing &amp; research (EN / RU)", "desc": "Regularly writes and co-authors academic papers, and helps students shape their own research into publishable form." },
-      { "icon": "translate", "title": "Translation &amp; interpreting (EN–RU)", "desc": "Years of interpreting at festivals large and small, and for private events." },
-      { "icon": "edtech", "title": "Digital learning &amp; EdTech tools", "desc": "Studied EdTech methodology at Master's level, and puts it to work in his own classroom." },
-      { "icon": "speaking", "title": "Public speaking", "desc": "Gives lectures often, and genuinely enjoys the stage." }
+      { "icon": "teaching", "title": "University teaching &amp; curriculum development", "desc": "I built five course curricula from the ground up, spanning practical English and the history of the language — syllabi, materials, assessment, all of it." },
+      { "icon": "writing", "title": "Academic writing &amp; research (EN / RU)", "desc": "I regularly write and co-author academic papers, and help students shape their own research into something that can actually be published." },
+      { "icon": "translate", "title": "Translation &amp; interpreting (EN–RU)", "desc": "I've spent years interpreting at festivals large and small, and for private events — everything from simultaneous interpreting on stage to whispered interpreting in the wings." },
+      { "icon": "edtech", "title": "Digital learning &amp; EdTech tools", "desc": "I studied EdTech methodology at Master's level, and I put it to work in my own classroom — and in my dissertation." },
+      { "icon": "speaking", "title": "Public speaking", "desc": "I give lectures often, and genuinely enjoy the stage — festivals, conferences, open lectures, I'm not picky." }
     ],
     "festA": {
       "title": "Volunteer – Lighthouse Restoration",
@@ -854,11 +940,11 @@ const T = {
       "alt": "Savely on stage at the Arctic Open festival"
     },
     "interests": [
-      { "icon": "music", "title": "Music", "desc": "An avid listener across genres, with a soft spot for Johnny Cash and country." },
-      { "icon": "reading", "title": "Reading", "desc": "Favourite author: F. Scott Fitzgerald." },
-      { "icon": "hiking", "title": "Hiking &amp; trekking", "desc": "Spent his whole youth in a local hiking club, and still heads out on expeditions regularly." },
-      { "icon": "travel", "title": "Travel", "desc": "Dreams of Scandinavia and Alaska next — Serbia was the dream before it became home." },
-      { "icon": "woodwork", "title": "Woodworking &amp; carpentry", "desc": "Builds garden beds and greenhouses by hand in his spare time." }
+      { "icon": "music", "title": "Music", "desc": "I'm a music fan in general, honestly, but I've got a real soft spot for Johnny Cash and country." },
+      { "icon": "reading", "title": "Reading", "desc": "My favourite author is F. Scott Fitzgerald." },
+      { "icon": "hiking", "title": "Hiking &amp; trekking", "desc": "I spent my whole youth in a local hiking club, and I still head out on expeditions regularly." },
+      { "icon": "travel", "title": "Travel", "desc": "I dream of Scandinavia and Alaska next — Serbia used to be the dream, before it became home." },
+      { "icon": "woodwork", "title": "Woodworking &amp; carpentry", "desc": "In my spare time, I build garden beds and greenhouses by hand." }
     ],
     "footer": "Savely Byzov // Belgrade, Serbia // "
   },
@@ -868,13 +954,15 @@ const T = {
     "role": "Лингвист // Преподаватель английского // Исследователь",
     "photoAlt": "Портрет Савелия Бызова",
     "plateCaption": "Илл. 1 — С. Бызов",
-    "intro": "Лингвист и преподаватель университета: специализируюсь на преподавании английского языка, социолингвистике и истории английского языка, полем интереса является Северная Европа. По натуре спокойный, эмпатичный и стрессоустойчивый, питаю интерес к языкам и культурам разных стран, а заодно к их истории и географии. Два года преподавания в университете, разработки учебных программ и руководства студенческими исследованиями, плюс опыт устного перевода на международных фестивалях (а однажды вообще всё лето провёл, восстанавливая маяк на краю света).",
+    "intro": "Я лингвист и преподаватель университета: специализируюсь на преподавании английского языка, социолингвистике и истории английского языка, а по-настоящему увлечён Северной Европой — её языками, историей и тем, как культуры сталкиваются и переплетаются на карте. По натуре я спокойный, эмпатичный и стрессоустойчивый, и мне искренне интересно почти всё: языки, культуры, история и география мест, откуда они родом. За два года в университете успел попреподавать, разработать несколько учебных программ и поруководить студенческими исследованиями, а параллельно годами занимался устным переводом на международных фестивалях. А однажды вообще всё лето провёл, восстанавливая маяк на краю света — но об этом чуть ниже.",
     "labels": {
       "experience": "Опыт работы",
       "education": "Образование",
       "skillslang": "Навыки, языки и увлечения",
       "festivals": "Фестивали и волонтёрство",
       "activity": "Академическая деятельность",
+      "publications": "Публикации",
+      "talks": "Доклады на конференциях",
       "languages": "Языки",
       "skills": "Навыки",
       "interests": "Увлечения"
@@ -883,19 +971,19 @@ const T = {
       "title": "Преподаватель университета",
       "place": "Кафедра английской филологии, языков северных стран и лингводидактики, Северный (Арктический) федеральный университет, Архангельск",
       "date": "2024 – 2026",
-      "imgAlt": "Савелий читает лекцию студентам",
-      "blurb": "САФУ — единственный крупный вуз, расположенный на материковой части арктической зоны России: опорная научная площадка для исследования Арктики — от вечной мерзлоты и лесной промышленности до языков Севера — с партнёрствами более чем в 70 странах.",
+      "imgAlt": "Читаю лекцию студентам",
+      "blurb": "Я работаю (точнее, работал) в САФУ — единственном крупном вузе на материковой части арктической зоны России: настоящей опорной площадке для арктической науки, от вечной мерзлоты и лесной промышленности до языков Севера, с партнёрствами больше чем в 70 странах.",
       "li": [
-        "Преподавал английский язык, социолингвистику и историю английского языка десяткам студентов в нескольких группах",
-        "Разработал пять учебных программ — по практическому курсу английского языка, социолингвистике и истории английского языка — включая учебные материалы и систему оценивания",
-        "Руководил студенческими исследовательскими проектами по лингвистике, истории языка и региональной географии"
+        "Преподавал английский язык, социолингвистику и историю английского языка — через мои занятия прошли десятки студентов в нескольких группах",
+        "С нуля разработал пять учебных программ — по практическому курсу английского языка, социолингвистике и истории английского языка — от структуры курса до системы оценивания",
+        "Руководил тремя студенческими исследовательскими проектами по лингвистике, истории языка и региональной географии"
       ]
     },
     "exp2": {
       "title": "Экскурсовод // Переводчик",
       "place": "Невьянский государственный историко-архитектурный музей, Невьянск",
       "date": "2023",
-      "blurb": "Музей построен вокруг Невьянской наклонной башни — 57,5-метровой башни, возведённой в 1725 году по заказу промышленника Акинфия Демидова, отклонившейся от вертикали почти на два метра, с легендами о тайном денежном дворе в затопленных подвалах.",
+      "blurb": "Музей, где я работал, построен вокруг Невьянской наклонной башни — 57,5-метровой башни, возведённой в 1725 году по заказу промышленника Акинфия Демидова, отклонившейся от вертикали почти на два метра, с легендами о тайном денежном дворе в затопленных подвалах.",
       "li": [
         "Проводил экскурсии и тематические туры по региональной истории и архитектуре для русскоязычных и иностранных посетителей"
       ]
@@ -905,25 +993,64 @@ const T = {
       "place": "Северный (Арктический) федеральный университет, Архангельск",
       "date": "2024 – 2026",
       "pre": "Специализация: обучение иностранным языкам в цифровой среде.",
-      "programBlurb": "Программа готовит преподавателей языков к разработке курсов для смешанного и полностью цифрового формата обучения — от выбора EdTech-платформ и мультимедийных материалов до формирующего оценивания и организации совместных проектов онлайн.",
+      "programBlurb": "Здесь я учился разрабатывать курсы для смешанного и полностью цифрового формата обучения — от выбора EdTech-платформ и мультимедийных материалов до формирующего оценивания и организации совместных проектов онлайн.",
       "thesisLabel": "Диссертация:",
       "thesis": "Обучение совместному письму студентов-лингвистов с использованием цифровых инструментов.",
-      "abstract": "Исследует, как коллаборативное письмо — соавторство, взаимное рецензирование и совместное редактирование — можно преподавать в связке с навыками командной работы студентам-лингвистам второго курса, на материале платформы «Яндекс.Документы». Опирается на социокультурную теорию письма и жанровый подход к обучению; включает апробацию на трёх учебных группах с анализом истории версий документов и рефлексии участников."
+      "abstract": "В этой работе я разбираю, как коллаборативное письмо — соавторство, взаимное рецензирование и совместное редактирование — можно преподавать в связке с навыками командной работы студентам-лингвистам второго курса, на материале платформы «Яндекс.Документы». Опираюсь на социокультурную теорию письма и жанровый подход к обучению; провёл апробацию на трёх учебных группах, проанализировав историю версий документов и рефлексию участников."
     },
     "edu2": {
       "title": "Бакалавриат по лингвистике",
       "place": "Северный (Арктический) федеральный университет, Архангельск",
       "date": "2020 – 2024",
       "pre": "Специализация: теория и практика межкультурной коммуникации. Изучаемые языки: английский и норвежский.",
-      "programBlurb": "Сочетает углублённое изучение английского языка с теорией межкультурной коммуникации, переводческой практикой и вторым иностранным языком — в его случае норвежским — готовя выпускников к работе на стыке языков и культур.",
+      "programBlurb": "Здесь я сочетал углублённое изучение английского языка с теорией межкультурной коммуникации, переводческой практикой и вторым иностранным языком — в моём случае норвежским.",
       "thesisLabel": "Дипломная работа:",
       "thesis": "Коммуникативные и речевые тактики в древнеанглийском тексте (на материале поэмы «Видение Креста»).",
-      "abstract": "Разбор поэмы «Видение Креста» — анонимной древнеанглийской поэмы VIII века о распятии — с анализом коммуникативно-речевых тактик и стилистических приёмов текста. Включает собственный перевод поэмы с древнеанглийского на русский язык."
+      "abstract": "Здесь я разбираю поэму «Видение Креста» — анонимную древнеанглийскую поэму VIII века о распятии — анализируя коммуникативно-речевые тактики и стилистические приёмы текста. А ещё сам перевёл поэму с древнеанглийского на русский язык — целиком, построчно."
     },
     "activity": [
       "Организовывал академические круглые столы и панельные дискуссии по межкультурной коммуникации",
       "Читал открытые лекции для студентов и широкой академической аудитории",
       "Участвовал в приемной компании в Северный Арктический Федеральный Университет"
+    ],
+    "publications": [
+      {
+        "title": "Место письма на иностранном языке в системе коллаборативного обучения в вузе",
+        "meta": "Научная статья",
+        "desc": "Разбираю, где в системе коллаборативного обучения вузу место письму на иностранном языке — на материале рабочих программ и учебного плана нашей лингвистической программы. Прохожусь по этапам обучения письму и по тому, что реально мешает студентам писать сообща: от нехватки ролей в команде до разницы в уровне языка — и что с этим можно сделать в цифровой среде."
+      },
+      {
+        "title": "Возможности организации цифровой поддержки обучения коллаборативному письму на английском языке в вузе",
+        "meta": "Научная статья",
+        "desc": "Смотрю, как облачные редакторы и вики-платформы помогают студентам-лингвистам подняться с уровня B1 до B2 в письме на английском — и предлагаю конкретные задания и методические приёмы для организации совместной работы в цифровой среде."
+      }
+    ],
+    "talks": [
+      {
+        "title": "Семантический анализ лексики власти и подчинения в древнеанглийской поэме «The Dream of the Rood»",
+        "meta": "Арктические чтения",
+        "desc": "Разбираю два лексико-семантических поля поэмы — «власть» и «подчинение» — и показываю, как в тексте происходит настоящая инверсия власти: Христос побеждает через добровольное страдание, а Крест — верный дружинник — торжествует через покорность."
+      },
+      {
+        "title": "Межкультурный код в «The Dream of the Rood»: синтез германской и христианской традиций",
+        "meta": "Доклад, 2026",
+        "desc": "Показываю, как поэма превращает Христа в героя германской саги, а христианский канон подаёт языком воинской дружины — и почему этот код-свитчинг работает не как случайность, а как осознанный приём."
+      },
+      {
+        "title": "Топонимическое подчинение: норвегизация саамских названий на картах (XIX–XXI вв.)",
+        "meta": "Арктические чтения",
+        "desc": "На материале карт Финнмарка и Тромса показываю, что норвегизация саамских топонимов — это не побочный эффект картографии, а системная процедура с узнаваемым набором приёмов: калька, фонетическая адаптация, замена, орфографическая нормализация и топонимическое умолчание."
+      },
+      {
+        "title": "Норвежский язык в германской языковой семье: классификация, исторический путь и современная языковая ситуация",
+        "meta": "Доклад, 2026",
+        "desc": "Прослеживаю место норвежского среди германских языков — откуда он пришёл исторически и что происходит с ним сегодня, включая непростые отношения букмола и нюнорска."
+      },
+      {
+        "title": "XVIII век как переходный период в норвежском изобразительном искусстве",
+        "meta": "Арктические чтения",
+        "desc": "Прослеживаю, как урбанизация и рост новых элит в XVIII веке превратили норвежское искусство из церковной резьбы в портрет и, у художников вроде Педера Однеса, — в пейзаж, заложив основу для более позднего расцвета норвежской живописи."
+      }
     ],
     "langs": [
       {
@@ -940,11 +1067,11 @@ const T = {
       }
     ],
     "skills": [
-      { "icon": "teaching", "title": "Преподавание в вузе и разработка программ", "desc": "С нуля разработал пять учебных программ — по практическому английскому и истории языка." },
-      { "icon": "writing", "title": "Академическое письмо и исследования (рус./англ.)", "desc": "Регулярно пишет и соавторствует в научных статьях, а также помогает студентам довести собственные исследования до публикации." },
-      { "icon": "translate", "title": "Письменный и устный перевод (англ.–рус.)", "desc": "Годами устно переводил на больших и маленьких фестивалях, а также на частных мероприятиях." },
-      { "icon": "edtech", "title": "Цифровое обучение и EdTech-инструменты", "desc": "Изучал методику EdTech в магистратуре и применяет её на практике в собственных курсах." },
-      { "icon": "speaking", "title": "Публичные выступления", "desc": "Часто выступает с лекциями и по-настоящему любит сцену." }
+      { "icon": "teaching", "title": "Преподавание в вузе и разработка программ", "desc": "С нуля разработал пять учебных программ — по практическому английскому и истории языка — от структуры курса до системы оценивания." },
+      { "icon": "writing", "title": "Академическое письмо и исследования (рус./англ.)", "desc": "Регулярно пишу и соавторствую в научных статьях, а ещё помогаю студентам довести собственные исследования до публикации — от первого черновика до финальной правки." },
+      { "icon": "translate", "title": "Письменный и устный перевод (англ.–рус.)", "desc": "Годами устно переводил на больших и маленьких фестивалях, а также на частных мероприятиях — от синхрона на сцене до шёпотного перевода в кулуарах." },
+      { "icon": "edtech", "title": "Цифровое обучение и EdTech-инструменты", "desc": "Изучал методику EdTech в магистратуре и применяю её на практике в собственных курсах — а заодно в диссертации." },
+      { "icon": "speaking", "title": "Публичные выступления", "desc": "Часто выступаю с лекциями и по-настоящему люблю сцену — открытая лекция, конференция или фестиваль, мне всё равно, лишь бы говорить." }
     ],
     "festA": {
       "title": "Волонтёр – реставрация маяка",
@@ -968,11 +1095,11 @@ const T = {
       "alt": "Савелий на сцене фестиваля Arctic Open"
     },
     "interests": [
-      { "icon": "music", "title": "Музыка", "desc": "Меломан во всех смыслах, но особенно неравнодушен к Джонни Кэшу и жанру кантри." },
-      { "icon": "reading", "title": "Чтение", "desc": "Любимый писатель: Фрэнсис Скотт Фицджеральд." },
-      { "icon": "hiking", "title": "Пешие походы и треккинг", "desc": "Всю юность провёл в туристическом кружке и до сих пор регулярно ходит в походы и экспедиции." },
-      { "icon": "travel", "title": "Путешествия", "desc": "Мечтает увидеть Скандинавию и Аляску — а Сербия была мечтой, пока не стала домом." },
-      { "icon": "woodwork", "title": "Резьба по дереву и столярное дело", "desc": "В свободное время своими руками строит грядки и теплицы." }
+      { "icon": "music", "title": "Музыка", "desc": "Меломан во всех смыслах, но если позвать на концерт кантри — приду одним из первых: особенно неравнодушен к Джонни Кэшу." },
+      { "icon": "reading", "title": "Чтение", "desc": "Любимый писатель — Фрэнсис Скотт Фицджеральд." },
+      { "icon": "hiking", "title": "Пешие походы и треккинг", "desc": "Всю юность провёл в туристическом кружке и до сих пор регулярно хожу в походы и экспедиции." },
+      { "icon": "travel", "title": "Путешествия", "desc": "Мечтаю увидеть Скандинавию и Аляску — а Сербия была мечтой, пока не стала домом." },
+      { "icon": "woodwork", "title": "Резьба по дереву и столярное дело", "desc": "В свободное время своими руками строю грядки и теплицы." }
     ],
     "footer": "Савелий Бызов // Белград, Сербия // "
   },
@@ -982,13 +1109,15 @@ const T = {
     "role": "Lingvista // Nastavnik engleskog jezika // Istraživač",
     "photoAlt": "Portret Saveliya Byzova",
     "plateCaption": "Sl. 1 — S. Byzov",
-    "intro": "Lingvista i univerzitetski predavač, specijalizovan za metodiku nastave engleskog jezika, sociolingvistiku i istoriju engleskog jezika, sa posebnim interesovanjem za Severnu Evropu. Po prirodi je miran, empatičan i otporan na stres, sa iskrenom radoznalošću prema jezicima i kulturama, kao i prema istoriji i geografiji krajeva iz kojih potiču. Dve godine univerzitetske nastave, kreiranja nastavnih programa i mentorstva studentskih istraživanja, uz praktično iskustvo usmenog prevođenja na međunarodnim festivalima – a jedno leto je proveo i popravljajući svetionik na kraju sveta.",
+    "intro": "Ja sam lingvista i univerzitetski predavač — specijalizovan sam za nastavu engleskog jezika, sociolingvistiku i istoriju engleskog jezika, a istinski me fascinira Severna Evropa: njeni jezici, istorija, i način na koji se kulture sudaraju i prepliću na mapi. Po prirodi sam miran, empatičan i otporan na stres, i zanima me gotovo sve — jezici, kulture, istorija i geografija krajeva iz kojih potiču. Za dve godine na univerzitetu sam predavao, kreirao nekoliko nastavnih programa i mentorisao studentska istraživanja, a paralelno sam godinama prevodio na međunarodnim festivalima. A jednog leta sam sve to ostavio po strani da bih restaurirao svetionik na kraju sveta — više o tome ispod.",
     "labels": {
       "experience": "Iskustvo",
       "education": "Obrazovanje",
       "skillslang": "Veštine, jezici i interesovanja",
       "festivals": "Festivali i volontiranje",
       "activity": "Akademske aktivnosti",
+      "publications": "Publikacije",
+      "talks": "Konferencijski nastupi",
       "languages": "Jezici",
       "skills": "Veštine",
       "interests": "Interesovanja"
@@ -997,11 +1126,11 @@ const T = {
       "title": "Univerzitetski predavač",
       "place": "Katedra za englesku filologiju, jezike severnih zemalja i lingvodidaktiku, Severni arktički federalni univerzitet, Arhangelsk",
       "date": "2024 – 2026",
-      "imgAlt": "Saveliy drži predavanje studentima",
-      "blurb": "SAFU je jedini veći univerzitet na kontinentalnom delu arktičke zone Rusije — nacionalno uporište za arktička istraživanja, od nauke o permafrostu i šumarstvu do proučavanja severnih jezika, sa partnerstvima u više od 70 institucija širom sveta.",
+      "imgAlt": "Držim predavanje studentima",
+      "blurb": "Radim (tačnije, radio sam) na SAFU-u — jedinom većem univerzitetu na kontinentalnom delu ruske Arktike, i zaista nacionalnom uporištu za arktička istraživanja: permafrost, šumarstvo, proučavanje severnih jezika, štagod, sa partnerstvima u više od 70 institucija širom sveta.",
       "li": [
-        "Predavao engleski jezik, sociolingvistiku i istoriju engleskog jezika za desetine studenata u nekoliko grupa",
-        "Kreirao pet nastavnih programa — iz praktičnog engleskog jezika, sociolingvistike i istorije engleskog jezika — uključujući materijale i sistem ocenjivanja",
+        "Predavao engleski jezik, sociolingvistiku i istoriju engleskog jezika — kroz moju nastavu prošlo je na desetine studenata u nekoliko grupa",
+        "Od nule kreirao pet nastavnih programa — iz praktičnog engleskog jezika, sociolingvistike i istorije engleskog jezika — od strukture kursa do sistema ocenjivanja",
         "Mentorisao tri studentska istraživačka projekta iz lingvistike i regionalne geografije"
       ]
     },
@@ -1009,7 +1138,7 @@ const T = {
       "title": "Muzejski vodič // Prevodilac",
       "place": "Nevjanski istorijsko-arhitektonski muzej, Nevjansk",
       "date": "2023",
-      "blurb": "Muzej je izgrađen oko Nevjanske nakošene kule — zvonika visine 57,5 metara podignutog 1725. godine za industrijalca Akinfija Demidova, nagnutog skoro dva metra od vertikale, uz legende o tajnoj kovnici novca u potopljenim podrumima.",
+      "blurb": "Muzej u kom sam radio izgrađen je oko Nevjanske nakošene kule — zvonika visine 57,5 metara podignutog 1725. godine za industrijalca Akinfija Demidova, nagnutog skoro dva metra od vertikale, uz legende o tajnoj kovnici novca u potopljenim podrumima.",
       "li": [
         "Vodio ture i tematske obilaske o regionalnoj istoriji i arhitekturi za rusko govorne i strane posetioce"
       ]
@@ -1019,24 +1148,63 @@ const T = {
       "place": "Severni arktički federalni univerzitet, Arhangelsk",
       "date": "2024 – 2026",
       "pre": "Specijalizacija: nastava stranih jezika u digitalnom okruženju.",
-      "programBlurb": "Program obučava nastavnike jezika za kreiranje kurseva u hibridnom i potpuno digitalnom formatu — od izbora EdTech platformi i multimedijalnih materijala do formativnog ocenjivanja i vođenja zajedničkih onlajn projekata.",
+      "programBlurb": "Ovde sam naučio da kreiram kurseve za hibridni i potpuno digitalni format nastave — od izbora EdTech platformi i multimedijalnih materijala do formativnog ocenjivanja i vođenja zajedničkih onlajn projekata.",
       "thesisLabel": "Master rad:",
       "thesis": "Podučavanje kolaborativnog pisanja studentima lingvistike uz pomoć digitalnih alata.",
-      "abstract": "Istražuje kako se kolaborativno pisanje — koautorstvo, uzajamno recenziranje i zajedničko uređivanje teksta — može podučavati zajedno sa veštinama timskog rada studentima lingvistike druge godine, na platformi „Jandeks.Dokumenti“. Oslanja se na sociokulturnu teoriju pisanja i žanrovski pristup nastavi; uključuje probnu nastavu sa tri studentska tima, analiziranu kroz istoriju verzija dokumenata i refleksije učesnika."
+      "abstract": "U njemu istražujem kako se kolaborativno pisanje — koautorstvo, uzajamno recenziranje i zajedničko uređivanje teksta — može podučavati zajedno sa veštinama timskog rada studentima lingvistike druge godine, na platformi „Jandeks.Dokumenti“. Oslanjam se na sociokulturnu teoriju pisanja i žanrovski pristup nastavi; sproveo sam probnu nastavu sa tri studentska tima, koju sam analizirao kroz istoriju verzija dokumenata i refleksije učesnika."
     },
     "edu2": {
       "title": "Osnovne studije lingvistike",
       "place": "Severni arktički federalni univerzitet, Arhangelsk",
       "date": "2020 – 2024",
       "pre": "Specijalizacija: teorija i praksa interkulturalne komunikacije. Jezici studija: engleski i norveški.",
-      "programBlurb": "Kombinuje napredno učenje engleskog jezika sa teorijom interkulturalne komunikacije, prevodilačkom praksom i drugim stranim jezikom — u njegovom slučaju norveškim — pripremajući diplomce za rad na spoju jezika i kultura.",
+      "programBlurb": "Ovde sam kombinovao napredno učenje engleskog jezika sa teorijom interkulturalne komunikacije, prevodilačkom praksom i drugim stranim jezikom — u mom slučaju norveškim.",
       "thesisLabel": "Diplomski rad:",
       "thesis": "Komunikativne i govorne taktike u staroengleskom tekstu (na osnovu pesme „San o krstu&rdquo;).",
-      "abstract": "Analiza pesme „San o krstu“ — anonimne staroengleske pesme iz VIII veka o raspeću — koja se bavi komunikativno-govornim taktikama i stilskim sredstvima teksta. Uključuje sopstveni prevod pesme sa staroengleskog na ruski jezik."
+      "abstract": "Ovde detaljno analiziram pesmu „San o krstu“ — anonimnu staroenglesku pesmu iz VIII veka o raspeću — bavim se komunikativno-govornim taktikama i stilskim sredstvima teksta. Takođe sam sâm preveo celu pesmu, stih po stih, sa staroengleskog na ruski jezik."
     },
     "activity": [
       "Organizovao akademske okrugle stolove i panel diskusije o interkulturalnoj komunikaciji",
       "Držao otvorena predavanja za studente i širu akademsku zajednicu"
+    ],
+    "publications": [
+      {
+        "title": "Mesto pisanja na stranom jeziku u sistemu kolaborativnog učenja na univerzitetu",
+        "meta": "Naučni rad",
+        "desc": "Istražujem gde pisanje na stranom jeziku zapravo pripada u sistemu kolaborativnog učenja na univerzitetu, na osnovu nastavnih planova i programa našeg smera Lingvistika. Prolazim kroz faze podučavanja pisanja i kroz ono što studentima zaista otežava zajedničko pisanje — od nedostatka podele uloga do razlika u nivou jezika — i šta se tim povodom može uraditi u digitalnom okruženju."
+      },
+      {
+        "title": "Mogućnosti organizovanja digitalne podrške u nastavi kolaborativnog pisanja na engleskom jeziku na univerzitetu",
+        "meta": "Naučni rad",
+        "desc": "Istražujem kako cloud editori i wiki platforme pomažu studentima lingvistike da napreduju sa nivoa B1 na B2 u pisanju na engleskom, i predlažem konkretne zadatke i metodičke smernice za organizovanje zajedničkog rada u digitalnom okruženju."
+      }
+    ],
+    "talks": [
+      {
+        "title": "Semantička analiza leksike moći i pokornosti u staroengleskoj pesmi „The Dream of the Rood“",
+        "meta": "Arktička čitanja",
+        "desc": "Analiziram dva leksičko-semantička polja u pesmi — moć i pokornost — i pokazujem kako tekst ostvaruje pravu inverziju moći: Hrist trijumfuje kroz dobrovoljno stradanje, a Krst, kao veran vazal, trijumfuje kroz pokornost."
+      },
+      {
+        "title": "Interkulturalni kod u „The Dream of the Rood“: sinteza germanske i hrišćanske tradicije",
+        "meta": "Konferencijski rad, 2026",
+        "desc": "Pokazujem kako pesma pretvara Hrista u junaka germanske sage, dok hrišćanski kanon oblači u jezik ratničke družine — i tvrdim da je taj code-switching svestan postupak, a ne slučajnost."
+      },
+      {
+        "title": "Toponimijska subordinacija: norveškizacija sami naziva na mapama (XIX–XXI vek)",
+        "meta": "Arktička čitanja",
+        "desc": "Na primeru mapa Finmarka i Tromsa, tvrdim da norveškizacija sami toponima nije bila slučajna posledica kartografije, već sistematski proces sa prepoznatljivim skupom taktika: kalkiranje, fonetska adaptacija, potpuna zamena, ortografska normalizacija i toponimijsko ćutanje."
+      },
+      {
+        "title": "Norveški jezik u germanskoj jezičkoj porodici: klasifikacija, istorijski put i savremena jezička situacija",
+        "meta": "Konferencijski rad, 2026",
+        "desc": "Pratim mesto norveškog među germanskim jezicima — odakle istorijski potiče i šta se sa njim dešava danas, uključujući stalno nadmetanje bukmola i ninorska."
+      },
+      {
+        "title": "XVIII vek kao prelazni period u norveškoj likovnoj umetnosti",
+        "meta": "Arktička čitanja",
+        "desc": "Pratim kako su urbanizacija i nova trgovačka elita u XVIII veku odvele norvešku umetnost od crkvene rezbe ka portretu, a kod slikara poput Pedera Odnesa i ka pejzažu — postavljajući temelj za kasniji procvat norveškog slikarstva."
+      }
     ],
     "langs": [
       {
@@ -1053,11 +1221,11 @@ const T = {
       }
     ],
     "skills": [
-      { "icon": "teaching", "title": "Univerzitetska nastava i razvoj kurikuluma", "desc": "Od nule je kreirao pet nastavnih programa iz praktičnog engleskog jezika i istorije jezika." },
-      { "icon": "writing", "title": "Akademsko pisanje i istraživanje (EN/RU)", "desc": "Redovno piše i koautor je naučnih radova, a pomaže i studentima da svoja istraživanja dovedu do publikacije." },
-      { "icon": "translate", "title": "Pismeno i usmeno prevođenje (EN–RU)", "desc": "Godinama je prevodio na velikim i malim festivalima, kao i na privatnim događajima." },
-      { "icon": "edtech", "title": "Digitalno učenje i EdTech alati", "desc": "Izučavao je EdTech metodologiju na master studijama i primenjuje je u sopstvenoj nastavi." },
-      { "icon": "speaking", "title": "Javni nastup", "desc": "Često drži predavanja i istinski uživa u nastupu pred publikom." }
+      { "icon": "teaching", "title": "Univerzitetska nastava i razvoj kurikuluma", "desc": "Od nule sam kreirao pet nastavnih programa — iz praktičnog engleskog i istorije jezika — od strukture kursa do sistema ocenjivanja." },
+      { "icon": "writing", "title": "Akademsko pisanje i istraživanje (EN/RU)", "desc": "Redovno pišem i koautor sam naučnih radova, a pomažem i studentima da svoja istraživanja dovedu do publikacije — od prvog nacrta do finalne redakture." },
+      { "icon": "translate", "title": "Pismeno i usmeno prevođenje (EN–RU)", "desc": "Godinama sam prevodio na velikim i malim festivalima, kao i na privatnim događajima — od simultanog prevoda na bini do šapatnog prevoda u kuloarima." },
+      { "icon": "edtech", "title": "Digitalno učenje i EdTech alati", "desc": "Izučavao sam EdTech metodologiju na master studijama i primenjujem je u sopstvenoj nastavi — a i u svojoj disertaciji." },
+      { "icon": "speaking", "title": "Javni nastup", "desc": "Često držim predavanja i istinski uživam u nastupu pred publikom — otvoreno predavanje, konferencija ili festival, svejedno mi je, samo da pričam." }
     ],
     "festA": {
       "title": "Volonter – restauracija svetionika",
@@ -1081,11 +1249,11 @@ const T = {
       "alt": "Saveliy na bini festivala Arctic Open"
     },
     "interests": [
-      { "icon": "music", "title": "Muzika", "desc": "Veliki ljubitelj muzike uopšte, sa posebnom slabošću prema Džoniju Kešu i kantri žanru." },
-      { "icon": "reading", "title": "Čitanje", "desc": "Omiljeni pisac: Frensis Skot Ficdžerald." },
-      { "icon": "hiking", "title": "Planinarenje i pešačenje", "desc": "Čitavu mladost proveo je u planinarskom klubu i i dalje redovno ide na ekspedicije." },
-      { "icon": "travel", "title": "Putovanja", "desc": "Sledeći sanja o Skandinaviji i Aljasci — Srbija je bila san, sve dok nije postala dom." },
-      { "icon": "woodwork", "title": "Rezbarenje i stolarstvo", "desc": "U slobodno vreme sopstvenim rukama pravi leje i staklenike." }
+      { "icon": "music", "title": "Muzika", "desc": "Veliki sam ljubitelj muzike uopšte, ali imam posebnu slabost prema Džoniju Kešu i kantri žanru." },
+      { "icon": "reading", "title": "Čitanje", "desc": "Omiljeni pisac mi je Frensis Skot Ficdžerald." },
+      { "icon": "hiking", "title": "Planinarenje i pešačenje", "desc": "Čitavu mladost sam proveo u planinarskom klubu i i dalje redovno idem na ekspedicije." },
+      { "icon": "travel", "title": "Putovanja", "desc": "Sledeće sanjam o Skandinaviji i Aljasci — Srbija je bila san, sve dok nije postala dom." },
+      { "icon": "woodwork", "title": "Rezbarenje i stolarstvo", "desc": "U slobodno vreme sopstvenim rukama pravim leje i staklenike." }
     ],
     "footer": "Saveliy Byzov // Beograd, Srbija // "
   }
@@ -1107,6 +1275,8 @@ function applyLang(lang){
   document.getElementById('tab-festivals').innerHTML = t.labels.festivals;
 
   document.getElementById('sub-activity').innerHTML = t.labels.activity;
+  document.getElementById('sub-publications').innerHTML = t.labels.publications;
+  document.getElementById('sub-talks').innerHTML = t.labels.talks;
   document.getElementById('sub-skills').innerHTML = t.labels.skills;
   document.getElementById('sub-languages').innerHTML = t.labels.languages;
   document.getElementById('sub-interests').innerHTML = t.labels.interests;
@@ -1118,6 +1288,8 @@ function applyLang(lang){
   fillEdu('edu2', t.edu2);
 
   fillList('activity', t.activity);
+  fillPubs('publications', t.publications);
+  fillPubs('talks', t.talks);
 
   fillLangs(t.langs);
 
@@ -1172,6 +1344,19 @@ function fillList(id, items){
   items.forEach(function(text){
     const li = document.createElement('li');
     li.textContent = text;
+    ul.appendChild(li);
+  });
+}
+
+function fillPubs(id, items){
+  const ul = document.getElementById(id + '-list');
+  ul.innerHTML = '';
+  items.forEach(function(item){
+    const li = document.createElement('li');
+    li.innerHTML =
+      '<span class="pub-title">' + item.title + '</span>' +
+      '<span class="pub-meta">' + item.meta + '</span>' +
+      '<p class="pub-desc">' + item.desc + '</p>';
     ul.appendChild(li);
   });
 }
