@@ -6,9 +6,9 @@
 <title>Savely Byzov — Linguist · EFL Teacher · Researcher</title>
 <meta name="description" content="Savely Byzov — university lecturer and researcher in English language teaching, sociolinguistics, and the history of English. Belgrade, Serbia.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#E7F0F9">
+<meta name="theme-color" content="#11202B">
 <link rel="canonical" href="https://saveliybyzov.github.io/cv/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23236A93'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23fff' text-anchor='middle'%3ESB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2311202B'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='28' fill='%23F2A93C' text-anchor='middle'%3ESB%3C/text%3E%3C/svg%3E">
 
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="profile">
@@ -50,20 +50,24 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&family=PT+Mono&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#E7F0F9;
-    --bg-soft:#DCE9F5;
-    --ink:#152433;
-    --muted:#4D6275;
-    --faint:#7B8EA0;
-    --hair:#C5D7E8;
-    --accent:#236A93;
-    --accent-warm:#B8622E;
-    --card:#ffffff;
-    --serif:"Instrument Serif", Georgia, serif;
-    --sans:"Inter", system-ui, -apple-system, sans-serif;
+    --band:#11202B;
+    --band-ink:#EFEEE5;
+    --band-muted:#93A6A2;
+    --beam:#F2A93C;
+    --paper:#EEF0EA;
+    --paper-deep:#E2E6DA;
+    --ink:#141F2A;
+    --ink-soft:#4B5C67;
+    --line:#C7CFC2;
+    --accent:#A6650E;
+    --accent2:#2B6E7E;
+    --card:#FBFAF5;
+    --serif:"PT Serif", Georgia, serif;
+    --sans:"PT Sans", system-ui, -apple-system, sans-serif;
+    --mono:"PT Mono", "SFMono-Regular", Menlo, monospace;
   }
 
   *{box-sizing:border-box;}
@@ -71,7 +75,7 @@
 
   body{
     margin:0;
-    background:var(--bg);
+    background:var(--paper);
     color:var(--ink);
     font-family:var(--sans);
     font-size:16px;
@@ -79,7 +83,7 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  ::selection{background:#C7DCEE;}
+  ::selection{background:#D8C7A0;}
 
   a{color:var(--accent);text-decoration:none;}
   a:hover{text-decoration:underline;text-underline-offset:3px;}
@@ -88,146 +92,193 @@
   .wrap{
     max-width:820px;
     margin:0 auto;
-    padding:88px 32px 120px;
+    padding:0 32px 120px;
   }
 
   /* ---- Language switcher ---- */
   .langbar{
     position:fixed;
-    top:22px;
-    right:22px;
+    top:20px;
+    right:20px;
     z-index:60;
     display:flex;
-    gap:4px;
-    background:rgba(255,255,255,.72);
-    backdrop-filter:blur(8px);
-    border:1px solid var(--hair);
-    border-radius:999px;
-    padding:4px;
-    box-shadow:0 4px 18px rgba(20,50,80,.1);
+    align-items:center;
+    gap:2px;
+    background:rgba(17,32,43,.82);
+    backdrop-filter:blur(6px);
+    border-radius:3px;
+    padding:5px 6px;
+    font-family:var(--mono);
   }
   .langbar button{
     appearance:none;
     border:none;
     background:transparent;
-    font-family:var(--sans);
-    font-size:.76rem;
-    font-weight:600;
-    letter-spacing:.04em;
-    color:var(--faint);
-    padding:7px 13px;
-    border-radius:999px;
+    font-family:inherit;
+    font-size:.72rem;
+    font-weight:400;
+    letter-spacing:.06em;
+    color:var(--band-muted);
+    padding:5px 8px;
     cursor:pointer;
-    transition:background .2s ease, color .2s ease;
+    position:relative;
   }
-  .langbar button:hover{color:var(--accent);}
-  .langbar button.active{
-    background:var(--accent);
-    color:#fff;
+  .langbar button:hover{color:var(--band-ink);}
+  .langbar button.active{color:var(--beam);}
+  .langbar button.active::after{
+    content:"";
+    position:absolute;left:8px;right:8px;bottom:0;height:1px;background:var(--beam);
   }
   @media (max-width:600px){
-    .langbar{top:14px;right:14px;}
-    .langbar button{padding:6px 10px;font-size:.7rem;}
+    .langbar{top:12px;right:12px;}
   }
 
-  /* ---- Header ---- */
-  .head{
-    display:flex;
-    align-items:center;
-    gap:36px;
-    margin-bottom:8px;
+  /* ---- Header band ---- */
+  .band{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse 140% 100% at var(--beamx, -30%) -10%, rgba(242,169,60,.24), transparent 55%),
+      var(--band);
+    color:var(--band-ink);
+    padding:96px 32px 40px;
+    animation:sweep 3.4s ease-out .2s 1 both;
   }
-  .head-text{flex:1;min-width:0;}
+  @keyframes sweep{
+    from{ --beamx:-30%; }
+    to{ --beamx:118%; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .band{animation:none;--beamx:10%;}
+  }
+
+  .band-inner{max-width:756px;margin:0 auto;}
+
+  .voyage{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:6px 20px;
+    margin:0 0 36px;
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--band-muted);
+  }
+
+  .band-main{
+    display:flex;
+    align-items:flex-end;
+    gap:32px;
+  }
+
+  .plate{margin:0;flex-shrink:0;text-align:center;}
+  .plate img{
+    width:112px;
+    height:150px;
+    object-fit:cover;
+    display:block;
+    border:3px solid #E8E4D8;
+  }
+  .plate figcaption{
+    font-family:var(--mono);
+    font-size:.6rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--band-muted);
+    margin-top:9px;
+  }
+
+  .band-text{min-width:0;padding-bottom:2px;}
 
   .topline{
-    font-size:.72rem;
-    letter-spacing:.24em;
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.16em;
     text-transform:uppercase;
-    color:var(--faint);
-    margin:0 0 18px;
+    color:var(--band-muted);
+    margin:0 0 16px;
   }
 
   .name{
     font-family:var(--serif);
-    font-weight:400;
-    font-size:clamp(2.8rem, 8vw, 4.6rem);
-    line-height:1.02;
+    font-weight:700;
+    font-size:clamp(2.5rem, 7vw, 4.1rem);
+    line-height:1.03;
     letter-spacing:-.01em;
     margin:0;
+    color:var(--band-ink);
+    text-wrap:balance;
   }
 
   .role{
     font-family:var(--serif);
     font-style:italic;
-    font-size:clamp(1.2rem, 4vw, 1.55rem);
-    color:var(--accent);
+    font-weight:400;
+    font-size:clamp(1.1rem, 3.4vw, 1.4rem);
+    color:var(--beam);
     margin:12px 0 0;
   }
 
-  .photo{
-    width:148px;
-    height:148px;
-    border-radius:50%;
-    object-fit:cover;
-    flex-shrink:0;
-    box-shadow:0 6px 28px rgba(20,50,80,.18);
-    outline:4px solid rgba(255,255,255,.65);
-  }
+  /* ---- Lede (contacts + intro, on paper) ---- */
+  .lede{padding:32px 0 0;}
 
   .contacts{
     display:flex;
     flex-wrap:wrap;
     gap:10px 24px;
-    margin:30px 0 0;
+    margin:0;
     font-size:.92rem;
   }
-  .contacts span{color:var(--faint);}
+  .contacts span{color:var(--ink-soft);}
 
   .intro{
     max-width:62ch;
-    color:var(--muted);
-    margin:30px 0 0;
-    font-size:1.05rem;
+    color:var(--ink-soft);
+    margin:26px 0 0;
+    font-size:1.03rem;
   }
 
   /* ---- Tabs ---- */
   .tabbar{
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
-    margin-top:48px;
-    border-top:1px solid var(--hair);
-    padding-top:28px;
+    gap:28px;
+    margin-top:44px;
+    border-top:1px solid var(--line);
+    padding-top:26px;
   }
   .tabbar button{
     appearance:none;
-    border:1px solid var(--hair);
-    background:rgba(255,255,255,.55);
-    border-radius:999px;
-    padding:9px 18px;
-    font-family:var(--sans);
+    border:none;
+    background:none;
+    font-family:var(--mono);
     font-size:.74rem;
-    letter-spacing:.1em;
+    letter-spacing:.08em;
     text-transform:uppercase;
-    font-weight:600;
-    color:var(--muted);
+    color:var(--ink-soft);
+    padding:0 0 14px;
     cursor:pointer;
-    transition:background .2s ease, color .2s ease, border-color .2s ease;
+    position:relative;
   }
-  .tabbar button:hover{color:var(--accent);}
-  .tabbar button[aria-selected="true"]{
-    background:var(--accent);
-    border-color:var(--accent);
-    color:#fff;
+  .tabbar button::before{
+    content:"§ ";
+    color:var(--accent);
+  }
+  .tabbar button:hover{color:var(--ink);}
+  .tabbar button[aria-selected="true"]{color:var(--ink);}
+  .tabbar button[aria-selected="true"]::after{
+    content:"";
+    position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent);
   }
   @media (max-width:600px){
-    .tabbar{gap:6px;padding-top:22px;}
-    .tabbar button{padding:8px 14px;font-size:.68rem;}
+    .tabbar{gap:18px;padding-top:20px;margin-top:34px;}
   }
 
   .tabpanel{
     display:none;
-    padding-top:36px;
+    padding-top:34px;
   }
   .tabpanel.active{
     display:block;
@@ -239,12 +290,13 @@
   }
 
   .sub-label{
+    font-family:var(--mono);
     font-size:.68rem;
-    letter-spacing:.18em;
+    letter-spacing:.14em;
     text-transform:uppercase;
-    color:var(--faint);
-    font-weight:600;
-    margin:36px 0 22px;
+    color:var(--ink-soft);
+    font-weight:400;
+    margin:36px 0 20px;
   }
   .sub-label:first-child{margin-top:0;}
 
@@ -252,44 +304,44 @@
     display:grid;
     grid-template-columns:1fr auto;
     gap:4px 28px;
-    margin-bottom:32px;
-    padding:14px;
-    margin-left:-14px;
-    margin-right:-14px;
-    border-radius:14px;
+    padding-bottom:28px;
+    margin-bottom:28px;
+    border-bottom:1px solid var(--line);
   }
-  .entry:last-child{margin-bottom:0;}
+  .entry:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
 
   .entry h3{
-    font-size:1.1rem;
-    font-weight:600;
+    font-family:var(--serif);
+    font-size:1.18rem;
+    font-weight:700;
     margin:0;
-    line-height:1.35;
+    line-height:1.3;
   }
   .entry .place{
     color:var(--accent);
     font-size:.95rem;
-    margin:2px 0 0;
+    margin:4px 0 0;
   }
   .entry .date{
-    color:var(--faint);
-    font-size:.85rem;
+    font-family:var(--mono);
+    color:var(--ink-soft);
+    font-size:.82rem;
     font-variant-numeric:tabular-nums;
     white-space:nowrap;
     text-align:right;
-    padding-top:4px;
+    padding-top:5px;
   }
   .entry ul{
     grid-column:1 / -1;
-    margin:12px 0 0;
+    margin:14px 0 0;
     padding:0;
     list-style:none;
-    color:var(--muted);
+    color:var(--ink-soft);
   }
   .entry li{
     position:relative;
     padding-left:20px;
-    margin-bottom:7px;
+    margin-bottom:8px;
     font-size:.96rem;
   }
   .entry li::before{
@@ -303,8 +355,8 @@
   }
   .entry .detail{
     grid-column:1 / -1;
-    margin:8px 0 0;
-    color:var(--muted);
+    margin:10px 0 0;
+    color:var(--ink-soft);
     font-size:.96rem;
   }
   .entry .detail em{color:var(--ink);font-style:italic;}
@@ -312,52 +364,64 @@
   /* ---- Festival / photo cards ---- */
   .fest-entry{
     display:grid;
-    grid-template-columns:132px 1fr auto;
+    grid-template-columns:140px 1fr auto;
     grid-template-areas:
-      "photo title date"
-      "photo desc desc";
-    gap:4px 24px;
+      "photo title  date"
+      "photo place  desc";
+    gap:6px 24px;
     align-items:start;
   }
   .fest-photo-wrap{
     grid-area:photo;
-    width:132px;
-    height:132px;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 4px 16px rgba(20,50,80,.14);
-    cursor:zoom-in;
+    width:140px;
+    height:140px;
     flex-shrink:0;
+    cursor:zoom-in;
   }
+  .fest-entry:nth-child(2) .fest-photo-wrap{--tilt:1.1deg;}
+  .fest-entry:nth-child(3) .fest-photo-wrap{--tilt:-0.7deg;}
   .fest-photo-wrap img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    transition:transform .5s ease;
+    border:6px solid var(--card);
+    box-shadow:0 10px 22px -8px rgba(20,31,42,.35);
+    transform:rotate(var(--tilt,-1.1deg));
+    transition:transform .3s ease, box-shadow .3s ease;
   }
-  .fest-photo-wrap:hover img{transform:scale(1.08);}
-  .fest-photo-wrap img:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-  .fest-entry .head-block{grid-area:title;}
+  .fest-photo-wrap:hover img{transform:rotate(0deg) scale(1.03);box-shadow:0 14px 28px -8px rgba(20,31,42,.42);}
+  .fest-photo-wrap img:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  .fest-entry .fest-title{grid-area:title;font-family:var(--serif);font-size:1.18rem;font-weight:700;margin:0;line-height:1.3;}
   .fest-entry .date{grid-area:date;}
-  .fest-entry .detail{grid-area:desc;margin-top:8px;}
+  .fest-entry .place{
+    grid-area:place;
+    font-family:var(--mono);
+    font-size:.66rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:10px 0 0;
+  }
+  .fest-entry .detail{grid-area:desc;margin-top:4px;}
 
   @media (max-width:600px){
     .fest-entry{
-      grid-template-columns:88px 1fr;
+      grid-template-columns:96px 1fr;
       grid-template-areas:
         "photo title"
+        "photo place"
         "desc desc";
     }
     .fest-entry .date{grid-column:2;grid-row:1;text-align:left;}
-    .fest-photo-wrap{width:88px;height:88px;}
+    .fest-photo-wrap{width:96px;height:96px;}
   }
 
   /* ---- Lightbox ---- */
   .lightbox{
     position:fixed;
     inset:0;
-    background:rgba(10,20,32,.86);
+    background:rgba(17,32,43,.9);
     display:none;
     align-items:center;
     justify-content:center;
@@ -369,7 +433,6 @@
   .lightbox img{
     max-width:92vw;
     max-height:88vh;
-    border-radius:10px;
     box-shadow:0 24px 70px rgba(0,0,0,.5);
   }
 
@@ -383,24 +446,22 @@
     list-style:none;
   }
   .tags li{
-    border:1px solid var(--hair);
-    border-radius:999px;
+    border:1px solid var(--line);
     padding:7px 16px;
     font-size:.9rem;
     color:var(--ink);
-    background:rgba(255,255,255,.5);
-    transition:background .2s ease, border-color .2s ease, transform .2s ease, color .2s ease;
+    background:rgba(255,255,255,.4);
+    transition:background .2s ease, border-color .2s ease, color .2s ease;
     cursor:default;
   }
   .tags li:hover{
     background:var(--accent);
     border-color:var(--accent);
     color:#fff;
-    transform:translateY(-2px);
   }
   .tags.interests li:hover{
-    background:var(--accent-warm);
-    border-color:var(--accent-warm);
+    background:var(--accent2);
+    border-color:var(--accent2);
   }
 
   /* ---- Languages ---- */
@@ -411,28 +472,32 @@
     align-items:center;
     gap:18px;
     padding:14px 0;
-    border-bottom:1px solid var(--hair);
+    border-bottom:1px solid var(--line);
   }
   .lang:last-child{border-bottom:none;}
-  .lang .lname{font-weight:600;font-size:1rem;}
-  .lang .level{color:var(--muted);font-size:.88rem;white-space:nowrap;}
-  .track{height:2px;background:var(--hair);position:relative;border-radius:2px;}
-  .track i{position:absolute;left:0;top:0;height:100%;background:var(--accent);border-radius:2px;}
+  .lang .lname{font-weight:700;font-size:1rem;}
+  .lang .level{font-family:var(--mono);color:var(--ink-soft);font-size:.82rem;white-space:nowrap;}
+  .track{height:2px;background:var(--line);position:relative;}
+  .track i{position:absolute;left:0;top:0;height:100%;background:var(--accent);}
 
   /* ---- Footer ---- */
   footer{
     margin-top:56px;
-    border-top:1px solid var(--hair);
-    padding-top:30px;
-    font-size:.85rem;
-    color:var(--faint);
+    border-top:1px solid var(--line);
+    padding-top:26px;
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
   }
 
   /* ---- Responsive ---- */
   @media (max-width:600px){
-    .wrap{padding:56px 22px 80px;}
-    .head{flex-direction:column-reverse;align-items:flex-start;gap:24px;}
-    .photo{width:120px;height:120px;}
+    .wrap{padding:0 22px 80px;}
+    .band{padding:76px 22px 32px;}
+    .band-main{flex-direction:column;align-items:flex-start;gap:22px;}
+    .plate{text-align:left;}
     .entry{grid-template-columns:1fr;}
     .entry .date{text-align:left;padding-top:6px;order:3;}
     .lang{grid-template-columns:96px 1fr;}
@@ -447,7 +512,7 @@
 
   .tabbar button:focus-visible,
   .langbar button:focus-visible{
-    outline:2px solid var(--accent);
+    outline:2px solid var(--beam);
     outline-offset:2px;
   }
 
@@ -456,11 +521,19 @@
     body{background:#fff;}
     .langbar,.tabbar,.lightbox{display:none !important;}
     .wrap{padding:0 8px;max-width:100%;}
-    .photo{box-shadow:none;outline:none;}
+    .band{
+      background:none !important;
+      animation:none !important;
+      color:var(--ink);
+      padding:0 0 20px;
+    }
+    .band-muted,.voyage,.topline{color:#555 !important;}
+    .role{color:var(--ink) !important;}
+    .plate img{border-color:#ccc;box-shadow:none;}
     .tabpanel{display:block !important;animation:none !important;opacity:1 !important;transform:none !important;}
-    .tabpanel + .tabpanel{margin-top:18px;border-top:1px solid var(--hair);padding-top:18px;}
-    .entry{break-inside:avoid;box-shadow:none;}
-    .fest-photo-wrap{box-shadow:none;cursor:default;}
+    .tabpanel + .tabpanel{margin-top:18px;border-top:1px solid var(--line);padding-top:18px;}
+    .entry{break-inside:avoid;}
+    .fest-photo-wrap img{box-shadow:none;transform:none !important;}
     a{color:var(--ink);text-decoration:underline;}
   }
 </style>
@@ -473,26 +546,37 @@
   <button type="button" data-lang="sr" aria-pressed="false">SR</button>
 </div>
 
-<main class="wrap">
-
-  <header>
-    <div class="head reveal">
-      <div class="head-text">
+<header class="band reveal">
+  <div class="band-inner">
+    <p class="voyage" aria-hidden="true">
+      <span><span id="voyage-from"></span> · 64.5401°N 39.8433°E</span>
+      <span>44.7866°N 20.4489°E · <span id="voyage-to"></span></span>
+    </p>
+    <div class="band-main">
+      <figure class="plate">
+        <img class="photo" id="photo" src="assets/Byzov-S.S_.jpg" width="426" height="640" alt="" decoding="async" fetchpriority="high">
+        <figcaption id="plate-caption" aria-hidden="true"></figcaption>
+      </figure>
+      <div class="band-text">
         <p class="topline" id="topline">Belgrade, Serbia</p>
         <h1 class="name" id="name">Savely Byzov</h1>
         <p class="role" id="role">Linguist · EFL Teacher · Researcher</p>
       </div>
-      <img class="photo" id="photo" src="assets/Byzov-S.S_.jpg" width="426" height="640" alt="" decoding="async" fetchpriority="high">
     </div>
+  </div>
+</header>
 
-    <nav class="contacts reveal" aria-label="Contact">
+<main class="wrap">
+
+  <div class="lede reveal">
+    <nav class="contacts" aria-label="Contact">
       <a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>
       <a href="https://t.me/savageavery">Telegram <span>@savageavery</span></a>
       <a href="tel:+381658389596">+381 65 8389596</a>
     </nav>
 
-    <p class="intro reveal" id="intro"></p>
-  </header>
+    <p class="intro" id="intro"></p>
+  </div>
 
   <nav class="tabbar" role="tablist" aria-label="Sections">
     <button type="button" role="tab" data-tab="experience" id="tab-experience" aria-selected="true"></button>
@@ -570,30 +654,24 @@
   <div class="tabpanel" id="panel-festivals" role="tabpanel">
       <article class="entry fest-entry">
         <div class="fest-photo-wrap"><img id="festA-img" src="assets/lighthouse.jpg" width="800" height="1066" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
-        <div class="head-block">
-          <h3 id="festA-title"></h3>
-          <p class="place" id="festA-place"></p>
-        </div>
+        <h3 class="fest-title" id="festA-title"></h3>
+        <p class="place" id="festA-place"></p>
         <p class="date" id="festA-date"></p>
         <p class="detail" id="festA-desc"></p>
       </article>
 
       <article class="entry fest-entry">
         <div class="fest-photo-wrap"><img id="festB-img" src="assets/street-theatre.jpg" width="900" height="677" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
-        <div class="head-block">
-          <h3 id="festB-title"></h3>
-          <p class="place" id="festB-place"></p>
-        </div>
+        <h3 class="fest-title" id="festB-title"></h3>
+        <p class="place" id="festB-place"></p>
         <p class="date" id="festB-date"></p>
         <p class="detail" id="festB-desc"></p>
       </article>
 
       <article class="entry fest-entry">
         <div class="fest-photo-wrap"><img id="festC-img" src="assets/arctic-open.jpg" width="900" height="601" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
-        <div class="head-block">
-          <h3 id="festC-title"></h3>
-          <p class="place" id="festC-place"></p>
-        </div>
+        <h3 class="fest-title" id="festC-title"></h3>
+        <p class="place" id="festC-place"></p>
         <p class="date" id="festC-date"></p>
         <p class="detail" id="festC-desc"></p>
       </article></div>
@@ -613,6 +691,9 @@ const T = {
     "name": "Savely Byzov",
     "role": "Linguist · EFL Teacher · Researcher",
     "photoAlt": "Portrait of Savely Byzov",
+    "plateCaption": "Fig. 1 — S. Byzov",
+    "voyageFrom": "Arkhangelsk",
+    "voyageTo": "Belgrade",
     "intro": "Linguist and university lecturer specialising in English language teaching, sociolinguistics, and the history of English, with a particular focus on Northern Europe. Calm, empathetic, and stress-resilient by nature, with a genuine curiosity for languages, cultures, and the history and geography of the places they come from. Two years of university-level instruction, curriculum design, and student research supervision, plus hands-on English–Russian interpreting at international festivals – and, one memorable summer, repairing a lighthouse at the edge of the world.",
     "labels": {
       "experience": "Experience",
@@ -718,6 +799,9 @@ const T = {
     "name": "Савелий Бызов",
     "role": "Лингвист · Преподаватель английского · Исследователь",
     "photoAlt": "Портрет Савелия Бызова",
+    "plateCaption": "Илл. 1 — С. Бызов",
+    "voyageFrom": "Архангельск",
+    "voyageTo": "Белград",
     "intro": "Лингвист и преподаватель университета: специализируюсь на преподавании английского языка, социолингвистике и истории английского языка, полем интереса является Северная Европа. По натуре спокойный, эмпатичный и стрессоустойчивый, питаю интерес к языкам и культурам разных стран, а заодно к их истории и географии. Два года преподавания в университете, разработки учебных программ и руководства студенческими исследованиями, плюс опыт устного перевода на международных фестивалях (а однажды вообще всё лето провёл, восстанавливая маяк на краю света).",
     "labels": {
       "experience": "Опыт работы",
@@ -824,6 +908,9 @@ const T = {
     "name": "Saveliy Byzov",
     "role": "Lingvista · Nastavnik engleskog jezika · Istraživač",
     "photoAlt": "Portret Saveliya Byzova",
+    "plateCaption": "Sl. 1 — S. Byzov",
+    "voyageFrom": "Arhangelsk",
+    "voyageTo": "Beograd",
     "intro": "Lingvista i univerzitetski predavač, specijalizovan za metodiku nastave engleskog jezika, sociolingvistiku i istoriju engleskog jezika, sa posebnim interesovanjem za Severnu Evropu. Po prirodi je miran, empatičan i otporan na stres, sa iskrenom radoznalošću prema jezicima i kulturama, kao i prema istoriji i geografiji krajeva iz kojih potiču. Dve godine univerzitetske nastave, kreiranja nastavnih programa i mentorstva studentskih istraživanja, uz praktično iskustvo usmenog prevođenja na međunarodnim festivalima – a jedno leto je proveo i popravljajući svetionik na kraju sveta.",
     "labels": {
       "experience": "Iskustvo",
@@ -934,6 +1021,9 @@ function applyLang(lang){
   document.getElementById('role').textContent = t.role;
   document.getElementById('intro').textContent = t.intro;
   document.getElementById('photo').alt = t.photoAlt;
+  document.getElementById('plate-caption').textContent = t.plateCaption;
+  document.getElementById('voyage-from').textContent = t.voyageFrom;
+  document.getElementById('voyage-to').textContent = t.voyageTo;
 
   document.getElementById('tab-experience').innerHTML = t.labels.experience;
   document.getElementById('tab-education').innerHTML = t.labels.education;
@@ -974,7 +1064,7 @@ function applyLang(lang){
 }
 
 function fillEntry(id, data){
-  document.getElementById(id + '-title').textContent = data.title.replace(/&rsquo;/g, '\u2019');
+  document.getElementById(id + '-title').textContent = data.title.replace(/&rsquo;/g, '’');
   document.getElementById(id + '-place').textContent = data.place;
   document.getElementById(id + '-date').textContent = data.date;
   const ul = document.getElementById(id + '-list');
