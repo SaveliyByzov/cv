@@ -507,8 +507,13 @@
   .entry.has-photo .entry-head h3{margin:0;}
   .entry.has-photo .entry-head .date{margin:0;padding-top:0;}
   .entry.has-photo .place{margin-top:4px;}
-  .entry.has-photo .workblurb{margin-top:14px;}
-  .entry.has-photo ul{margin-top:18px;}
+  /* .workblurb carries its own border-left/padding — a plain block box
+     like that doesn't narrow around a float the way wrapped text does
+     (only the text lines do), so left unguarded its left border cuts
+     straight across the photo instead of starting beside it. Giving it
+     its own block formatting context makes it dodge the float properly. */
+  .entry.has-photo .workblurb{margin-top:14px;display:flow-root;}
+  .entry.has-photo ul{margin-top:18px;display:flow-root;}
   @media (max-width:600px){
     .entry.has-photo .fest-photo-wrap{float:none;width:100%;max-width:220px;aspect-ratio:4/5;margin:0 0 20px;}
   }
@@ -1178,14 +1183,14 @@ const T = {
       "title": "Interpreter // Volunteer",
       "place": "International Street Theatre Festival, Arkhangelsk",
       "date": "2024",
-      "desc": "Facilitated communication between foreign theatre companies and local volunteers at Arkhangelsk's International Street Theatre Festival — running since 1990 and opening each year with a carnival procession along the Northern Dvina embankment — from rehearsals to late-night load-outs by the water.",
+      "desc": "Facilitated communication between foreign theatre companies and local volunteers at Arkhangelsk's International Street Theatre Festival — Russia's oldest and largest street-theatre festival, launched in 1990 on the initiative of Arkhangelsk Youth Theatre's artistic director Viktor Panov and awarded a UNESCO label in 1992. It opens each year with a carnival procession along the Northern Dvina embankment and always closes on the city's founding day — from rehearsals to late-night load-outs by the water.",
       "alt": "View from the festival stage over the harbour at sunset"
     },
     "festC": {
       "title": "Interpreter // Volunteer",
       "place": "Arctic Open International Film Festival, Arkhangelsk",
       "date": "2023",
-      "desc": "Provided English–Russian interpretation for international guests and film directors at the Arctic Open International Film Festival — launched in 2017 to bring together Arctic-nation filmmakers, screening across venues in Arkhangelsk, Severodvinsk, and Novodvinsk.",
+      "desc": "Provided English–Russian interpretation for international guests and film directors at the Arctic Open International Film Festival — launched in 2017 with the Northern (Arctic) Federal University, my own university, as co-organiser, bringing together filmmakers from Russia, Canada, the Nordic countries, and the US, with screenings across Arkhangelsk, Severodvinsk, and Novodvinsk.",
       "alt": "Savely on stage at the Arctic Open festival"
     },
     "festD": {
@@ -1352,14 +1357,14 @@ const T = {
       "title": "Переводчик // Волонтёр",
       "place": "Международный фестиваль уличных театров, Архангельск",
       "date": "2024",
-      "desc": "Обеспечивал коммуникацию между иностранными театральными труппами и местными волонтёрами на Международном фестивале уличных театров в Архангельске — фестиваль проводится с 1990 года и ежегодно открывается карнавальным шествием по набережной Северной Двины — от репетиций до позднего разбора декораций у воды.",
+      "desc": "Обеспечивал коммуникацию между иностранными театральными труппами и местными волонтёрами на Международном фестивале уличных театров в Архангельске — старейшем и крупнейшем фестивале уличных театров в России, который проводится с 1990 года по инициативе художественного руководителя Архангельского молодёжного театра Виктора Панова и в 1992 году получил лейбл ЮНЕСКО. Ежегодно открывается карнавальным шествием по набережной Северной Двины и всегда завершается в День города — от репетиций до позднего разбора декораций у воды.",
       "alt": "Вид со сцены фестиваля на гавань на закате"
     },
     "festC": {
       "title": "Переводчик // Волонтёр",
       "place": "Международный фестиваль «Arctic Open», Архангельск",
       "date": "2023",
-      "desc": "Выполнял устный перевод с английского на русский для иностранных гостей и режиссёров на международном кинофестивале «Arctic Open» — фестиваль основан в 2017 году для объединения кинематографистов арктических стран и проходит на площадках Архангельска, Северодвинска и Новодвинска.",
+      "desc": "Выполнял устный перевод с английского на русский для иностранных гостей и режиссёров на международном кинофестивале «Arctic Open» — фестиваль основан в 2017 году, соорганизатором выступает САФУ имени М.В. Ломоносова, где я сам работал, и объединяет кинематографистов России, Канады, скандинавских стран и США; проходит на площадках Архангельска, Северодвинска и Новодвинска.",
       "alt": "Савелий на сцене фестиваля Arctic Open"
     },
     "festD": {
@@ -1526,14 +1531,14 @@ const T = {
       "title": "Prevodilac // Volonter",
       "place": "Međunarodni festival uličnog pozorišta, Arhangelsk",
       "date": "2024",
-      "desc": "Omogućavao komunikaciju između stranih pozorišnih trupa i lokalnih volontera na Međunarodnom festivalu uličnog pozorišta u Arhangelsku — koji se održava od 1990. godine i svake godine počinje karnevalskom povorkom duž keja reke Severne Dvine — od proba do kasnonoćnog rastavljanja scenografije pored vode.",
+      "desc": "Omogućavao komunikaciju između stranih pozorišnih trupa i lokalnih volontera na Međunarodnom festivalu uličnog pozorišta u Arhangelsku — najstarijem i najvećem festivalu uličnog pozorišta u Rusiji, koji se održava od 1990. godine na inicijativu umetničkog direktora Arhangelskog omladinskog pozorišta Viktora Panova, a 1992. godine je dobio UNESCO oznaku. Svake godine počinje karnevalskom povorkom duž keja reke Severne Dvine i uvek se završava na Dan grada — od proba do kasnonoćnog rastavljanja scenografije pored vode.",
       "alt": "Pogled sa festivalske bine na luku u sumrak"
     },
     "festC": {
       "title": "Prevodilac // Volonter",
       "place": "Međunarodni festival „Arctic Open”, Arhangelsk",
       "date": "2023",
-      "desc": "Pružao usmeni prevod sa engleskog na ruski za strane goste i reditelje na Međunarodnom filmskom festivalu „Arctic Open” — pokrenutom 2017. godine radi okupljanja filmskih stvaralaca arktičkih zemalja, koji se održava na lokacijama u Arhangelsku, Severodvinsku i Novodvinsku.",
+      "desc": "Pružao usmeni prevod sa engleskog na ruski za strane goste i reditelje na Međunarodnom filmskom festivalu „Arctic Open” — pokrenutom 2017. godine, čiji je suorganizator Severni (Arktički) federalni univerzitet, moj sopstveni univerzitet, i koji okuplja filmske stvaraoce iz Rusije, Kanade, skandinavskih zemalja i SAD; održava se na lokacijama u Arhangelsku, Severodvinsku i Novodvinsku.",
       "alt": "Saveliy na bini festivala Arctic Open"
     },
     "festD": {
