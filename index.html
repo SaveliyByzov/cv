@@ -639,24 +639,81 @@
     outline-offset:2px;
   }
 
-  /* ---- Print ---- */
+  /* ---- Print: condensed 1-2 page summary ---- */
+  .print-note{display:none;}
   @media print{
+    html{font-size:13px;}
     body{background:#fff;}
     .langbar,.tabbar,.lightbox,.print-btn{display:none !important;}
-    .wrap{padding:0 8px;max-width:100%;}
+    .wrap{padding:0 6px;max-width:100%;}
+
+    /* Compact header — no photo, no coordinate line */
     .band{
       background:none !important;
       animation:none !important;
       color:var(--ink);
-      padding:0 0 20px;
+      padding:0 0 10px;
     }
-    .band-muted,.topline{color:#555 !important;}
-    .role{color:var(--ink) !important;}
-    .plate img{border-color:#ccc;box-shadow:none;}
-    .tabpanel{display:block !important;animation:none !important;opacity:1 !important;transform:none !important;}
-    .tabpanel + .tabpanel{margin-top:18px;border-top:1px solid var(--line);padding-top:18px;}
-    .entry{break-inside:avoid;}
-    .fest-photo-wrap img{box-shadow:none;transform:none !important;}
+    .plate{display:none;}
+    .topline{display:none;}
+    .name{font-size:1.65rem;color:var(--ink) !important;}
+    .role{font-size:.92rem;margin-top:4px;color:var(--ink) !important;}
+
+    .lede{padding-top:6px;}
+    .contacts{font-size:.76rem;gap:4px 16px;}
+    .intro{font-size:.8rem;margin-top:8px;max-width:none;}
+
+    .tabpanel{display:block !important;animation:none !important;opacity:1 !important;transform:none !important;padding-top:8px;}
+    .tabpanel + .tabpanel{margin-top:8px;border-top:1px solid var(--line);padding-top:8px;}
+
+    /* Only Experience, Education, Skills & Languages make the cut —
+       Festivals & Volunteering is the kind of thing worth a website,
+       not a one-pager */
+    #panel-festivals{display:none !important;}
+
+    /* Photos, institutional asides, and long-form abstracts are for
+       browsing, not skimming — trimmed here, full versions live on
+       the site */
+    .fest-photo-wrap,.campus-photo,.workblurb,.abstract{display:none !important;}
+    .entry.has-photo{padding-left:0;}
+
+    .sub-label{font-size:.6rem;margin:10px 0 6px;}
+
+    .entry{break-inside:avoid;padding-bottom:8px;margin-bottom:8px;font-size:.8rem;}
+    .entry h3{font-size:.92rem;}
+    .entry .place{font-size:.76rem;}
+    .entry .date{font-size:.7rem;}
+    .entry li{font-size:.76rem;margin-bottom:2px;}
+    .entry .detail{font-size:.76rem;}
+
+    /* Publications & talks — titles only, no venue/description, so
+       the list stays a scan rather than a read */
+    .pub-list .pub-meta,.pub-list .pub-desc{display:none !important;}
+    .pub-list li{padding-bottom:3px;margin-bottom:3px;}
+    .pub-title{font-size:.78rem;}
+
+    /* Skills — titles only, two columns */
+    .spec-grid.skills{display:block;columns:2;column-gap:20px;}
+    .spec-grid.skills .spec-item{display:block;margin-bottom:2px;break-inside:avoid;}
+    .spec-grid.skills svg,.spec-grid.skills p{display:none;}
+    .spec-item h4{font-size:.78rem;}
+
+    /* Interests are personality, not qualifications — off the summary */
+    #sub-interests,.spec-grid.interests{display:none !important;}
+
+    .lang{padding:5px 0;font-size:.78rem;}
+
+    .print-note{
+      display:block;
+      margin-top:14px;
+      padding-top:8px;
+      border-top:1px solid var(--line);
+      font-family:var(--mono);
+      font-size:.66rem;
+      color:var(--ink-soft);
+    }
+    footer{margin-top:12px;padding-top:8px;font-size:.6rem;}
+
     a{color:var(--ink);text-decoration:underline;}
   }
 </style>
@@ -825,6 +882,8 @@
         <p class="detail" id="festC-desc"></p>
       </article></div>
 
+  <p class="print-note" id="print-note"></p>
+
   <footer>
     <span id="footer-text"></span><a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>
   </footer>
@@ -859,6 +918,7 @@ const T = {
     "photoAlt": "Portrait of Savely Byzov",
     "plateCaption": "Fig. 1 — S. Byzov",
     "printLabel": "Print // Save as PDF",
+    "printNote": "This is a condensed summary — publications, conference talks, festivals & volunteering, and more are at saveliybyzov.github.io/cv",
     "intro": "I'm a linguist and university lecturer — I specialise in English language teaching, sociolinguistics, and the history of English, and I'm genuinely fascinated by Northern Europe: its languages, its history, and the way cultures collide and intertwine across a map. I'm calm, empathetic, and stress-resilient by nature, and curious about pretty much everything — languages, cultures, and the history and geography of the places they come from. In two years at the university I taught, built several course curricula, and supervised student research, while also spending years interpreting at international festivals. And one memorable summer, I dropped all of that to go restore a lighthouse at the edge of the world – more on that below.",
     "labels": {
       "experience": "Experience",
@@ -1024,6 +1084,7 @@ const T = {
     "photoAlt": "Портрет Савелия Бызова",
     "plateCaption": "Илл. 1 — С. Бызов",
     "printLabel": "Печать // Сохранить в PDF",
+    "printNote": "Это сокращённая версия — публикации, доклады на конференциях, фестивали и волонтёрство и многое другое на saveliybyzov.github.io/cv",
     "intro": "Я лингвист и преподаватель университета: специализируюсь на преподавании английского языка, социолингвистике и истории английского языка, а по-настоящему увлечён Северной Европой — её языками, историей и тем, как культуры сталкиваются и переплетаются на карте. По натуре я спокойный, эмпатичный и стрессоустойчивый, и мне искренне интересно почти всё: языки, культуры, история и география мест, откуда они родом. За два года в университете успел попреподавать, разработать несколько учебных программ и поруководить студенческими исследованиями, а параллельно годами занимался устным переводом на международных фестивалях. А однажды вообще всё лето провёл, восстанавливая маяк на краю света — но об этом чуть ниже.",
     "labels": {
       "experience": "Опыт работы",
@@ -1189,6 +1250,7 @@ const T = {
     "photoAlt": "Portret Saveliya Byzova",
     "plateCaption": "Sl. 1 — S. Byzov",
     "printLabel": "Štampaj // Sačuvaj kao PDF",
+    "printNote": "Ovo je skraćena verzija — publikacije, konferencijski nastupi, festivali i volontiranje i još mnogo toga na saveliybyzov.github.io/cv",
     "intro": "Ja sam lingvista i univerzitetski predavač — specijalizovan sam za nastavu engleskog jezika, sociolingvistiku i istoriju engleskog jezika, a istinski me fascinira Severna Evropa: njeni jezici, istorija, i način na koji se kulture sudaraju i prepliću na mapi. Po prirodi sam miran, empatičan i otporan na stres, i zanima me gotovo sve — jezici, kulture, istorija i geografija krajeva iz kojih potiču. Za dve godine na univerzitetu sam predavao, kreirao nekoliko nastavnih programa i mentorisao studentska istraživanja, a paralelno sam godinama prevodio na međunarodnim festivalima. A jednog leta sam sve to ostavio po strani da bih restaurirao svetionik na kraju sveta — više o tome ispod.",
     "labels": {
       "experience": "Iskustvo",
@@ -1359,6 +1421,7 @@ function applyLang(lang){
   document.getElementById('photo').alt = t.photoAlt;
   document.getElementById('plate-caption').textContent = t.plateCaption;
   document.getElementById('print-label').textContent = t.printLabel;
+  document.getElementById('print-note').textContent = t.printNote;
 
   document.getElementById('tab-experience').innerHTML = t.labels.experience;
   document.getElementById('tab-education').innerHTML = t.labels.education;
