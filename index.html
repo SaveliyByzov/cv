@@ -71,6 +71,7 @@
   }
 
   *{box-sizing:border-box;}
+  button{text-align:inherit;}
   html{
     -webkit-text-size-adjust:100%;
     font-size:18px;
@@ -275,6 +276,7 @@
     appearance:none;
     border:none;
     background:none;
+    text-align:left;
     font-family:var(--mono);
     font-size:.74rem;
     letter-spacing:.08em;
@@ -497,9 +499,11 @@
     height:140px;
     flex-shrink:0;
     cursor:zoom-in;
+    overflow:hidden;
   }
   .fest-entry:nth-child(2) .fest-photo-wrap{--tilt:1.1deg;}
   .fest-entry:nth-child(3) .fest-photo-wrap{--tilt:-0.7deg;}
+  .fest-entry:nth-child(4) .fest-photo-wrap{--tilt:0.8deg;}
   .fest-photo-wrap img{
     width:100%;
     height:100%;
@@ -530,10 +534,11 @@
       grid-template-columns:96px 1fr;
       grid-template-areas:
         "photo title"
+        "photo date"
         "photo place"
         "desc desc";
     }
-    .fest-entry .date{grid-column:2;grid-row:1;text-align:left;}
+    .fest-entry .date{grid-area:date;text-align:left;margin:2px 0 0;}
     .fest-photo-wrap{width:96px;height:96px;}
   }
 
@@ -634,7 +639,7 @@
     .band-main{flex-direction:column;align-items:center;gap:22px;}
     .band-text{text-align:center;}
     .entry{grid-template-columns:1fr;}
-    .entry .date{text-align:left;padding-top:6px;order:3;}
+    .entry .date{text-align:left;padding-top:2px;margin-bottom:8px;}
     .lang{grid-template-columns:96px 1fr;}
     .lang .level{grid-column:1 / -1;}
     .lang .track{grid-column:1 / -1;}
@@ -900,6 +905,14 @@
         <p class="place" id="festC-place"></p>
         <p class="date" id="festC-date"></p>
         <p class="detail" id="festC-desc"></p>
+      </article>
+
+      <article class="entry fest-entry">
+        <div class="fest-photo-wrap"><img id="festD-img" src="assets/theatre-exhibition.jpg" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
+        <h3 class="fest-title" id="festD-title"></h3>
+        <p class="place" id="festD-place"></p>
+        <p class="date" id="festD-date"></p>
+        <p class="detail" id="festD-desc"></p>
       </article></div>
 
   <p class="print-note" id="print-note"></p>
@@ -1087,6 +1100,13 @@ const T = {
       "desc": "Provided English–Russian interpretation for international guests and film directors at the Arctic Open International Film Festival — launched in 2017 to bring together Arctic-nation filmmakers, screening across venues in Arkhangelsk, Severodvinsk, and Novodvinsk.",
       "alt": "Savely on stage at the Arctic Open festival"
     },
+    "festD": {
+      "title": "Volunteer – Anniversary Exhibition",
+      "place": "Arkhangelsk Youth Theatre, Gostiny Dvor",
+      "date": "Summer 2023",
+      "desc": "Helped put together “Here Nothing Would Stand If It Weren't for You” — a maze-like exhibition marking the Arkhangelsk Youth Theatre's 50th anniversary, built from six rooms carved out of two halls at Gostiny Dvor. It traced founder Viktor Panov's own path to the theatre — including his recovery from a broken spine — through costumes, props, archive photographs, actors' voices, and new work commissioned from artists in Vladikavkaz, Yekaterinburg, Moscow, and St Petersburg who'd never heard of him before.",
+      "alt": "Poster for the exhibition “Here Nothing Would Stand If It Weren't for You”"
+    },
     "interests": [
       { "icon": "music", "title": "Music", "desc": "I'm a music fan in general, honestly, but I've got a real soft spot for Johnny Cash and country." },
       { "icon": "reading", "title": "Reading", "desc": "My favourite author is F. Scott Fitzgerald." },
@@ -1253,6 +1273,13 @@ const T = {
       "desc": "Выполнял устный перевод с английского на русский для иностранных гостей и режиссёров на международном кинофестивале «Arctic Open» — фестиваль основан в 2017 году для объединения кинематографистов арктических стран и проходит на площадках Архангельска, Северодвинска и Новодвинска.",
       "alt": "Савелий на сцене фестиваля Arctic Open"
     },
+    "festD": {
+      "title": "Волонтёр — юбилейная выставка",
+      "place": "Архангельский молодёжный театр, Гостиные дворы",
+      "date": "Лето 2023",
+      "desc": "Помогал собирать выставку-лабиринт «Здесь ничего бы не стояло, если бы не было тебя» — к 50-летию Архангельского молодёжного театра, устроенную в шести комнатах, вырезанных из двух залов Гостиных дворов. Экспозиция прослеживала путь основателя театра Виктора Панова — включая восстановление после перелома позвоночника — через костюмы, реквизит, архивные фотографии, голоса актёров и новые работы художников из Владикавказа, Екатеринбурга, Москвы и Петербурга, впервые узнавших о нём именно тогда.",
+      "alt": "Афиша выставки «Здесь ничего бы не стояло, если бы не было тебя»"
+    },
     "interests": [
       { "icon": "music", "title": "Музыка", "desc": "Меломан во всех смыслах, но если позвать на концерт кантри — приду одним из первых: особенно неравнодушен к Джонни Кэшу." },
       { "icon": "reading", "title": "Чтение", "desc": "Любимый писатель — Фрэнсис Скотт Фицджеральд." },
@@ -1414,10 +1441,17 @@ const T = {
     },
     "festC": {
       "title": "Prevodilac // Volonter",
-      "place": "Međunarodni festival „Arctic Open&rdquo;, Arhangelsk",
+      "place": "Međunarodni festival „Arctic Open”, Arhangelsk",
       "date": "2023",
-      "desc": "Pružao usmeni prevod sa engleskog na ruski za strane goste i reditelje na Međunarodnom filmskom festivalu „Arctic Open&rdquo; — pokrenutom 2017. godine radi okupljanja filmskih stvaralaca arktičkih zemalja, koji se održava na lokacijama u Arhangelsku, Severodvinsku i Novodvinsku.",
+      "desc": "Pružao usmeni prevod sa engleskog na ruski za strane goste i reditelje na Međunarodnom filmskom festivalu „Arctic Open” — pokrenutom 2017. godine radi okupljanja filmskih stvaralaca arktičkih zemalja, koji se održava na lokacijama u Arhangelsku, Severodvinsku i Novodvinsku.",
       "alt": "Saveliy na bini festivala Arctic Open"
+    },
+    "festD": {
+      "title": "Volonter — jubilarna izložba",
+      "place": "Arhangelski omladinski pozorište, Gostini dvor",
+      "date": "Leto 2023",
+      "desc": "Pomagao je u postavljanju izložbe-lavirinta „Ovde ne bi stajalo ništa da nije bilo tebe” — povodom 50 godina Arhangelskog omladinskog pozorišta, smeštene u šest soba izdeljenih iz dve dvorane Gostinog dvora. Postavka je pratila put osnivača pozorišta Viktora Panova — uključujući oporavak od preloma kičme — kroz kostime, rekvizite, arhivske fotografije, glasove glumaca i nova dela umetnika iz Vladikavkaza, Jekaterinburga, Moskve i Peterburga, koji su tada prvi put čuli za njega.",
+      "alt": "Plakat izložbe „Ovde ne bi stajalo ništa da nije bilo tebe”"
     },
     "interests": [
       { "icon": "music", "title": "Muzika", "desc": "Veliki sam ljubitelj muzike uopšte, ali imam posebnu slabost prema Džoniju Kešu i kantri žanru." },
@@ -1477,6 +1511,7 @@ function applyLang(lang){
   fillFest('festA', t.festA);
   fillFest('festB', t.festB);
   fillFest('festC', t.festC);
+  fillFest('festD', t.festD);
 
   document.getElementById('footer-text').textContent = t.footer;
 
