@@ -137,9 +137,12 @@
   .band{
     position:relative;
     overflow:hidden;
-    background:
+    background-color:var(--band);
+    background-image:
       radial-gradient(ellipse 140% 100% at var(--beamx, -30%) -10%, rgba(242,169,60,.24), transparent 55%),
-      var(--band);
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.055' stroke-width='1'%3E%3Cpath d='M-20 30 Q35 0 90 30 T200 30'/%3E%3Cpath d='M-20 84 Q35 54 90 84 T200 84'/%3E%3Cpath d='M-20 138 Q35 108 90 138 T200 138'/%3E%3Cpath d='M-20 192 Q35 162 90 192 T200 192'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat:no-repeat, repeat;
+    background-size:auto, 220px 220px;
     color:var(--band-ink);
     padding:96px 32px 40px;
     animation:sweep 3.4s ease-out .2s 1 both;
@@ -162,9 +165,10 @@
 
   .plate{margin:0;flex-shrink:0;text-align:center;}
   .plate img{
-    width:112px;
-    height:150px;
+    width:150px;
+    height:190px;
     object-fit:cover;
+    object-position:center 22%;
     display:block;
     border:3px solid #E8E4D8;
   }
@@ -219,6 +223,25 @@
     font-size:.92rem;
   }
   .contacts span{color:var(--ink-soft);}
+
+  .print-btn{
+    appearance:none;
+    border:1px solid var(--line);
+    background:none;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:6px 13px;
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .print-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  .print-btn:hover{color:var(--accent);border-color:var(--accent);}
 
   .intro{
     max-width:64ch;
@@ -619,7 +642,7 @@
   /* ---- Print ---- */
   @media print{
     body{background:#fff;}
-    .langbar,.tabbar,.lightbox{display:none !important;}
+    .langbar,.tabbar,.lightbox,.print-btn{display:none !important;}
     .wrap{padding:0 8px;max-width:100%;}
     .band{
       background:none !important;
@@ -669,6 +692,10 @@
       <a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>
       <a href="https://t.me/savageavery">Telegram <span>@savageavery</span></a>
       <a href="tel:+381658389596">+381 65 8389596</a>
+      <button type="button" class="print-btn" id="print-btn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="1"/><path d="M6 17v4h12v-4"/></svg>
+        <span id="print-label"></span>
+      </button>
     </nav>
 
     <p class="intro" id="intro"></p>
@@ -683,7 +710,7 @@
 
   <div class="tabpanel active" id="panel-experience" role="tabpanel">
       <article class="entry has-photo">
-        <div class="fest-photo-wrap"><img id="exp1-img" src="assets/lecture.jpg" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
+        <div class="fest-photo-wrap"><img id="exp1-img" src="assets/lecture.jpg" width="675" height="800" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
         <div class="entry-body">
           <div class="entry-head">
             <h3 id="exp1-title"></h3>
@@ -831,6 +858,7 @@ const T = {
     "role": "Linguist // EFL Teacher // Researcher",
     "photoAlt": "Portrait of Savely Byzov",
     "plateCaption": "Fig. 1 — S. Byzov",
+    "printLabel": "Print // Save as PDF",
     "intro": "I'm a linguist and university lecturer — I specialise in English language teaching, sociolinguistics, and the history of English, and I'm genuinely fascinated by Northern Europe: its languages, its history, and the way cultures collide and intertwine across a map. I'm calm, empathetic, and stress-resilient by nature, and curious about pretty much everything — languages, cultures, and the history and geography of the places they come from. In two years at the university I taught, built several course curricula, and supervised student research, while also spending years interpreting at international festivals. And one memorable summer, I dropped all of that to go restore a lighthouse at the edge of the world – more on that below.",
     "labels": {
       "experience": "Experience",
@@ -995,6 +1023,7 @@ const T = {
     "role": "Лингвист // Преподаватель английского // Исследователь",
     "photoAlt": "Портрет Савелия Бызова",
     "plateCaption": "Илл. 1 — С. Бызов",
+    "printLabel": "Печать // Сохранить в PDF",
     "intro": "Я лингвист и преподаватель университета: специализируюсь на преподавании английского языка, социолингвистике и истории английского языка, а по-настоящему увлечён Северной Европой — её языками, историей и тем, как культуры сталкиваются и переплетаются на карте. По натуре я спокойный, эмпатичный и стрессоустойчивый, и мне искренне интересно почти всё: языки, культуры, история и география мест, откуда они родом. За два года в университете успел попреподавать, разработать несколько учебных программ и поруководить студенческими исследованиями, а параллельно годами занимался устным переводом на международных фестивалях. А однажды вообще всё лето провёл, восстанавливая маяк на краю света — но об этом чуть ниже.",
     "labels": {
       "experience": "Опыт работы",
@@ -1159,6 +1188,7 @@ const T = {
     "role": "Lingvista // Nastavnik engleskog jezika // Istraživač",
     "photoAlt": "Portret Saveliya Byzova",
     "plateCaption": "Sl. 1 — S. Byzov",
+    "printLabel": "Štampaj // Sačuvaj kao PDF",
     "intro": "Ja sam lingvista i univerzitetski predavač — specijalizovan sam za nastavu engleskog jezika, sociolingvistiku i istoriju engleskog jezika, a istinski me fascinira Severna Evropa: njeni jezici, istorija, i način na koji se kulture sudaraju i prepliću na mapi. Po prirodi sam miran, empatičan i otporan na stres, i zanima me gotovo sve — jezici, kulture, istorija i geografija krajeva iz kojih potiču. Za dve godine na univerzitetu sam predavao, kreirao nekoliko nastavnih programa i mentorisao studentska istraživanja, a paralelno sam godinama prevodio na međunarodnim festivalima. A jednog leta sam sve to ostavio po strani da bih restaurirao svetionik na kraju sveta — više o tome ispod.",
     "labels": {
       "experience": "Iskustvo",
@@ -1328,6 +1358,7 @@ function applyLang(lang){
   document.getElementById('intro').textContent = t.intro;
   document.getElementById('photo').alt = t.photoAlt;
   document.getElementById('plate-caption').textContent = t.plateCaption;
+  document.getElementById('print-label').textContent = t.printLabel;
 
   document.getElementById('tab-experience').innerHTML = t.labels.experience;
   document.getElementById('tab-education').innerHTML = t.labels.education;
@@ -1457,6 +1488,8 @@ function fillFest(id, data){
 document.querySelectorAll('.langbar button').forEach(function(btn){
   btn.addEventListener('click', function(){ applyLang(btn.dataset.lang); });
 });
+
+document.getElementById('print-btn').addEventListener('click', function(){ window.print(); });
 
 let initialLang = 'en';
 try {
