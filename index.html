@@ -271,6 +271,19 @@
     margin-top:44px;
     border-top:1px solid var(--line);
     padding-top:26px;
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:var(--paper);
+    transition:box-shadow .25s ease, padding-top .25s ease;
+  }
+  .tabbar.stuck{
+    box-shadow:0 10px 18px -14px rgba(20,31,42,.45);
+  }
+  @media (max-width:600px){
+    /* Once stuck, the tabs would otherwise sit directly under the
+       fixed language/text-size pill — push them below it. */
+    .tabbar.stuck{padding-top:56px;}
   }
   .tabbar button{
     appearance:none;
@@ -325,6 +338,7 @@
   .sub-label:first-child{margin-top:0;}
 
   .entry{
+    position:relative;
     display:grid;
     grid-template-columns:1fr auto;
     gap:4px 28px;
@@ -333,6 +347,21 @@
     border-bottom:1px solid var(--line);
   }
   .entry:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+  .entry::before{
+    content:"";
+    position:absolute;
+    left:-14px;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:var(--accent);
+    opacity:0;
+    transition:opacity .2s ease;
+  }
+  .entry:hover::before{opacity:1;}
+  @media (max-width:600px){
+    .entry::before{left:-10px;}
+  }
 
   .entry h3{
     font-family:var(--serif);
@@ -542,6 +571,16 @@
     .fest-photo-wrap{width:96px;height:96px;}
   }
 
+  /* ---- Unified photo colour grading: one warm, slightly muted grade
+     across the profile, lecture, campus and festival photos so they
+     read as one deliberate series despite different sources ---- */
+  .plate img,
+  .campus-photo img,
+  .fest-photo-wrap img,
+  .lightbox img{
+    filter:sepia(.12) saturate(1.15) contrast(1.05) brightness(.99);
+  }
+
   /* ---- Lightbox ---- */
   .lightbox{
     position:fixed;
@@ -620,6 +659,44 @@
   .track{height:2px;background:var(--line);position:relative;}
   .track i{position:absolute;left:0;top:0;height:100%;background:var(--accent);}
 
+  /* ---- Back to top ---- */
+  .back-to-top{
+    position:fixed;
+    right:20px;
+    bottom:24px;
+    z-index:60;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    appearance:none;
+    border:none;
+    background:var(--band);
+    color:var(--band-ink);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 6px 16px -6px rgba(20,31,42,.5);
+    opacity:0;
+    transform:translateY(10px);
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease, background-color .2s ease;
+  }
+  .back-to-top.visible{
+    opacity:1;
+    transform:none;
+    pointer-events:auto;
+  }
+  .back-to-top:hover{background:var(--accent);}
+  .back-to-top svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .back-to-top:focus-visible{outline:2px solid var(--beam);outline-offset:2px;}
+  @media (max-width:600px){
+    .back-to-top{right:14px;bottom:16px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .back-to-top{transition:opacity .25s ease;}
+  }
+
   /* ---- Footer ---- */
   footer{
     margin-top:56px;
@@ -661,7 +738,7 @@
   @media print{
     html{font-size:13px !important;}
     body{background:#fff;}
-    .langbar,.tabbar,.lightbox,.print-btn{display:none !important;}
+    .langbar,.tabbar,.lightbox,.print-btn,.back-to-top{display:none !important;}
     .wrap{padding:0 6px;max-width:100%;}
 
     /* Compact header — no photo, no coordinate line */
@@ -925,6 +1002,10 @@
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1"><img src="" alt=""></div>
 
+<button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
 <script>
 /* Icon set: one consistent line-icon style (24x24, single stroke) shared
    across skills and interests. Icons are language-independent, referenced
@@ -951,6 +1032,7 @@ const T = {
     "photoAlt": "Portrait of Savely Byzov",
     "plateCaption": "Fig. 1 — S. Byzov",
     "printLabel": "Print // Save as PDF",
+    "backToTop": "Back to top",
     "printNote": "This is a condensed summary — publications, conference talks, festivals & volunteering, and more are at saveliybyzov.github.io/cv",
     "intro": "I'm a linguist and university lecturer — I specialise in English language teaching, sociolinguistics, and the history of English, and I'm genuinely fascinated by Northern Europe: its languages, its history, and the way cultures collide and intertwine across a map. I'm calm, empathetic, and stress-resilient by nature, and curious about pretty much everything — languages, cultures, and the history and geography of the places they come from. In two years at the university I taught, built several course curricula, and supervised student research, while also spending years interpreting at international festivals. And one memorable summer, I dropped all of that to go restore a lighthouse at the edge of the world – more on that below.",
     "labels": {
@@ -1124,6 +1206,7 @@ const T = {
     "photoAlt": "Портрет Савелия Бызова",
     "plateCaption": "Илл. 1 — С. Бызов",
     "printLabel": "Печать // Сохранить в PDF",
+    "backToTop": "Наверх",
     "printNote": "Это сокращённая версия — публикации, доклады на конференциях, фестивали и волонтёрство и многое другое на saveliybyzov.github.io/cv",
     "intro": "Я лингвист и преподаватель университета: специализируюсь на преподавании английского языка, социолингвистике и истории английского языка, а по-настоящему увлечён Северной Европой — её языками, историей и тем, как культуры сталкиваются и переплетаются на карте. По натуре я спокойный, эмпатичный и стрессоустойчивый, и мне искренне интересно почти всё: языки, культуры, история и география мест, откуда они родом. За два года в университете успел попреподавать, разработать несколько учебных программ и поруководить студенческими исследованиями, а параллельно годами занимался устным переводом на международных фестивалях. А однажды вообще всё лето провёл, восстанавливая маяк на краю света — но об этом чуть ниже.",
     "labels": {
@@ -1297,6 +1380,7 @@ const T = {
     "photoAlt": "Portret Saveliya Byzova",
     "plateCaption": "Sl. 1 — S. Byzov",
     "printLabel": "Štampaj // Sačuvaj kao PDF",
+    "backToTop": "Nazad na vrh",
     "printNote": "Ovo je skraćena verzija — publikacije, konferencijski nastupi, festivali i volontiranje i još mnogo toga na saveliybyzov.github.io/cv",
     "intro": "Ja sam lingvista i univerzitetski predavač — specijalizovan sam za nastavu engleskog jezika, sociolingvistiku i istoriju engleskog jezika, a istinski me fascinira Severna Evropa: njeni jezici, istorija, i način na koji se kulture sudaraju i prepliću na mapi. Po prirodi sam miran, empatičan i otporan na stres, i zanima me gotovo sve — jezici, kulture, istorija i geografija krajeva iz kojih potiču. Za dve godine na univerzitetu sam predavao, kreirao nekoliko nastavnih programa i mentorisao studentska istraživanja, a paralelno sam godinama prevodio na međunarodnim festivalima. A jednog leta sam sve to ostavio po strani da bih restaurirao svetionik na kraju sveta — više o tome ispod.",
     "labels": {
@@ -1476,6 +1560,7 @@ function applyLang(lang){
   document.getElementById('plate-caption').textContent = t.plateCaption;
   document.getElementById('print-label').textContent = t.printLabel;
   document.getElementById('print-note').textContent = t.printNote;
+  document.getElementById('back-to-top').setAttribute('aria-label', t.backToTop);
 
   document.getElementById('tab-experience').innerHTML = t.labels.experience;
   document.getElementById('tab-education').innerHTML = t.labels.education;
@@ -1697,6 +1782,20 @@ document.querySelector('.tabbar').addEventListener('keydown', function(e){
   }
 });
 activateTab('experience');
+
+/* ---- Sticky tabbar shadow + back-to-top button ---- */
+const tabbarEl = document.querySelector('.tabbar');
+const backToTopBtn = document.getElementById('back-to-top');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function onScroll(){
+  tabbarEl.classList.toggle('stuck', tabbarEl.getBoundingClientRect().top <= 0);
+  backToTopBtn.classList.toggle('visible', window.scrollY > 480);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+backToTopBtn.addEventListener('click', function(){
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+});
 
 </script>
 </body>
