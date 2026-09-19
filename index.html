@@ -166,11 +166,32 @@
   }
 
   /* ---- Header: a cloth book-cover, not a lit sky ---- */
+  /* Buckram cloth: a fine woven grain (two hairline gradients, no image
+     file) under a soft "reading lamp" that rests upper-right and, with a
+     mouse, drifts toward the pointer. A double gilt rule is blind-stamped
+     inside the edge, the way a bound cover is tooled. */
   .band{
     position:relative;
-    background:var(--cloth);
+    background-color:var(--cloth);
+    background-image:
+      radial-gradient(560px 340px at var(--lamp-x,74%) var(--lamp-y,18%), rgba(255,244,222,.11), transparent 72%),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.075) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px);
     color:var(--page);
     padding:96px 32px 44px;
+  }
+  .band::before,
+  .band::after{
+    content:"";
+    position:absolute;
+    pointer-events:none;
+    border:1px solid rgba(173,138,71,.55);
+  }
+  .band::before{inset:14px;}
+  .band::after{inset:19px;border-color:rgba(173,138,71,.26);}
+  @media (max-width:600px){
+    .band::before{inset:8px;}
+    .band::after{inset:12px;}
   }
 
   .band-inner{max-width:756px;margin:0 auto;}
@@ -375,6 +396,27 @@
     font-weight:600;
     border-bottom:1px solid var(--page);
     z-index:1;
+  }
+  /* A silk bookmark ribbon: it hangs from the open section's tab into
+     the page and moves with you. Only shown while the four tabs sit on
+     one row (JS toggles .one-row) — wrapped, it would lie across the
+     row below. */
+  .tabbar.one-row button[aria-selected="true"]::after{
+    content:"";
+    position:absolute;
+    left:13px;
+    top:100%;
+    width:13px;
+    height:34px;
+    pointer-events:none;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.2) 0, rgba(255,255,255,0) 32%, rgba(0,0,0,.2) 100%),
+      var(--cloth);
+    clip-path:polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .tabbar.one-row button.drop::after{animation:ribbonDrop 260ms var(--ease-out);}
+    @keyframes ribbonDrop{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:none;}}
   }
   @media (max-width:600px){
     .tabbar{gap:2px;margin-top:34px;}
@@ -929,6 +971,7 @@
       color:var(--ink);
       padding:0 0 10px;
     }
+    .band::before,.band::after{display:none;}
     .plate{display:none;}
     .topline{display:none;}
     .name{font-size:1.65rem;color:var(--ink) !important;text-shadow:none !important;animation:none !important;}
@@ -2007,6 +2050,7 @@ function activateTab(id, focusButton, animate){
     const selected = b.dataset.tab === id;
     b.setAttribute('aria-selected', String(selected));
     b.setAttribute('tabindex', selected ? '0' : '-1');
+    b.classList.toggle('drop', !!(animate && selected)); // the bookmark ribbon drops in on a click
     if (selected && focusButton) b.focus();
   });
   tabPanels.forEach(function(p){
@@ -2066,6 +2110,40 @@ document.querySelector('.tabbar').addEventListener('keydown', function(e){
   }
 });
 activateTab('experience');
+
+/* The bookmark ribbon hangs from the open tab, so it only shows while all
+   four tabs share one row (otherwise it would lie across the row below). */
+const tabbarForRows = document.querySelector('.tabbar');
+function markTabRows(){
+  /* bottoms, not tops: the open tab is 1px taller (its border-bottom) and
+     the row is bottom-aligned */
+  const bottoms = new Set(tabButtons.map(function(b){ return b.offsetTop + b.offsetHeight; }));
+  tabbarForRows.classList.toggle('one-row', bottoms.size === 1);
+}
+markTabRows();
+if ('ResizeObserver' in window) new ResizeObserver(markTabRows).observe(tabbarForRows);
+else window.addEventListener('resize', markTabRows);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(markTabRows);
+
+/* The cover's reading lamp follows a mouse, eased so it drifts rather than
+   snaps. Skipped on touch and for reduced motion. */
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !prefersReducedMotion){
+  const cover = document.querySelector('.band');
+  let lampTx = 74, lampTy = 18, lampX = 74, lampY = 18, lampRaf = 0;
+  const lampStep = function(){
+    lampX += (lampTx - lampX) * 0.12;
+    lampY += (lampTy - lampY) * 0.12;
+    cover.style.setProperty('--lamp-x', lampX.toFixed(1) + '%');
+    cover.style.setProperty('--lamp-y', lampY.toFixed(1) + '%');
+    lampRaf = (Math.abs(lampTx - lampX) + Math.abs(lampTy - lampY) > 0.15) ? requestAnimationFrame(lampStep) : 0;
+  };
+  cover.addEventListener('pointermove', function(e){
+    const r = cover.getBoundingClientRect();
+    lampTx = (e.clientX - r.left) / r.width * 100;
+    lampTy = (e.clientY - r.top) / r.height * 100;
+    if (!lampRaf) lampRaf = requestAnimationFrame(lampStep);
+  });
+}
 
 /* ---- Sticky tabbar shadow + back-to-top button ---- */
 const tabbarEl = document.querySelector('.tabbar');
