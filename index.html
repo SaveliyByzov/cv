@@ -525,6 +525,24 @@
     text-align:right;
     padding-top:5px;
   }
+  /* Marginalia. Where the screen is wide enough, dates leave the text
+     column and hang in the outer margin beside their entry, the way a
+     critical edition sets line references and glosses — the column
+     itself keeps its full measure. Narrower screens keep the date at the
+     right of the title. */
+  @media (min-width:1200px){
+    .tabpanel .entry .date{
+      position:absolute;
+      right:calc(100% + 48px);
+      top:.3rem;
+      width:150px;
+      margin:0;
+      padding:0;
+      white-space:normal;
+      line-height:1.3;
+    }
+    .tabpanel .entry:not(.has-photo):not(.fest-entry){grid-template-columns:1fr;}
+  }
   .entry ul{
     grid-column:1 / -1;
     margin:14px 0 0;
