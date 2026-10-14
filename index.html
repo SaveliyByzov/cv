@@ -414,6 +414,18 @@
   }
   .entry .detail em{color:var(--ink);font-style:italic;}
 
+  /* A note on the people in a photo (festival entries): same aside look as
+     .workblurb. flow-root keeps its side rule from running under the floated photo. */
+  .fest-entry .crew{
+    display:flow-root;
+    margin:12px 0 0;
+    padding-left:14px;
+    border-left:2px solid var(--accent);
+    color:var(--ink-soft);
+    font-style:italic;
+    font-size:.9rem;
+  }
+  .fest-entry .crew a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-style:normal;}
   .entry .workblurb{
     grid-column:1 / -1;
     margin:12px 0 0;
@@ -971,6 +983,7 @@
         </div>
         <p class="place" id="festA-place"></p>
         <p class="detail" id="festA-desc"></p>
+        <p class="crew" id="festA-crew"></p>
       </article>
 
       <article class="entry fest-entry">
@@ -1173,6 +1186,19 @@ const T = {
       { "icon": "speaking", "title": "Public speaking", "desc": "I give lectures often, and genuinely enjoy the stage — festivals, conferences, open lectures, I'm not picky." }
     ],
     "festA": {
+      "crew": [
+        "To my left in the photo is ",
+        {
+          "a": "Mark",
+          "href": "https://mkostarev.com/"
+        },
+        " — an excellent GIS specialist; if you need one, get in touch. My fiancée ",
+        {
+          "a": "Sasha",
+          "href": "https://toropova-edu.github.io/cv/#/education"
+        },
+        " was there too: she knows marine biology and whales, so feel free to write to her as well."
+      ],
       "title": "Volunteer – Lighthouse Restoration",
       "place": "Zimnegorsky Lighthouse, White Sea coast",
       "date": "Summer 2025",
@@ -1347,6 +1373,19 @@ const T = {
       { "icon": "speaking", "title": "Публичные выступления", "desc": "Часто выступаю с лекциями и по-настоящему люблю сцену — открытая лекция, конференция или фестиваль, мне всё равно, лишь бы говорить." }
     ],
     "festA": {
+      "crew": [
+        "Слева от меня на фото — ",
+        {
+          "a": "Марк",
+          "href": "https://mkostarev.com/"
+        },
+        ", очень хороший специалист по GIS; если понадобится, обращайтесь. Там же была моя невеста ",
+        {
+          "a": "Саша",
+          "href": "https://toropova-edu.github.io/cv/#/education"
+        },
+        ": она разбирается в морской биологии и китах, так что можно обратиться и к ней."
+      ],
       "title": "Волонтёр – реставрация маяка",
       "place": "Зимнегорский маяк, побережье Белого моря",
       "date": "Лето 2025",
@@ -1521,6 +1560,19 @@ const T = {
       { "icon": "speaking", "title": "Javni nastup", "desc": "Često držim predavanja i istinski uživam u nastupu pred publikom — otvoreno predavanje, konferencija ili festival, svejedno mi je, samo da pričam." }
     ],
     "festA": {
+      "crew": [
+        "Levo od mene na fotografiji je ",
+        {
+          "a": "Mark",
+          "href": "https://mkostarev.com/"
+        },
+        ", vrlo dobar stručnjak za GIS; ako vam zatreba, slobodno mu se javite. Tamo je bila i moja verenica ",
+        {
+          "a": "Saša",
+          "href": "https://toropova-edu.github.io/cv/#/education"
+        },
+        ": razume se u morsku biologiju i kitove, pa se obratite i njoj."
+      ],
       "title": "Volonter – restauracija svetionika",
       "place": "Zimnegorski svetionik, obala Belog mora",
       "date": "Leto 2025",
@@ -1691,12 +1743,25 @@ function fillSpecs(id, items){
   });
 }
 
+/* A paragraph made of plain text and {a, href} link segments, so word order
+   and grammar can differ per language. */
+function renderSegments(el, segments){
+  el.textContent = '';
+  segments.forEach(function(seg){
+    if (typeof seg === 'string') { el.appendChild(document.createTextNode(seg)); return; }
+    const a = document.createElement('a');
+    a.href = seg.href; a.textContent = seg.a; a.rel = 'noopener';
+    el.appendChild(a);
+  });
+}
 function fillFest(id, data){
   document.getElementById(id + '-title').textContent = data.title;
   document.getElementById(id + '-place').textContent = data.place;
   document.getElementById(id + '-date').textContent = data.date;
   document.getElementById(id + '-desc').textContent = data.desc;
   document.getElementById(id + '-img').alt = data.alt;
+  const crewEl = document.getElementById(id + '-crew');
+  if (crewEl && data.crew) renderSegments(crewEl, data.crew);
 }
 
 document.querySelectorAll('.lang-group button').forEach(function(btn){
