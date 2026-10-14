@@ -6,9 +6,10 @@
 <title>Savely Byzov — Linguist // EFL Teacher // Researcher</title>
 <meta name="description" content="Savely Byzov — university lecturer and researcher in English language teaching, sociolinguistics, and the history of English. Belgrade, Serbia.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#11202B">
+<meta name="theme-color" content="#6B2230">
+<meta name="color-scheme" content="light">
 <link rel="canonical" href="https://saveliybyzov.github.io/cv/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2311202B'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='28' fill='%23F2A93C' text-anchor='middle'%3ESB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%236B2230'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='28' fill='%23AD8A47' text-anchor='middle'%3ESB%3C/text%3E%3C/svg%3E">
 
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="profile">
@@ -43,37 +44,55 @@
     "@type": "CollegeOrUniversity",
     "name": "Northern Arctic Federal University"
   },
-  "knowsLanguage": ["en", "ru", "no"],
+  "knowsLanguage": ["en", "ru", "sr", "no"],
   "sameAs": ["https://t.me/savageavery"]
 }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,500;1,600&family=PT+Sans:wght@400;700&family=PT+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <style>
+  /*
+    Visual direction: a scholarly critical edition — the apparatus he
+    builds around Old English poems (rubricated initials, marginal
+    dates, a bibliographic register) — rather than another editorial-
+    portfolio template. One family (EB Garamond) carries display, body,
+    italic and small-caps; no second face, no mono. One saturated
+    "buckram cloth" oxblood is the Committed accent — it IS the header's
+    cover colour and the one rubrication mark used throughout — against
+    a cool bone page, not warm parchment.
+  */
   :root{
-    --band:#11202B;
-    --band-ink:#EFEEE5;
-    --band-muted:#93A6A2;
-    --beam:#F5A833;
-    --paper:#EEF0EA;
-    --paper-deep:#E2E6DA;
-    --ink:#141F2A;
-    --ink-soft:#4B5C67;
-    --line:#C7CFC2;
-    --accent:#BD6D0A;
-    --accent2:#5B3E8C;
-    --card:#FBFAF5;
-    --serif:"Playfair Display", Georgia, serif;
-    --sans:"PT Sans", system-ui, -apple-system, sans-serif;
-    --mono:"PT Mono", "SFMono-Regular", Menlo, monospace;
+    --cloth:#6B2230;      /* cloth-cover oxblood: header, rubrication, links, active state */
+    --cloth-deep:#4E1A22; /* darker cloth, for rules/shadows against the cover */
+    --gilt:#AD8A47;       /* muted brass, used once: the stamped title on the cover */
+    --page:#F1EFE8;       /* bone page — the reading surface, deliberately not cream/parchment */
+    --page-deep:#E7E3D6;  /* deeper page tint: recessed tab fill, photo mat */
+    --ink:#1B1613;        /* near-black warm ink */
+    --ink-soft:#5C5348;   /* muted ink for secondary text */
+    --rule:#D6D0C1;       /* hairline rule colour */
+    --serif:"EB Garamond","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    /* One motion vocabulary for the whole page: a strong ease-out for
+       everything that enters, responds or settles. */
+    --ease-out:cubic-bezier(.23,1,.32,1);
   }
 
   *{box-sizing:border-box;}
-  button{text-align:inherit;}
+  /* Controls are controls: no long-press text selection or callout, no
+     double-tap-zoom delay, no grey tap flash competing with the pressed
+     state. Content text stays selectable. */
+  button{
+    text-align:inherit;
+    touch-action:manipulation;
+    -webkit-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
+  }
+  a{touch-action:manipulation;}
   html{
     -webkit-text-size-adjust:100%;
+    -webkit-tap-highlight-color:transparent;
     font-size:18px;
   }
   html[data-fontsize="large"]{font-size:20px;}
@@ -81,19 +100,18 @@
 
   body{
     margin:0;
-    background:var(--paper);
+    background:var(--page);
     color:var(--ink);
-    font-family:var(--sans);
+    font-family:var(--serif);
     font-size:1rem;
-    line-height:1.6;
+    line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
 
-  ::selection{background:#D8C7A0;}
+  ::selection{background:#D9BFB0;}
 
-  a{color:var(--accent);text-decoration:none;}
-  a:hover{text-decoration:underline;text-underline-offset:3px;}
-  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+  a{color:var(--cloth);text-decoration:none;}
+  a:focus-visible{outline:2px solid var(--cloth);outline-offset:3px;border-radius:2px;}
 
   .wrap{
     max-width:820px;
@@ -101,7 +119,7 @@
     padding:0 32px 120px;
   }
 
-  /* ---- Language switcher ---- */
+  /* ---- Language switcher (unchanged behaviour, re-inked) ---- */
   .langbar{
     position:fixed;
     top:20px;
@@ -110,62 +128,70 @@
     display:flex;
     align-items:center;
     gap:2px;
-    background:rgba(17,32,43,.82);
+    background:rgba(27,22,19,.88);
+    -webkit-backdrop-filter:blur(6px);
     backdrop-filter:blur(6px);
-    border-radius:3px;
+    border-radius:2px;
     padding:5px 6px;
-    font-family:var(--mono);
+    font-family:var(--serif);
   }
   .lang-group,.size-group{display:flex;align-items:center;gap:2px;}
-  .langbar-divider{width:1px;height:14px;background:rgba(255,255,255,.18);margin:0 5px;flex-shrink:0;}
+  .langbar-divider{width:1px;height:14px;background:rgba(241,239,232,.2);margin:0 5px;flex-shrink:0;}
   .langbar button{
     appearance:none;
     border:none;
     background:transparent;
     font-family:inherit;
-    font-size:.72rem;
-    font-weight:400;
-    letter-spacing:.06em;
-    color:var(--band-muted);
+    font-size:.78rem;
+    font-weight:500;
+    letter-spacing:.03em;
+    color:rgba(241,239,232,.62);
     padding:5px 8px;
     cursor:pointer;
     position:relative;
+    transition:color .15s ease, transform 120ms var(--ease-out);
   }
-  .langbar button:hover{color:var(--band-ink);}
-  .langbar button.active{color:var(--beam);}
+  .langbar button.active{color:var(--gilt);}
   .langbar button.active::after{
     content:"";
-    position:absolute;left:8px;right:8px;bottom:0;height:1px;background:var(--beam);
+    position:absolute;left:8px;right:8px;bottom:0;height:1px;background:var(--gilt);
   }
   .size-btn{padding:5px 6px !important;line-height:1;}
-  .size-group .size-btn:nth-child(1){font-size:.62rem;}
-  .size-group .size-btn:nth-child(2){font-size:.78rem;}
-  .size-group .size-btn:nth-child(3){font-size:.96rem;}
+  .size-group .size-btn:nth-child(1){font-size:.66rem;}
+  .size-group .size-btn:nth-child(2){font-size:.8rem;}
+  .size-group .size-btn:nth-child(3){font-size:.98rem;}
   @media (max-width:600px){
     .langbar{top:12px;right:12px;}
     .langbar-divider{margin:0 3px;}
   }
 
-  /* ---- Header band ---- */
+  /* ---- Header: a cloth book-cover, not a lit sky ---- */
+  /* Buckram cloth: a fine woven grain (two hairline gradients, no image
+     file) under a soft "reading lamp" that rests upper-right and, with a
+     mouse, drifts toward the pointer. A double gilt rule is blind-stamped
+     inside the edge, the way a bound cover is tooled. */
   .band{
     position:relative;
-    overflow:hidden;
-    background-color:var(--band);
+    background-color:var(--cloth);
     background-image:
-      radial-gradient(ellipse 140% 100% at var(--beamx, -30%) -10%, rgba(242,169,60,.24), transparent 55%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.055' stroke-width='1'%3E%3Cpath d='M-20 30 Q35 0 90 30 T200 30'/%3E%3Cpath d='M-20 84 Q35 54 90 84 T200 84'/%3E%3Cpath d='M-20 138 Q35 108 90 138 T200 138'/%3E%3Cpath d='M-20 192 Q35 162 90 192 T200 192'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat:no-repeat, repeat;
-    background-size:auto, 220px 220px;
-    color:var(--band-ink);
-    padding:96px 32px 40px;
-    animation:sweep 3.4s ease-out .2s 1 both;
+      radial-gradient(560px 340px at var(--lamp-x,74%) var(--lamp-y,18%), rgba(255,244,222,.11), transparent 72%),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.075) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px);
+    color:var(--page);
+    padding:96px 32px 44px;
   }
-  @keyframes sweep{
-    from{ --beamx:-30%; }
-    to{ --beamx:118%; }
+  .band::before,
+  .band::after{
+    content:"";
+    position:absolute;
+    pointer-events:none;
+    border:1px solid rgba(173,138,71,.55);
   }
-  @media (prefers-reduced-motion:reduce){
-    .band{animation:none;--beamx:10%;}
+  .band::before{inset:14px;}
+  .band::after{inset:19px;border-color:rgba(173,138,71,.26);}
+  @media (max-width:600px){
+    .band::before{inset:8px;}
+    .band::after{inset:12px;}
   }
 
   .band-inner{max-width:756px;margin:0 auto;}
@@ -176,56 +202,98 @@
     gap:32px;
   }
 
-  .plate{margin:0;flex-shrink:0;text-align:center;}
+  /* The portrait as a frontispiece plate facing the title, not a hero shot */
+  .plate{margin:0;flex-shrink:0;text-align:center;position:relative;}
   .plate img{
     width:150px;
     height:190px;
     object-fit:cover;
     object-position:center 22%;
     display:block;
-    border:3px solid #E8E4D8;
+    border:1px solid rgba(241,239,232,.5);
+    filter:sepia(.1) saturate(1.08) contrast(1.05) brightness(.99);
+  }
+  /* A small ex-libris stamp on the frontispiece — this is, after all,
+     his own copy of his own life. */
+  .exlibris{
+    position:absolute;
+    right:5px;
+    bottom:5px;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    border:1px solid var(--gilt);
+    background:rgba(27,22,19,.6);
+    color:var(--gilt);
+    font-family:var(--serif);
+    font-variant:small-caps;
+    font-size:.6rem;
+    letter-spacing:.03em;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
   .plate figcaption{
-    font-family:var(--mono);
-    font-size:.6rem;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    color:var(--band-muted);
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:.72rem;
+    letter-spacing:.01em;
+    color:rgba(241,239,232,.62);
     margin-top:9px;
   }
 
   .band-text{min-width:0;padding-bottom:2px;}
 
+  /* Coordinates read as a marginal gloss, not a mono data readout */
   .topline{
-    font-family:var(--mono);
-    font-size:.7rem;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--band-muted);
-    margin:0 0 16px;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:.85rem;
+    letter-spacing:.01em;
+    color:rgba(241,239,232,.68);
+    margin:0 0 14px;
   }
 
+  /* The name is stamped gilt lettering on cloth; its first letter is the
+     page's one recurring rubrication mark, echoed at every section head
+     below via ::first-letter — no illustration needed, no JS required. */
   .name{
     font-family:var(--serif);
-    font-weight:700;
-    font-size:clamp(2.6rem, 7vw, 4.3rem);
-    line-height:1.05;
-    letter-spacing:-.01em;
+    font-weight:600;
+    font-size:clamp(2.3rem, 6vw, 3.6rem);
+    line-height:1.08;
     margin:0;
-    color:var(--band-ink);
+    color:var(--gilt);
+    text-shadow:0 1px 0 rgba(0,0,0,.32), 0 -1px 0 rgba(255,255,255,.07);
     text-wrap:balance;
+  }
+  .name::first-letter{
+    font-size:1.3em;
+    font-weight:700;
+  }
+
+  /* A parallel-text title page: the same name in the other two
+     scripts, the way a bilingual critical edition states its title
+     twice — a small, quiet fact rather than a design flourish. */
+  .name-alt{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:.82rem;
+    letter-spacing:.02em;
+    color:rgba(241,239,232,.56);
+    margin:7px 0 0;
   }
 
   .role{
     font-family:var(--serif);
     font-style:italic;
     font-weight:500;
-    font-size:clamp(1.1rem, 3.3vw, 1.4rem);
-    color:var(--beam);
+    font-size:clamp(1.05rem, 3vw, 1.3rem);
+    color:var(--page);
     margin:12px 0 0;
   }
 
-  /* ---- Lede (contacts + intro, on paper) ---- */
+  /* ---- Lede (contacts + intro, on the page) ---- */
   .lede{padding:32px 0 0;}
 
   .contacts{
@@ -233,108 +301,172 @@
     flex-wrap:wrap;
     gap:10px 24px;
     margin:0;
-    font-size:.92rem;
+    font-size:.94rem;
   }
   .contacts span{color:var(--ink-soft);}
 
   .print-btn{
     appearance:none;
-    border:1px solid var(--line);
+    border:1px solid var(--rule);
     background:none;
     display:inline-flex;
     align-items:center;
     gap:7px;
     padding:6px 13px;
-    font-family:var(--mono);
-    font-size:.72rem;
+    font-family:var(--serif);
+    font-variant:small-caps;
+    font-size:.85rem;
     letter-spacing:.04em;
-    text-transform:uppercase;
     color:var(--ink-soft);
     cursor:pointer;
-    transition:color .2s ease, border-color .2s ease;
+    position:relative;
+    transition:color .15s ease, border-color .15s ease, transform 120ms var(--ease-out);
   }
   .print-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-  .print-btn:hover{color:var(--accent);border-color:var(--accent);}
 
+  .intro-link{
+    color:var(--cloth);
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:4px;
+  }
+  .intro-link::after{content:" ☞";}
   .intro{
-    max-width:64ch;
+    max-width:68ch;
     color:var(--ink-soft);
     margin:26px 0 0;
-    font-size:1.06rem;
+    font-size:1.08rem;
   }
 
-  /* ---- Tabs ---- */
+  /* ---- Tabs, re-cut as book thumb-index tabs: the active one bridges
+     into the page below (same fill, its own bottom edge erased) the way
+     a dictionary's edge-tab sits flush with the section it opens. Short,
+     boxed labels never produce the lone-orphaned-row a full-width
+     underline tab did. ---- */
   .tabbar{
     display:flex;
     flex-wrap:wrap;
-    gap:28px;
+    align-items:flex-end;
+    gap:3px;
     margin-top:44px;
-    border-top:1px solid var(--line);
-    padding-top:26px;
+    padding-bottom:5px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='6' viewBox='0 0 48 6'%3E%3Cpath d='M0 3 Q12 0 24 3 T48 3' fill='none' stroke='%23D6D0C1' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;
+    background-position:bottom;
+    background-size:48px 6px;
     position:sticky;
     top:0;
     z-index:40;
-    background:var(--paper);
-    transition:box-shadow .25s ease, padding-top .25s ease;
+    background-color:var(--page);
+    transition:box-shadow 200ms ease;
   }
   .tabbar.stuck{
-    box-shadow:0 10px 18px -14px rgba(20,31,42,.45);
+    box-shadow:0 10px 18px -14px rgba(27,22,19,.35);
   }
+  /* On a phone the fixed language bar sits over the top 44px, so the
+     stuck tab bar parks below it. A page-coloured shadow strip fills the
+     gap above (paint only) — the bar's height never changes, so nothing
+     below it shifts when it sticks or unsticks. */
   @media (max-width:600px){
-    /* Once stuck, the tabs would otherwise sit directly under the
-       fixed language/text-size pill — push them below it. */
-    .tabbar.stuck{padding-top:56px;}
+    .tabbar{top:44px;}
+    .tabbar.stuck{
+      box-shadow:0 -44px 0 0 var(--page), 0 10px 18px -14px rgba(27,22,19,.35);
+    }
   }
   .tabbar button{
     appearance:none;
-    border:none;
-    background:none;
+    background:var(--page-deep);
+    border:1px solid var(--rule);
+    border-bottom:none;
     text-align:left;
-    font-family:var(--mono);
-    font-size:.74rem;
-    letter-spacing:.08em;
-    text-transform:uppercase;
+    font-family:var(--serif);
+    font-variant:small-caps;
+    font-size:.92rem;
+    letter-spacing:.03em;
     color:var(--ink-soft);
-    padding:0 0 14px;
+    padding:9px 16px;
+    margin-bottom:-1px;
     cursor:pointer;
     position:relative;
+    transition:color .15s ease, background-color .15s ease, transform 120ms var(--ease-out);
   }
-  .tabbar button::before{
-    content:"§ ";
-    color:var(--accent);
+  .tabbar button[aria-selected="true"]{
+    background:var(--page);
+    color:var(--cloth);
+    font-weight:600;
+    border-bottom:1px solid var(--page);
+    z-index:1;
   }
-  .tabbar button:hover{color:var(--ink);}
-  .tabbar button[aria-selected="true"]{color:var(--ink);}
-  .tabbar button[aria-selected="true"]::after{
+  /* A silk bookmark ribbon: it hangs from the open section's tab into
+     the page and moves with you. Only shown while the four tabs sit on
+     one row (JS toggles .one-row) — wrapped, it would lie across the
+     row below. */
+  .tabbar.one-row button[aria-selected="true"]::after{
     content:"";
-    position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent);
+    position:absolute;
+    left:13px;
+    top:100%;
+    width:13px;
+    height:34px;
+    pointer-events:none;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.2) 0, rgba(255,255,255,0) 32%, rgba(0,0,0,.2) 100%),
+      var(--cloth);
+    clip-path:polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .tabbar.one-row button.drop::after{animation:ribbonDrop 260ms var(--ease-out);}
+    @keyframes ribbonDrop{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:none;}}
   }
   @media (max-width:600px){
-    .tabbar{gap:18px;padding-top:20px;margin-top:34px;}
+    .tabbar{gap:2px;margin-top:34px;}
+    .tabbar button{padding:8px 12px;font-size:.85rem;}
   }
 
   .tabpanel{
     display:none;
     padding-top:34px;
   }
+  /* A tab click nudges the new section in from the side its tab sits on
+     (spatial consistency along the index); 180ms, ease-out. Keyboard,
+     hash and first-load switches carry no animation at all. */
   .tabpanel.active{
     display:block;
-    animation:panelIn .35s ease;
+    animation:panelIn 180ms var(--ease-out);
   }
+  .tabpanel.active.instant{animation:none;}
   @keyframes panelIn{
-    from{opacity:0;transform:translateY(8px);}
+    from{opacity:0;transform:translateX(var(--panel-from,0px));}
     to{opacity:1;transform:none;}
   }
-
-  .sub-label{
-    font-family:var(--mono);
-    font-size:.68rem;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    font-weight:400;
-    margin:36px 0 20px;
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  /* Reduced motion keeps the fade (it aids comprehension), drops the shift. */
+  @media (prefers-reduced-motion:reduce){
+    .tabpanel.active{animation:fadeIn 120ms ease;}
+    .tabpanel.active.instant{animation:none;}
   }
+
+  /* Section heads: a real heading set in small caps, its own first
+     letter rubricated to echo the cover mark — not a kicker floating
+     above a separate title. */
+  .sub-label{
+    font-family:var(--serif);
+    font-variant:small-caps;
+    font-weight:600;
+    font-size:1.15rem;
+    letter-spacing:.03em;
+    color:var(--ink);
+    padding-bottom:8px;
+    /* A wavy rule rather than a straight one — the boundary-line
+       convention of a dialect map, standing in for a plain divider
+       at every section break on the page. */
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='6' viewBox='0 0 48 6'%3E%3Cpath d='M0 3 Q12 0 24 3 T48 3' fill='none' stroke='%23D6D0C1' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;
+    background-position:bottom;
+    background-size:40px 5px;
+    margin:40px 0 22px;
+  }
+  .sub-label::first-letter{color:var(--cloth);font-weight:700;}
   .sub-label:first-child{margin-top:0;}
 
   .entry{
@@ -344,45 +476,72 @@
     gap:4px 28px;
     padding-bottom:28px;
     margin-bottom:28px;
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid var(--rule);
   }
   .entry:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+  /* On hover, a manicule — the real marginal "note this" mark of old
+     print — appears in the gutter, in place of a coloured accent bar. */
   .entry::before{
-    content:"";
+    content:"☞";
     position:absolute;
-    left:-14px;
-    top:0;
-    bottom:0;
-    width:3px;
-    background:var(--accent);
+    left:-30px;
+    top:1px;
+    color:var(--cloth);
+    font-size:1.15rem;
     opacity:0;
-    transition:opacity .2s ease;
+    transition:opacity 150ms ease;
   }
-  .entry:hover::before{opacity:1;}
   @media (max-width:600px){
-    .entry::before{left:-10px;}
+    .entry::before{display:none;}
   }
 
-  .entry h3{
+  .entry h3,
+  .fest-entry .fest-title{
     font-family:var(--serif);
-    font-size:1.28rem;
-    font-weight:700;
+    font-size:1.32rem;
+    font-weight:600;
     margin:0;
     line-height:1.3;
   }
+  /* The masthead's rubrication mark, carried through to every entry
+     in the log — the same recurring device, not a one-off flourish. */
+  .entry h3::first-letter,
+  .fest-entry .fest-title::first-letter{
+    color:var(--cloth);
+    font-weight:700;
+  }
   .entry .place{
-    color:var(--accent);
-    font-size:.95rem;
+    color:var(--cloth);
+    font-style:italic;
+    font-size:.96rem;
     margin:4px 0 0;
   }
   .entry .date{
-    font-family:var(--mono);
+    font-family:var(--serif);
+    font-variant:small-caps;
     color:var(--ink-soft);
-    font-size:.82rem;
-    font-variant-numeric:tabular-nums;
+    font-size:.9rem;
     white-space:nowrap;
     text-align:right;
     padding-top:5px;
+  }
+  /* Marginalia. Where the screen is wide enough, dates leave the text
+     column and hang in the outer margin beside their entry, the way a
+     critical edition sets line references and glosses — the column
+     itself keeps its full measure. Narrower screens keep the date at the
+     right of the title. */
+  @media (min-width:1200px){
+    .tabpanel .entry .date{
+      position:absolute;
+      right:calc(100% + 48px);
+      top:.3rem;
+      width:150px;
+      margin:0;
+      padding:0;
+      white-space:normal;
+      line-height:1.3;
+    }
+    .tabpanel .entry:not(.has-photo):not(.fest-entry){grid-template-columns:1fr;}
   }
   .entry ul{
     grid-column:1 / -1;
@@ -395,47 +554,48 @@
     position:relative;
     padding-left:20px;
     margin-bottom:8px;
-    font-size:.97rem;
+    font-size:.98rem;
   }
   .entry li::before{
-    content:"";
+    content:"—";
     position:absolute;
     left:0;
-    top:.7em;
-    width:8px;
-    height:1px;
-    background:var(--accent);
+    color:var(--cloth);
   }
   .entry .detail{
     grid-column:1 / -1;
     margin:10px 0 0;
     color:var(--ink-soft);
-    font-size:.97rem;
+    font-size:.98rem;
   }
   .entry .detail em{color:var(--ink);font-style:italic;}
 
+  /* An aside set off the way a block quotation is in a printed critical
+     edition: rules above and below, not a coloured side border. */
   .entry .workblurb{
     grid-column:1 / -1;
-    margin:12px 0 0;
-    padding-left:14px;
-    border-left:2px solid var(--accent);
+    margin:14px 0 0;
+    padding:10px 0;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
     color:var(--ink-soft);
     font-style:italic;
-    font-size:.9rem;
+    font-size:.93rem;
   }
   .entry .abstract{
     grid-column:1 / -1;
     margin:10px 0 0;
     color:var(--ink-soft);
-    font-size:.94rem;
+    font-size:.95rem;
   }
 
-  /* ---- Publications & conference talks ---- */
+  /* ---- Publications & conference talks: set as a bibliography, not a
+     card list — italic title, small-caps venue, hanging register. ---- */
   .pub-list{list-style:none;margin:0;padding:0;}
   .pub-list li{
     padding-bottom:20px;
     margin-bottom:20px;
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid var(--rule);
   }
   .pub-list li:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none;}
   .pub-title{
@@ -443,25 +603,24 @@
     font-family:var(--serif);
     font-style:italic;
     font-weight:600;
-    font-size:1.02rem;
+    font-size:1.06rem;
     color:var(--ink);
   }
   .pub-meta{
     display:block;
-    font-family:var(--mono);
-    font-size:.68rem;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--accent);
-    margin-top:5px;
+    font-family:var(--serif);
+    font-variant:small-caps;
+    font-size:.88rem;
+    color:var(--cloth);
+    margin-top:4px;
   }
   .pub-desc{
     margin:8px 0 0;
     color:var(--ink-soft);
-    font-size:.92rem;
+    font-size:.93rem;
   }
 
-  /* ---- Campus photo (Education tab) ---- */
+  /* ---- Campus photo (Education tab), captioned as a numbered plate ---- */
   .campus-photo{margin:0 0 36px;}
   .campus-photo img{
     width:100%;
@@ -469,14 +628,13 @@
     aspect-ratio:3 / 2;
     object-fit:cover;
     display:block;
-    border:6px solid var(--card);
-    box-shadow:0 10px 22px -8px rgba(20,31,42,.35);
+    border:1px solid var(--rule);
+    filter:sepia(.1) saturate(1.08) contrast(1.05) brightness(.99);
   }
   .campus-photo figcaption{
-    font-family:var(--mono);
-    font-size:.66rem;
-    letter-spacing:.04em;
-    text-transform:uppercase;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:.85rem;
     color:var(--ink-soft);
     margin-top:9px;
     text-align:right;
@@ -507,23 +665,24 @@
   .entry.has-photo .entry-head h3{margin:0;}
   .entry.has-photo .entry-head .date{margin:0;padding-top:0;}
   .entry.has-photo .place{margin-top:4px;}
-  /* .workblurb carries its own border-left/padding — a plain block box
-     like that doesn't narrow around a float the way wrapped text does
-     (only the text lines do), so left unguarded its left border cuts
-     straight across the photo instead of starting beside it. Giving it
-     its own block formatting context makes it dodge the float properly. */
+  /* .workblurb carries its own top/bottom rules — a plain block box like
+     that doesn't narrow around a float the way wrapped text does (only
+     the text lines do), so left unguarded its rules would run straight
+     across the photo instead of starting beside it. Giving it its own
+     block formatting context makes it dodge the float properly. */
   .entry.has-photo .workblurb{margin-top:14px;display:flow-root;}
   .entry.has-photo ul{margin-top:18px;display:flow-root;}
   @media (max-width:600px){
     .entry.has-photo .fest-photo-wrap{float:none;width:100%;max-width:220px;aspect-ratio:4/5;margin:0 0 20px;}
   }
 
-  /* ---- Festival / photo cards ----
+  /* ---- Festival / photo entries ----
      Same reasoning as the has-photo entry above: the photo floats left,
      the title/date line and place/description text wrap beside it while
      short and widen to the full column once they run past the photo's
      bottom edge, so no blank strip is ever left dangling next to a long
-     description. ---- */
+     description. Framed as a numbered plate, the way a printed book
+     captions its figures, rather than a tilted "pinned photo" card. ---- */
   .fest-entry{
     display:flow-root;
   }
@@ -535,21 +694,17 @@
     cursor:zoom-in;
     overflow:hidden;
   }
-  .fest-entry:nth-child(2) .fest-photo-wrap{--tilt:1.1deg;}
-  .fest-entry:nth-child(3) .fest-photo-wrap{--tilt:-0.7deg;}
-  .fest-entry:nth-child(4) .fest-photo-wrap{--tilt:0.8deg;}
   .fest-photo-wrap img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    border:6px solid var(--card);
-    box-shadow:0 10px 22px -8px rgba(20,31,42,.35);
-    transform:rotate(var(--tilt,-1.1deg));
-    transition:transform .3s ease, box-shadow .3s ease;
+    border:1px solid var(--rule);
+    filter:sepia(.1) saturate(1.08) contrast(1.05) brightness(.99);
+    transition:filter .3s ease;
+    -webkit-touch-callout:none; /* a tap opens the lightbox; no save-image callout on long-press */
   }
-  .fest-photo-wrap:hover img{transform:rotate(0deg) scale(1.03);box-shadow:0 14px 28px -8px rgba(20,31,42,.42);}
-  .fest-photo-wrap img:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  .fest-photo-wrap img:focus-visible{outline:2px solid var(--cloth);outline-offset:3px;}
   .fest-entry .fest-head{
     display:flex;
     justify-content:space-between;
@@ -557,110 +712,142 @@
     gap:16px;
     flex-wrap:wrap;
   }
-  .fest-entry .fest-title{font-family:var(--serif);font-size:1.28rem;font-weight:700;margin:0;line-height:1.3;}
   .fest-entry .date{margin:0;}
   .fest-entry .place{
-    font-family:var(--mono);
-    font-size:.66rem;
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:.9rem;
+    color:var(--cloth);
     margin:10px 0 0;
   }
   .fest-entry .detail{margin-top:8px;}
+  /* A note about the people in the photo: set like a marginal gloss, with
+     the manicule pointing back at the picture it speaks of. Links stay
+     underlined (they are not told apart by colour alone). */
+  .fest-entry .crew{
+    margin:12px 0 0;
+    font-size:.96rem;
+    font-style:italic;
+    color:var(--ink-soft);
+  }
+  .fest-entry .crew::before{content:"☞ ";content:"☞ " / "";color:var(--cloth);font-style:normal;}
+  .fest-entry .crew a{
+    color:var(--cloth);
+    font-style:normal;
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:3px;
+  }
 
   @media (max-width:600px){
     .fest-photo-wrap{float:none;width:100%;max-width:240px;height:auto;aspect-ratio:1/1;margin:0 auto 18px;}
     .fest-entry .date{text-align:left;margin-top:2px;}
   }
 
-  /* ---- Unified photo colour grading: one warm, slightly muted grade
-     across the profile, lecture, campus and festival photos so they
-     read as one deliberate series despite different sources ---- */
-  .plate img,
-  .campus-photo img,
-  .fest-photo-wrap img,
-  .lightbox img{
-    filter:sepia(.12) saturate(1.15) contrast(1.05) brightness(.99);
-  }
-
   /* ---- Lightbox ---- */
+  /* Opens with a quick fade and the photo settling from 97% — it would
+     otherwise teleport in; closes faster than it opens. visibility (not
+     display) keeps it out of the tab order and the a11y tree while shut. */
   .lightbox{
     position:fixed;
     inset:0;
-    background:rgba(17,32,43,.9);
-    display:none;
+    background:rgba(27,22,19,.92);
+    display:flex;
     align-items:center;
     justify-content:center;
     padding:32px;
     z-index:200;
     cursor:zoom-out;
+    overscroll-behavior:contain;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 150ms var(--ease-out), visibility 0s linear 150ms;
   }
-  .lightbox.open{display:flex;}
+  .lightbox.open{
+    opacity:1;
+    visibility:visible;
+    transition:opacity 220ms var(--ease-out), visibility 0s;
+  }
   .lightbox img{
     max-width:92vw;
     max-height:88vh;
+    max-height:88dvh; /* the visible height, not the URL-bar-collapsed one */
     box-shadow:0 24px 70px rgba(0,0,0,.5);
+    filter:sepia(.1) saturate(1.08) contrast(1.05) brightness(.99);
+    transform:scale(.97);
+    transition:transform 150ms var(--ease-out);
+  }
+  .lightbox.open img{
+    transform:none;
+    transition:transform 220ms var(--ease-out);
+  }
+  @media (prefers-reduced-motion:reduce){
+    .lightbox img,.lightbox.open img{transform:none;transition:none;}
   }
 
-  /* ---- Skills / interests spec grid ---- */
+  /* ---- Skills / interests: a running glossary, not a grid of icon
+     cards — one flowing list, a small mark standing in for the icon,
+     the term in small caps the way a dictionary sets its headwords. ---- */
   .spec-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:22px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
     margin:0;
     padding:0;
     list-style:none;
   }
   .spec-item{
     display:flex;
-    gap:13px;
-    align-items:flex-start;
+    gap:14px;
+    align-items:baseline;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--rule);
   }
+  .spec-item:last-child{border-bottom:none;padding-bottom:0;}
   .spec-item svg{
     flex-shrink:0;
-    width:22px;
-    height:22px;
-    margin-top:1px;
-    stroke:var(--accent);
+    width:17px;
+    height:17px;
+    margin-top:.15em;
+    stroke:var(--cloth);
     fill:none;
-    stroke-width:1.6;
+    stroke-width:1.5;
     stroke-linecap:round;
     stroke-linejoin:round;
   }
-  .spec-grid.interests svg{stroke:var(--accent2);}
-  .spec-item h4{
+  .spec-item h3{
     font-family:var(--serif);
+    font-variant:small-caps;
     font-weight:600;
-    font-size:.98rem;
+    font-size:1.02rem;
+    letter-spacing:.03em;
     margin:0;
     line-height:1.3;
+    display:inline;
   }
   .spec-item p{
-    margin:5px 0 0;
+    display:inline;
+    margin:0;
     color:var(--ink-soft);
-    font-size:.87rem;
+    font-size:.95rem;
     line-height:1.5;
   }
-  @media (max-width:600px){
-    .spec-grid{grid-template-columns:1fr;}
-  }
+  .spec-item h3::after{content:" — ";color:var(--ink-soft);font-variant:normal;}
 
-  /* ---- Languages ---- */
+  /* ---- Languages: the level is stated, not gauged — no progress bar
+     standing in for the actual words. ---- */
   .langs{margin:0;padding:0;list-style:none;}
   .lang{
-    display:grid;
-    grid-template-columns:120px 1fr auto;
-    align-items:center;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
     gap:18px;
-    padding:14px 0;
-    border-bottom:1px solid var(--line);
+    padding:13px 0;
+    border-bottom:1px solid var(--rule);
   }
   .lang:last-child{border-bottom:none;}
-  .lang .lname{font-weight:700;font-size:1rem;}
-  .lang .level{font-family:var(--mono);color:var(--ink-soft);font-size:.82rem;white-space:nowrap;}
-  .track{height:2px;background:var(--line);position:relative;}
-  .track i{position:absolute;left:0;top:0;height:100%;background:var(--accent);}
+  .lang .lname{font-weight:600;font-size:1.02rem;}
+  .lang .level{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:.92rem;white-space:nowrap;}
 
   /* ---- Back to top ---- */
   .back-to-top{
@@ -670,47 +857,59 @@
     z-index:60;
     width:40px;
     height:40px;
-    border-radius:50%;
+    border-radius:2px;
     appearance:none;
     border:none;
-    background:var(--band);
-    color:var(--band-ink);
+    background:var(--cloth);
+    color:var(--page);
     cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:center;
-    box-shadow:0 6px 16px -6px rgba(20,31,42,.5);
+    box-shadow:0 6px 16px -6px rgba(27,22,19,.5);
     opacity:0;
     transform:translateY(10px);
     pointer-events:none;
-    transition:opacity .25s ease, transform .25s ease, background-color .2s ease;
+    /* leaves faster (150ms) than it arrives (220ms, below) */
+    transition:opacity 150ms var(--ease-out), transform 150ms var(--ease-out), background-color .15s ease;
   }
   .back-to-top.visible{
     opacity:1;
     transform:none;
     pointer-events:auto;
+    transition:opacity 220ms var(--ease-out), transform 220ms var(--ease-out), background-color .15s ease;
   }
-  .back-to-top:hover{background:var(--accent);}
   .back-to-top svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-  .back-to-top:focus-visible{outline:2px solid var(--beam);outline-offset:2px;}
+  .back-to-top:focus-visible{outline:2px solid var(--gilt);outline-offset:2px;}
   @media (max-width:600px){
     .back-to-top{right:14px;bottom:16px;}
   }
   @media (prefers-reduced-motion:reduce){
-    .back-to-top{transition:opacity .25s ease;}
+    .back-to-top,.back-to-top.visible{transform:none;transition:opacity 150ms ease;}
   }
 
   /* ---- Footer ---- */
   footer{
     margin-top:56px;
-    border-top:1px solid var(--line);
+    border-top:1px solid var(--rule);
     padding-top:26px;
-    font-family:var(--mono);
-    font-size:.7rem;
-    letter-spacing:.05em;
-    text-transform:uppercase;
+    font-family:var(--serif);
+    font-variant:small-caps;
+    font-size:.88rem;
+    letter-spacing:.03em;
     color:var(--ink-soft);
   }
+  /* A colophon, the way a printed book closes — what it's set in,
+     not just who made it. */
+  .colophon{
+    text-align:center;
+    font-style:italic;
+    font-variant:small-caps;
+    color:var(--cloth);
+    font-size:.85rem;
+    margin:0 0 16px;
+  }
+  .colophon::before{content:"❦";margin-right:.4em;}
 
   /* ---- Responsive ---- */
   @media (max-width:600px){
@@ -720,20 +919,77 @@
     .band-text{text-align:center;}
     .entry{grid-template-columns:1fr;}
     .entry .date{text-align:left;padding-top:2px;margin-bottom:8px;}
-    .lang{grid-template-columns:96px 1fr;}
-    .lang .level{grid-column:1 / -1;}
-    .lang .track{grid-column:1 / -1;}
   }
 
   @media (prefers-reduced-motion:no-preference){
-    .reveal{opacity:0;transform:translateY(12px);animation:rise .7s ease forwards;}
+    .reveal{opacity:0;transform:translateY(8px);animation:rise .5s var(--ease-out) forwards;}
     @keyframes rise{to{opacity:1;transform:none;}}
+    /* The one signature moment: the cover's gilt initial settles into
+       place, like a stamp meeting cloth, instead of a scattered set of
+       hover flourishes across the page. */
+    .name{animation:stampIn .5s var(--ease-out) both;}
+    @keyframes stampIn{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:none;}}
+    /* Switching language replaces every word at once; a short fade from
+       35% bridges the swap without delaying it (it starts the instant
+       the text changes). */
+    .lang-swap{animation:langSwap 180ms var(--ease-out);}
+    @keyframes langSwap{from{opacity:.35;}to{opacity:1;}}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .lang-swap{animation:fadeIn 120ms ease;}
+  }
+
+  /* Pointer-only hover states: on touch a tap would otherwise leave them
+     stuck on. Touch users get the :active press below instead. */
+  @media (hover:hover) and (pointer:fine){
+    a:hover{text-decoration:underline;text-underline-offset:3px;}
+    .langbar button:not(.active):hover{color:var(--page);}
+    .tabbar button:not([aria-selected="true"]):hover{color:var(--ink);}
+    .print-btn:hover{color:var(--cloth);border-color:var(--cloth);}
+    .entry:hover::before{opacity:1;}
+    .fest-photo-wrap:hover img{filter:sepia(0) saturate(1.05) contrast(1.03) brightness(1.01);}
+    .back-to-top:hover{background:var(--cloth-deep);}
+  }
+
+  /* Press feedback on the instant of contact (all input types). */
+  .langbar button:active,
+  .tabbar button:active,
+  .print-btn:active,
+  .back-to-top.visible:active{transform:scale(.97);transition-duration:120ms;}
+
+  /* Fingers need more than the visual box: extend hit areas to ~44px
+     without changing how anything looks. */
+  @media (pointer:coarse){
+    .langbar button::before{content:"";position:absolute;inset:-8px -1px;}
+    .print-btn::before{content:"";position:absolute;inset:-7px -2px;}
+    .back-to-top::before{content:"";position:absolute;inset:-4px;}
+  }
+
+  /* System preferences the browser passes along. */
+  @media (prefers-reduced-transparency:reduce){
+    .langbar{background:var(--ink);-webkit-backdrop-filter:none;backdrop-filter:none;}
+  }
+  @media (prefers-contrast:more){
+    :root{--ink-soft:#3D362E;--rule:#A39A87;}
   }
 
   .tabbar button:focus-visible,
   .langbar button:focus-visible{
-    outline:2px solid var(--beam);
+    outline:2px solid var(--gilt);
     outline-offset:2px;
+  }
+
+  /* Each tabpanel's own (visually hidden) heading — restores the h1→h2→h3
+     nesting the tab buttons alone can't provide, without changing how
+     anything looks. */
+  .sr-only{
+    position:absolute;
+    width:1px;height:1px;
+    padding:0;margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
   }
 
   /* ---- Print: condensed 1-2 page summary ---- */
@@ -747,13 +1003,13 @@
     /* Compact header — no photo, no coordinate line */
     .band{
       background:none !important;
-      animation:none !important;
       color:var(--ink);
       padding:0 0 10px;
     }
+    .band::before,.band::after{display:none;}
     .plate{display:none;}
     .topline{display:none;}
-    .name{font-size:1.65rem;color:var(--ink) !important;}
+    .name{font-size:1.65rem;color:var(--ink) !important;text-shadow:none !important;animation:none !important;}
     .role{font-size:.92rem;margin-top:4px;color:var(--ink) !important;}
 
     .lede{padding-top:6px;}
@@ -761,7 +1017,7 @@
     .intro{font-size:.8rem;margin-top:8px;max-width:none;}
 
     .tabpanel{display:block !important;animation:none !important;opacity:1 !important;transform:none !important;padding-top:8px;}
-    .tabpanel + .tabpanel{margin-top:8px;border-top:1px solid var(--line);padding-top:8px;}
+    .tabpanel + .tabpanel{margin-top:8px;border-top:1px solid var(--rule);padding-top:8px;}
 
     /* Only Experience, Education, Skills & Languages make the cut —
        Festivals & Volunteering is the kind of thing worth a website,
@@ -773,8 +1029,9 @@
        the site */
     .fest-photo-wrap,.campus-photo,.workblurb,.abstract{display:none !important;}
     .entry.has-photo{padding-left:0;}
+    .entry::before{display:none !important;}
 
-    .sub-label{font-size:.6rem;margin:10px 0 6px;}
+    .sub-label{font-size:.72rem;margin:10px 0 6px;padding-bottom:2px;}
 
     .entry{break-inside:avoid;padding-bottom:8px;margin-bottom:8px;font-size:.8rem;}
     .entry h3{font-size:.92rem;}
@@ -791,9 +1048,10 @@
 
     /* Skills — titles only, two columns */
     .spec-grid.skills{display:block;columns:2;column-gap:20px;}
-    .spec-grid.skills .spec-item{display:block;margin-bottom:2px;break-inside:avoid;}
+    .spec-grid.skills .spec-item{display:block;margin-bottom:2px;padding-bottom:0;border-bottom:none;break-inside:avoid;}
     .spec-grid.skills svg,.spec-grid.skills p{display:none;}
-    .spec-item h4{font-size:.78rem;}
+    .spec-item h3{font-size:.78rem;}
+    .spec-item h3::after{content:"";}
 
     /* Interests are personality, not qualifications — off the summary */
     #sub-interests,.spec-grid.interests{display:none !important;}
@@ -804,12 +1062,13 @@
       display:block;
       margin-top:14px;
       padding-top:8px;
-      border-top:1px solid var(--line);
-      font-family:var(--mono);
-      font-size:.66rem;
+      border-top:1px solid var(--rule);
+      font-family:var(--serif);
+      font-style:italic;
+      font-size:.72rem;
       color:var(--ink-soft);
     }
-    footer{margin-top:12px;padding-top:8px;font-size:.6rem;}
+    footer{margin-top:12px;padding-top:8px;font-size:.78rem;}
 
     a{color:var(--ink);text-decoration:underline;}
   }
@@ -836,11 +1095,13 @@
     <div class="band-main">
       <figure class="plate">
         <img class="photo" id="photo" src="assets/Byzov-S.S_.jpg" width="426" height="640" alt="" decoding="async" fetchpriority="high">
+        <span class="exlibris" aria-hidden="true">S·B</span>
         <figcaption id="plate-caption" aria-hidden="true"></figcaption>
       </figure>
       <div class="band-text">
         <p class="topline" id="topline">Belgrade, Serbia // 44.7866°N 20.4489°E</p>
         <h1 class="name" id="name">Savely Byzov</h1>
+        <p class="name-alt" id="name-alt" aria-hidden="true"></p>
         <p class="role" id="role">Linguist // EFL Teacher // Researcher</p>
       </div>
     </div>
@@ -871,6 +1132,7 @@
   </nav>
 
   <div class="tabpanel active" id="panel-experience" role="tabpanel">
+      <h2 class="sr-only" id="heading-experience"></h2>
       <article class="entry has-photo">
         <div class="fest-photo-wrap"><img id="exp1-img" src="assets/lecture.jpg" width="675" height="800" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
         <div class="entry-body">
@@ -905,6 +1167,7 @@
       <h3 class="sub-label" id="sub-talks"></h3>
       <ul class="pub-list" id="talks-list"></ul></div>
   <div class="tabpanel" id="panel-education" role="tabpanel">
+      <h2 class="sr-only" id="heading-education"></h2>
       <figure class="campus-photo">
         <img id="campus-img" src="assets/narfu-campus.jpg" width="1600" height="1067" loading="lazy" decoding="async" alt="">
         <figcaption id="campus-caption"></figcaption>
@@ -938,6 +1201,7 @@
         <ul style="margin-top:0;" id="training-list"></ul>
       </article></div>
   <div class="tabpanel" id="panel-skillslang" role="tabpanel">
+      <h2 class="sr-only" id="heading-skillslang"></h2>
       <h3 class="sub-label" id="sub-skills"></h3>
       <ul class="spec-grid skills" id="skills-list"></ul>
 
@@ -945,17 +1209,14 @@
       <ul class="langs" id="langs-list">
         <li class="lang">
           <span class="lname"></span>
-          <span class="track"><i style="width:90%"></i></span>
           <span class="level"></span>
         </li>
         <li class="lang">
           <span class="lname"></span>
-          <span class="track"><i style="width:100%"></i></span>
           <span class="level"></span>
         </li>
         <li class="lang">
           <span class="lname"></span>
-          <span class="track"><i style="width:55%"></i></span>
           <span class="level"></span>
         </li>
       </ul>
@@ -963,7 +1224,8 @@
       <h3 class="sub-label" id="sub-interests"></h3>
       <ul class="spec-grid interests" id="interests-list"></ul></div>
   <div class="tabpanel" id="panel-festivals" role="tabpanel">
-      <article class="entry fest-entry">
+      <h2 class="sr-only" id="heading-festivals"></h2>
+      <article class="entry fest-entry" id="lighthouse">
         <div class="fest-photo-wrap"><img id="festA-img" src="assets/lighthouse.jpg" width="800" height="1066" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
         <div class="fest-head">
           <h3 class="fest-title" id="festA-title"></h3>
@@ -971,6 +1233,7 @@
         </div>
         <p class="place" id="festA-place"></p>
         <p class="detail" id="festA-desc"></p>
+        <p class="crew" id="festA-crew"></p>
       </article>
 
       <article class="entry fest-entry">
@@ -994,7 +1257,7 @@
       </article>
 
       <article class="entry fest-entry">
-        <div class="fest-photo-wrap"><img id="festD-img" src="assets/theatre-exhibition.jpg" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
+        <div class="fest-photo-wrap"><img id="festD-img" src="assets/theatre-exhibition.jpg" width="1024" height="576" loading="lazy" decoding="async" alt="" tabindex="0" role="button"></div>
         <div class="fest-head">
           <h3 class="fest-title" id="festD-title"></h3>
           <p class="date" id="festD-date"></p>
@@ -1006,6 +1269,7 @@
   <p class="print-note" id="print-note"></p>
 
   <footer>
+    <p class="colophon" id="colophon"></p>
     <span id="footer-text"></span><a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>
   </footer>
 
@@ -1173,6 +1437,19 @@ const T = {
       { "icon": "speaking", "title": "Public speaking", "desc": "I give lectures often, and genuinely enjoy the stage — festivals, conferences, open lectures, I'm not picky." }
     ],
     "festA": {
+      "crew": [
+        "To my left in the photo is ",
+        {
+          "a": "Mark",
+          "href": "https://mkostarev.com/"
+        },
+        " — an excellent GIS specialist; if you need one, get in touch. My fiancée ",
+        {
+          "a": "Sasha",
+          "href": "https://toropova-edu.github.io/cv/#/education"
+        },
+        " was there too: she knows marine biology and whales, so feel free to write to her as well."
+      ],
       "title": "Volunteer – Lighthouse Restoration",
       "place": "Zimnegorsky Lighthouse, White Sea coast",
       "date": "Summer 2025",
@@ -1208,7 +1485,9 @@ const T = {
       { "icon": "travel", "title": "Travel", "desc": "I dream of Scandinavia and Alaska next — Serbia used to be the dream, before it became home." },
       { "icon": "woodwork", "title": "Woodworking &amp; carpentry", "desc": "In my spare time, I make shields and build greenhouses by hand." }
     ],
-    "footer": "Savely Byzov // Belgrade, Serbia // "
+    "introLink": "restore a lighthouse at the edge of the world",
+    "footer": "Savely Byzov // Belgrade, Serbia // ",
+    "colophon": "Set in EB Garamond — Belgrade,"
   },
   "ru": {
     "topline": "Белград, Сербия // 44.7866°N 20.4489°E",
@@ -1347,6 +1626,19 @@ const T = {
       { "icon": "speaking", "title": "Публичные выступления", "desc": "Часто выступаю с лекциями и по-настоящему люблю сцену — открытая лекция, конференция или фестиваль, мне всё равно, лишь бы говорить." }
     ],
     "festA": {
+      "crew": [
+        "Слева от меня на фото — ",
+        {
+          "a": "Марк",
+          "href": "https://mkostarev.com/"
+        },
+        ", очень хороший специалист по GIS; если понадобится, обращайтесь. Там же была моя невеста ",
+        {
+          "a": "Саша",
+          "href": "https://toropova-edu.github.io/cv/#/education"
+        },
+        ": она разбирается в морской биологии и китах, так что можно обратиться и к ней."
+      ],
       "title": "Волонтёр – реставрация маяка",
       "place": "Зимнегорский маяк, побережье Белого моря",
       "date": "Лето 2025",
@@ -1382,7 +1674,9 @@ const T = {
       { "icon": "travel", "title": "Путешествия", "desc": "Мечтаю увидеть Скандинавию и Аляску — а Сербия была мечтой, пока не стала домом." },
       { "icon": "woodwork", "title": "Резьба по дереву и столярное дело", "desc": "В свободное время своими руками делаю щиты и строю теплицы." }
     ],
-    "footer": "Савелий Бызов // Белград, Сербия // "
+    "introLink": "восстанавливая маяк на краю света",
+    "footer": "Савелий Бызов // Белград, Сербия // ",
+    "colophon": "Набрано EB Garamond — Белград,"
   },
   "sr": {
     "topline": "Beograd, Srbija // 44.7866°N 20.4489°E",
@@ -1521,6 +1815,19 @@ const T = {
       { "icon": "speaking", "title": "Javni nastup", "desc": "Često držim predavanja i istinski uživam u nastupu pred publikom — otvoreno predavanje, konferencija ili festival, svejedno mi je, samo da pričam." }
     ],
     "festA": {
+      "crew": [
+        "Levo od mene na fotografiji je ",
+        {
+          "a": "Mark",
+          "href": "https://mkostarev.com/"
+        },
+        ", vrlo dobar stručnjak za GIS; ako vam zatreba, slobodno mu se javite. Tamo je bila i moja verenica ",
+        {
+          "a": "Saša",
+          "href": "https://toropova-edu.github.io/cv/#/education"
+        },
+        ": razume se u morsku biologiju i kitove, pa se obratite i njoj."
+      ],
       "title": "Volonter – restauracija svetionika",
       "place": "Zimnegorski svetionik, obala Belog mora",
       "date": "Leto 2025",
@@ -1556,7 +1863,9 @@ const T = {
       { "icon": "travel", "title": "Putovanja", "desc": "Sledeće sanjam o Skandinaviji i Aljasci — Srbija je bila san, sve dok nije postala dom." },
       { "icon": "woodwork", "title": "Rezbarenje i stolarstvo", "desc": "U slobodno vreme sopstvenim rukama pravim štitove i gradim staklenike." }
     ],
-    "footer": "Saveliy Byzov // Beograd, Srbija // "
+    "introLink": "restaurirao svetionik na kraju sveta",
+    "footer": "Saveliy Byzov // Beograd, Srbija // ",
+    "colophon": "Složeno u EB Garamond — Beograd,"
   }
 };
 
@@ -1566,7 +1875,11 @@ function applyLang(lang){
   document.getElementById('topline').textContent = t.topline;
   document.getElementById('name').textContent = t.name;
   document.getElementById('role').textContent = t.role;
-  document.getElementById('intro').textContent = t.intro;
+  renderIntro(document.getElementById('intro'), t.intro, t.introLink);
+  document.getElementById('name-alt').textContent = ['en','ru','sr']
+    .filter(function(l){ return l !== lang; })
+    .map(function(l){ return T[l].name; })
+    .join(' · ');
   document.getElementById('photo').alt = t.photoAlt;
   document.getElementById('plate-caption').textContent = t.plateCaption;
   document.getElementById('print-label').textContent = t.printLabel;
@@ -1577,6 +1890,10 @@ function applyLang(lang){
   document.getElementById('tab-education').innerHTML = t.labels.education;
   document.getElementById('tab-skillslang').innerHTML = t.labels.skillslang;
   document.getElementById('tab-festivals').innerHTML = t.labels.festivals;
+  document.getElementById('heading-experience').innerHTML = t.labels.experience;
+  document.getElementById('heading-education').innerHTML = t.labels.education;
+  document.getElementById('heading-skillslang').innerHTML = t.labels.skillslang;
+  document.getElementById('heading-festivals').innerHTML = t.labels.festivals;
 
   document.getElementById('sub-activity').innerHTML = t.labels.activity;
   document.getElementById('sub-publications').innerHTML = t.labels.publications;
@@ -1610,6 +1927,7 @@ function applyLang(lang){
   fillFest('festD', t.festD);
 
   document.getElementById('footer-text').textContent = t.footer;
+  document.getElementById('colophon').textContent = t.colophon + ' ' + new Date().getFullYear();
 
   document.querySelectorAll('.lang-group button').forEach(function(b){
     const isActive = b.dataset.lang === lang;
@@ -1618,6 +1936,21 @@ function applyLang(lang){
   });
 
   try { localStorage.setItem('sb-lang', lang); } catch(e){}
+}
+
+/* The intro's lighthouse phrase is a real link to the lighthouse entry —
+   the site's best story shouldn't sit four tabs deep with no way there. */
+function renderIntro(el, text, phrase){
+  el.textContent = '';
+  const i = text.indexOf(phrase);
+  if (i < 0){ el.textContent = text; return; }
+  el.appendChild(document.createTextNode(text.slice(0, i)));
+  const a = document.createElement('a');
+  a.href = '#lighthouse';
+  a.className = 'intro-link';
+  a.textContent = phrase;
+  el.appendChild(a);
+  el.appendChild(document.createTextNode(text.slice(i + phrase.length)));
 }
 
 function fillEntry(id, data){
@@ -1686,21 +2019,48 @@ function fillSpecs(id, items){
     li.className = 'spec-item';
     li.innerHTML =
       '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[item.icon] || '') + '</svg>' +
-      '<div><h4>' + item.title + '</h4><p>' + item.desc + '</p></div>';
+      '<div><h3>' + item.title + '</h3><p>' + item.desc + '</p></div>';
     ul.appendChild(li);
   });
 }
 
+/* A paragraph made of plain text and {a, href} link segments, so word order
+   and grammar can differ per language. */
+function renderSegments(el, segments){
+  el.textContent = '';
+  segments.forEach(function(seg){
+    if (typeof seg === 'string') { el.appendChild(document.createTextNode(seg)); return; }
+    const a = document.createElement('a');
+    a.href = seg.href; a.textContent = seg.a; a.rel = 'noopener';
+    el.appendChild(a);
+  });
+}
 function fillFest(id, data){
   document.getElementById(id + '-title').textContent = data.title;
   document.getElementById(id + '-place').textContent = data.place;
   document.getElementById(id + '-date').textContent = data.date;
   document.getElementById(id + '-desc').textContent = data.desc;
   document.getElementById(id + '-img').alt = data.alt;
+  const crewEl = document.getElementById(id + '-crew');
+  if (crewEl && data.crew) renderSegments(crewEl, data.crew);
 }
 
 document.querySelectorAll('.lang-group button').forEach(function(btn){
-  btn.addEventListener('click', function(){ applyLang(btn.dataset.lang); });
+  btn.addEventListener('click', function(){
+    if (btn.dataset.lang === document.documentElement.lang) return;
+    applyLang(btn.dataset.lang);
+    /* a quick fade from 35% over the swapped text (see .lang-swap) */
+    document.querySelectorAll('.band-inner, main.wrap').forEach(function(el){
+      el.classList.remove('lang-swap');
+      void el.offsetWidth; // restart the animation if switched twice quickly
+      el.classList.add('lang-swap');
+      el.addEventListener('animationend', function done(e){
+        if (e.target !== el) return;
+        el.classList.remove('lang-swap');
+        el.removeEventListener('animationend', done);
+      });
+    });
+  });
 });
 
 document.getElementById('print-btn').addEventListener('click', function(){ window.print(); });
@@ -1734,7 +2094,7 @@ try {
 applyFontSize(initialFontSize);
 
 document.querySelectorAll('.reveal').forEach(function(el, i){
-  el.style.animationDelay = (i * 0.1) + 's';
+  el.style.animationDelay = (i * 0.06) + 's';
 });
 
 const lightbox = document.getElementById('lightbox');
@@ -1768,18 +2128,63 @@ lightbox.addEventListener('keydown', function(e){
 /* ---- Exclusive tabs: opening one closes the others ---- */
 const tabButtons = Array.from(document.querySelectorAll('.tabbar button'));
 const tabPanels = document.querySelectorAll('.tabpanel');
-function activateTab(id, focusButton){
+/* animate=true only for a pointer click on a tab: the new section then
+   slides in a few px from the side its tab is on. Arrow keys, the hash
+   and first load switch instantly (repeated/keyboard actions don't animate). */
+function activateTab(id, focusButton, animate){
+  const prev = tabButtons.findIndex(function(b){ return b.getAttribute('aria-selected') === 'true'; });
+  const next = tabButtons.findIndex(function(b){ return b.dataset.tab === id; });
   tabButtons.forEach(function(b){
     const selected = b.dataset.tab === id;
     b.setAttribute('aria-selected', String(selected));
     b.setAttribute('tabindex', selected ? '0' : '-1');
+    b.classList.toggle('drop', !!(animate && selected)); // the bookmark ribbon drops in on a click
     if (selected && focusButton) b.focus();
   });
-  tabPanels.forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + id); });
+  tabPanels.forEach(function(p){
+    const on = p.id === 'panel-' + id;
+    const wasOn = p.classList.contains('active');
+    p.classList.toggle('active', on);
+    p.classList.toggle('instant', !(animate && on && !wasOn));
+    if (on) p.style.setProperty('--panel-from', (next > prev ? 8 : -8) + 'px');
+  });
+}
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TAB_IDS = tabButtons.map(function(b){ return b.dataset.tab; });
+/* Switching tabs from far down the page would otherwise leave you in the
+   middle of the new section (or past its end): bring its start back
+   under the sticky tab bar instead. */
+/* Where the sticky bar parks: 0 on desktop, below the language bar on a phone. */
+function stickyTop(){ return parseFloat(getComputedStyle(document.querySelector('.tabbar')).top) || 0; }
+function scrollToTabsTop(){
+  const bar = document.querySelector('.tabbar');
+  if (bar.getBoundingClientRect().top > stickyTop() + 0.5) return; // not scrolled past the bar
+  const panel = document.querySelector('.tabpanel.active');
+  const panelTop = panel.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top: Math.max(0, panelTop - bar.offsetHeight - stickyTop()), behavior: 'auto' });
 }
 tabButtons.forEach(function(btn){
-  btn.addEventListener('click', function(){ activateTab(btn.dataset.tab); });
+  btn.addEventListener('click', function(){
+    activateTab(btn.dataset.tab, false, true);
+    try { history.replaceState(null, '', '#' + btn.dataset.tab); } catch(e){}
+    scrollToTabsTop();
+  });
 });
+/* #festivals, #education … open that tab; #lighthouse opens Festivals and
+   scrolls to the lighthouse entry. Works on load, on back/forward, and
+   from the link in the intro. */
+function openFromHash(){
+  const id = decodeURIComponent(location.hash.replace('#', ''));
+  if (TAB_IDS.indexOf(id) >= 0){ activateTab(id); return; }
+  const target = id && document.getElementById(id);
+  if (target && target.closest('.tabpanel')){
+    activateTab(target.closest('.tabpanel').id.replace('panel-', ''));
+    /* keep the entry's heading clear of the sticky tab bar */
+    target.style.scrollMarginTop = (document.querySelector('.tabbar').offsetHeight + stickyTop() + 16) + 'px';
+    target.scrollIntoView({ block: 'start', behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  }
+}
+window.addEventListener('hashchange', openFromHash);
 document.querySelector('.tabbar').addEventListener('keydown', function(e){
   const current = tabButtons.findIndex(function(b){ return b.getAttribute('aria-selected') === 'true'; });
   let next = null;
@@ -1794,12 +2199,45 @@ document.querySelector('.tabbar').addEventListener('keydown', function(e){
 });
 activateTab('experience');
 
+/* The bookmark ribbon hangs from the open tab, so it only shows while all
+   four tabs share one row (otherwise it would lie across the row below). */
+const tabbarForRows = document.querySelector('.tabbar');
+function markTabRows(){
+  /* bottoms, not tops: the open tab is 1px taller (its border-bottom) and
+     the row is bottom-aligned */
+  const bottoms = new Set(tabButtons.map(function(b){ return b.offsetTop + b.offsetHeight; }));
+  tabbarForRows.classList.toggle('one-row', bottoms.size === 1);
+}
+markTabRows();
+if ('ResizeObserver' in window) new ResizeObserver(markTabRows).observe(tabbarForRows);
+else window.addEventListener('resize', markTabRows);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(markTabRows);
+
+/* The cover's reading lamp follows a mouse, eased so it drifts rather than
+   snaps. Skipped on touch and for reduced motion. */
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !prefersReducedMotion){
+  const cover = document.querySelector('.band');
+  let lampTx = 74, lampTy = 18, lampX = 74, lampY = 18, lampRaf = 0;
+  const lampStep = function(){
+    lampX += (lampTx - lampX) * 0.12;
+    lampY += (lampTy - lampY) * 0.12;
+    cover.style.setProperty('--lamp-x', lampX.toFixed(1) + '%');
+    cover.style.setProperty('--lamp-y', lampY.toFixed(1) + '%');
+    lampRaf = (Math.abs(lampTx - lampX) + Math.abs(lampTy - lampY) > 0.15) ? requestAnimationFrame(lampStep) : 0;
+  };
+  cover.addEventListener('pointermove', function(e){
+    const r = cover.getBoundingClientRect();
+    lampTx = (e.clientX - r.left) / r.width * 100;
+    lampTy = (e.clientY - r.top) / r.height * 100;
+    if (!lampRaf) lampRaf = requestAnimationFrame(lampStep);
+  });
+}
+
 /* ---- Sticky tabbar shadow + back-to-top button ---- */
 const tabbarEl = document.querySelector('.tabbar');
 const backToTopBtn = document.getElementById('back-to-top');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function onScroll(){
-  tabbarEl.classList.toggle('stuck', tabbarEl.getBoundingClientRect().top <= 0);
+  tabbarEl.classList.toggle('stuck', tabbarEl.getBoundingClientRect().top <= stickyTop() + 0.5);
   backToTopBtn.classList.toggle('visible', window.scrollY > 480);
 }
 window.addEventListener('scroll', onScroll, { passive: true });
@@ -1807,6 +2245,7 @@ onScroll();
 backToTopBtn.addEventListener('click', function(){
   window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
 });
+openFromHash();
 
 </script>
 </body>
