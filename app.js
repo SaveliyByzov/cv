@@ -33,13 +33,8 @@ const LANGBAR =
     '</div>' +
   '</div>';
 
-const FLORA = function(compact){
-  return '<img class="flora flora-l" src="' + ROOT + 'assets/flora-left.svg" alt="" aria-hidden="true" width="430" height="600"' + (compact ? '' : ' fetchpriority="high"') + '>' +
-         '<img class="flora flora-r" src="' + ROOT + 'assets/flora-right.svg" alt="" aria-hidden="true" width="430" height="600">';
-};
-
 const HERO =
-  '<header class="band reveal">' + FLORA(false) +
+  '<header class="band reveal">' +
     '<div class="band-inner"><div class="band-main">' +
       '<figure class="plate">' +
         '<img class="photo" id="photo" src="' + ROOT + 'assets/Byzov-S.S_.jpg" width="426" height="640" alt="" decoding="async" fetchpriority="high">' +
@@ -54,7 +49,7 @@ const HERO =
   '</header>';
 
 const COMPACT =
-  '<header class="band compact reveal">' + FLORA(true) +
+  '<header class="band compact reveal">' +
     '<div class="band-inner"><div class="band-text">' +
       '<p class="name"><a href="' + (ROOT || './') + '" id="name"></a></p>' +
       '<p class="role" id="role"></p>' +
@@ -76,22 +71,25 @@ const LEDE =
   '</div>';
 
 const HOME_BODY =
+  '<div class="rule home-rule"></div>' +
   '<dl class="now">' +
     '<dt id="now-label"></dt><dd id="now-text"></dd>' +
     '<dt id="open-label"></dt><dd id="open-text"></dd>' +
   '</dl>' +
+  '<div class="rule home-rule"></div>' +
   '<ul class="home-grid" id="home-grid">' +
     NAV.map(function(n, i){
-      return '<li><a class="home-card" href="' + n[1] + '"><span class="num">0' + (i + 1) + '</span>' +
+      return '<li><a class="home-card" href="' + n[1] + '"><span class="num">' + (i + 1) + '</span>' +
              '<h3 id="card-' + n[0] + '-t"></h3><p id="card-' + n[0] + '-d"></p></a></li>';
     }).join('') +
   '</ul>';
 
 const TABBAR =
   '<nav class="tabbar" aria-label="Sections">' +
-    NAV.map(function(n){
-      return '<a href="' + ROOT + n[1] + '" data-nav="' + n[0] + '" id="tab-' + n[0] + '"' +
-             (PAGE === n[0] ? ' aria-current="page"' : '') + '></a>';
+    NAV.map(function(n, i){
+      return '<a href="' + ROOT + n[1] + '" data-nav="' + n[0] + '" aria-keyshortcuts="' + (i + 1) + '"' +
+             (PAGE === n[0] ? ' aria-current="page"' : '') + '>' +
+             '<span id="tab-' + n[0] + '"></span><kbd class="chip" aria-hidden="true">' + (i + 1) + '</kbd></a>';
     }).join('') +
   '</nav>';
 
@@ -111,7 +109,7 @@ if (PAGE === 'home' || PAGE === 'cv') {
 }
 main.insertAdjacentHTML('beforeend', FOOTER);
 main.insertAdjacentHTML('afterend',
-  '<img class="flora-foot" src="' + ROOT + 'assets/flora-foot.svg" alt="" aria-hidden="true" width="720" height="200">' +
+  '<img class="flora-foot" src="' + ROOT + 'assets/arches.svg" alt="" aria-hidden="true" width="1200" height="560">' +
   '<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1"><img src="" alt=""></div>' +
   '<button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">' +
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>' +
@@ -378,7 +376,16 @@ function start(){
     if (e.key === 'Escape') closeLightbox();
   });
 
-  /* ---- Sticky section nav + back-to-top button ---- */
+  /* ---- Number keys 1-5 open the sections (the keycaps in the nav) ---- */
+  document.addEventListener('keydown', function(e){
+    if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+    const tag = (e.target && e.target.tagName) || '';
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (e.target && e.target.isContentEditable)) return;
+    const link = document.querySelector('.tabbar a[aria-keyshortcuts="' + e.key + '"]');
+    if (link) { e.preventDefault(); location.href = link.href; }
+  });
+
+  /* ---- Back-to-top button ---- */
   const tabbarEl = document.querySelector('.tabbar');
   const backToTopBtn = $('back-to-top');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
