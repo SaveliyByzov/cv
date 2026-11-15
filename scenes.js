@@ -30,13 +30,16 @@ const ART_DIR = 'assets/art/';
 /* far / mid / ground come from the land sheet. `front` is what stands in
    front of the ground: 'water' (CSS + water.jpg), a file name to reuse the
    ground of another screen, or nothing.                                   */
-function sceneLayers(key, extra, front){
+function sceneLayers(key, extra, front, pos){
   const n = extra || {};
   const list = [
     { kind:'far',    file:key + '/far.png',    size:'cover', depth:.3,  note:n.far || '' },
     { kind:'mid',    file:key + '/mid.png',    size:'cover', depth:.18, note:n.mid || '' },
     { kind:'ground', file:key + '/ground.png', size:'cover', depth:.08, note:n.ground || '' }
   ];
+  /* pos = bottom edge of each layer in units of the scene (chapter pages only); */
+  /* layers then keep their own proportions and are never cropped */
+  if (pos) list.forEach(function(L){ L.full = true; L.bottom = pos[L.kind]; });
   if (front === 'water') list.push({ kind:'front', css:true, depth:0 });
   else if (front) list.push({ kind:'front', file:front, reuse:true, depth:0 });
   return list;
@@ -115,11 +118,7 @@ const SCENES = {
       far:    'Терракотовый городок: крыши, башенки, флюгер.',
       mid:    'Аркада школьного двора.',
       ground: 'Зелёный двор с травой и ромашками.'
-    }).map(function(l){
-      if (l.kind === 'far') return Object.assign(l, { full:true, bottom:20 });
-      if (l.kind === 'mid') return Object.assign(l, { full:true, bottom:3 });
-      return l;
-    }),
+    }, null, { far:20, mid:3, ground:0 }),
     sprites: [
       { id:'owl-magister',    file:'experience/owl-magister.png',    frames:3, fps:3, w:160, x:62, y:12, plane:'mid', move:'bob', dur:3,
         note:'Сова-магистр за кафедрой: указка у свитка → поднята → сова моргает.' },
@@ -139,6 +138,7 @@ const SCENES = {
     name: 'Башня звездочёта',
     mood: 'Ночь: глубокий ультрамарин, золотые звёзды, тёмно-зелёные холмы.',
     raw: rawFiles('research'),
+    h: 56,
     grid: [
       ['cat-astrologer', 'cat-astrologer', 'cat-astrologer', 'star'],
       ['flying-book',    'flying-book',    'flying-book',    'moon'],
@@ -148,20 +148,20 @@ const SCENES = {
       far:    'Тёмные холмы и кривая башня с горящим окном.',
       mid:    'Стена библиотеки с книгами на цепях.',
       ground: 'Ночной луг, тёмная трава.'
-    }),
+    }, null, { far:21, mid:9, ground:0 }),
     sprites: [
-      { id:'cat-astrologer', file:'research/cat-astrologer.png', frames:3, fps:3, w:150, x:66, y:6, plane:'mid', move:'idle',
+      { id:'cat-astrologer', file:'research/cat-astrologer.png', frames:3, fps:3, w:150, x:66, y:22, plane:'back', move:'idle',
         note:'Кот-звездочёт в колпаке: подносит астролябию к глазу → опускает → записывает в кодекс.' },
-      { id:'flying-book',    file:'research/flying-book.png',    frames:3, fps:6, w:100, x:0,  y:62, plane:'sky', move:'fly', dur:42, phase:.3,
+      { id:'flying-book',    file:'research/flying-book.png',    frames:3, fps:6, w:100, x:0,  y:78, plane:'sky', move:'fly', dur:42, phase:.3,
         note:'Книга летит, хлопая страницами, как птица: вверх → середина → вниз.' },
       { id:'moon',           file:'research/moon.png',           frames:1, fps:1, w:130, x:6,  y:68, plane:'sky', move:'bob', dur:6,
         note:'Полумесяц с сонным лицом.' },
-      star(24, 86, 40, 3.2, .1), star(35, 72, 28, 4.1, .6), star(46, 90, 46, 2.8, .3), star(58, 76, 26, 3.7, .8),
-      star(70, 88, 34, 4.4, .45), star(82, 72, 42, 3.1, .2), star(90, 90, 24, 3.9, .7), star(16, 60, 22, 4.6, .55),
-      star(52, 62, 20, 3.4, .9), star(76, 60, 24, 4.0, .35), star(64, 94, 22, 3.3, .05), star(30, 94, 20, 4.2, .75),
-      cloud('home/cloud-a.png', 190, 62, 230, .1, { opacity:.3, filter:'brightness(.6) saturate(.5)' }),
-      cloud('home/cloud-b.png', 140, 78, 280, .45, { opacity:.26, filter:'brightness(.6) saturate(.5)' }),
-      cloud('home/cloud-c.png', 170, 70, 250, .78, { opacity:.28, filter:'brightness(.6) saturate(.5)' })
+      star(24, 86, 40, 3.2, .1), star(35, 80, 28, 4.1, .6), star(46, 90, 46, 2.8, .3), star(58, 76, 26, 3.7, .8),
+      star(70, 88, 34, 4.4, .45), star(82, 80, 42, 3.1, .2), star(90, 90, 24, 3.9, .7), star(16, 78, 22, 4.6, .55),
+      star(52, 83, 20, 3.4, .9), star(76, 85, 24, 4.0, .35), star(64, 94, 22, 3.3, .05), star(30, 94, 20, 4.2, .75),
+      cloud('home/cloud-a.png', 190, 80, 230, .1, { opacity:.3, filter:'brightness(.6) saturate(.5)' }),
+      cloud('home/cloud-b.png', 140, 87, 280, .45, { opacity:.26, filter:'brightness(.6) saturate(.5)' }),
+      cloud('home/cloud-c.png', 170, 78, 250, .78, { opacity:.28, filter:'brightness(.6) saturate(.5)' })
     ],
     margins: [
       { id:'bookworm', file:'research/bookworm.png', frames:1, fps:1, w:120, side:'left', top:'10%', move:'bob',
@@ -173,6 +173,7 @@ const SCENES = {
     name: 'Монастырь на холме',
     mood: 'Прохладный зелёный полдень, охристая дорога.',
     raw: rawFiles('education'),
+    h: 55,
     grid: [
       ['fox-monk', 'fox-monk', 'fox-monk', 'goose-cap'],
       ['bell',     'candle',   'cloud-a',  'cloud-b']
@@ -181,7 +182,7 @@ const SCENES = {
       far:    'Зелёные холмы, монастырь со скрипториумом на вершине.',
       mid:    'Плодовые деревья и плетень.',
       ground: 'Охристая дорога к воротам, лопухи.'
-    }, 'experience/ground.png'),
+    }, 'experience/ground.png', { far:20, mid:11.25, ground:0 }),
     sprites: [
       { id:'fox-monk',  file:'education/fox-monk.png',  frames:3, fps:6, w:150, x:22, y:20, plane:'mid', move:'pace', dur:26, range:420,
         note:'Лис-монах несёт стопку книг выше головы: шаг левой → середина → шаг правой.' },
@@ -203,6 +204,7 @@ const SCENES = {
     name: 'Мастерская',
     mood: 'Золотой фон, как сусальное золото в миниатюре; тёплые кирпичные тона.',
     raw: rawFiles('skills'),
+    h: 52,
     grid: [
       ['dragon-interpreter', 'dragon-interpreter', 'dragon-interpreter', 'badger-lute'],
       ['beaver-carver',      'beaver-carver',      'beaver-carver',      'three-tongues']
@@ -211,7 +213,7 @@ const SCENES = {
       far:    'Рыжие крыши мастерских и вывески.',
       mid:    'Верстак, полки с инструментом и свитками.',
       ground: 'Кирпичный пол в ёлочку, стружка.'
-    }, 'research/ground.png'),
+    }, 'research/ground.png', { far:20, mid:10.4, ground:0 }),
     sprites: [
       { id:'dragon-interpreter', file:'skills/dragon-interpreter.png', frames:3, fps:3, w:180, x:58, y:20, plane:'mid', move:'bob', dur:3.4,
         note:'Трёхголовый дракон-толмач: говорит левая голова → средняя → правая.' },
@@ -232,6 +234,7 @@ const SCENES = {
     name: 'Ярмарка',
     mood: 'Розовый закат, алые шатры, синяя вода и маяк.',
     raw: rawFiles('festivals'),
+    h: 54,
     grid: [
       ['bear-stilts', 'bear-stilts', 'bear-stilts', 'pennants'],
       ['',            'goat-jester', 'goat-jester', ''],
@@ -241,7 +244,7 @@ const SCENES = {
       far:    'Маяк на мысу и паруса.',
       mid:    'Полосатые шатры и подмостки уличного театра.',
       ground: 'Охристая площадь.'
-    }, 'water'),
+    }, 'water', { far:18.75, mid:10.2, ground:0 }),
     sprites: [
       { id:'bear-stilts', file:'festivals/bear-stilts.png', frames:3, fps:5, w:170, x:24, y:20, plane:'mid', move:'pace', dur:22, range:380,
         note:'Медведь на ходулях жонглирует яблоками: шаг → яблоки вверх → шаг.' },
