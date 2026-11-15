@@ -312,6 +312,18 @@ public class Img {
     }
   }
 
+  // one clean piece of the strip, repeated (mirror, ping-pong) over `total` px
+  public Img TileMirror(int x0, int x1, int total) {
+    int w = x1 - x0;
+    Img o = new Img(total, H);
+    for (int x = 0; x < total; x++) {
+      int k = x % (2 * w);
+      int sx = x0 + (k < w ? k : 2 * w - 1 - k);
+      for (int y = 0; y < H; y++) Buffer.BlockCopy(P, (y * W + sx) * 4, o.P, (y * total + x) * 4, 4);
+    }
+    return o;
+  }
+
   // big enclosed patches of parchment (e.g. between tree trunks)
   public void RemovePaperIslands(int rmin, int gmin, int bmin, int maxRB, int minArea) {
     bool[] seen = new bool[W * H];
@@ -481,7 +493,7 @@ $pages = [ordered]@{
       @('bear-stilts','bear-stilts','bear-stilts','pennants'),
       @('','goat-jester','goat-jester',''),
       @('mask','mask','',''))
-    paper = @(); tight = @('far','mid'); islands = @('far','mid'); valleys = @('ground'); seacut = @{ far = @(575,156,706,818) }; ipar = @{ far = @(222,208,182,64,2200); mid = @(222,208,182,64,1100) }; clean = @('far','mid'); crop = @{ far = @(100,1290); mid = @(100,1292) }
+    paper = @(); tight = @('far','mid'); islands = @('far','mid'); seacut = @{ far = @(575,156,706,818) }; tile = @{ ground = @(480,940) }; ipar = @{ far = @(222,208,182,64,2200); mid = @(222,208,182,64,1100) }; clean = @('far','mid'); crop = @{ far = @(100,1290); mid = @(100,1292) }
   }
 }
 
@@ -527,6 +539,7 @@ foreach ($dir in $pages.Keys) {
         if ($cfg.clean -contains $n) { $strip.OpenAlpha(); $strip.RemoveSpecks(300) }
         if ($cfg.valleys -contains $n) { $strip.FillValleys(70, 35) }
         $strip = $strip.TrimY(20); $strip = $strip.Crop(0, 2, $strip.W, $strip.H - 5)   # the pink line left by the magenta edge
+        if ($cfg.tile -and $cfg.tile.ContainsKey($n)) { $t = $cfg.tile[$n]; $strip = $strip.TileMirror($t[0], $t[1], $strip.W) }
         if ($cfg.seacut -and $cfg.seacut.ContainsKey($n)) { $sc = $cfg.seacut[$n]; $strip.ReplaceRightWithSea($sc[0], $sc[1], $sc[2], $sc[3]) }
         $strip.Save((Join-Path $outDir "$n.png"))
         Write-Host ("  {0}.png  {1}x{2}" -f $n, $strip.W, $strip.H)

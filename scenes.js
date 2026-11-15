@@ -248,10 +248,10 @@ const SCENES = {
       ['mask',        'mask',        '',            '']
     ],
     layers: sceneLayers('festivals', {
-      far:    'Скалистый мыс с маяком; справа спокойное море.',
+      far:    'Скалистый мыс с маяком; море справа дорисовывается водой из water.jpg.',
       mid:    'Полосатые шатры и подмостки уличного театра.',
       ground: 'Охристая площадь.'
-    }, 'water', { far:18.75, mid:10.2, ground:0 }).map(function(l){ return l.kind === 'far' ? Object.assign(l, { under:'#cab8a0' }) : l; }),
+    }, 'water', { far:18.75, mid:10.2, ground:0 }).map(function(l){ return l.kind === 'far' ? Object.assign(l, { sea:true }) : l; }),
     sprites: [
       { id:'bear-stilts', file:'festivals/bear-stilts.png', frames:3, fps:5, w:170, x:24, y:20, plane:'mid', move:'pace', dur:22, range:380,
         note:'Медведь на ходулях жонглирует яблоками: шаг → яблоки вверх → шаг.' },

@@ -43,7 +43,7 @@ function mkLayer(L){
   if (L.css) { d.classList.add('is-css'); return d; }
   if (L.fit) d.classList.add('layer--fit');
   if (L.full) d.classList.add('layer--full');
-  if (L.under) d.style.boxShadow = '0 calc(var(--u, 12px) * 14) 0 ' + L.under;   /* closes the gap under a layer that has holes in the layer above */
+  if (L.sea) d.classList.add('layer--sea');   /* a band of real water behind the gaps of the next layer */
   if (L.bottom != null) { d.classList.add('layer--b'); d.style.setProperty('--b', L.bottom); }
   d.dataset.label = L.file + ' · ' + L.size;
   loadArt(d, L.file, function(img){
