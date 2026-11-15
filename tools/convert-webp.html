@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>PNG to WebP</title>
+<style>
+  body{font:15px/1.5 system-ui,sans-serif;max-width:760px;margin:30px auto;padding:0 16px;background:#f1e4c0;color:#2e1d12;}
+  pre{background:#fbf4dc;border:2px solid #2e1d12;padding:12px;white-space:pre-wrap;max-height:60vh;overflow:auto;}
+  b.ok{color:#2c6b2c;} b.bad{color:#a52c18;}
+</style>
+</head>
+<body>
+<h1>PNG to WebP</h1>
+<p>Converts the sliced pictures of the site with the browser's own encoder and saves them through
+the local server of <code>tools/to-webp.ps1</code>. Close this page when it says <b>done</b>.</p>
+<pre id="log">starting…</pre>
+
+<script src="../scenes.js"></script>
+<script>
+(function(){
+  'use strict';
+  const log = document.getElementById('log');
+  function say(t){ log.textContent += '\n' + t; log.scrollTop = log.scrollHeight; }
+  log.textContent = '';
+
+  /* what to convert: every art file of scenes.js, the two textures, the big photos */
+  const jobs = [], seen = {};
+  /* scenes.js names the .webp files; the sources are the sliced .png ones */
+  function png(f){ return f.replace(/\.webp$/, '.png'); }
+  function add(src, q, scale){ if (seen[src]) return; seen[src] = 1; jobs.push({ src:src, q:q, scale:scale || 1 }); }
+  Object.keys(SCENES).forEach(function(k){
+    const s = SCENES[k];
+    (s.layers || []).forEach(function(l){ if (l.file && !l.reuse) add('assets/art/' + png(l.file), .82); });
+    (s.sprites || []).concat(s.margins || []).forEach(function(x){ add('assets/art/' + png(x.file), .88); });
+  });
+  add('assets/art/sky.jpg', .82);
+  add('assets/art/water.jpg', .72, .75);   /* shown at ~1100px: 1152px is plenty */
+  add('assets/narfu-campus.jpg', .72);
+  add('assets/lighthouse.jpg', .72);
+
+  async function convert(job){
+    const dst = job.src.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+    const r = await fetch('../' + job.src);
+    if (!r.ok) throw new Error('read ' + job.src + ' ' + r.status);
+    const bmp = await createImageBitmap(await r.blob());
+    const c = document.createElement('canvas');
+    c.width = Math.round(bmp.width * job.scale); c.height = Math.round(bmp.height * job.scale);
+    const g = c.getContext('2d'); g.imageSmoothingQuality = 'high';
+    g.drawImage(bmp, 0, 0, c.width, c.height);
+    const out = await new Promise(function(ok){ c.toBlob(ok, 'image/webp', job.q); });
+    if (!out || out.type !== 'image/webp') throw new Error('this browser cannot encode WebP');
+    const w = await fetch('/__save/' + dst, { method:'PUT', body:out });
+    if (!w.ok) throw new Error('save ' + dst + ' ' + w.status);
+    return { dst:dst, from:+r.headers.get('content-length') || 0, to:out.size, w:c.width, h:c.height };
+  }
+
+  (async function(){
+    let before = 0, after = 0, n = 0, bad = 0;
+    for (const j of jobs) {
+      try {
+        const o = await convert(j);
+        n++; before += o.from; after += o.to;
+        say(o.dst + '  ' + o.w + 'x' + o.h + '  ' + Math.round(o.from / 1024) + ' KB -> ' + Math.round(o.to / 1024) + ' KB');
+      } catch (e) { bad++; say('FAILED ' + j.src + ': ' + e.message); }
+    }
+    say('\ndone: ' + n + ' files, ' + (before / 1048576).toFixed(2) + ' MB -> ' + (after / 1048576).toFixed(2) + ' MB' + (bad ? ', ' + bad + ' failed' : ''));
+    document.title = bad ? 'WebP: FAILED' : 'WebP: done';
+    try { await fetch('/__done'); } catch (e) {}
+  })();
+})();
+</script>
+</body>
+</html>

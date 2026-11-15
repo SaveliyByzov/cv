@@ -14,6 +14,7 @@
 #  - sprites: cuts each grid cell, keeps all frames of a sprite aligned
 #    (one shared crop + scale), stands it on the bottom edge of a square frame
 # The grid below must match `grid` in scenes.js.
+# This writes PNG (and sky.jpg / water.jpg). The site loads WebP: run tools/to-webp.ps1 next.
 param([string]$Only = '', [string]$Preview = '')
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -491,7 +492,7 @@ $pages = [ordered]@{
   'festivals' = @{
     grid = @(
       @('bear-stilts','bear-stilts','bear-stilts','pennants'),
-      @('','goat-jester','goat-jester',''),
+      @('','goat-jester','',''),
       @('mask','mask','',''))
     paper = @(); tight = @('far','mid'); islands = @('far','mid'); seacut = @{ far = @(575,156,706,818) }; tile = @{ ground = @(480,940) }; ipar = @{ far = @(222,208,182,64,2200); mid = @(222,208,182,64,1100) }; clean = @('far','mid'); crop = @{ far = @(100,1290); mid = @(100,1292) }
   }

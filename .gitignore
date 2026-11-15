@@ -1,0 +1,5 @@
+﻿# Built from the raw sheets by tools/slice-art.ps1 (PNG) and tools/to-webp.ps1 (WebP).
+# The site uses the .webp files; the PNG/JPG stages are not kept in git.
+assets/art/**/*.png
+assets/art/sky.jpg
+assets/art/water.jpg

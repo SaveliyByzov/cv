@@ -58,6 +58,65 @@ function mkLayer(L){
   return d;
 }
 
+/* ---------- talking characters: a fact in a speech bubble ---------- */
+const TALK = { items:[], bubble:null, hideT:0, autoT:0, raf:0, active:null, last:null };
+function talkLang(){ const l = document.documentElement.lang; return (l === 'ru' || l === 'sr') ? l : 'en'; }
+function getBubble(){
+  if (TALK.bubble) return TALK.bubble;
+  const sc = $('scene');
+  if (!sc) return null;
+  const b = el('div', 'bubble');
+  b.setAttribute('role', 'note');
+  b.addEventListener('click', hideBubble);
+  sc.appendChild(b);
+  TALK.bubble = b;
+  return b;
+}
+function placeBubble(){
+  const b = TALK.bubble, it = TALK.active, sc = $('scene');
+  if (!b || !it || !sc) return;
+  const s = sc.getBoundingClientRect(), r = it.el.getBoundingClientRect();
+  const bw = b.offsetWidth, bh = b.offsetHeight;
+  const cx = r.left + r.width / 2 - s.left;
+  const left = Math.min(Math.max(cx, bw / 2 + 8), s.width - bw / 2 - 8);
+  b.style.left = left + 'px';
+  b.style.top = Math.max(r.top - s.top + r.height * 0.12, bh + 8) + 'px';
+  b.style.setProperty('--tx', Math.min(Math.max(cx - (left - bw / 2), 18), bw - 18) + 'px');
+}
+function followBubble(){ placeBubble(); TALK.raf = requestAnimationFrame(followBubble); }
+function hideBubble(){
+  clearTimeout(TALK.hideT);
+  cancelAnimationFrame(TALK.raf);
+  TALK.active = null;
+  if (TALK.bubble) TALK.bubble.classList.remove('show');
+}
+function speak(item){
+  const b = getBubble(), set = FACTS[item.key];
+  if (!b || !set) return;
+  const arr = set[talkLang()] || set.en;
+  item.n = (item.n == null ? Math.floor(Math.random() * arr.length) : item.n + 1) % arr.length;
+  b.textContent = arr[item.n];
+  TALK.active = item; TALK.last = item;
+  b.classList.add('show');
+  cancelAnimationFrame(TALK.raf);
+  followBubble();
+  clearTimeout(TALK.hideT);
+  TALK.hideT = setTimeout(hideBubble, Math.max(6500, arr[item.n].length * 80));
+}
+/* they also speak up by themselves: one at a time, only what is on screen */
+function startAuto(delay){
+  clearTimeout(TALK.autoT);
+  TALK.autoT = setTimeout(function(){
+    if (!document.hidden && TALK.items.length) {
+      const seen = TALK.items.filter(function(it){
+        const r = it.el.getBoundingClientRect();
+        return r.bottom > 40 && r.top < window.innerHeight * 0.85 && it !== TALK.last;
+      });
+      if (seen.length) speak(seen[Math.floor(Math.random() * seen.length)]);
+    }
+    startAuto(12000 + Math.random() * 8000);
+  }, delay);
+}
 function mkSprite(sp){
   const s = el('div', 'sprite sprite--' + (sp.plane || 'mid'));
   const move = el('div', 'sprite-move');
@@ -82,10 +141,13 @@ function mkSprite(sp){
       img.style.animation = 'sprite-frames ' + (sp.frames / (sp.fps || 8)) + 's steps(' + sp.frames + ') infinite';
     }
   });
+  const talker = (sp.say && typeof FACTS !== 'undefined' && FACTS[sp.say]) ? { el:s, key:sp.say, n:null } : null;
+  if (talker) TALK.items.push(talker);
   s.addEventListener('click', function(){
     react.classList.remove('boing');
     void react.offsetWidth;
     react.classList.add('boing');
+    if (talker) { speak(talker); startAuto(20000); }
   });
   react.appendChild(img); flip.appendChild(react); move.appendChild(flip); s.appendChild(move);
   return s;
@@ -235,13 +297,15 @@ buildStage(document.querySelector('#scene .scene-stage'), SCENE_KEY);
 if (HAS_SCENES && SCENES[SCENE_KEY] && SCENES[SCENE_KEY].h) $('scene').style.setProperty('--hu', SCENES[SCENE_KEY].h);
 buildStage($('strip-stage'), 'footer');
 buildMargins(main, SCENE_KEY);
+if (TALK.items.length) startAuto(5000);
 
 /* optional hand-made textures: assets/art/sky.jpg and water.jpg replace the
    built-in CSS ones as soon as the files exist */
 if (HAS_SCENES) {
-  ['sky', 'water'].forEach(function(n){
+  const WATER_PAGES = ['home', 'cv', 'festivals'];
+  ['sky'].concat(WATER_PAGES.indexOf(PAGE) >= 0 ? ['water'] : []).forEach(function(n){
     const im = new Image();
-    const href = new URL(ROOT + ART_DIR + n + '.jpg', document.baseURI).href;
+    const href = new URL(ROOT + ART_DIR + n + '.webp', document.baseURI).href;
     im.onload = function(){
       document.documentElement.style.setProperty('--tex-' + n, 'url("' + href + '")');
       document.documentElement.classList.add('tex-' + n);
@@ -249,6 +313,8 @@ if (HAS_SCENES) {
     im.src = href;
   });
 }
+/* the chapter miniatures are below the fold: load them once the page itself is done */
+function loadCards(){
 if (HAS_SCENES) {
   document.querySelectorAll('.mini[data-card]').forEach(function(m){
     const art = CARD_ART[m.dataset.card];
@@ -265,6 +331,10 @@ if (HAS_SCENES) {
     probe.src = ROOT + ART_DIR + art.file;
   });
 }
+
+}
+if (document.readyState === 'complete') setTimeout(loadCards, 300);
+else window.addEventListener('load', function(){ setTimeout(loadCards, 300); });
 
 /* "A // B // C" from the copy becomes A ◆ B ◆ C */
 function setSeps(id, text){

@@ -261,31 +261,37 @@ h1,h2,h3,h4{font-synthesis:none;}
 .layer--front:not(.has-art)::before{
   content:"";
   position:absolute;
-  left:0; right:0; top:0; bottom:0;
+  left:-192px; right:0; top:0; bottom:0;
+  will-change:transform;
   background:
     url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'192'%20height%3D'48'%20fill%3D'none'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cg%20stroke%3D'%23fbf4dc'%20stroke-width%3D'2.2'%3E%3Cpath%20d%3D'M8%2012q6-6%2012%200t12%200t12%200'%2F%3E%3Cpath%20d%3D'M104%208q6-6%2012%200t12%200'%2F%3E%3Cpath%20d%3D'M56%2030q6-6%2012%200t12%200t12%200t12%200'%2F%3E%3Cpath%20d%3D'M152%2034q6-6%2012%200t12%200'%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D'%23143273'%20stroke-width%3D'1.6'%20opacity%3D'.7'%3E%3Cpath%20d%3D'M22%2022h14M120%2022h10M80%2044h12M176%2018h10M8%2040h10'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") 0 0 / 192px 48px repeat,
     repeating-linear-gradient(to bottom, transparent 0 9px, rgba(20,50,115,.3) 9px 10px);
-  animation:waves 22s linear infinite;
+  animation:waves-x 22s linear infinite;
 }
 @keyframes waves{to{background-position:192px 0, 0 0;}}
 html.tex-water .layer--front:not(.has-art)::before{
   background:var(--tex-water) 0 0 / 1100px auto repeat;
   filter:saturate(1.4) brightness(1.2) contrast(1.05);
-  animation:waves-tex 70s linear infinite;
+  left:-1100px;
+  animation:waves-tex-x 70s linear infinite;
 }
 html.tex-water body .layer--front.is-css::after{
   display:block;
   content:"";
   position:absolute;
-  left:0; right:0; top:0; bottom:0;
+  left:0; right:-1700px; top:0; bottom:0;
+  will-change:transform;
   background:var(--tex-water) 0 0 / 1700px auto repeat;
   mix-blend-mode:screen;
   opacity:.38;
   filter:brightness(1.7);
-  animation:waves-tex2 95s linear infinite;
+  animation:waves-tex2-x 95s linear infinite;
   pointer-events:none;
 }
 @keyframes waves-tex{to{background-position:1100px 0;}}
+@keyframes waves-x{to{transform:translateX(192px);}}
+@keyframes waves-tex-x{to{transform:translateX(1100px);}}
+@keyframes waves-tex2-x{to{transform:translateX(-1700px);}}
 
 /* sea behind the gaps of the layer in front: starts at the horizon of the far picture,
    fades in to the right of the lighthouse, moves like the front water */
@@ -411,16 +417,46 @@ html.tex-sky .scene--chapter::before{
   60%,88%{transform:translateY(0);}
 }
 
-/* poke a creature: it does a little somersault */
-.sprite-react.boing{animation:boing .75s cubic-bezier(.3,1.5,.5,1);}
-@keyframes boing{
-  0%{transform:none;}
-  35%{transform:translateY(-55%) rotate(200deg) scale(1.1);}
-  70%{transform:translateY(-10%) rotate(360deg);}
-  85%{transform:translateY(0) rotate(360deg) scale(1.12,.86);}
-  100%{transform:rotate(360deg);}
+/* poke a creature: a small nod, then it tells a fact */
+.sprite-react.boing{animation:nod .5s ease-out;}
+@keyframes nod{
+  0%,100%{transform:none;}
+  35%{transform:translateY(-3%) scale(1.03);}
 }
 
+/* speech bubble (one per scene, follows the character that speaks) */
+.bubble{
+  position:absolute;
+  z-index:15;
+  width:max-content;
+  max-width:min(260px, 72vw);
+  padding:10px 14px 11px;
+  border:var(--line) solid var(--ink);
+  border-radius:14px;
+  background:var(--bone);
+  box-shadow:3px 3px 0 var(--ink);
+  color:var(--ink);
+  font:400 .94rem/1.32 var(--hand);
+  text-align:left;
+  transform:translate(-50%, calc(-100% - 12px));
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+}
+.bubble.show{opacity:1;pointer-events:auto;cursor:pointer;}
+.bubble::after{
+  content:"";
+  position:absolute;
+  left:var(--tx, 50%);
+  bottom:-9px;
+  width:14px;
+  height:14px;
+  background:var(--bone);
+  border:var(--line) solid var(--ink);
+  border-width:0 var(--line) var(--line) 0;
+  transform:translateX(-50%) rotate(45deg);
+}
+@media print{.bubble{display:none !important;}}
 /* --- empty slots: visible only while html.slots-on --- */
 .sprite-img:not(.has-art),
 .slot:not(.has-art){
