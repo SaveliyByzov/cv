@@ -85,7 +85,7 @@ const SCENES = {
       far:    'Дальние округлые холмы, крошечная крепость и колокольня.',
       mid:    'Ряд условных деревьев-«грибочков» на невысоких буграх.',
       ground: 'Охристый берег с травинками и цветами, неровный нижний край.'
-    }, 'water'),
+    }, 'water').map(function(l){ return l.css ? l : Object.assign(l, { full:true }); }),
     sprites: [
       { id:'hare-scribe',  file:'home/hare-scribe.png',  frames:3, fps:3, w:150, x:14, y:21, plane:'mid', move:'idle',
         note:'Заяц-писарь на пеньке: перо поднято → пишет → чешет ухо.' },

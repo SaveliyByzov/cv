@@ -206,7 +206,7 @@ h1,h2,h3,h4{font-synthesis:none;}
 }
 .layer--sky{top:0; bottom:0; z-index:0; background-size:cover; background-position:center;}
 .layer--clouds{top:7%; height:30%; z-index:1;}
-.layer--far{bottom:27%; height:34%; z-index:2;}
+.layer--far{bottom:30%; height:34%; z-index:2;}
 .layer--mid{bottom:24%; height:26%; z-index:3;}
 .layer--ground{bottom:9%; height:24%; z-index:5;}
 .layer--front{bottom:0; height:16%; z-index:7;}
@@ -218,6 +218,10 @@ h1,h2,h3,h4{font-synthesis:none;}
 .scene--chapter .layer--front{bottom:0; height:calc(var(--u) * 9);}
 /* a reused ground in front: only its top (the silhouette) shows */
 .layer--front.has-art{background-size:100% auto; background-position:center top;}
+/* title page: layers are never lower than their picture needs for the full width, so no crop at the top */
+.scene--hero .layer--far.layer--full.has-art{height:max(34%, calc(108vw / var(--ar, 6)));}
+.scene--hero .layer--mid.layer--full.has-art{height:max(26%, calc(108vw / var(--ar, 6)));}
+.scene--hero .layer--ground.layer--full.has-art{height:max(24%, calc(108vw / var(--ar, 6)));}
 /* a single building, not a band: keep its proportions and centre it */
 .layer--fit.has-art{background-size:auto 100%;}
 /* chapter layers that keep their own proportions (nothing cropped), own height of the scene */
