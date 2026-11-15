@@ -244,14 +244,15 @@ h1,h2,h3,h4{font-synthesis:none;}
 /* water in front: an ink-edged scalloped crest, painted wave strokes, and
    (with water.jpg) a second, slower layer of ripples going the other way */
 .layer--front:not(.has-art){
-  background:
-    radial-gradient(circle at 50% -4px, transparent 12px, var(--ink) 12px 14px, #2556b4 14px) 0 0 / 44px 22px repeat-x,
-    linear-gradient(transparent 21px, #2556b4 21px);
+  background:#2556b4;
+  /* the water edge is cut into soft scallops, no flat band above the texture */
+  -webkit-mask:radial-gradient(circle at 50% -4px, transparent 13px, #000 14px) 0 0 / 44px 22px repeat-x, linear-gradient(#000, #000) 0 21px / 100% calc(100% - 21px) no-repeat;
+  mask:radial-gradient(circle at 50% -4px, transparent 13px, #000 14px) 0 0 / 44px 22px repeat-x, linear-gradient(#000, #000) 0 21px / 100% calc(100% - 21px) no-repeat;
 }
 .layer--front:not(.has-art)::before{
   content:"";
   position:absolute;
-  left:0; right:0; top:22px; bottom:0;
+  left:0; right:0; top:0; bottom:0;
   background:
     url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'192'%20height%3D'48'%20fill%3D'none'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cg%20stroke%3D'%23fbf4dc'%20stroke-width%3D'2.2'%3E%3Cpath%20d%3D'M8%2012q6-6%2012%200t12%200t12%200'%2F%3E%3Cpath%20d%3D'M104%208q6-6%2012%200t12%200'%2F%3E%3Cpath%20d%3D'M56%2030q6-6%2012%200t12%200t12%200t12%200'%2F%3E%3Cpath%20d%3D'M152%2034q6-6%2012%200t12%200'%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D'%23143273'%20stroke-width%3D'1.6'%20opacity%3D'.7'%3E%3Cpath%20d%3D'M22%2022h14M120%2022h10M80%2044h12M176%2018h10M8%2040h10'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") 0 0 / 192px 48px repeat,
     repeating-linear-gradient(to bottom, transparent 0 9px, rgba(20,50,115,.3) 9px 10px);
@@ -267,7 +268,7 @@ html.tex-water body .layer--front.is-css::after{
   display:block;
   content:"";
   position:absolute;
-  left:0; right:0; top:22px; bottom:0;
+  left:0; right:0; top:0; bottom:0;
   background:var(--tex-water) 0 0 / 1700px auto repeat;
   mix-blend-mode:screen;
   opacity:.38;
