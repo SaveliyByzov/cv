@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стайлгайд — Savely Byzov</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+SC:wght@500;700&family=Grenze+Gotisch:wght@500;800&family=Pangolin&family=Ruslan+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .sg{max-width:1040px;margin:0 auto;padding:40px 28px 80px;}
+  .sg h1{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1;margin:0 0 8px;}
+  .sg h1::first-letter{color:var(--vermilion);}
+  .sg .lead{max-width:64ch;margin:0 0 8px;}
+  .sg h2{margin:64px 0 20px;}
+  .sg h3{font-family:var(--caps);font-weight:700;letter-spacing:.06em;font-size:1.05rem;margin:28px 0 10px;}
+  .sg p{max-width:70ch;}
+  .sg code{font:400 .82em/1.3 ui-monospace,Consolas,monospace;background:var(--vellum-deep);padding:1px 5px;border-radius:3px;}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px;margin:0;padding:0;list-style:none;}
+  .swatches li{border:var(--line) solid var(--ink);border-radius:var(--r);background:var(--bone);box-shadow:4px 4px 0 var(--ink);overflow:hidden;}
+  .swatches i{display:block;height:74px;border-bottom:var(--line) solid var(--ink);}
+  .swatches b{display:block;padding:8px 10px 0;font-family:var(--caps);letter-spacing:.04em;}
+  .swatches span{display:block;padding:0 10px;font-size:.86rem;color:var(--ink-soft);line-height:1.3;}
+  .swatches span:last-child{padding-bottom:10px;}
+  .scenes-pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;}
+  .pal{border:var(--line) solid var(--ink);border-radius:var(--r);overflow:hidden;box-shadow:4px 4px 0 var(--ink);background:var(--bone);}
+  .pal .bands{display:grid;grid-template-rows:38px 20px 20px 20px 16px;}
+  .pal p{margin:0;padding:8px 12px 10px;font-size:.92rem;line-height:1.35;}
+  .pal p b{font-family:var(--caps);letter-spacing:.04em;}
+  .type-row{display:grid;grid-template-columns:200px 1fr;gap:10px 28px;padding:18px 0;border-bottom:2px dashed color-mix(in srgb,var(--ink) 35%,transparent);align-items:baseline;}
+  .type-row small{font:400 .86rem/1.4 var(--body);color:var(--ink-soft);}
+  .type-row small b{display:block;font-family:var(--caps);color:var(--ink);letter-spacing:.04em;font-size:1rem;}
+  .t-display{font-family:var(--display);font-weight:800;font-size:3rem;line-height:1;margin:0 0 6px;}
+  .t-display.ru{font-weight:400;font-size:2.2rem;}
+  .t-display2{font-family:var(--display);font-weight:500;font-size:1.9rem;line-height:1.1;margin:0;}
+  .t-caps{font-family:var(--caps);font-weight:700;letter-spacing:.06em;margin:0;}
+  .t-hand{font-family:var(--hand);margin:0;}
+  .demo{display:flex;flex-wrap:wrap;gap:22px;align-items:center;margin:14px 0;}
+  .sg table{width:100%;border-collapse:collapse;font-size:.95rem;line-height:1.35;background:var(--bone);border:var(--line) solid var(--ink);}
+  .sg th,.sg td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid color-mix(in srgb,var(--ink) 25%,transparent);}
+  .sg th{font-family:var(--caps);letter-spacing:.05em;background:var(--vellum-deep);border-bottom:var(--line) solid var(--ink);}
+  .sg td:first-child{white-space:nowrap;}
+  .sg tr.group td{background:var(--ochre);font-family:var(--caps);font-weight:700;letter-spacing:.05em;border-top:var(--line) solid var(--ink);border-bottom:var(--line) solid var(--ink);}
+  .sg tr.group td span{font-family:var(--body);font-weight:400;font-style:italic;letter-spacing:0;}
+  .tablewrap{overflow-x:auto;}
+  .rules li{margin-bottom:6px;max-width:72ch;}
+  @media (max-width:700px){.type-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="sg">
+  <p class="crumb"><a href="../">На сайт</a></p>
+  <h1>Стайлгайд: шутовские маргиналии</h1>
+  <p class="lead">Рабочая страница: палитра, шрифты, детали интерфейса и полный список картинок, которые ещё предстоит нарисовать. В поиске не индексируется.</p>
+
+  <h2 class="sub-label">Идея</h2>
+  <p>Сайт — расписная рукопись. Каждая страница открывается сценой-миниатюрой из шести слоёв (небо, облака, дальний план, средний план, земля, передний план), по которой ходят нелепые зверьки. Ниже — пергаментный лист с текстом: толстый чернильный контур, плоские «темперные» заливки, цветная смещённая тень вместо размытой, всё слегка криво, как нарисовано рукой.</p>
+  <ul class="rules">
+    <li>Контур — всегда <code>2px</code> цвета чернил. Тень — плоская, <code>5px 5px 0</code>, цветная. Никаких размытий и градиентов-переливов.</li>
+    <li>Яркие пигменты живут в сценах, кнопках, ярлыках и тенях. Текст — только чернила на пергаменте.</li>
+    <li>Лёгкий наклон (до 2,5°) — у «прикреплённых» вещей: фотографий, ярлыков с датой, записок. Текстовые блоки стоят ровно.</li>
+    <li>У каждой главы свой цвет и своё время суток — по нему глава узнаётся во флажках, карточках и тенях.</li>
+  </ul>
+
+  <h2 class="sub-label">Пигменты</h2>
+  <ul class="swatches" id="swatches"></ul>
+
+  <h3>Палитры сцен</h3>
+  <div class="scenes-pal" id="scene-pals"></div>
+
+  <h2 class="sub-label">Шрифты</h2>
+  <p>Все — с Google Fonts, бесплатные. Для русского в заголовках подставляется Ruslan Display: у готического Grenze Gotisch нет кириллицы, браузер переключается сам, по буквам.</p>
+  <div class="type-row">
+    <small><b>Grenze Gotisch 800 / 500</b>Заголовки на латинице: имя, названия глав, рубрики.</small>
+    <div><p class="t-display">Savely Byzov</p><p class="t-display2">Festivals &amp; Volunteering · Istraživač</p></div>
+  </div>
+  <div class="type-row">
+    <small><b>Ruslan Display 400</b>Те же заголовки на кириллице.</small>
+    <div lang="ru"><p class="t-display ru">Савелий Бызов</p><p class="t-display2" style="font-weight:400;font-size:1.4rem">Фестивали и волонтёрство</p></div>
+  </div>
+  <div class="type-row">
+    <small><b>Alegreya 400 / 500 / 700 + курсив</b>Основной текст. Каллиграфическая антиква, хорошо читается, есть кириллица и сербская латиница.</small>
+    <p style="margin:0">Я лингвист и преподаватель: занимаюсь методикой английского, социолингвистикой и историей языка. <em>Čitam, pišem i prevodim.</em> <strong>The Dream of the Rood, 1234567890.</strong></p>
+  </div>
+  <div class="type-row">
+    <small><b>Alegreya SC 500 / 700</b>Ярлыки, даты, кнопки, навигация, номера глав.</small>
+    <p class="t-caps">Belgrade, Serbia · 2019–2024 · Скачать CV · Глава III</p>
+  </div>
+  <div class="type-row">
+    <small><b>Pangolin 400</b>«Рука писца»: подписи к картинкам, пометки на полях, реплики зверей.</small>
+    <p class="t-hand">Рис. 1 — С. Бызов. Здесь могла быть улитка. Fig. 2 — puž sa kulom.</p>
+  </div>
+
+  <h2 class="sub-label">Детали</h2>
+  <div class="demo">
+    <a class="print-btn" href="#"><span>Скачать CV</span></a>
+    <a class="pub-read" href="#">Читать рукопись</a>
+    <span class="date">2019 — 2024</span>
+    <p class="role" style="margin:0">Лингвист<span class="sep"></span>Исследователь</p>
+  </div>
+  <div class="demo" id="pennants" style="align-items:flex-start;border-top:4px solid var(--ink);gap:10px"></div>
+  <article class="entry" style="max-width:640px">
+    <div><h3>Карточка записи</h3><p class="place">Место, учреждение</p></div>
+    <p class="date">2021 — 2024</p>
+    <ul><li>Пункт списка с красным ромбом</li><li>Цвет тени берётся от главы</li></ul>
+    <p class="workblurb">Заметка писца: курсив на охристой полосе.</p>
+  </article>
+
+  <h2 class="sub-label">Правила для картинок</h2>
+  <ul class="rules">
+    <li><b>Манера.</b> Книжная миниатюра XIII–XV веков, гуашь/темпера по пергаменту: плоские заливки, тёмный контур, чуть неровная рука, без перспективы и без мягких теней. Звери с человеческими занятиями, серьёзные лица при нелепых делах.</li>
+    <li><b>Цвет.</b> Только пигменты из палитры выше; у каждой сцены свои пять тонов.</li>
+    <li><b>Слои фона.</b> PNG шириной 2400 px, бесшовно стыкуются по горизонтали, всё выше силуэта прозрачное (небо — непрозрачное). Высоты — в таблице.</li>
+    <li><b>Спрайты.</b> PNG с прозрачностью: одна горизонтальная лента из квадратных кадров 256×256. Персонаж смотрит вправо, ноги стоят на нижнем крае кадра, размер и положение в кадре не меняются от кадра к кадру.</li>
+    <li><b>Миниатюры карточек.</b> 480×360, непрозрачные.</li>
+    <li><b>Куда класть.</b> В <code>assets/art/</code> под именем из таблицы — картинка появится на сайте сама. Пока файла нет, на его месте пунктирная заглушка; чтобы спрятать заглушки перед публикацией, в <code>scenes.js</code> поставьте <code>SHOW_SLOTS = false</code>.</li>
+  </ul>
+
+  <h2 class="sub-label">Список картинок</h2>
+  <p id="count"></p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Файл</th><th>Что это</th><th>Размер</th><th>Движение</th><th>Что нарисовать</th></tr></thead>
+      <tbody id="art-rows"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="../scenes.js"></script>
+<script>
+(function(){
+  'use strict';
+  function el(tag, text){ const e = document.createElement(tag); if (text != null) e.textContent = text; return e; }
+
+  const PIGMENTS = [
+    ['vellum', 'Пергамент', 'фон страниц'],
+    ['vellum-deep', 'Пергамент тёмный', 'тихие заливки'],
+    ['bone', 'Кость', 'карточки, светлый текст'],
+    ['ink', 'Чернила', 'текст и контуры'],
+    ['ink-soft', 'Чернила разбавленные', 'даты, места, подписи'],
+    ['lapis', 'Ляпис', 'вода, даты, ссылки'],
+    ['lapis-deep', 'Ляпис глубокий', 'ночь, наведение'],
+    ['sky', 'Небо', 'пыльно-голубая темпера'],
+    ['ochre', 'Охра', 'земля, медальоны'],
+    ['gold', 'Золото', 'рамы, полоски'],
+    ['vermilion', 'Киноварь', 'буквицы, главная кнопка'],
+    ['vermilion-deep', 'Киноварь тёмная', 'наведение'],
+    ['verdigris', 'Ярь-медянка', 'зелень'],
+    ['moss', 'Мох', 'трава'],
+    ['madder', 'Марена', 'розовый акцент']
+  ];
+  const css = getComputedStyle(document.documentElement);
+  const sw = document.getElementById('swatches');
+  PIGMENTS.forEach(function(p){
+    const li = el('li'), i = el('i');
+    i.style.background = 'var(--' + p[0] + ')';
+    li.appendChild(i);
+    li.appendChild(el('b', p[1]));
+    li.appendChild(el('span', css.getPropertyValue('--' + p[0]).trim() + ' · --' + p[0]));
+    li.appendChild(el('span', p[2]));
+    sw.appendChild(li);
+  });
+
+  /* scene palettes are read from the real stylesheet, so they cannot drift */
+  const pals = document.getElementById('scene-pals');
+  const probe = document.createElement('div');
+  document.body.appendChild(probe);
+  ['home', 'experience', 'research', 'education', 'skillslang', 'festivals'].forEach(function(key){
+    const sc = SCENES[key];
+    const box = el('div'); box.className = 'pal';
+    const bands = el('div'); bands.className = 'bands';
+    const host = document.createElement('body');
+    host.dataset.page = key;
+    host.style.cssText = 'display:block;margin:0;font-size:inherit;background:none';
+    ['sky', 'far', 'mid', 'ground', 'front'].forEach(function(b){
+      const s = el('span'); s.style.background = 'var(--c-' + b + ')'; bands.appendChild(s);
+    });
+    host.appendChild(bands);
+    box.appendChild(host);
+    const p = el('p'); p.appendChild(el('b', sc.name)); p.appendChild(document.createTextNode(' — ' + sc.mood));
+    box.appendChild(p);
+    pals.appendChild(box);
+  });
+  probe.remove();
+
+  const pen = document.getElementById('pennants');
+  pen.className += ' tabbar';
+  pen.style.position = 'static'; pen.style.margin = '26px 0'; pen.style.justifyContent = 'flex-start';
+  [['experience', 'I', 'Опыт'], ['research', 'II', 'Наука'], ['education', 'III', 'Образование'],
+   ['skillslang', 'IV', 'Навыки'], ['festivals', 'V', 'Фестивали']].forEach(function(n, i){
+    const a = el('a'); a.href = '../' + (n[0] === 'skillslang' ? 'skills' : n[0]) + '/'; a.dataset.tone = n[0];
+    if (i === 1) a.setAttribute('aria-current', 'page');
+    a.appendChild(el('span', n[2]));
+    const c = el('span', n[1]); c.className = 'chip'; a.appendChild(c);
+    pen.appendChild(a);
+  });
+
+  const MOVES = {
+    idle:'стоит на месте', bob:'покачивается вверх-вниз', hop:'подпрыгивает', sway:'качается из стороны в сторону',
+    twinkle:'мерцает', peek:'выглядывает снизу и прячется', pace:'ходит туда-сюда', walk:'идёт через весь экран →',
+    'walk-back':'идёт через весь экран ←', fly:'летит через весь экран'
+  };
+  const KINDS = { sky:'небо', clouds:'облака', far:'дальний план', mid:'средний план', ground:'земля', front:'передний план' };
+  const rows = document.getElementById('art-rows');
+  const seen = {};
+  let total = 0;
+  function row(file, what, size, move, note, raw){
+    if (seen[file]) return;
+    seen[file] = 1; if (raw) total++;
+    const tr = el('tr');
+    const td = el('td'); td.appendChild(el('code', file)); tr.appendChild(td);
+    [what, size, move, note].forEach(function(v){ tr.appendChild(el('td', v)); });
+    rows.appendChild(tr);
+  }
+  function group(title, mood){
+    const tr = el('tr'); tr.className = 'group';
+    const td = el('td'); td.colSpan = 5; td.textContent = title + ' ';
+    td.appendChild(el('span', mood));
+    tr.appendChild(td); rows.appendChild(tr);
+  }
+  Object.keys(SCENES).forEach(function(key){
+    const sc = SCENES[key];
+    group(sc.name, '— ' + sc.mood);
+    if (sc.raw) {
+      row(sc.raw.land, '★ лист 1 из 2 (Gemini)', '16:9', '—', 'Три полосы на пурпурном фоне сверху вниз: дальний план, средний план, земля.', true);
+      const cols = sc.grid[0].length;
+      row(sc.raw.sprites, '★ лист 2 из 2 (Gemini)', '4:3, сетка 4×3', '—',
+        'Клетки слева направо, сверху вниз: ' + sc.grid.map(function(r){ return r.map(function(c){ return c || '—'; }).join(', '); }).join(' ‖ '), true);
+    }
+    sc.layers.forEach(function(L){ if (!L.css && !L.reuse) row(L.file, 'нарезка: слой, ' + KINDS[L.kind], L.size, 'параллакс', L.note); });
+    (sc.sprites || []).forEach(function(s){ row(s.file, 'нарезка: спрайт', s.frames === 1 ? '1 кадр' : s.frames + ' кадра', MOVES[s.move] || s.move, s.note); });
+    (sc.margins || []).forEach(function(s){ row(s.file, 'нарезка: спрайт на полях', s.frames === 1 ? '1 кадр' : s.frames + ' кадра', MOVES[s.move] || s.move, s.note); });
+  });
+  document.getElementById('count').textContent = 'Картинок для Gemini: ' + total + ' (по 2 на экран, строки со звездой). Остальные строки — маленькие файлы, которые из них нарежет скрипт. Небо, вода и миниатюры карточек глав рисовать не нужно: небо и вода делаются в коде, на карточках показан первый кадр главного персонажа главы.';
+})();
+</script>
+</body>
+</html>

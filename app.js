@@ -17,6 +17,100 @@ const NAV = [
   ['festivals',  'festivals/']
 ];
 
+/* ---------- scenes: layered backdrops and sprites (slots from scenes.js) ---------- */
+const HAS_SCENES = typeof SCENES !== 'undefined';
+if (HAS_SCENES && SHOW_SLOTS) document.documentElement.classList.add('slots-on');
+const ROMAN = ['I', 'II', 'III', 'IV', 'V'];
+const PAGE_INDEX = NAV.findIndex(function(n){ return n[0] === PAGE; });
+const SCENE_KEY = (PAGE === 'cv') ? 'home' : PAGE;
+
+function el(tag, cls){ const e = document.createElement(tag); if (cls) e.className = cls; return e; }
+
+/* Looks for the picture; if it exists the slot becomes the picture. */
+function loadArt(target, file, done){
+  const img = new Image();
+  img.onload = function(){
+    target.style.backgroundImage = 'url("' + ROOT + ART_DIR + file + '")';
+    target.classList.add('has-art');
+    if (done) done(img);
+  };
+  img.src = ROOT + ART_DIR + file;
+}
+
+function mkLayer(L){
+  const d = el('div', 'layer layer--' + L.kind);
+  d.style.setProperty('--d', L.depth || 0);
+  if (L.css) { d.classList.add('is-css'); return d; }
+  if (L.fit) d.classList.add('layer--fit');
+  d.dataset.label = L.file + ' · ' + L.size;
+  loadArt(d, L.file, function(img){
+    if (!L.drift) return;
+    d.dataset.drift = L.drift;
+    d.style.setProperty('--drift', L.drift);
+    const fit = function(){ d.style.setProperty('--tile', (d.clientHeight * img.naturalWidth / img.naturalHeight) + 'px'); };
+    fit();
+    window.addEventListener('resize', fit);
+  });
+  return d;
+}
+
+function mkSprite(sp){
+  const s = el('div', 'sprite sprite--' + (sp.plane || 'mid'));
+  const move = el('div', 'sprite-move');
+  const flip = el('div', 'sprite-flip');
+  const react = el('div', 'sprite-react');
+  const img = el('div', 'sprite-img');
+  s.dataset.move = sp.move || 'idle';
+  s.style.setProperty('--w', sp.w);
+  if (sp.x != null) s.style.setProperty('--x', sp.x);
+  if (sp.y != null) s.style.setProperty('--y', sp.y);
+  if (sp.dur) s.style.setProperty('--dur', sp.dur);
+  if (sp.range) s.style.setProperty('--range', sp.range);
+  if (sp.phase != null) { s.style.setProperty('--phase', sp.phase); s.dataset.phase = '1'; }
+  if (sp.flip) s.classList.add('flipped');
+  if (sp.opacity != null) s.style.opacity = sp.opacity;
+  if (sp.filter) s.style.filter = sp.filter;
+  img.style.setProperty('--frames', sp.frames);
+  img.dataset.label = sp.id + ' · ' + sp.frames + ' fr';
+  loadArt(img, sp.file, function(){
+    s.classList.add('is-drawn');
+    if (sp.frames > 1) {
+      img.style.animation = 'sprite-frames ' + (sp.frames / (sp.fps || 8)) + 's steps(' + sp.frames + ') infinite';
+    }
+  });
+  s.addEventListener('click', function(){
+    react.classList.remove('boing');
+    void react.offsetWidth;
+    react.classList.add('boing');
+  });
+  react.appendChild(img); flip.appendChild(react); move.appendChild(flip); s.appendChild(move);
+  return s;
+}
+
+function buildStage(stage, key){
+  const sc = HAS_SCENES && SCENES[key];
+  if (!stage || !sc) return;
+  sc.layers.forEach(function(L){ stage.appendChild(mkLayer(L)); });
+  (sc.sprites || []).forEach(function(sp){ stage.appendChild(mkSprite(sp)); });
+}
+
+function buildMargins(host, key){
+  const sc = HAS_SCENES && SCENES[key];
+  if (!host || !sc || !sc.margins) return;
+  sc.margins.forEach(function(m){
+    const box = el('div', 'margin-slot');
+    box.setAttribute('aria-hidden', 'true');
+    box.dataset.side = m.side;
+    box.style.setProperty('--top', m.top);
+    box.style.setProperty('--w', m.w);
+    const sp = mkSprite(m);
+    new MutationObserver(function(){ if (sp.classList.contains('is-drawn')) box.classList.add('is-drawn'); })
+      .observe(sp, { attributes: true, attributeFilter: ['class'] });
+    box.appendChild(sp);
+    host.appendChild(box);
+  });
+}
+
 /* ---------- chrome ---------- */
 const LANGBAR =
   '<div class="langbar">' +
@@ -33,53 +127,59 @@ const LANGBAR =
     '</div>' +
   '</div>';
 
+/* title page: the full-height scene with the name painted on the sky */
 const HERO =
-  '<header class="band reveal">' +
-    '<div class="band-inner"><div class="band-main">' +
-      '<figure class="plate">' +
-        '<img class="photo" id="photo" src="' + ROOT + 'assets/Byzov-S.S_.jpg" width="426" height="640" alt="" decoding="async" fetchpriority="high">' +
-        '<figcaption id="plate-caption" aria-hidden="true"></figcaption>' +
-      '</figure>' +
-      '<div class="band-text">' +
-        '<p class="topline" id="topline"></p>' +
-        '<h1 class="name" id="name"></h1>' +
-        '<p class="role" id="role"></p>' +
-      '</div>' +
-    '</div></div>' +
+  '<header class="scene scene--hero" id="scene">' +
+    '<div class="scene-stage" aria-hidden="true"></div>' +
+    '<div class="scene-title reveal">' +
+      '<p class="topline" id="topline"></p>' +
+      '<h1 class="name" id="name"></h1>' +
+      '<p class="role" id="role"></p>' +
+    '</div>' +
   '</header>';
 
+/* chapter pages: a shorter scene with the chapter number and title */
 const COMPACT =
-  '<header class="band compact reveal">' +
-    '<div class="band-inner"><div class="band-text">' +
-      '<p class="name"><a href="' + (ROOT || './') + '" id="name"></a></p>' +
-      '<p class="role" id="role"></p>' +
-    '</div></div>' +
+  '<header class="scene scene--chapter" id="scene">' +
+    '<div class="scene-stage" aria-hidden="true"></div>' +
+    '<div class="scene-title reveal">' +
+      '<p class="crumb"><a href="' + (ROOT || './') + '" id="name"></a></p>' +
+      '<h1 class="chapter"><span class="chapter-num">' + (ROMAN[PAGE_INDEX] || '') + '</span>' +
+        '<span id="chapter-title"></span></h1>' +
+    '</div>' +
   '</header>';
 
 const LEDE =
   '<div class="lede reveal">' +
-    '<nav class="contacts" aria-label="Contact">' +
-      '<a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>' +
-      '<a href="https://t.me/savageavery">Telegram <span>@savageavery</span></a>' +
-      '<a href="tel:+381658389596">+381 65 8389596</a>' +
-      '<a class="print-btn" id="cv-btn" href="' + ROOT + 'assets/cv/Byzov-CV-en.pdf" download>' +
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>' +
-        '<span id="print-label"></span>' +
-      '</a>' +
-    '</nav>' +
-    '<p class="intro" id="intro"></p>' +
+    '<figure class="plate">' +
+      '<img class="photo" id="photo" src="' + ROOT + 'assets/Byzov-S.S_.jpg" width="426" height="640" alt="" decoding="async" fetchpriority="high">' +
+      '<figcaption id="plate-caption" aria-hidden="true"></figcaption>' +
+    '</figure>' +
+    '<div class="lede-text">' +
+      '<p class="intro" id="intro"></p>' +
+      '<nav class="contacts" aria-label="Contact">' +
+        '<a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>' +
+        '<a href="https://t.me/savageavery">Telegram <span>@savageavery</span></a>' +
+        '<a href="tel:+381658389596">+381 65 8389596</a>' +
+        '<a class="print-btn" id="cv-btn" href="' + ROOT + 'assets/cv/Byzov-CV-en.pdf" download>' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>' +
+          '<span id="print-label"></span>' +
+        '</a>' +
+      '</nav>' +
+    '</div>' +
   '</div>';
 
 const HOME_BODY =
-  '<div class="rule home-rule"></div>' +
   '<dl class="now">' +
-    '<dt id="now-label"></dt><dd id="now-text"></dd>' +
-    '<dt id="open-label"></dt><dd id="open-text"></dd>' +
+    '<div><dt id="now-label"></dt><dd id="now-text"></dd></div>' +
+    '<div><dt id="open-label"></dt><dd id="open-text"></dd></div>' +
   '</dl>' +
   '<div class="rule home-rule"></div>' +
   '<ul class="home-grid" id="home-grid">' +
     NAV.map(function(n, i){
-      return '<li><a class="home-card" href="' + n[1] + '"><span class="num">' + (i + 1) + '</span>' +
+      return '<li><a class="home-card" data-tone="' + n[0] + '" href="' + n[1] + '">' +
+             '<span class="mini slot" data-card="' + n[0] + '" aria-hidden="true"></span>' +
+             '<span class="num">' + ROMAN[i] + '</span>' +
              '<h3 id="card-' + n[0] + '-t"></h3><p id="card-' + n[0] + '-d"></p></a></li>';
     }).join('') +
   '</ul>';
@@ -87,14 +187,25 @@ const HOME_BODY =
 const TABBAR =
   '<nav class="tabbar" aria-label="Sections">' +
     NAV.map(function(n, i){
-      return '<a href="' + ROOT + n[1] + '" data-nav="' + n[0] + '" aria-keyshortcuts="' + (i + 1) + '"' +
+      return '<a href="' + ROOT + n[1] + '" data-nav="' + n[0] + '" data-tone="' + n[0] + '" aria-keyshortcuts="' + (i + 1) + '"' +
              (PAGE === n[0] ? ' aria-current="page"' : '') + '>' +
-             '<span id="tab-' + n[0] + '"></span><kbd class="chip" aria-hidden="true">' + (i + 1) + '</kbd></a>';
+             '<span id="tab-' + n[0] + '"></span><span class="chip" aria-hidden="true">' + ROMAN[i] + '</span></a>';
     }).join('') +
   '</nav>';
 
+/* previous / next chapter, so the pages read like one codex */
+function pagerLink(i, dir){
+  const n = NAV[i];
+  if (!n) return '';
+  return '<a class="pager-' + dir + '" data-tone="' + n[0] + '" href="' + ROOT + n[1] + '" rel="' + dir + '">' +
+         '<span class="pager-dir" aria-hidden="true">' + (dir === 'prev' ? '← ' + ROMAN[i] : ROMAN[i] + ' →') + '</span>' +
+         '<span id="pager-' + dir + '"></span></a>';
+}
+const PAGER = PAGE_INDEX < 0 ? '' :
+  '<nav class="pager" aria-label="Chapters">' + pagerLink(PAGE_INDEX - 1, 'prev') + pagerLink(PAGE_INDEX + 1, 'next') + '</nav>';
+
 const FOOTER =
-  '<p class="print-note" id="print-note"></p>' +
+  '<div class="scene scene--strip" aria-hidden="true"><div class="scene-stage" id="strip-stage"></div></div>' +
   '<footer><span id="footer-text"></span><a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a></footer>';
 
 const main = $('main');
@@ -106,14 +217,60 @@ if (PAGE === 'home' || PAGE === 'cv') {
 } else {
   main.insertAdjacentHTML('beforebegin', COMPACT);
   main.insertAdjacentHTML('afterbegin', TABBAR);
+  main.insertAdjacentHTML('beforeend', PAGER);
 }
-main.insertAdjacentHTML('beforeend', FOOTER);
+main.insertAdjacentHTML('beforeend', '<p class="print-note" id="print-note"></p>');
 main.insertAdjacentHTML('afterend',
-  '<img class="flora-foot" src="' + ROOT + 'assets/arches.svg" alt="" aria-hidden="true" width="1200" height="560">' +
+  FOOTER +
   '<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1"><img src="" alt=""></div>' +
   '<button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">' +
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>' +
   '</button>');
+
+buildStage(document.querySelector('#scene .scene-stage'), SCENE_KEY);
+buildStage($('strip-stage'), 'footer');
+buildMargins(main, SCENE_KEY);
+
+/* optional hand-made textures: assets/art/sky.jpg and water.jpg replace the
+   built-in CSS ones as soon as the files exist */
+if (HAS_SCENES) {
+  ['sky', 'water'].forEach(function(n){
+    const im = new Image();
+    const href = new URL(ROOT + ART_DIR + n + '.jpg', document.baseURI).href;
+    im.onload = function(){
+      document.documentElement.style.setProperty('--tex-' + n, 'url("' + href + '")');
+      document.documentElement.classList.add('tex-' + n);
+    };
+    im.src = href;
+  });
+}
+if (HAS_SCENES) {
+  document.querySelectorAll('.mini[data-card]').forEach(function(m){
+    const art = CARD_ART[m.dataset.card];
+    if (!art) return;
+    m.dataset.label = art.file;
+    const probe = new Image();
+    probe.onload = function(){
+      const pic = el('i', 'mini-sprite');
+      pic.style.backgroundImage = 'url("' + ROOT + ART_DIR + art.file + '")';
+      pic.style.backgroundSize = (art.frames * 100) + '% 100%';
+      m.appendChild(pic);
+      m.classList.add('has-art');
+    };
+    probe.src = ROOT + ART_DIR + art.file;
+  });
+}
+
+/* "A // B // C" from the copy becomes A ◆ B ◆ C */
+function setSeps(id, text){
+  const e = $(id);
+  if (!e || text == null) return;
+  e.textContent = '';
+  text.split(' // ').forEach(function(part, i){
+    if (i) { const s = el('span', 'sep'); s.setAttribute('aria-hidden', 'true'); e.appendChild(s); }
+    if (part.trim()) e.appendChild(document.createTextNode(part.trim()));
+  });
+}
 
 /* ---------- filling ---------- */
 function setText(id, value){ const el = $(id); if (el && value != null) el.textContent = value; }
@@ -123,15 +280,18 @@ function applyLang(lang){
   const t = T[lang];
   document.documentElement.lang = lang;
 
-  setText('topline', t.topline);
+  setSeps('topline', t.topline);
   setText('name', t.name);
-  setText('role', t.role);
+  setSeps('role', t.role);
+  setHTML('chapter-title', t.labels[PAGE]);
+  if (PAGE_INDEX > 0) setHTML('pager-prev', t.labels[NAV[PAGE_INDEX - 1][0]]);
+  if (PAGE_INDEX > -1 && NAV[PAGE_INDEX + 1]) setHTML('pager-next', t.labels[NAV[PAGE_INDEX + 1][0]]);
   setText('intro', t.intro);
   if ($('photo')) $('photo').alt = t.photoAlt;
   setText('plate-caption', t.plateCaption);
   setText('print-label', t.cvLabel);
   setText('print-note', t.printNote);
-  setText('footer-text', t.footer);
+  setSeps('footer-text', t.footer);
   $('back-to-top').setAttribute('aria-label', t.backToTop);
   const cv = $('cv-btn');
   if (cv) cv.href = ROOT + 'assets/cv/Byzov-CV-' + lang + '.pdf';
@@ -395,6 +555,24 @@ function start(){
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  /* ---- Parallax: layers drift with the scroll and lean away from the pointer ---- */
+  const sceneEl = $('scene');
+  if (sceneEl && !prefersReducedMotion) {
+    let queued = false, mx = 0;
+    const paint = function(){
+      queued = false;
+      sceneEl.style.setProperty('--sy', Math.min(window.scrollY, sceneEl.offsetHeight));
+      sceneEl.style.setProperty('--mx', mx.toFixed(3));
+    };
+    const ask = function(){ if (!queued) { queued = true; requestAnimationFrame(paint); } };
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('pointermove', function(e){
+      if (e.pointerType === 'touch') return;
+      mx = (e.clientX / window.innerWidth - .5) * 2;
+      ask();
+    }, { passive: true });
+  }
   backToTopBtn.addEventListener('click', function(){
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   });
