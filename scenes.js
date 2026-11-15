@@ -54,6 +54,10 @@ function cloud(file, w, y, dur, phase, extra){
   return Object.assign({ id:'cloud', file:file, frames:1, fps:1, w:w, x:0, y:y,
     plane:'sky', move:'walk', dur:dur, phase:phase }, extra || {});
 }
+/* a golden sun with a face, behind all layers (it is the same picture as the research star) */
+function sun(x, y, w){
+  return { id:'sun', file:'research/star.png', frames:1, fps:1, w:w, x:x, y:y, plane:'bg', move:'bob', dur:8 };
+}
 function star(x, y, w, dur, phase){
   return { id:'star', file:'research/star.png', frames:1, fps:1, w:w, x:x, y:y,
     plane:'sky', move:'twinkle', dur:dur, phase:phase };
@@ -96,7 +100,8 @@ const SCENES = {
       cloud('home/cloud-a.png', 190, 80, 170, .05), cloud('home/cloud-b.png', 130, 68, 210, .22),
       cloud('home/cloud-c.png', 170, 88, 160, .38), cloud('home/cloud-a.png', 120, 74, 240, .55),
       cloud('home/cloud-b.png', 150, 84, 190, .70), cloud('home/cloud-c.png', 110, 64, 260, .84),
-      cloud('home/cloud-a.png', 140, 91, 200, .95)
+      cloud('home/cloud-a.png', 140, 91, 200, .95),
+      sun(80, 69, 150)
     ],
     margins: [
       { id:'manicule', file:'home/manicule.png', frames:1, fps:1, w:120, side:'left', top:'4%', move:'bob',
@@ -126,7 +131,8 @@ const SCENES = {
         note:'Трое ежей-школяров на лавке: один пишет, второй спит, третий тянет лапу.' },
       cloud('experience/cloud-a.png', 160, 80, 170, .06), cloud('experience/cloud-b.png', 120, 90, 220, .25),
       cloud('experience/cloud-a.png', 110, 70, 250, .45), cloud('experience/cloud-b.png', 140, 84, 190, .66),
-      cloud('experience/cloud-a.png', 100, 92, 230, .88)
+      cloud('experience/cloud-a.png', 100, 92, 230, .88),
+      sun(70, 80, 130)
     ],
     margins: [
       { id:'inkpot', file:'experience/inkpot.png', frames:1, fps:1, w:110, side:'right', top:'12%', move:'bob',
@@ -192,7 +198,8 @@ const SCENES = {
         note:'Колокол в деревянной раме, стоит на земле.' },
       cloud('education/cloud-a.png', 170, 80, 170, .05), cloud('education/cloud-b.png', 120, 90, 220, .25),
       cloud('education/cloud-a.png', 120, 72, 250, .45), cloud('education/cloud-b.png', 150, 86, 190, .65),
-      cloud('education/cloud-a.png', 100, 93, 230, .87)
+      cloud('education/cloud-a.png', 100, 93, 230, .87),
+      sun(70, 77, 120)
     ],
     margins: [
       { id:'candle', file:'education/candle.png', frames:1, fps:1, w:100, side:'right', top:'8%', move:'bob',
@@ -244,7 +251,7 @@ const SCENES = {
       far:    'Маяк на мысу и паруса.',
       mid:    'Полосатые шатры и подмостки уличного театра.',
       ground: 'Охристая площадь.'
-    }, 'water', { far:18.75, mid:10.2, ground:0 }),
+    }, 'water', { far:18.75, mid:10.2, ground:0 }).map(function(l){ return l.kind === 'far' ? Object.assign(l, { under:'#cab8a0' }) : l; }),
     sprites: [
       { id:'bear-stilts', file:'festivals/bear-stilts.png', frames:3, fps:5, w:170, x:24, y:20, plane:'mid', move:'pace', dur:22, range:380,
         note:'Медведь на ходулях жонглирует яблоками: шаг → яблоки вверх → шаг.' },
@@ -255,7 +262,10 @@ const SCENES = {
       { id:'pennants',    file:'festivals/pennants.png',    frames:1, fps:1, w:300, x:72, y:74, plane:'sky', move:'sway', dur:7, flip:true,
         note:'Та же связка, справа, зеркально.' },
       cloud('home/cloud-a.png', 160, 84, 200, .1,  { opacity:.8 }), cloud('home/cloud-b.png', 120, 92, 250, .4, { opacity:.8 }),
-      cloud('home/cloud-c.png', 140, 78, 220, .7,  { opacity:.8 })
+      cloud('home/cloud-c.png', 140, 78, 220, .7,  { opacity:.8 }),
+      cloud('home/cloud-a.png', 110, 70, 260, .25, { opacity:.8 }), cloud('home/cloud-b.png', 150, 88, 190, .55, { opacity:.8 }),
+      cloud('home/cloud-c.png', 120, 66, 240, .9,  { opacity:.8 }),
+      sun(41, 46, 170)
     ],
     margins: [
       { id:'mask', file:'festivals/mask.png', frames:2, fps:1, w:110, side:'right', top:'20%', move:'bob',

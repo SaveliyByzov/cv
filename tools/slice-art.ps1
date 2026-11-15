@@ -264,6 +264,38 @@ public class Img {
     }
   }
 
+  // fill dips in the top silhouette with ground texture (no holes between mounds)
+  public void FillValleys(int win, int minDepth) {
+    int[] top = new int[W];
+    for (int x = 0; x < W; x++) {
+      int t = H;
+      for (int y = 0; y < H; y++) if (P[(y * W + x) * 4 + 3] >= 128) { t = y; break; }
+      top[x] = t;
+    }
+    int[] tgt = new int[W];
+    for (int x = 0; x < W; x++) {
+      int m = top[x];
+      for (int k = -win; k <= win; k++) { int xx = x + k; if (xx >= 0 && xx < W && top[xx] < m) m = top[xx]; }
+      tgt[x] = m;
+    }
+    for (int x = 0; x < W; x++) {
+      if (tgt[x] >= top[x] - minDepth || top[x] >= H) continue;
+      int d = top[x] - tgt[x];
+      for (int y = tgt[x]; y < top[x] + 4 && y < H; y++) {
+        int sy = y + d + 30;
+        int sx = x + ((y * 7 + x * 3) % 41) - 20;
+        if (sx < 0) sx = 0; if (sx >= W) sx = W - 1;
+        if (sy >= H) sy = H - 1;
+        int so = (sy * W + sx) * 4, o = (y * W + x) * 4;
+        P[o] = P[so]; P[o + 1] = P[so + 1]; P[o + 2] = P[so + 2]; P[o + 3] = 255;
+      }
+      for (int y = tgt[x]; y < tgt[x] + 2 && y < H; y++) {
+        int o = (y * W + x) * 4;
+        P[o] = 24; P[o + 1] = 42; P[o + 2] = 70; P[o + 3] = 255;
+      }
+    }
+  }
+
   // big enclosed patches of parchment (e.g. between tree trunks)
   public void RemovePaperIslands(int rmin, int gmin, int bmin, int maxRB, int minArea) {
     bool[] seen = new bool[W * H];
@@ -433,7 +465,7 @@ $pages = [ordered]@{
       @('bear-stilts','bear-stilts','bear-stilts','pennants'),
       @('','goat-jester','goat-jester',''),
       @('mask','mask','',''))
-    paper = @(); tight = @('far','mid'); islands = @('far','mid'); ipar = @(222,208,182,64,2200); clean = @('far','mid'); crop = @{ far = @(100,1290); mid = @(100,1292) }
+    paper = @(); tight = @('far','mid'); islands = @('far','mid'); valleys = @('ground'); ipar = @{ far = @(222,208,182,64,2200); mid = @(222,208,182,64,1100) }; clean = @('far','mid'); crop = @{ far = @(100,1290); mid = @(100,1292) }
   }
 }
 
@@ -473,10 +505,11 @@ foreach ($dir in $pages.Keys) {
         elseif ($cfg.loose -contains $n) { $strip.FloodPaper(178, 158, 120, 80) }
         elseif ($cfg.paper -contains $n) { $strip.FloodPaper(205, 195, 160, 75) }
         if ($cfg.islands -contains $n) {
-          $ip = $cfg.ipar; if (-not $ip) { $ip = @(190, 170, 135, 80, 400) }
+          $ip = $cfg.ipar; if ($ip -is [hashtable]) { $ip = $ip[$n] }; if (-not $ip) { $ip = @(190, 170, 135, 80, 400) }
           $strip.RemovePaperIslands($ip[0], $ip[1], $ip[2], $ip[3], $ip[4])
         }
         if ($cfg.clean -contains $n) { $strip.OpenAlpha(); $strip.RemoveSpecks(300) }
+        if ($cfg.valleys -contains $n) { $strip.FillValleys(70, 35) }
         $strip = $strip.TrimY(20); $strip = $strip.Crop(0, 2, $strip.W, $strip.H - 5)   # the pink line left by the magenta edge
         $strip.Save((Join-Path $outDir "$n.png"))
         Write-Host ("  {0}.png  {1}x{2}" -f $n, $strip.W, $strip.H)

@@ -92,7 +92,7 @@ body[data-page="skillslang"]{
   --sky-pat:repeating-linear-gradient(45deg, rgba(110,60,5,.5) 0 1px, transparent 1px 26px), repeating-linear-gradient(-45deg, rgba(110,60,5,.5) 0 1px, transparent 1px 26px);
 }
 body[data-page="festivals"]{
-  --sky-glow:radial-gradient(ellipse 60% 50% at 78% 85%, rgba(255,222,150,.66), transparent 70%);
+  --sky-glow:radial-gradient(ellipse 55% 45% at 69% 58%, rgba(255,214,140,.78), transparent 70%);
   --sky-top:rgba(130,45,90,.32);
 }
 /* tones: the colour a chapter is known by (pennants, cards) */
@@ -332,6 +332,7 @@ html.tex-sky .scene--chapter::before{
   -webkit-tap-highlight-color:transparent;
   transform:translate3d(calc(var(--mx) * var(--d, 0) * -46px), calc(var(--sy) * var(--d, 0) * 1px), 0);
 }
+.sprite--bg{z-index:1; --d:.4;}   /* behind every layer: a sun that sets behind the hills */
 .sprite--sky{z-index:2; --d:.3;}
 .sprite--back{z-index:4; --d:.14;}
 .sprite--mid{z-index:6; --d:.08;}
