@@ -220,6 +220,11 @@ h1,h2,h3,h4{font-synthesis:none;}
 .layer--front.has-art{background-size:100% auto; background-position:center top;}
 /* a single building, not a band: keep its proportions and centre it */
 .layer--fit.has-art{background-size:auto 100%;}
+/* chapter layers that keep their own proportions (nothing cropped), own height of the scene */
+.scene--chapter[style*="--hu"]{height:clamp(440px, calc(var(--u) * var(--hu)), 760px);}
+.scene--chapter .layer--b{bottom:calc(var(--u) * var(--b));}
+.scene--chapter .layer--full.has-art{height:auto; aspect-ratio:var(--ar, 4.6);}
+@media (max-width:700px){.scene--chapter .layer--full{left:50%; right:auto; width:max(108%, 720px); translate:-50% 0;}}
 .scene--chapter .scene-title{padding-top:58px;}
 
 /* stand-ins until the art exists: flat tempera shapes */

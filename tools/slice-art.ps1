@@ -407,7 +407,7 @@ $pages = [ordered]@{
       @('owl-magister','owl-magister','owl-magister','hedgehog-pupils'),
       @('','','','inkpot'),
       @('cloud-a','cloud-b','',''))
-    paper = @(); crop = @{ far = @(168,1208); mid = @(170,1208) }
+    paper = @(); crop = @{ far = @(168,1208); mid = @(214,1164) }
   }
   'research' = @{
     grid = @(
@@ -477,7 +477,7 @@ foreach ($dir in $pages.Keys) {
           $strip.RemovePaperIslands($ip[0], $ip[1], $ip[2], $ip[3], $ip[4])
         }
         if ($cfg.clean -contains $n) { $strip.OpenAlpha(); $strip.RemoveSpecks(300) }
-        $strip = $strip.TrimY(20); $strip = $strip.Crop(0, 0, $strip.W, $strip.H - 3)   # the pink line left by the magenta edge
+        $strip = $strip.TrimY(20); $strip = $strip.Crop(0, 2, $strip.W, $strip.H - 5)   # the pink line left by the magenta edge
         $strip.Save((Join-Path $outDir "$n.png"))
         Write-Host ("  {0}.png  {1}x{2}" -f $n, $strip.W, $strip.H)
       }

@@ -105,6 +105,7 @@ const SCENES = {
     name: 'Школа',
     mood: 'Тёплое абрикосовое утро, терракотовый городок, зелёный двор.',
     raw: rawFiles('experience'),
+    h: 56,
     grid: [
       ['owl-magister', 'owl-magister', 'owl-magister', 'hedgehog-pupils'],
       ['',             '',             '',             'inkpot'],
@@ -114,7 +115,11 @@ const SCENES = {
       far:    'Терракотовый городок: крыши, башенки, флюгер.',
       mid:    'Аркада школьного двора.',
       ground: 'Зелёный двор с травой и ромашками.'
-    }).map(function(l){ return l.kind === 'mid' ? Object.assign(l, { fit:true }) : l; }),
+    }).map(function(l){
+      if (l.kind === 'far') return Object.assign(l, { full:true, bottom:20 });
+      if (l.kind === 'mid') return Object.assign(l, { full:true, bottom:3 });
+      return l;
+    }),
     sprites: [
       { id:'owl-magister',    file:'experience/owl-magister.png',    frames:3, fps:3, w:160, x:62, y:12, plane:'mid', move:'bob', dur:3,
         note:'Сова-магистр за кафедрой: указка у свитка → поднята → сова моргает.' },

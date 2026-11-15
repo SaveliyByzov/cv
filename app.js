@@ -42,8 +42,11 @@ function mkLayer(L){
   d.style.setProperty('--d', L.depth || 0);
   if (L.css) { d.classList.add('is-css'); return d; }
   if (L.fit) d.classList.add('layer--fit');
+  if (L.full) d.classList.add('layer--full');
+  if (L.bottom != null) { d.classList.add('layer--b'); d.style.setProperty('--b', L.bottom); }
   d.dataset.label = L.file + ' · ' + L.size;
   loadArt(d, L.file, function(img){
+    if (L.full) d.style.setProperty('--ar', img.naturalWidth / img.naturalHeight);
     if (!L.drift) return;
     d.dataset.drift = L.drift;
     d.style.setProperty('--drift', L.drift);
@@ -228,6 +231,7 @@ main.insertAdjacentHTML('afterend',
   '</button>');
 
 buildStage(document.querySelector('#scene .scene-stage'), SCENE_KEY);
+if (HAS_SCENES && SCENES[SCENE_KEY] && SCENES[SCENE_KEY].h) $('scene').style.setProperty('--hu', SCENES[SCENE_KEY].h);
 buildStage($('strip-stage'), 'footer');
 buildMargins(main, SCENE_KEY);
 
