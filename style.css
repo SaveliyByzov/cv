@@ -92,7 +92,7 @@ body[data-page="skillslang"]{
   --sky-pat:repeating-linear-gradient(45deg, rgba(110,60,5,.5) 0 1px, transparent 1px 26px), repeating-linear-gradient(-45deg, rgba(110,60,5,.5) 0 1px, transparent 1px 26px);
 }
 body[data-page="festivals"]{
-  --sky-glow:radial-gradient(ellipse 55% 45% at 69% 58%, rgba(255,214,140,.78), transparent 70%);
+  --sky-glow:radial-gradient(circle 440px at 41% 60%, rgba(255,246,205,.95) 0, rgba(255,222,150,.8) 18%, rgba(255,190,120,.45) 46%, transparent 76%), radial-gradient(ellipse 90% 40% at 50% 62%, rgba(255,205,140,.45), transparent 75%);
   --sky-top:rgba(130,45,90,.32);
 }
 /* tones: the colour a chapter is known by (pennants, cards) */

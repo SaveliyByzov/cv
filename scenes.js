@@ -248,7 +248,7 @@ const SCENES = {
       ['mask',        'mask',        '',            '']
     ],
     layers: sceneLayers('festivals', {
-      far:    'Маяк на мысу и паруса.',
+      far:    'Скалистый мыс с маяком; справа спокойное море.',
       mid:    'Полосатые шатры и подмостки уличного театра.',
       ground: 'Охристая площадь.'
     }, 'water', { far:18.75, mid:10.2, ground:0 }).map(function(l){ return l.kind === 'far' ? Object.assign(l, { under:'#cab8a0' }) : l; }),
@@ -264,8 +264,7 @@ const SCENES = {
       cloud('home/cloud-a.png', 160, 84, 200, .1,  { opacity:.8 }), cloud('home/cloud-b.png', 120, 92, 250, .4, { opacity:.8 }),
       cloud('home/cloud-c.png', 140, 78, 220, .7,  { opacity:.8 }),
       cloud('home/cloud-a.png', 110, 70, 260, .25, { opacity:.8 }), cloud('home/cloud-b.png', 150, 88, 190, .55, { opacity:.8 }),
-      cloud('home/cloud-c.png', 120, 66, 240, .9,  { opacity:.8 }),
-      sun(41, 46, 170)
+      cloud('home/cloud-c.png', 120, 66, 240, .9,  { opacity:.8 })
     ],
     margins: [
       { id:'mask', file:'festivals/mask.png', frames:2, fps:1, w:110, side:'right', top:'20%', move:'bob',
