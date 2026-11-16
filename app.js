@@ -446,12 +446,6 @@ function applyLang(lang){
 
   fillEntry('exp1', t.exp1);
   fillEntry('exp2', t.exp2);
-  if ($('mappa') && t.map) {
-    setText('map-title', t.map.title);
-    setText('map-caption', t.map.caption);
-    $('map-img').alt = t.map.alt;
-    $('map-legend').innerHTML = t.map.pins.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('');
-  }
   fillEdu('edu1', t.edu1);
   fillEdu('edu2', t.edu2);
   fillList('activity', t.activity);

@@ -1361,53 +1361,10 @@ footer::before{
   background:url("assets/art/extras/inkwell.webp") bottom / contain no-repeat;
   pointer-events:none;
 }
-.mappa{margin:56px 0 0;}
-.mappa-frame{
-  position:relative;
-  border:var(--line) solid var(--ink);
-  border-radius:var(--r);
-  background:var(--bone);
-  box-shadow:var(--drop) var(--gold), 5px 5px 0 2px var(--ink);
-  overflow:hidden;
-}
-.mappa-frame img{display:block;width:100%;height:auto;}
-.pin{
-  position:absolute;
-  left:var(--x);
-  top:var(--y);
-  width:28px;
-  height:28px;
-  margin:-14px 0 0 -14px;
-  border:2px solid var(--ink);
-  border-radius:50%;
-  background:var(--vermilion);
-  box-shadow:2px 2px 0 var(--ink);
-  color:var(--bone);
-  font:700 .85rem/24px var(--caps);
-  text-align:center;
-}
-.mappa-legend{counter-reset:pin;list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px;}
-.mappa-legend li{counter-increment:pin;position:relative;padding-left:42px;line-height:1.4;}
-.mappa-legend li::before{
-  content:counter(pin);
-  position:absolute;
-  left:0;
-  top:-1px;
-  width:28px;
-  height:28px;
-  border:2px solid var(--ink);
-  border-radius:50%;
-  background:var(--vermilion);
-  color:var(--bone);
-  font:700 .85rem/24px var(--caps);
-  text-align:center;
-}
-.mappa figcaption{margin:14px 0 0;font-style:italic;color:var(--ink-soft);}
 @media (max-width:700px){
   .intro .dc{font-size:2.2em;}
   .factday{padding-right:62px;}
   .factday::before{right:14px;width:28px;height:66px;}
-  .pin{width:22px;height:22px;margin:-11px 0 0 -11px;font-size:.72rem;line-height:18px;}
   .entry::after{left:-12px;top:-12px;width:38px;height:38px;}
 }
 @media print{.entry::after,.factday::before,footer::before{display:none;}}

@@ -26,17 +26,6 @@ T.sr = {
     },
     "campusAlt": "Glavna zgrada SAFU-a u Arhangelsku",
     "campusCaption": "Glavna zgrada SAFU-a, Arhangelsk — foto: Artem Kelarev, javno vlasništvo, Wikimedia Commons",
-    "map": {
-      "title": "Mesta na karti",
-      "alt": "Šašava srednjovekovna karta sveta sa morskim čudovištima, vikinškim brodom i kulama",
-      "caption": "Karta u maniru srednjovekovne mappa mundi (bez razmere, ali sa morskim čudovištima).",
-      "pins": [
-        "Arhangelsk — Severni (Arktički) federalni univerzitet: studirao i predavao, 2020–2026",
-        "Nevjansk — muzej kod Nagnute kule, 2023",
-        "Beograd — gde sam sada",
-        "Norveška — jezik koji sam učio i toponimi koje sam istraživao"
-      ]
-    },
     "exp1": {
       "title": "Univerzitetski predavač",
       "place": "Katedra za englesku filologiju, jezike severnih zemalja i lingvodidaktiku, Severni arktički federalni univerzitet, Arhangelsk",
