@@ -479,7 +479,7 @@ $pages = [ordered]@{
   }
   'education' = @{
     grid = @(
-      @('fox-monk','fox-monk','fox-monk','goose-cap'),
+      @('','fox-monk','','goose-cap'),
       @('bell','candle','cloud-a','cloud-b'))
     paper = @(); crop = @{}
   }
@@ -492,7 +492,7 @@ $pages = [ordered]@{
   'festivals' = @{
     grid = @(
       @('bear-stilts','bear-stilts','bear-stilts','pennants'),
-      @('','goat-jester','',''),
+      @('','goat-jester','goat-jester',''),
       @('mask','mask','',''))
     paper = @(); tight = @('far','mid'); islands = @('far','mid'); seacut = @{ far = @(575,156,706,818) }; tile = @{ ground = @(480,940) }; ipar = @{ far = @(222,208,182,64,2200); mid = @(222,208,182,64,1100) }; clean = @('far','mid'); crop = @{ far = @(100,1290); mid = @(100,1292) }
   }

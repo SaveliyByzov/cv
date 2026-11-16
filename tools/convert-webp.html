@@ -40,6 +40,10 @@ the local server of <code>tools/to-webp.ps1</code>. Close this page when it says
   add('assets/narfu-campus.jpg', .72);
   add('assets/lighthouse.jpg', .72);
 
+  /* convert-webp.html?only=fox-monk,goat-jester converts just those */
+  const only = (new URLSearchParams(location.search).get('only') || '').split(',').filter(Boolean);
+  if (only.length) for (let i = jobs.length - 1; i >= 0; i--) if (!only.some(function(k){ return jobs[i].src.indexOf(k) >= 0; })) jobs.splice(i, 1);
+
   async function convert(job){
     const dst = job.src.replace(/\.(png|jpg|jpeg)$/i, '.webp');
     const r = await fetch('../' + job.src);

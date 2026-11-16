@@ -89,7 +89,7 @@ const SCENES = {
     sprites: [
       { say:'hare', id:'hare-scribe',  file:'home/hare-scribe.webp',  frames:3, fps:3, w:150, x:14, y:21, plane:'mid', move:'idle',
         note:'Заяц-писарь на пеньке: перо поднято → пишет → чешет ухо.' },
-      { say:'snail', id:'snail-castle', file:'home/snail-castle.webp', frames:1, fps:1, w:130, x:0,  y:19, plane:'mid', move:'walk', dur:80,
+      { say:'snail', id:'snail-castle', file:'home/snail-castle.webp', frames:1, fps:1, w:130, x:44, y:19, plane:'mid', move:'idle',
         note:'Улитка с каменной башенкой на раковине, из окошка торчит флажок.' },
       { id:'fish-hat',     file:'home/fish-hat.webp',     frames:1, fps:1, w:120, x:70, y:3,  plane:'mid', move:'peek', dur:9,
         note:'Рыба стоймя, в красном остром колпаке, с каменным лицом.' },
@@ -125,9 +125,9 @@ const SCENES = {
       ground: 'Зелёный двор с травой и ромашками.'
     }, null, { far:20, mid:3, ground:0 }),
     sprites: [
-      { say:'owl', id:'owl-magister',    file:'experience/owl-magister.webp',    frames:3, fps:3, w:160, x:62, y:12, plane:'mid', move:'bob', dur:3,
+      { say:'owl', id:'owl-magister',    file:'experience/owl-magister.webp',    frames:3, fps:3, w:160, x:62, y:12, plane:'mid', move:'idle',
         note:'Сова-магистр за кафедрой: указка у свитка → поднята → сова моргает.' },
-      { say:'hedgehogs', id:'hedgehog-pupils', file:'experience/hedgehog-pupils.webp', frames:1, fps:1, w:170, x:28, y:11, plane:'mid', move:'sway', dur:4, flip:true,
+      { say:'hedgehogs', id:'hedgehog-pupils', file:'experience/hedgehog-pupils.webp', frames:1, fps:1, w:170, x:28, y:11, plane:'mid', move:'idle', flip:true,
         note:'Трое ежей-школяров на лавке: один пишет, второй спит, третий тянет лапу.' },
       cloud('experience/cloud-a.webp', 160, 80, 170, .06), cloud('experience/cloud-b.webp', 120, 90, 220, .25),
       cloud('experience/cloud-a.webp', 110, 70, 250, .45), cloud('experience/cloud-b.webp', 140, 84, 190, .66),
@@ -181,7 +181,7 @@ const SCENES = {
     raw: rawFiles('education'),
     h: 55,
     grid: [
-      ['fox-monk', 'fox-monk', 'fox-monk', 'goose-cap'],
+      ['',         'fox-monk', '',         'goose-cap'],
       ['bell',     'candle',   'cloud-a',  'cloud-b']
     ],
     layers: sceneLayers('education', {
@@ -190,9 +190,9 @@ const SCENES = {
       ground: 'Охристая дорога к воротам, лопухи.'
     }, 'experience/ground.webp', { far:20, mid:11.25, ground:0 }),
     sprites: [
-      { say:'fox', id:'fox-monk',  file:'education/fox-monk.webp',  frames:3, fps:6, w:150, x:22, y:20, plane:'mid', move:'pace', dur:26, range:420,
+      { say:'fox', id:'fox-monk',  file:'education/fox-monk.webp',  frames:1, fps:1, w:150, x:22, y:20, plane:'mid', move:'idle',
         note:'Лис-монах несёт стопку книг выше головы: шаг левой → середина → шаг правой.' },
-      { say:'goose', id:'goose-cap', file:'education/goose-cap.webp', frames:1, fps:1, w:110, x:72, y:20, plane:'mid', move:'idle',
+      { say:'goose', id:'goose-cap', file:'education/goose-cap.webp', frames:1, fps:1, w:110, x:72, y:20, plane:'mid', move:'hop', dur:5,
         note:'Гусь в академической шапочке с важным видом.' },
       { id:'bell',      file:'education/bell.webp',      frames:1, fps:1, w:90,  x:52, y:19, plane:'mid', move:'sway', dur:3,
         note:'Колокол в деревянной раме, стоит на земле.' },
@@ -222,11 +222,11 @@ const SCENES = {
       ground: 'Кирпичный пол в ёлочку, стружка.'
     }, 'research/ground.webp', { far:20, mid:10.4, ground:0 }),
     sprites: [
-      { say:'dragon', id:'dragon-interpreter', file:'skills/dragon-interpreter.webp', frames:3, fps:3, w:180, x:58, y:20, plane:'mid', move:'bob', dur:3.4,
+      { say:'dragon', id:'dragon-interpreter', file:'skills/dragon-interpreter.webp', frames:3, fps:3, w:180, x:58, y:20, plane:'mid', move:'idle',
         note:'Трёхголовый дракон-толмач: говорит левая голова → средняя → правая.' },
       { say:'beaver', id:'beaver-carver',      file:'skills/beaver-carver.webp',      frames:3, fps:6, w:140, x:20, y:21, plane:'mid', move:'idle',
         note:'Бобр строгает ложку: нож вверх → вниз → стружка летит.' },
-      { say:'badger', id:'badger-lute',        file:'skills/badger-lute.webp',        frames:1, fps:1, w:130, x:82, y:20, plane:'mid', move:'sway', dur:2.6,
+      { say:'badger', id:'badger-lute',        file:'skills/badger-lute.webp',        frames:1, fps:1, w:130, x:82, y:20, plane:'mid', move:'idle',
         note:'Барсук с лютней.' },
       cloud('home/cloud-a.webp', 150, 80, 220, .12), cloud('home/cloud-b.webp', 110, 90, 260, .5),
       cloud('home/cloud-c.webp', 130, 72, 240, .82)
@@ -244,7 +244,7 @@ const SCENES = {
     h: 54,
     grid: [
       ['bear-stilts', 'bear-stilts', 'bear-stilts', 'pennants'],
-      ['',            'goat-jester', '',            ''],
+      ['',            'goat-jester', 'goat-jester', ''],
       ['mask',        'mask',        '',            '']
     ],
     layers: sceneLayers('festivals', {
@@ -253,10 +253,10 @@ const SCENES = {
       ground: 'Охристая площадь.'
     }, 'water', { far:18.75, mid:10.2, ground:0 }).map(function(l){ return l.kind === 'far' ? Object.assign(l, { sea:true }) : l; }),
     sprites: [
-      { say:'bear', id:'bear-stilts', file:'festivals/bear-stilts.webp', frames:3, fps:5, w:170, x:24, y:20, plane:'mid', move:'pace', dur:22, range:380,
+      { say:'bear', id:'bear-stilts', file:'festivals/bear-stilts.webp', frames:3, fps:5, w:170, x:24, y:20, plane:'mid', move:'idle',
         note:'Медведь на ходулях жонглирует яблоками: шаг → яблоки вверх → шаг.' },
-      { say:'goat', id:'goat-jester', file:'festivals/goat-jester.webp', frames:1, fps:1, w:130, x:70, y:21, plane:'mid', move:'idle',
-        note:'Козёл-шут в колпаке с бубенцами сидит спокойно (присел) и рассказывает факты.' },
+      { say:'goat', id:'goat-jester', file:'festivals/goat-jester.webp', frames:2, fps:3, w:130, x:70, y:21, plane:'mid', move:'hop', dur:3.5,
+        note:'Козёл-шут в колпаке с бубенцами пляшет (прыгает): левая нога → правая.' },
       { id:'pennants',    file:'festivals/pennants.webp',    frames:1, fps:1, w:300, x:-4, y:74, plane:'sky', move:'sway', dur:6,
         note:'Связка флажков на верёвке: слева, от угла.' },
       { id:'pennants',    file:'festivals/pennants.webp',    frames:1, fps:1, w:300, x:72, y:74, plane:'sky', move:'sway', dur:7, flip:true,
@@ -286,7 +286,7 @@ const SCENES = {
 const CARD_ART = {
   experience: { file:'experience/owl-magister.webp',   frames:3 },
   research:   { file:'research/cat-astrologer.webp',   frames:3 },
-  education:  { file:'education/fox-monk.webp',        frames:3 },
+  education:  { file:'education/fox-monk.webp',        frames:1 },
   skillslang: { file:'skills/dragon-interpreter.webp', frames:3 },
   festivals:  { file:'festivals/bear-stilts.webp',     frames:3 }
 };

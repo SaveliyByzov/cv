@@ -75,7 +75,8 @@ function getBubble(){
 function placeBubble(){
   const b = TALK.bubble, it = TALK.active, sc = $('scene');
   if (!b || !it || !sc) return;
-  const s = sc.getBoundingClientRect(), r = it.el.getBoundingClientRect();
+  /* the picture (hopping, pacing...) moves inside the sprite box: follow the picture */
+  const s = sc.getBoundingClientRect(), r = it.anchor.getBoundingClientRect();
   const bw = b.offsetWidth, bh = b.offsetHeight;
   const cx = r.left + r.width / 2 - s.left;
   const left = Math.min(Math.max(cx, bw / 2 + 8), s.width - bw / 2 - 8);
@@ -109,7 +110,7 @@ function startAuto(delay){
   TALK.autoT = setTimeout(function(){
     if (!document.hidden && TALK.items.length) {
       const seen = TALK.items.filter(function(it){
-        const r = it.el.getBoundingClientRect();
+        const r = it.anchor.getBoundingClientRect();
         return r.bottom > 40 && r.top < window.innerHeight * 0.85 && it !== TALK.last;
       });
       if (seen.length) speak(seen[Math.floor(Math.random() * seen.length)]);
@@ -141,7 +142,7 @@ function mkSprite(sp){
       img.style.animation = 'sprite-frames ' + (sp.frames / (sp.fps || 8)) + 's steps(' + sp.frames + ') infinite';
     }
   });
-  const talker = (sp.say && typeof FACTS !== 'undefined' && FACTS[sp.say]) ? { el:s, key:sp.say, n:null } : null;
+  const talker = (sp.say && typeof FACTS !== 'undefined' && FACTS[sp.say]) ? { el:s, anchor:img, key:sp.say, n:null } : null;
   if (talker) TALK.items.push(talker);
   s.addEventListener('click', function(){
     react.classList.remove('boing');
