@@ -37,6 +37,10 @@ the local server of <code>tools/to-webp.ps1</code>. Close this page when it says
   });
   add('assets/art/sky.jpg', .82);
   add('assets/art/water.jpg', .72, .75);   /* shown at ~1100px: 1152px is plenty */
+  /* decoration sheets (tools/slice-extras.ps1) */
+  ['bat','bookmark','candle','cat','cock-snake','corner-bird','corner-dragon','corner-oak','corner-vine','div-arch','div-knot','div-snail','div-vine','duck-monk','firefly','frame-blue','frame-green','frame-plain','frame-red','inkwell','knight-goat','lantern','manicule','moon','owl-branch','rabbit-snail','ribbon-blue','ribbon-red','scroll','seal-green','seal-red','stars'].forEach(function(n){ add('assets/art/extras/' + n + '.png', .9); });
+  ['parchment','parchment-ink','wood','stone'].forEach(function(n){ add('assets/art/extras/tex-' + n + '.jpg', .78); });
+  add('assets/art/extras/map.jpg', .84);
   add('assets/narfu-campus.jpg', .72);
   add('assets/lighthouse.jpg', .72);
 

@@ -26,6 +26,17 @@ T.en = {
     },
     "campusAlt": "NArFU’s main building in Arkhangelsk",
     "campusCaption": "NArFU main building, Arkhangelsk — photo: Artem Kelarev, public domain, Wikimedia Commons",
+    "map": {
+      "title": "Places on the map",
+      "alt": "A silly medieval world map with sea monsters, a Viking ship and little towers",
+      "caption": "A map in the manner of a medieval mappa mundi (not to scale, sea monsters included).",
+      "pins": [
+        "Arkhangelsk — the Northern (Arctic) Federal University: where I studied and taught, 2020–2026",
+        "Nevyansk — the museum under the Leaning Tower, 2023",
+        "Belgrade — where I am based now",
+        "Norway — a language I studied and the place names I researched"
+      ]
+    },
     "exp1": {
       "title": "University Lecturer",
       "place": "Department of English Philology, Nordic Languages and Linguodidactics, Northern (Arctic) Federal University, Arkhangelsk",

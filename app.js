@@ -188,6 +188,14 @@ function buildMargins(host, key){
 
 /* ---------- fact of the day ---------- */
 function esc(t){ return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+/* an illuminated initial: the first letter of a paragraph sits in a painted frame */
+function dropcap(id){
+  const el = $(id);
+  if (!el) return;
+  const ch = Array.from(el.textContent.trim());
+  if (!ch.length) return;
+  el.innerHTML = '<span class="dc">' + esc(ch[0]) + '</span>' + esc(ch.slice(1).join(''));
+}
 function ui(){ return (typeof FACTS_UI !== 'undefined' && (FACTS_UI[LANG] || FACTS_UI.en)) || {}; }
 function factsOf(key){ const set = FACTS[key]; return set[LANG] || set.en; }
 /* one fact per day, the same for everyone that day */
@@ -401,6 +409,7 @@ function applyLang(lang){
   if (PAGE_INDEX > 0) setHTML('pager-prev', t.labels[NAV[PAGE_INDEX - 1][0]]);
   if (PAGE_INDEX > -1 && NAV[PAGE_INDEX + 1]) setHTML('pager-next', t.labels[NAV[PAGE_INDEX + 1][0]]);
   setText('intro', t.intro);
+  dropcap('intro');
   if ($('photo')) $('photo').alt = t.photoAlt;
   setText('plate-caption', t.plateCaption);
   setText('print-label', t.cvLabel);
@@ -437,6 +446,12 @@ function applyLang(lang){
 
   fillEntry('exp1', t.exp1);
   fillEntry('exp2', t.exp2);
+  if ($('mappa') && t.map) {
+    setText('map-title', t.map.title);
+    setText('map-caption', t.map.caption);
+    $('map-img').alt = t.map.alt;
+    $('map-legend').innerHTML = t.map.pins.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('');
+  }
   fillEdu('edu1', t.edu1);
   fillEdu('edu2', t.edu2);
   fillList('activity', t.activity);

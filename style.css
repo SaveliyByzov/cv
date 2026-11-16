@@ -681,20 +681,6 @@ body[data-page="research"] .chapter-num{color:var(--ochre);}
 }
 .plate figcaption{margin-top:22px;font:400 .95rem/1.2 var(--hand);color:var(--ink-soft);}
 .intro{margin:0;font-size:1.18rem;line-height:1.65;}
-.intro::first-letter{
-  float:left;
-  margin:.06em .12em 0 0;
-  padding:.04em .16em .1em;
-  border:var(--line) solid var(--ink);
-  border-radius:var(--r);
-  background:var(--lapis);
-  box-shadow:3px 3px 0 var(--gold);
-  color:var(--bone);
-  font-family:var(--display);
-  font-weight:800;
-  font-size:3.5em;
-  line-height:.86;
-}
 .contacts{
   display:flex;
   flex-wrap:wrap;
@@ -1300,6 +1286,131 @@ html[data-time="night"] body:not([data-page="research"]) .chapter-num{color:var(
 .factday-who{margin:6px 0 0;font-style:italic;color:var(--ink-soft);}
 
 @media print{.factday,.mood-group{display:none !important;}}
+/* =====================================================================
+   Painted details (assets/art/extras): parchment, vine rule, initial,
+   corners, bookmark, inkwell, wood footer, the map
+   ===================================================================== */
+body{
+  background:var(--vellum) url("assets/art/extras/tex-parchment.webp") 0 0 / 900px auto;
+  background-blend-mode:multiply;
+}
+.home-rule,.rule{
+  height:78px;
+  margin:44px 0 30px;
+  background:
+    url("assets/art/extras/div-vine.webp") center / auto 100% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) left center / calc(50% - 150px) 2px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) right center / calc(50% - 150px) 2px no-repeat;
+}
+.intro .dc{
+  float:left;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:1.8em;
+  height:1.8em;
+  margin:.1em .45em .1em 0;
+  background:url("assets/art/extras/frame-blue.webp") center / 100% 100% no-repeat, var(--bone);
+  color:var(--vermilion-deep);
+  font-family:var(--display);
+  font-weight:800;
+  font-size:2.6em;
+  line-height:1;
+}
+.entry::after{
+  content:"";
+  position:absolute;
+  left:-18px;
+  top:-18px;
+  width:50px;
+  height:50px;
+  background:url("assets/art/extras/corner-vine.webp") center / contain no-repeat;
+  pointer-events:none;
+}
+.factday{padding-right:78px;}
+.factday::before{
+  content:"";
+  position:absolute;
+  right:26px;
+  top:-3px;
+  width:34px;
+  height:80px;
+  background:url("assets/art/extras/bookmark.webp") top / contain no-repeat;
+}
+.factday{position:relative;}
+.factday-who::before{
+  content:"";
+  display:inline-block;
+  width:44px;
+  height:20px;
+  margin-right:8px;
+  vertical-align:-3px;
+  background:url("assets/art/extras/manicule.webp") center / contain no-repeat;
+}
+footer{
+  position:relative;
+  background:linear-gradient(rgba(46,29,18,.66), rgba(46,29,18,.66)), url("assets/art/extras/tex-wood.webp") 0 0 / 340px auto, var(--ink);
+}
+footer::before{
+  content:"";
+  position:absolute;
+  right:max(18px, calc(50% - 430px));
+  bottom:calc(100% - 4px);
+  width:40px;
+  height:58px;
+  background:url("assets/art/extras/inkwell.webp") bottom / contain no-repeat;
+  pointer-events:none;
+}
+.mappa{margin:56px 0 0;}
+.mappa-frame{
+  position:relative;
+  border:var(--line) solid var(--ink);
+  border-radius:var(--r);
+  background:var(--bone);
+  box-shadow:var(--drop) var(--gold), 5px 5px 0 2px var(--ink);
+  overflow:hidden;
+}
+.mappa-frame img{display:block;width:100%;height:auto;}
+.pin{
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+  width:28px;
+  height:28px;
+  margin:-14px 0 0 -14px;
+  border:2px solid var(--ink);
+  border-radius:50%;
+  background:var(--vermilion);
+  box-shadow:2px 2px 0 var(--ink);
+  color:var(--bone);
+  font:700 .85rem/24px var(--caps);
+  text-align:center;
+}
+.mappa-legend{counter-reset:pin;list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px;}
+.mappa-legend li{counter-increment:pin;position:relative;padding-left:42px;line-height:1.4;}
+.mappa-legend li::before{
+  content:counter(pin);
+  position:absolute;
+  left:0;
+  top:-1px;
+  width:28px;
+  height:28px;
+  border:2px solid var(--ink);
+  border-radius:50%;
+  background:var(--vermilion);
+  color:var(--bone);
+  font:700 .85rem/24px var(--caps);
+  text-align:center;
+}
+.mappa figcaption{margin:14px 0 0;font-style:italic;color:var(--ink-soft);}
+@media (max-width:700px){
+  .intro .dc{font-size:2.2em;}
+  .factday{padding-right:62px;}
+  .factday::before{right:14px;width:28px;height:66px;}
+  .pin{width:22px;height:22px;margin:-11px 0 0 -11px;font-size:.72rem;line-height:18px;}
+  .entry::after{left:-12px;top:-12px;width:38px;height:38px;}
+}
+@media print{.entry::after,.factday::before,footer::before{display:none;}}
 .print-note{display:none;}
 @media print{
   :root{--ink:#111;--ink-soft:#555;--accent:#111;}

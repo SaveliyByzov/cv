@@ -71,7 +71,15 @@ function nightSky(){
                  [84,83,36,3.1,.2], [92,92,22,3.9,.7], [16,86,20,4.6,.55], [54,78,18,3.4,.9]].map(function(a){
     return Object.assign(star(a[0], a[1], a[2], a[3], a[4]), { when:'night' });
   });
-  return [moon].concat(stars);
+  /* a bat flies across, fireflies bob above the grass (night only) */
+  const bats = [
+    { id:'bat', file:'extras/bat.webp', frames:1, fps:1, w:64, x:0, y:64, plane:'sky', move:'walk',      dur:34, phase:.2,  when:'night' },
+    { id:'bat', file:'extras/bat.webp', frames:1, fps:1, w:52, x:0, y:72, plane:'sky', move:'walk-back', dur:46, phase:.7,  when:'night' }
+  ];
+  const flies = [[16,27,3.1,.1], [38,32,3.8,.5], [61,26,2.9,.8], [82,31,3.5,.3]].map(function(a){
+    return { id:'firefly', file:'extras/firefly.webp', frames:1, fps:1, w:34, x:a[0], y:a[1], plane:'mid', move:'bob', dur:a[2], phase:a[3], when:'night' };
+  });
+  return [moon].concat(stars, bats, flies);
 }
 
 /* sprite fields
