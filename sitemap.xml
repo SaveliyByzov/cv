@@ -180,34 +180,4 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://saveliybyzov.github.io/cv/bestiary/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/bestiary/"/>
-    <lastmod>2026-11-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://saveliybyzov.github.io/cv/ru/bestiary/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/bestiary/"/>
-    <lastmod>2026-11-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://saveliybyzov.github.io/cv/sr/bestiary/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/bestiary/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/bestiary/"/>
-    <lastmod>2026-11-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
 </urlset>

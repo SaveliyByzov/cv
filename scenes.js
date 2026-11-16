@@ -202,7 +202,7 @@ const SCENES = {
       ground: 'Охристая дорога к воротам, лопухи.'
     }, 'experience/ground.webp', { far:20, mid:11.25, ground:0 }),
     sprites: [
-      { say:'fox', id:'fox-monk',  file:'education/fox-monk.webp',  frames:1, fps:1, w:150, x:22, y:20, plane:'mid', move:'idle',
+      { say:'fox', id:'fox-monk',  file:'education/fox-monk.webp',  frames:1, fps:1, w:150, x:22, y:20, plane:'mid', move:'pace', dur:16,
         note:'Лис-монах несёт стопку книг выше головы: шаг левой → середина → шаг правой.' },
       { say:'goose', id:'goose-cap', file:'education/goose-cap.webp', frames:1, fps:1, w:110, x:72, y:20, plane:'mid', move:'hop', dur:5,
         note:'Гусь в академической шапочке с важным видом.' },
@@ -282,22 +282,6 @@ const SCENES = {
       { id:'mask', file:'festivals/mask.webp', frames:2, fps:1, w:110, side:'right', top:'20%', move:'bob',
         note:'Театральная маска: кадр 1 — смех, кадр 2 — плач.' }
     ]
-  },
-
-  bestiary: {
-    name: 'Бестиарий',
-    mood: 'Берег с главной страницы; сами существа живут на своих страницах.',
-    h: 47,
-    layers: [
-      { kind:'far',    file:'home/far.webp',    reuse:true, full:true, bottom:15, depth:.3 },
-      { kind:'mid',    file:'home/mid.webp',    reuse:true, full:true, bottom:6,  depth:.18 },
-      { kind:'ground', file:'home/ground.webp', reuse:true, full:true, bottom:0,  depth:.08 }
-    ],
-    sprites: [
-      cloud('home/cloud-a.webp', 150, 82, 200, .1), cloud('home/cloud-b.webp', 110, 90, 250, .5),
-      cloud('home/cloud-c.webp', 130, 76, 230, .8),
-      sun(80, 76, 120)
-    ].concat(nightSky())
   },
 
   /* the strip above the footer, on every page: plain CSS ground for now */

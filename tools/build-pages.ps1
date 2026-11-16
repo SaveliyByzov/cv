@@ -25,8 +25,7 @@ $pages = @(
   @{ key = 'research';   rel = 'research/'; art = 'research';   water = $false; og = 'website' },
   @{ key = 'education';  rel = 'education/'; art = 'education'; water = $false; og = 'website' },
   @{ key = 'skillslang'; rel = 'skills/';   art = 'skills';     water = $false; og = 'website' },
-  @{ key = 'festivals';  rel = 'festivals/'; art = 'festivals'; water = $true;  og = 'website' },
-  @{ key = 'bestiary';   rel = 'bestiary/'; art = 'home';       water = $false; og = 'website' }
+  @{ key = 'festivals';  rel = 'festivals/'; art = 'festivals'; water = $true;  og = 'website' }
 )
 
 $titles = @{
@@ -34,17 +33,17 @@ $titles = @{
     home = 'Savely Byzov — Linguist // EFL Teacher // Researcher'; experience = 'Experience — Savely Byzov'
     research = 'Research and publications — Savely Byzov'; education = 'Education — Savely Byzov'
     skillslang = 'Skills, languages and interests — Savely Byzov'; festivals = 'Festivals and volunteering — Savely Byzov'
-    cv = 'CV — Savely Byzov'; bestiary = 'Bestiary — Savely Byzov' }
+    cv = 'CV — Savely Byzov' }
   ru = @{
     home = 'Савелий Бызов — лингвист // преподаватель английского // исследователь'; experience = 'Опыт работы — Савелий Бызов'
     research = 'Исследования и публикации — Савелий Бызов'; education = 'Образование — Савелий Бызов'
     skillslang = 'Навыки, языки и увлечения — Савелий Бызов'; festivals = 'Фестивали и волонтёрство — Савелий Бызов'
-    cv = 'Резюме — Савелий Бызов'; bestiary = 'Бестиарий — Савелий Бызов' }
+    cv = 'Резюме — Савелий Бызов' }
   sr = @{
     home = 'Saveliy Byzov — lingvista // nastavnik engleskog jezika // istraživač'; experience = 'Iskustvo — Saveliy Byzov'
     research = 'Istraživanja i publikacije — Saveliy Byzov'; education = 'Obrazovanje — Saveliy Byzov'
     skillslang = 'Veštine, jezici i interesovanja — Saveliy Byzov'; festivals = 'Festivali i volonterstvo — Saveliy Byzov'
-    cv = 'CV — Saveliy Byzov'; bestiary = 'Bestijarijum — Saveliy Byzov' }
+    cv = 'CV — Saveliy Byzov' }
 }
 $descs = @{
   en = @{
@@ -54,8 +53,7 @@ $descs = @{
     education = 'Education of Savely Byzov: Master''s in Pedagogy, Bachelor''s in Linguistics, additional training.'
     skillslang = 'Skills, languages and interests of Savely Byzov: teaching, interpreting, English, Russian, Norwegian.'
     festivals = 'Festival interpreting, volunteering and exhibitions of Savely Byzov.'
-    cv = 'Condensed CV of Savely Byzov.'
-    bestiary = 'The creatures of Savely Byzov''s site and the facts they tell: the English language, Britain and the USA, Vikings and the North.' }
+    cv = 'Condensed CV of Savely Byzov.' }
   ru = @{
     home = 'Савелий Бызов — преподаватель вуза и исследователь: преподавание английского, социолингвистика и история английского языка. Белград, Сербия.'
     experience = 'Опыт работы Савелия Бызова: преподаватель вуза, экскурсовод, подход к преподаванию.'
@@ -63,8 +61,7 @@ $descs = @{
     education = 'Образование Савелия Бызова: магистратура по педагогике, бакалавриат по лингвистике, дополнительное обучение.'
     skillslang = 'Навыки, языки и увлечения Савелия Бызова: преподавание, перевод, английский, русский, норвежский.'
     festivals = 'Перевод на фестивалях, волонтёрство и выставки Савелия Бызова.'
-    cv = 'Краткое резюме Савелия Бызова.'
-    bestiary = 'Существа с сайта Савелия Бызова и их факты: английский язык, Британия и США, викинги и Север.' }
+    cv = 'Краткое резюме Савелия Бызова.' }
   sr = @{
     home = 'Saveliy Byzov — univerzitetski predavač i istraživač: nastava engleskog jezika, sociolingvistika i istorija engleskog jezika. Beograd, Srbija.'
     experience = 'Radno iskustvo Savelija Byzova: predavač na univerzitetu, vodič u muzeju, pristup nastavi.'
@@ -72,8 +69,7 @@ $descs = @{
     education = 'Obrazovanje Savelija Byzova: master iz pedagogije, osnovne studije lingvistike, dodatna obuka.'
     skillslang = 'Veštine, jezici i interesovanja Savelija Byzova: nastava, prevođenje, engleski, ruski, norveški.'
     festivals = 'Prevođenje na festivalima, volontiranje i izložbe Savelija Byzova.'
-    cv = 'Sažeti CV Savelija Byzova.'
-    bestiary = 'Stvorenja sa sajta Savelija Byzova i njihove činjenice: engleski jezik, Britanija i SAD, Vikinzi i Sever.' }
+    cv = 'Sažeti CV Savelija Byzova.' }
 }
 $imgAlt = @{ en = 'Savely Byzov: a painted medieval riverbank'; ru = 'Савелий Бызов: расписной средневековый берег реки'; sr = 'Saveliy Byzov: oslikana srednjovekovna obala reke' }
 

@@ -1,4 +1,4 @@
-﻿/* Shared behaviour for every page of the site.
+/* Shared behaviour for every page of the site.
    Each page is a thin shell (<body data-page data-root>); this script builds the
    common chrome (language bar, header, section nav, footer, lightbox), then fills
    the page from the trilingual T object in i18n.*.js. */
@@ -6,7 +6,7 @@
 'use strict';
 
 const BODY = document.body;
-const PAGE = BODY.dataset.page;            // home | experience | research | education | skillslang | festivals | cv | bestiary
+const PAGE = BODY.dataset.page;            // home | experience | research | education | skillslang | festivals | cv
 const ROOT = BODY.dataset.root || '';      // path back to the site root: '' on the home page, '../' one level down...
 const LANG = BODY.dataset.lang || 'en';    // a page is in one language (/, /ru/, /sr/)
 const BASE = ROOT + (LANG === 'en' ? '' : LANG + '/');   // where the pages of this language live
@@ -18,9 +18,9 @@ const NAV = [
   ['skillslang', 'skills/'],
   ['festivals',  'festivals/']
 ];
-const NAV_ALL = NAV.concat([['bestiary', 'bestiary/']]);   // the section bar also has the Bestiary
+const NAV_ALL = NAV;
 const PAGE_PATHS = { home:'', cv:'cv/', experience:'experience/', research:'research/', education:'education/',
-                     skillslang:'skills/', festivals:'festivals/', bestiary:'bestiary/' };
+                     skillslang:'skills/', festivals:'festivals/' };
 
 /* ---------- scenes: layered backdrops and sprites (slots from scenes.js) ---------- */
 const HAS_SCENES = typeof SCENES !== 'undefined';
@@ -103,7 +103,6 @@ function speak(item){
   const arr = set[talkLang()] || set.en;
   item.n = (item.n == null ? Math.floor(Math.random() * arr.length) : item.n + 1) % arr.length;
   b.textContent = arr[item.n];
-  markFound(item.key, item.n);
   if (window.SB_SOUND) SB_SOUND.chime(item.key);
   TALK.active = item; TALK.last = item;
   b.classList.add('show');
@@ -187,57 +186,10 @@ function buildMargins(host, key){
   });
 }
 
-/* ---------- collected facts, Bestiary, fact of the day ---------- */
+/* ---------- fact of the day ---------- */
 function esc(t){ return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function ui(){ return (typeof FACTS_UI !== 'undefined' && (FACTS_UI[LANG] || FACTS_UI.en)) || {}; }
 function factsOf(key){ const set = FACTS[key]; return set[LANG] || set.en; }
-function loadFound(){ try { return JSON.parse(localStorage.getItem('sb-facts') || '{}') || {}; } catch (e) { return {}; } }
-function markFound(key, idx){
-  const f = loadFound(), a = f[key] || (f[key] = []);
-  if (a.indexOf(idx) < 0) { a.push(idx); try { localStorage.setItem('sb-facts', JSON.stringify(f)); } catch (e) {} }
-  updateCount();
-}
-function totalFacts(){ let n = 0; if (typeof FACTS === 'undefined') return 0; Object.keys(FACTS).forEach(function(k){ n += (FACTS[k].en || []).length; }); return n; }
-function foundCount(){ const f = loadFound(); let n = 0; Object.keys(f).forEach(function(k){ if (typeof FACTS !== 'undefined' && FACTS[k]) n += f[k].length; }); return n; }
-function updateCount(){
-  const c = $('best-count');
-  if (c) c.textContent = foundCount() + '/' + totalFacts();
-  const g = $('best-got');
-  if (g) g.textContent = foundCount();
-}
-function allTalkers(){
-  const out = [];
-  if (!HAS_SCENES || typeof FACTS === 'undefined') return out;
-  Object.keys(SCENES).forEach(function(pk){
-    (SCENES[pk].sprites || []).forEach(function(sp){ if (sp.say && FACTS[sp.say]) out.push({ sp:sp, page:pk }); });
-  });
-  return out;
-}
-function bestiaryHTML(){
-  const u = ui(), t = T[LANG], found = loadFound(), list = allTalkers();
-  let total = 0, got = 0;
-  const cards = list.map(function(o){
-    const key = o.sp.say, facts = factsOf(key), f = found[key] || [];
-    total += facts.length; got += f.length;
-    const nm = FACTS[key].name || {};
-    const where = o.page === 'home' ? t.homeLabel : t.labels[o.page];
-    return '<li class="beast' + (f.length === facts.length ? ' beast--full' : '') + '">' +
-      '<span class="beast-pic" style="--frames:' + o.sp.frames + ';background-image:url(\'' + ROOT + ART_DIR + o.sp.file + '\')" role="img" aria-label="' + esc(nm[LANG] || nm.en || key) + '"></span>' +
-      '<div class="beast-text"><h3>' + esc(nm[LANG] || nm.en || key) + '</h3>' +
-      '<p class="beast-where"><a href="' + BASE + PAGE_PATHS[o.page] + '">' + esc(where) + '</a> <span>' + f.length + '/' + facts.length + '</span></p>' +
-      '<ol class="beast-facts">' + facts.map(function(x, i){
-        return f.indexOf(i) >= 0 ? '<li>' + esc(x) + '</li>' : '<li class="locked" aria-label="' + esc(u.locked || '') + '">· · ·</li>';
-      }).join('') + '</ol></div></li>';
-  }).join('');
-  return '<div class="tabpanel" id="panel-bestiary">' +
-    '<p class="prose">' + esc(u.intro || '') + '</p>' +
-    '<p class="best-progress"><b id="best-got">' + got + '</b> / ' + total + ' <span>' + esc(u.found || '') + '</span></p>' +
-    '<div class="best-bar" aria-hidden="true"><i style="width:' + (total ? Math.round(got / total * 100) : 0) + '%"></i></div>' +
-    (got === total && total ? '<p class="best-done">' + esc(u.all || '') + '</p>' : '') +
-    '<ul class="bestiary">' + cards + '</ul>' +
-    '<p class="best-reset"><button type="button" id="best-reset">' + esc(u.reset || '') + '</button></p>' +
-  '</div>';
-}
 /* one fact per day, the same for everyone that day */
 function fillFactDay(){
   const box = $('factday');
@@ -251,7 +203,6 @@ function fillFactDay(){
   $('factday-label').textContent = ui().day || '';
   $('factday-text').textContent = pick[1];
   $('factday-who').textContent = '— ' + (nm[LANG] || nm.en || '');
-  $('factday-more').textContent = ui().more || '';
   box.hidden = false;
 }
 
@@ -326,7 +277,7 @@ const HOME_BODY =
   '</dl>' +
   '<aside class="factday" id="factday" hidden><span class="factday-label" id="factday-label"></span>' +
     '<p class="factday-text" id="factday-text"></p><p class="factday-who" id="factday-who"></p>' +
-    '<a class="factday-more" id="factday-more" href="' + BASE + 'bestiary/"></a></aside>' +
+  '</aside>' +
   '<div class="rule home-rule"></div>' +
   '<ul class="home-grid" id="home-grid">' +
     NAV.map(function(n, i){
@@ -342,7 +293,7 @@ const TABBAR =
     NAV_ALL.map(function(n, i){
       return '<a href="' + BASE + n[1] + '" data-nav="' + n[0] + '" data-tone="' + n[0] + '" aria-keyshortcuts="' + (i + 1) + '"' +
              (PAGE === n[0] ? ' aria-current="page"' : '') + '>' +
-             '<span id="tab-' + n[0] + '"></span>' + (n[0] === 'bestiary' ? '<small class="tab-count" id="best-count"></small>' : '') +
+             '<span id="tab-' + n[0] + '"></span>' +
              '<span class="chip" aria-hidden="true">' + ROMAN[i] + '</span></a>';
     }).join('') +
   '</nav>';
@@ -371,7 +322,6 @@ if (PAGE === 'home' || PAGE === 'cv') {
 } else {
   main.insertAdjacentHTML('beforebegin', COMPACT);
   main.insertAdjacentHTML('afterbegin', TABBAR);
-  if (PAGE === 'bestiary') main.insertAdjacentHTML('beforeend', bestiaryHTML());
   main.insertAdjacentHTML('beforeend', PAGER);
 }
 main.insertAdjacentHTML('beforeend', '<p class="print-note" id="print-note"></p>');
@@ -466,10 +416,7 @@ function applyLang(lang){
   setHTML('tab-education', t.labels.education);
   setHTML('tab-skillslang', t.labels.skillslang);
   setHTML('tab-festivals', t.labels.festivals);
-  setHTML('tab-bestiary', ui().title);
-  if (PAGE === 'bestiary') setHTML('chapter-title', ui().title);
   fillFactDay();
-  updateCount();
 
   /* home */
   setText('now-label', t.labels.now);
@@ -686,13 +633,6 @@ function start(){
       if (a && !a.hasAttribute('download') && a.origin === location.origin) SB_SOUND.page();
     }, true);
   } else { soundBtn.hidden = true; }
-
-  /* ---- Bestiary: forget progress ---- */
-  const resetBtn = $('best-reset');
-  if (resetBtn) resetBtn.addEventListener('click', function(){
-    try { localStorage.removeItem('sb-facts'); } catch(e){}
-    location.reload();
-  });
 
   /* ---- Text size (accessibility): normal / large / extra-large ---- */
   const FONT_SIZES = ['normal', 'large', 'xlarge'];
