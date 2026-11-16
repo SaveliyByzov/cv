@@ -1,38 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://saveliybyzov.github.io/cv/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/sr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/"/>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://saveliybyzov.github.io/cv/experience/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/experience/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/experience/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/experience/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/ru/experience/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/experience/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/experience/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/experience/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/sr/experience/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/experience/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/experience/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/experience/"/>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saveliybyzov.github.io/cv/research/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/research/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/research/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/research/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/research/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/ru/research/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/research/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/research/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/research/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/research/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/sr/research/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/research/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/research/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/research/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/research/"/>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saveliybyzov.github.io/cv/education/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/education/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/education/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/education/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/education/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/ru/education/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/education/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/education/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/education/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/education/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/sr/education/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/education/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/education/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/education/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/education/"/>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saveliybyzov.github.io/cv/skills/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/skills/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/skills/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/skills/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/skills/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/ru/skills/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/skills/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/skills/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/skills/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/skills/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/sr/skills/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/skills/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/skills/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/skills/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/skills/"/>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saveliybyzov.github.io/cv/festivals/</loc>
-    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/festivals/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/ru/festivals/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/festivals/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/sr/festivals/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/festivals/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/festivals/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/bestiary/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/bestiary/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/ru/bestiary/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/bestiary/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://saveliybyzov.github.io/cv/sr/bestiary/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://saveliybyzov.github.io/cv/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://saveliybyzov.github.io/cv/ru/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://saveliybyzov.github.io/cv/sr/bestiary/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://saveliybyzov.github.io/cv/bestiary/"/>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

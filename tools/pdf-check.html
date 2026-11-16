@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="robots" content="noindex"><title>PDF check</title>
+<style>body{margin:0;background:#888;}canvas{display:block;margin:6px auto;background:#fff;max-width:100%;}p{color:#fff;margin:6px 10px;font:13px system-ui}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head><body>
+<p id="log">loading…</p>
+<script>
+(async function(){
+  const q = new URLSearchParams(location.search);
+  const file = q.get('f') || 'en', want = (q.get('p') || '1').split(',').map(Number), scale = +(q.get('s') || 1);
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const pdf = await pdfjsLib.getDocument('../assets/cv/Byzov-CV-' + file + '.pdf').promise;
+  document.getElementById('log').textContent = 'Byzov-CV-' + file + '.pdf: ' + pdf.numPages + ' page(s)';
+  for (const n of want) {
+    if (n > pdf.numPages) continue;
+    const page = await pdf.getPage(n), vp = page.getViewport({ scale: scale });
+    const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height;
+    document.body.appendChild(c);
+    await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+  }
+  const t = await (await pdf.getPage(1)).getTextContent();
+  window.__text = t.items.map(function(i){ return i.str; }).join(' ');
+  document.title = 'pdf ready';
+})().catch(function(e){ document.getElementById('log').textContent = 'ERROR ' + e.message; });
+</script></body></html>

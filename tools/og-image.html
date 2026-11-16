@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Preview image</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  body{margin:0;background:#2e1d12;color:#fbf4dc;font:14px system-ui,sans-serif;}
+  canvas{display:block;max-width:100%;height:auto;}
+  p{margin:8px 12px;}
+</style>
+</head>
+<body>
+<canvas id="c" width="1200" height="630"></canvas>
+<p id="log">drawing…</p>
+<script>
+/* Draws the picture shown when a link to the site is shared (1200 x 630) from the
+   site's own layers, characters and fonts, and saves it as assets/og-image.jpg
+   through the local server of tools/to-webp.ps1-style runs (serve.ps1 -AllowSave). */
+(async function(){
+  'use strict';
+  const W = 1200, H = 630;
+  const cv = document.getElementById('c'), g = cv.getContext('2d');
+  const say = function(t){ document.getElementById('log').textContent = t; };
+  function load(src){
+    return new Promise(function(ok, bad){ const i = new Image(); i.onload = function(){ ok(i); }; i.onerror = function(){ bad(new Error(src)); }; i.src = src; });
+  }
+  await Promise.all([
+    document.fonts.load('800 110px "Grenze Gotisch"'), document.fonts.load('700 26px "Alegreya SC"'),
+    document.fonts.load('500 26px "Alegreya SC"')
+  ]);
+  const A = '../assets/art/';
+  const im = {};
+  const names = { far:'home/far.webp', mid:'home/mid.webp', ground:'home/ground.webp', water:'water.webp',
+    hare:'home/hare-scribe.webp', snail:'home/snail-castle.webp', sun:'research/star.webp',
+    ca:'home/cloud-a.webp', cb:'home/cloud-b.webp', cc:'home/cloud-c.webp', bird:'home/bird-letter.webp' };
+  await Promise.all(Object.keys(names).map(function(k){ return load(A + names[k]).then(function(i){ im[k] = i; }); }));
+
+  /* sky: dusty blue, warm glow low, a little darker at the top */
+  let grad = g.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, '#6f8da0'); grad.addColorStop(.7, '#a9bcc0'); grad.addColorStop(1, '#c9d2c0');
+  g.fillStyle = grad; g.fillRect(0, 0, W, H);
+  const glow = g.createRadialGradient(W * .5, H * .66, 20, W * .5, H * .66, 640);
+  glow.addColorStop(0, 'rgba(255,240,200,.75)'); glow.addColorStop(1, 'rgba(255,240,200,0)');
+  g.fillStyle = glow; g.fillRect(0, 0, W, H);
+
+  function sprite(img, x, y, size, frame){ g.drawImage(img, (frame || 0) * 320, 0, 320, 320, x, y, size, size); }
+  function band(img, bottom, scale){   /* a layer, as wide as the picture plus a margin, bottom-aligned */
+    const w = W * scale, h = w * img.naturalHeight / img.naturalWidth;
+    g.drawImage(img, (W - w) / 2, bottom - h, w, h);
+  }
+
+  sprite(im.sun, 985, 38, 150);
+  g.globalAlpha = .95;
+  g.drawImage(im.ca, 40, 22, 170, 170 * im.ca.naturalHeight / im.ca.naturalWidth);
+  g.drawImage(im.cb, 430, 8, 135, 135 * im.cb.naturalHeight / im.cb.naturalWidth);
+  g.drawImage(im.cc, 790, 40, 150, 150 * im.cc.naturalHeight / im.cc.naturalWidth);
+  g.globalAlpha = 1;
+
+  band(im.far, 462, 1.2);
+  band(im.mid, 528, 1.2);
+  band(im.ground, 596, 1.2);
+
+  /* water with the site's own texture, scalloped crest */
+  g.save();
+  g.beginPath(); g.rect(0, 556, W, H - 556); g.clip();
+  g.fillStyle = '#2556b4'; g.fillRect(0, 556, W, H);
+  const pat = g.createPattern(im.water, 'repeat');
+  g.save(); g.scale(.55, .55); g.fillStyle = pat; g.fillRect(0, 556 / .55, W / .55, (H - 556) / .55); g.restore();
+  g.restore();
+  g.fillStyle = '#c9a73a';   /* ochre scallops over the water edge */
+  for (let x = -10; x < W + 40; x += 44) { g.beginPath(); g.arc(x + 22, 552, 22, 0, Math.PI); g.fill(); }
+  g.strokeStyle = '#2e1d12'; g.lineWidth = 2;
+  for (let x = -10; x < W + 40; x += 44) { g.beginPath(); g.arc(x + 22, 552, 22, 0, Math.PI); g.stroke(); }
+
+  sprite(im.hare, 150, 372, 215, 0);
+  sprite(im.snail, 700, 388, 170, 0);
+
+  /* title */
+  g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  g.font = '800 124px "Grenze Gotisch"';
+  g.fillStyle = '#fbf4dc'; g.fillText('Savely Byzov', W / 2 + 5, 190 + 5);
+  g.fillStyle = '#2e1d12'; g.fillText('Savely Byzov', W / 2, 190);
+  g.fillStyle = '#c63a22'; g.font = '800 124px "Grenze Gotisch"';
+  const sw = g.measureText('Savely Byzov').width;
+  g.save(); g.beginPath(); g.rect(W / 2 - sw / 2 - 4, 60, g.measureText('S').width + 8, 160); g.clip();
+  g.textAlign = 'left'; g.fillText('S', W / 2 - sw / 2, 190); g.restore();
+
+  /* the role badge */
+  g.save();
+  g.translate(W / 2, 252); g.rotate(-.021);
+  const label = 'LINGUIST  ◆  EFL TEACHER  ◆  RESEARCHER';
+  g.font = '700 31px "Alegreya SC"'; g.textAlign = 'center';
+  const bw = g.measureText(label).width + 56, bh = 56;
+  g.fillStyle = '#2e1d12'; g.fillRect(-bw / 2 + 6, -bh / 2 + 6, bw, bh);
+  g.fillStyle = '#fbf4dc'; g.fillRect(-bw / 2, -bh / 2, bw, bh);
+  g.strokeStyle = '#2e1d12'; g.lineWidth = 3; g.strokeRect(-bw / 2, -bh / 2, bw, bh);
+  g.fillStyle = '#2e1d12'; g.textBaseline = 'middle'; g.fillText(label, 0, 3);
+  g.restore();
+
+  /* a thin painted frame */
+  g.strokeStyle = '#2e1d12'; g.lineWidth = 8; g.strokeRect(4, 4, W - 8, H - 8);
+
+  const blob = await new Promise(function(ok){ cv.toBlob(ok, 'image/jpeg', .9); });
+  const r = await fetch('/__save/assets/og-image.jpg', { method:'PUT', body:blob });
+  say(r.ok ? 'saved assets/og-image.jpg  ' + Math.round(blob.size / 1024) + ' KB' : 'SAVE FAILED ' + r.status);
+  document.title = r.ok ? 'preview: done' : 'preview: FAILED';
+  try { await fetch('/__done'); } catch (e) {}
+})().catch(function(e){ document.getElementById('log').textContent = 'ERROR ' + e.message; document.title = 'preview: FAILED'; });
+</script>
+</body>
+</html>

@@ -56,11 +56,22 @@ function cloud(file, w, y, dur, phase, extra){
 }
 /* a golden sun with a face, behind all layers (it is the same picture as the research star) */
 function sun(x, y, w){
-  return { id:'sun', file:'research/star.webp', frames:1, fps:1, w:w, x:x, y:y, plane:'bg', move:'bob', dur:8 };
+  return { id:'sun', file:'research/star.webp', frames:1, fps:1, w:w, x:x, y:y, plane:'bg', move:'bob', dur:8, when:'day' };
 }
 function star(x, y, w, dur, phase){
   return { id:'star', file:'research/star.webp', frames:1, fps:1, w:w, x:x, y:y,
     plane:'sky', move:'twinkle', dur:dur, phase:phase };
+}
+
+/* the night sky every page can switch to (moon and stars show only at night; the
+   Research chapter has its own, always-on night sky) */
+function nightSky(){
+  const moon = { id:'moon', file:'research/moon.webp', frames:1, fps:1, w:120, x:6, y:76, plane:'sky', move:'bob', dur:6, when:'night' };
+  const stars = [[24,90,34,3.2,.1], [36,82,24,4.1,.6], [48,92,40,2.8,.3], [60,84,24,3.7,.8], [72,91,30,4.4,.45],
+                 [84,83,36,3.1,.2], [92,92,22,3.9,.7], [16,86,20,4.6,.55], [54,78,18,3.4,.9]].map(function(a){
+    return Object.assign(star(a[0], a[1], a[2], a[3], a[4]), { when:'night' });
+  });
+  return [moon].concat(stars);
 }
 
 /* sprite fields
@@ -70,7 +81,8 @@ function star(x, y, w, dur, phase){
    x, y:  left and bottom, % of the scene
    dur:   seconds for one loop of the movement;  range: px for `pace`
    phase: 0..1, where in the loop it starts;     flip: face left
-   opacity, filter: plain CSS, for night clouds and the like               */
+   opacity, filter: plain CSS, for night clouds and the like
+   when:  'night' or 'day': shown only in that mood of the site                  */
 const SCENES = {
   home: {
     name: 'Берег реки',
@@ -102,7 +114,7 @@ const SCENES = {
       cloud('home/cloud-b.webp', 150, 84, 190, .70), cloud('home/cloud-c.webp', 110, 64, 260, .84),
       cloud('home/cloud-a.webp', 140, 91, 200, .95),
       sun(80, 69, 150)
-    ],
+    ].concat(nightSky()),
     margins: [
       { id:'manicule', file:'home/manicule.webp', frames:1, fps:1, w:120, side:'left', top:'4%', move:'bob',
         note:'Маникула: рука в кружевном манжете, указательный палец вправо.' }
@@ -133,7 +145,7 @@ const SCENES = {
       cloud('experience/cloud-a.webp', 110, 70, 250, .45), cloud('experience/cloud-b.webp', 140, 84, 190, .66),
       cloud('experience/cloud-a.webp', 100, 92, 230, .88),
       sun(70, 80, 130)
-    ],
+    ].concat(nightSky()),
     margins: [
       { id:'inkpot', file:'experience/inkpot.webp', frames:1, fps:1, w:110, side:'right', top:'12%', move:'bob',
         note:'Чернильница с ножками, из неё торчит перо.' }
@@ -200,7 +212,7 @@ const SCENES = {
       cloud('education/cloud-a.webp', 120, 72, 250, .45), cloud('education/cloud-b.webp', 150, 86, 190, .65),
       cloud('education/cloud-a.webp', 100, 93, 230, .87),
       sun(70, 77, 120)
-    ],
+    ].concat(nightSky()),
     margins: [
       { id:'candle', file:'education/candle.webp', frames:1, fps:1, w:100, side:'right', top:'8%', move:'bob',
         note:'Свеча с сонным лицом.' }
@@ -230,7 +242,7 @@ const SCENES = {
         note:'Барсук с лютней.' },
       cloud('home/cloud-a.webp', 150, 80, 220, .12), cloud('home/cloud-b.webp', 110, 90, 260, .5),
       cloud('home/cloud-c.webp', 130, 72, 240, .82)
-    ],
+    ].concat(nightSky()),
     margins: [
       { id:'three-tongues', file:'skills/three-tongues.webp', frames:1, fps:1, w:120, side:'left', top:'46%', move:'bob',
         note:'Три свитка-«языка» вьются из одного рта.' }
@@ -265,11 +277,27 @@ const SCENES = {
       cloud('home/cloud-c.webp', 140, 78, 220, .7,  { opacity:.8 }),
       cloud('home/cloud-a.webp', 110, 70, 260, .25, { opacity:.8 }), cloud('home/cloud-b.webp', 150, 88, 190, .55, { opacity:.8 }),
       cloud('home/cloud-c.webp', 120, 66, 240, .9,  { opacity:.8 })
-    ],
+    ].concat(nightSky()),
     margins: [
       { id:'mask', file:'festivals/mask.webp', frames:2, fps:1, w:110, side:'right', top:'20%', move:'bob',
         note:'Театральная маска: кадр 1 — смех, кадр 2 — плач.' }
     ]
+  },
+
+  bestiary: {
+    name: 'Бестиарий',
+    mood: 'Берег с главной страницы; сами существа живут на своих страницах.',
+    h: 47,
+    layers: [
+      { kind:'far',    file:'home/far.webp',    reuse:true, full:true, bottom:15, depth:.3 },
+      { kind:'mid',    file:'home/mid.webp',    reuse:true, full:true, bottom:6,  depth:.18 },
+      { kind:'ground', file:'home/ground.webp', reuse:true, full:true, bottom:0,  depth:.08 }
+    ],
+    sprites: [
+      cloud('home/cloud-a.webp', 150, 82, 200, .1), cloud('home/cloud-b.webp', 110, 90, 250, .5),
+      cloud('home/cloud-c.webp', 130, 76, 230, .8),
+      sun(80, 76, 120)
+    ].concat(nightSky())
   },
 
   /* the strip above the footer, on every page: plain CSS ground for now */

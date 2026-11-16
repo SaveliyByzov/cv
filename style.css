@@ -1229,6 +1229,152 @@ footer a:hover{color:var(--bone);}
 /* =====================================================================
    Print: the condensed one-pager. Dark ink on white; no ornament.
    ===================================================================== */
+/* =====================================================================
+   Little buttons in the language bar: day/night and sound
+   ===================================================================== */
+.mood-group{display:flex;align-items:center;gap:2px;}
+.langbar .icon-btn{
+  display:grid;
+  place-items:center;
+  width:30px;
+  height:28px;
+  padding:0;
+}
+.langbar .icon-btn[aria-pressed="true"]{background:var(--ochre);color:var(--ink);}
+.icon-btn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.time-btn .ico-moon{display:none;}
+html[data-time="night"] .time-btn .ico-sun{display:none;}
+html[data-time="night"] .time-btn .ico-moon{display:block;}
+.sound-btn .ico-off{opacity:.9;}
+.sound-btn[aria-pressed="true"] .ico-off{display:none;}
+body[data-page="research"] .time-btn{display:none;}   /* this chapter is always night */
+
+/* =====================================================================
+   Night: the same scenes, darker. Moon and stars appear, the sun hides.
+   ===================================================================== */
+.when-night{display:none;}
+html[data-time="night"] .when-night{display:block;}
+html[data-time="night"] .when-day{display:none;}
+html[data-time="night"] body:not([data-page="research"]){
+  --c-sky:#1b2f6b;
+  --title:var(--bone);
+  --title-halo:#0d1a45;
+  --sky-top:rgba(0,0,25,.42);
+  --sky-glow:radial-gradient(circle 440px at 10% 26%, rgba(255,240,190,.5), transparent 68%), radial-gradient(ellipse 80% 40% at 50% 100%, rgba(110,100,200,.4), transparent 70%);
+  --sky-pat:linear-gradient(transparent, transparent);
+}
+html[data-time="night"] body:not([data-page="research"]) .scene-stage .layer,
+html[data-time="night"] body:not([data-page="research"]) .scene-stage .sprite:not(.when-night){
+  filter:brightness(.55) saturate(.8) contrast(1.05);
+}
+html[data-time="night"] body:not([data-page="research"]) .chapter-num{color:var(--ochre);}
+
+/* =====================================================================
+   Fact of the day (title page)
+   ===================================================================== */
+.factday{
+  max-width:62ch;
+  margin:46px auto 0;
+  padding:16px 22px 18px;
+  border:var(--line) solid var(--ink);
+  border-radius:var(--r);
+  background:var(--bone);
+  box-shadow:var(--drop) var(--lapis), 5px 5px 0 2px var(--ink);
+  transform:rotate(-.4deg);
+}
+.factday[hidden]{display:none;}
+.factday-label{
+  display:inline-block;
+  margin:-34px 0 10px;
+  padding:1px 12px 2px;
+  border:var(--line) solid var(--ink);
+  border-radius:var(--r);
+  background:var(--lapis);
+  color:var(--bone);
+  font-family:var(--caps);
+  font-weight:700;
+  font-size:.92rem;
+  letter-spacing:.06em;
+}
+.factday-text{margin:0;font-size:1.14rem;line-height:1.5;}
+.factday-who{margin:6px 0 0;font-style:italic;color:var(--ink-soft);}
+.factday-more{display:inline-block;margin-top:8px;font-size:.98rem;}
+
+/* =====================================================================
+   Bestiary
+   ===================================================================== */
+[data-tone="bestiary"]{--tone:#b5536c;--tone-ink:var(--bone);}
+.tab-count{margin-left:.45em;font:700 .72rem/1 var(--caps);letter-spacing:.06em;opacity:.9;}
+.best-progress{margin:10px 0 12px;font-family:var(--caps);font-weight:700;font-size:1.15rem;letter-spacing:.05em;}
+.best-progress b{color:var(--vermilion-deep);font-size:1.6rem;}
+.best-progress span{font-weight:500;color:var(--ink-soft);}
+.best-bar{
+  height:16px;
+  border:var(--line) solid var(--ink);
+  border-radius:8px;
+  background:var(--bone);
+  overflow:hidden;
+  box-shadow:3px 3px 0 var(--ink);
+}
+.best-bar i{
+  display:block;
+  height:100%;
+  background:repeating-linear-gradient(115deg, var(--vermilion) 0 12px, var(--gold) 12px 16px);
+  border-right:var(--line) solid var(--ink);
+}
+.best-done{
+  margin:18px 0 0;
+  padding:8px 16px;
+  border:var(--line) solid var(--ink);
+  border-radius:var(--r);
+  background:var(--ochre);
+  font-family:var(--caps);
+  font-weight:700;
+  letter-spacing:.04em;
+}
+.bestiary{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:28px 26px;}
+.beast{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  padding:16px;
+  border:var(--line) solid var(--ink);
+  border-radius:var(--r);
+  background:var(--bone);
+  box-shadow:var(--drop) var(--ochre), 5px 5px 0 2px var(--ink);
+}
+.beast--full{box-shadow:var(--drop) var(--verdigris), 5px 5px 0 2px var(--ink);}
+.beast-pic{
+  flex:0 0 96px;
+  width:96px;
+  aspect-ratio:1;
+  background-repeat:no-repeat;
+  background-position:0 0;
+  background-size:calc(var(--frames, 1) * 100%) 100%;
+}
+.beast h3{margin:0;font-weight:700;font-size:1.2rem;line-height:1.2;}
+.beast-where{margin:2px 0 8px;font-size:.92rem;color:var(--ink-soft);}
+.beast-where span{margin-left:.4em;font-family:var(--caps);font-weight:700;color:var(--vermilion-deep);}
+.beast-facts{margin:0;padding-left:1.1em;font-size:.95rem;line-height:1.4;}
+.beast-facts li{margin-bottom:6px;}
+.beast-facts .locked{list-style:none;margin-left:-1.1em;opacity:.45;letter-spacing:.4em;}
+.best-reset{margin:34px 0 0;text-align:center;}
+.best-reset button{
+  appearance:none;
+  padding:6px 16px;
+  border:var(--line) solid var(--ink);
+  border-radius:var(--r);
+  background:transparent;
+  color:var(--ink-soft);
+  font:500 .95rem/1.3 var(--body);
+  cursor:pointer;
+}
+.best-reset button:hover{background:var(--vellum-deep);color:var(--ink);}
+@media (max-width:760px){
+  .bestiary{grid-template-columns:1fr;}
+  .beast-pic{flex-basis:72px;width:72px;}
+}
+@media print{.factday,.tab-count,.mood-group,.best-reset{display:none !important;}}
 .print-note{display:none;}
 @media print{
   :root{--ink:#111;--ink-soft:#555;--accent:#111;}

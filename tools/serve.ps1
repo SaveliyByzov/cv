@@ -31,7 +31,7 @@ try {
       elseif ($AllowSave -and $req.HttpMethod -eq 'PUT' -and $urlPath.StartsWith('/__save/')) {
         $rel = $urlPath.Substring(8)
         $dest = [IO.Path]::GetFullPath((Join-Path $root ($rel -replace '/','\')))
-        $ok = $dest.StartsWith((Join-Path $root 'assets\'), [StringComparison]::OrdinalIgnoreCase) -and $dest.EndsWith('.webp')
+        $ok = $dest.StartsWith((Join-Path $root 'assets\'), [StringComparison]::OrdinalIgnoreCase) -and ($dest.EndsWith('.webp') -or $dest.EndsWith('.jpg'))
         if (-not $ok) { $res.StatusCode = 403 }
         else {
           New-Item -ItemType Directory -Force (Split-Path $dest) | Out-Null
