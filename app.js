@@ -444,6 +444,7 @@ function applyLang(lang){
   setText('research-text', t.research);
   setText('teaching-text', t.teaching);
   setText('interpreting-text', t.interpreting);
+  ['research-text', 'teaching-text', 'interpreting-text'].forEach(dropcap);
 
   fillEntry('exp1', t.exp1);
   fillEntry('exp2', t.exp2);

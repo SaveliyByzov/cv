@@ -496,6 +496,13 @@ $pages = [ordered]@{
       @('mask','mask','',''))
     paper = @(); tight = @('far','mid'); islands = @('far','mid'); seacut = @{ far = @(575,156,706,818) }; tile = @{ ground = @(480,940) }; ipar = @{ far = @(222,208,182,64,2200); mid = @(222,208,182,64,1100) }; clean = @('far','mid'); crop = @{ far = @(100,1290); mid = @(100,1292) }
   }
+  'north' = @{
+    grid = @(
+      @('viking-goose','viking-goose','viking-goose','runestone'),
+      @('wolf','wolf','wolf','raven'),
+      @('reindeer','reindeer','reindeer','longship'))
+    paper = @(); crop = @{}
+  }
 }
 
 function Find-Raw($dir, $name) {

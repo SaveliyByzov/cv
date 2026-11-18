@@ -78,8 +78,8 @@ function Url($lang, $rel) { if ($lang -eq 'en') { return $site + $rel } else { r
 
 # ---- the favicon is kept from the current home page ----
 $oldHome = [IO.File]::ReadAllText((Join-Path $root 'index.html'), $enc)
-$icon = [regex]::Match($oldHome, '<link rel="icon" href="[^"]+">').Value
-if (-not $icon) { throw 'favicon link not found in index.html' }
+$icon = ''
+
 
 # ---- the <main> of every English page is the source of the markup ----
 $mains = @{}
@@ -205,6 +205,7 @@ foreach ($pg in $pages) {
     $main = $mains[$pg.key]
     if ($lang -ne 'en') { $main = [regex]::Replace($main, '(src|href)="\.\./', '$1="../../') }
 
+    $icon = '<link rel="icon" type="image/png" sizes="32x32" href="' + $rootRel + 'assets/favicon-32.png">' + [char]10 + '<link rel="icon" type="image/png" sizes="192x192" href="' + $rootRel + 'assets/favicon-192.png">' + [char]10 + '<link rel="apple-touch-icon" href="' + $rootRel + 'assets/apple-touch-icon.png">'
     $out = $template
     $map = [ordered]@{
       '{{LANG}}' = $lang; '{{TITLE}}' = (Esc $titles[$lang][$pg.key]); '{{DESC}}' = (Esc $descs[$lang][$pg.key]); '{{URL}}' = $url

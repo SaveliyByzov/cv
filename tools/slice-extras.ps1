@@ -168,4 +168,27 @@ for ($i = 0; $i -lt 4; $i++) {
   $t.SaveJpg((Join-Path $out ("tex-" + $tex[$i] + ".jpg")), 80)
   Write-Host ("  tex-{0}.jpg {1}x{2}" -f $tex[$i], $t.W, $t.H)
 }
-Write-Host 'done'
+
+# ---------- second batch ----------
+function GridRows($file, $names, $cols, $bounds, $cw, $max) {
+  $img = [Px]::Load((Join-Path $raw $file)); $img.Key(70, 180); $img.Despill()
+  $inset = 9
+  for ($r = 0; $r -lt $bounds.Count; $r++) { for ($c = 0; $c -lt $cols; $c++) {
+    $n = $names[$r * $cols + $c]; if (-not $n) { continue }
+    $y0 = $bounds[$r][0]; $h = $bounds[$r][1] - $bounds[$r][0]
+    Cut $img ($c * $cw + $inset) ($y0 + $inset) ($cw - 2 * $inset) ($h - 2 * $inset) $n $max
+  } }
+}
+Write-Host '== scrolls'
+$k = [Px]::Load((Join-Path $raw 'scrolls.jpg'))
+Grid 'scrolls.jpg' @('scroll-wide','scroll-hang','note-pin','vellum','manicule-r','manicule-l','fleur','rosette','quill','quill-drop','lens','cursor-hand') 4 3 ([int]($k.W / 4)) ([int]($k.H / 3)) 420
+Write-Host '== ribbons'
+GridRows 'ribbons.jpg' @('ribbon-red','ribbon-blue','ribbon-green','ribbon-gold','tag-scroll','tag-hang','tag-red','tag-blue','wax-red','wax-green','wax-gold','wax-blue') 4 @(@(0,447),@(447,623),@(623,896)) 300 420
+Write-Host '== photo frames'
+Grid 'photoframes.jpg' @('pframe-portrait-blue','pframe-portrait-red','pframe-land-green','pframe-land-gold') 2 2 512 512 700
+Write-Host '== monograms'
+Grid 'mono.jpg' @('mono-blue','mono-red','mono-green','mono-gold') 2 2 512 512 512
+Write-Host '== initials'
+$k = [Px]::Load((Join-Path $raw 'initials.jpg'))
+Grid 'initials.jpg' @('ini-1','ini-2','ini-3','ini-4','ini-5','ini-6','ini-7','ini-8','ini-9','ini-10','ini-11','ini-12') 4 3 ([int]($k.W / 4)) ([int]($k.H / 3)) 300
+Write-Host 'done 2'
