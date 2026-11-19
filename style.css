@@ -1393,10 +1393,11 @@ body[data-page="festivals"]{--ini:url("assets/art/extras/ini-8.webp");}
   outline:0;
   box-shadow:none;
 }
+.campus-photo{max-width:540px;margin-left:auto;margin-right:auto;}
 .campus-photo img{
   border:solid transparent;
-  border-width:51px 34px 34px;
-  border-image:url("assets/art/extras/pframe-land-green.webp") 77 52 51 52 / 51px 34px 34px 34px stretch;
+  border-width:38px 25px 25px;
+  border-image:url("assets/art/extras/pframe-land-green.webp") 77 52 51 52 / 38px 25px 25px 25px stretch;
   outline:0;
   box-shadow:none;
 }
@@ -1483,7 +1484,7 @@ footer::after{
 
 @media (max-width:700px){
   .plate img{width:190px;height:250px;border-width:28px;border-image-width:28px;}
-  .campus-photo img{border-width:36px 22px 22px;border-image-width:36px 22px 22px 22px;}
+  .campus-photo img{border-width:30px 18px 18px;border-image-width:30px 18px 18px 18px;}
   .sub-label,:lang(ru) .sub-label{padding:.34em 1.5em .46em;font-size:1.3rem;overflow-wrap:anywhere;hyphens:auto;}
   .print-btn{padding-left:30px;}
 }

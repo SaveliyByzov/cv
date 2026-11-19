@@ -99,8 +99,6 @@ const SCENES = {
       ground: 'Охристый берег с травинками и цветами, неровный нижний край.'
     }, 'water').map(function(l){ return l.css ? l : Object.assign(l, { full:true }); }),
     sprites: [
-      { id:'longship', file:'north/longship.webp', frames:1, fps:1, w:130, x:0, y:3, plane:'front', move:'walk', dur:90, phase:.15,
-        note:'Драккар с драконьей головой неспешно плывёт по реке.' },
       { say:'hare', id:'hare-scribe',  file:'home/hare-scribe.webp',  frames:3, fps:3, w:150, x:14, y:21, plane:'mid', move:'idle',
         note:'Заяц-писарь на пеньке: перо поднято → пишет → чешет ухо.' },
       { say:'snail', id:'snail-castle', file:'home/snail-castle.webp', frames:1, fps:1, w:130, x:44, y:19, plane:'mid', move:'idle',
@@ -172,10 +170,6 @@ const SCENES = {
     sprites: [
       { say:'cat', id:'cat-astrologer', file:'research/cat-astrologer.webp', frames:3, fps:3, w:150, x:66, y:22, plane:'back', move:'idle',
         note:'Кот-звездочёт в колпаке: подносит астролябию к глазу → опускает → записывает в кодекс.' },
-      { say:'wolf', id:'wolf', file:'north/wolf.webp', frames:3, fps:5, w:150, x:8, y:19, plane:'mid', move:'pace', dur:44, range:380,
-        note:'Волк трусит по лугу, вид сбоку: три кадра бега.' },
-      { say:'raven', id:'raven', file:'north/raven.webp', frames:1, fps:1, w:90, x:88, y:21, plane:'mid', move:'idle',
-        note:'Ворон с золотым колечком на лапе сидит на лугу.' },
       { id:'flying-book',    file:'research/flying-book.webp',    frames:3, fps:6, w:100, x:0,  y:78, plane:'sky', move:'fly', dur:42, phase:.3,
         note:'Книга летит, хлопая страницами, как птица: вверх → середина → вниз.' },
       { id:'moon',           file:'research/moon.webp',           frames:1, fps:1, w:130, x:6,  y:68, plane:'sky', move:'bob', dur:6,
@@ -212,8 +206,6 @@ const SCENES = {
         note:'Лис-монах несёт стопку книг выше головы: шаг левой → середина → шаг правой.' },
       { say:'goose', id:'goose-cap', file:'education/goose-cap.webp', frames:1, fps:1, w:110, x:72, y:20, plane:'mid', move:'hop', dur:5,
         note:'Гусь в академической шапочке с важным видом.' },
-      { say:'reindeer', id:'reindeer', file:'north/reindeer.webp', frames:3, fps:4, w:170, x:46, y:19, plane:'back', move:'pace', dur:52, range:300,
-        note:'Северный олень с красными ленточками на рогах идёт по дороге.' },
       { id:'bell',      file:'education/bell.webp',      frames:1, fps:1, w:90,  x:52, y:19, plane:'mid', move:'sway', dur:3,
         note:'Колокол в деревянной раме, стоит на земле.' },
       cloud('education/cloud-a.webp', 170, 80, 170, .05), cloud('education/cloud-b.webp', 120, 90, 220, .25),
@@ -246,8 +238,6 @@ const SCENES = {
         note:'Трёхголовый дракон-толмач: говорит левая голова → средняя → правая.' },
       { say:'beaver', id:'beaver-carver',      file:'skills/beaver-carver.webp',      frames:3, fps:6, w:140, x:20, y:21, plane:'mid', move:'idle',
         note:'Бобр строгает ложку: нож вверх → вниз → стружка летит.' },
-      { say:'runes', id:'runestone', file:'north/runestone.webp', frames:1, fps:1, w:100, x:40, y:20, plane:'mid', move:'idle',
-        note:'Рунический камень с узором из переплетённых линий.' },
       { say:'badger', id:'badger-lute',        file:'skills/badger-lute.webp',        frames:1, fps:1, w:130, x:82, y:20, plane:'mid', move:'idle',
         note:'Барсук с лютней.' },
       cloud('home/cloud-a.webp', 150, 80, 220, .12), cloud('home/cloud-b.webp', 110, 90, 260, .5),
