@@ -780,21 +780,17 @@ body[data-page="research"] .chapter-num{color:var(--ochre);}
 }
 .home-card:hover{color:var(--ink);transform:translate(-3px, -3px) rotate(-1deg);box-shadow:9px 9px 0 var(--tone), 9px 9px 0 2px var(--ink);}
 .home-grid li:nth-child(even) .home-card:hover{transform:translate(-3px, -3px) rotate(1deg);}
-/* the picture sits inside the painted frame of its section */
+/* the picture sits inside the painted frame of its section; the frame is drawn at its own proportions */
 .mini{
   position:relative;
   display:block;
+  width:100%;
   aspect-ratio:1 / 1;
-  overflow:hidden;
-  border:22px solid transparent;
-  border-image:var(--frame, none) 62 / 22px stretch;
-  background-color:var(--tone);
-  background-clip:padding-box;
-  background-size:cover;
-  background-position:center;
+  background:
+    var(--frame, none) center / 100% 100% no-repeat,
+    linear-gradient(var(--tone), var(--tone)) center / 54% 54% no-repeat;
 }
-.mini.slot:not(.has-art){background:var(--tone);background-clip:padding-box;color:var(--tone-ink);}
-[data-tone="experience"]{--frame:url("assets/art/extras/ini-6.webp");}
+.mini.slot:not(.has-art){color:var(--tone-ink);}[data-tone="experience"]{--frame:url("assets/art/extras/ini-6.webp");}
 [data-tone="research"]{--frame:url("assets/art/extras/ini-5.webp");}
 [data-tone="education"]{--frame:url("assets/art/extras/ini-10.webp");}
 [data-tone="skillslang"]{--frame:url("assets/art/extras/ini-7.webp");}
@@ -802,8 +798,8 @@ body[data-page="research"] .chapter-num{color:var(--ochre);}
 .mini-sprite{
   position:absolute;
   left:50%;
-  bottom:2%;
-  height:96%;
+  bottom:21.5%;
+  height:60%;
   aspect-ratio:1;
   transform:translateX(-50%);
   background-repeat:no-repeat;
@@ -828,7 +824,7 @@ body[data-page="research"] .chapter-num{color:var(--ochre);}
   hyphens:auto;
   text-wrap:balance;
 }
-:lang(ru) .home-card h3{font-weight:400;font-size:clamp(.8rem, 7cqw, 1.15rem);line-height:1.2;}
+:lang(ru) .home-card h3{font-weight:400;font-size:clamp(.8rem, 8.2cqw, 1.15rem);line-height:1.2;}
 .home-card p{margin:0 10px;color:var(--ink-soft);font-size:1rem;line-height:1.4;}
 /* =====================================================================
    Chapter navigation: pennants on a rope
@@ -1211,7 +1207,7 @@ footer a:hover{color:var(--bone);}
   .now{grid-template-columns:1fr;gap:38px;}
   .home-grid{grid-template-columns:1fr;gap:28px;}
   .home-grid li,.home-grid li:nth-child(n+4){grid-column:auto;}
-  .mini{aspect-ratio:4 / 3;}
+  .mini{width:min(100%, 260px);margin:0 auto;}
   .entry{grid-template-columns:1fr;padding:20px 18px 22px;}
   .date{justify-self:start;margin:8px 0 2px;}
   .entry.has-photo .fest-photo-wrap{float:none;width:100%;max-width:210px;margin:8px auto 26px;}
@@ -1426,13 +1422,18 @@ body[data-page="festivals"]{--ini:url("assets/art/extras/ini-8.webp");}
   outline:0;
   box-shadow:none;
 }
+.fest-photo-wrap{width:200px;height:auto;aspect-ratio:auto;}
 .fest-photo-wrap img{
-  border:16px solid transparent;
-  border-image:url("assets/art/extras/pframe-land-gold.webp") 47 / 16px stretch;
+  height:auto;
+  aspect-ratio:445 / 322;
+  border:21px solid transparent;
+  border-image:url("assets/art/extras/pframe-land-gold.webp") 47 / 21px stretch;
   outline:0;
   box-shadow:none;
 }
 .entry.has-photo .fest-photo-wrap img{
+  height:100%;
+  aspect-ratio:auto;
   border:22px solid transparent;
   border-image:url("assets/art/extras/pframe-portrait-red.webp") 64 / 22px stretch;
 }
@@ -1487,7 +1488,7 @@ footer::after{
 
 @media (max-width:700px){
   .plate img{width:190px;height:250px;border-width:28px;border-image-width:28px;}
-  .campus-photo img{border-width:14px;border-image-width:14px;}
+  .campus-photo img{border-width:20px;border-image-width:20px;}
   .print-btn{padding-left:30px;}
 }
 @media print{
@@ -1496,9 +1497,9 @@ footer::after{
 /* the campus photo sits to the left of the Master's entry */
 .entry.has-photo .campus-photo{float:left;width:250px;max-width:none;margin:6px 30px 14px 4px;}
 .entry.has-photo .campus-photo img{
-  aspect-ratio:4 / 3;
-  border-width:16px;
-  border-image:url("assets/art/extras/frame-plain.webp") 50 / 16px stretch;
+  aspect-ratio:445 / 322;
+  border-width:26px;
+  border-image:url("assets/art/extras/pframe-land-gold.webp") 47 / 26px stretch;
 }
 .entry.has-photo .campus-photo figcaption{margin-top:8px;font-size:.78rem;text-align:left;}
 @media (max-width:700px){
