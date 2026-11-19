@@ -1457,11 +1457,6 @@ body[data-page="education"] .sub-label{background-image:url("assets/art/extras/t
   transform:none;
 }
 
-/* a goose-quill cursor, a pointing hand over links */
-html{cursor:url("assets/cursors/quill.png") 2 30, auto;}
-a,button,[role="button"],summary,.home-card,.size-btn,.icon-btn{cursor:url("assets/cursors/pointer.png") 5 2, pointer;}
-.fest-photo-wrap,.fest-photo-wrap img{cursor:zoom-in;}
-
 /* the monogram, sitting on the strip opposite the inkwell */
 footer::after{
   content:"";
@@ -1484,7 +1479,7 @@ footer::after{
 
 @media (max-width:700px){
   .plate img{width:190px;height:250px;border-width:28px;border-image-width:28px;}
-  .campus-photo img{border-width:30px 18px 18px;border-image-width:30px 18px 18px 18px;}
+  .campus-photo img{border-width:14px;border-image-width:14px;}
   .sub-label,:lang(ru) .sub-label{padding:.34em 1.5em .46em;font-size:1.3rem;overflow-wrap:anywhere;hyphens:auto;}
   .print-btn{padding-left:30px;}
 }
@@ -1496,8 +1491,8 @@ footer::after{
 .entry.has-photo .campus-photo{float:left;width:250px;max-width:none;margin:6px 30px 14px 4px;}
 .entry.has-photo .campus-photo img{
   aspect-ratio:4 / 3;
-  border-width:25px 16px 16px;
-  border-image:url("assets/art/extras/pframe-land-green.webp") 77 52 51 52 / 25px 16px 16px 16px stretch;
+  border-width:16px;
+  border-image:url("assets/art/extras/frame-plain.webp") 50 / 16px stretch;
 }
 .entry.has-photo .campus-photo figcaption{margin-top:8px;font-size:.78rem;text-align:left;}
 @media (max-width:700px){
