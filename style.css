@@ -1492,7 +1492,17 @@ footer::after{
   .sub-label{background:none;color:#000;text-shadow:none;width:auto;padding:0;}
   .print-btn::before,.pub-read::before,footer::after,.dc{display:none;}
 }
-.print-note{display:none;}
+/* the campus photo sits to the left of the Master's entry */
+.entry.has-photo .campus-photo{float:left;width:250px;max-width:none;margin:6px 30px 14px 4px;}
+.entry.has-photo .campus-photo img{
+  aspect-ratio:4 / 3;
+  border-width:25px 16px 16px;
+  border-image:url("assets/art/extras/pframe-land-green.webp") 77 52 51 52 / 25px 16px 16px 16px stretch;
+}
+.entry.has-photo .campus-photo figcaption{margin-top:8px;font-size:.78rem;text-align:left;}
+@media (max-width:700px){
+  .entry.has-photo .campus-photo{float:none;width:100%;max-width:260px;margin:4px auto 18px;}
+}.print-note{display:none;}
 @media print{
   :root{--ink:#111;--ink-soft:#555;--accent:#111;}
   html{font-size:13px !important;background:#fff;}
