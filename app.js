@@ -103,7 +103,6 @@ function speak(item){
   const arr = set[talkLang()] || set.en;
   item.n = (item.n == null ? Math.floor(Math.random() * arr.length) : item.n + 1) % arr.length;
   b.textContent = arr[item.n];
-  if (window.SB_SOUND) SB_SOUND.chime(item.key);
   TALK.active = item; TALK.last = item;
   b.classList.add('show');
   cancelAnimationFrame(TALK.raf);
@@ -216,7 +215,6 @@ function fillFactDay(){
 
 /* ---------- chrome ---------- */
 const ICON_TIME = '<svg viewBox="0 0 24 24" aria-hidden="true"><g class="ico-sun"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g><path class="ico-moon" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>';
-const ICON_SOUND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l10-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/><path class="ico-off" d="M3 3l18 18"/></svg>';
 const LANGBAR =
   '<div class="langbar">' +
     '<div class="lang-group" role="group" aria-label="Language">' +
@@ -233,7 +231,6 @@ const LANGBAR =
     '<span class="langbar-divider" aria-hidden="true"></span>' +
     '<div class="mood-group">' +
       '<button type="button" class="icon-btn time-btn" id="time-btn" aria-pressed="false">' + ICON_TIME + '</button>' +
-      '<button type="button" class="icon-btn sound-btn" id="sound-btn" aria-pressed="false">' + ICON_SOUND + '</button>' +
     '</div>' +
   '</div>';
 /* title page: the full-height scene with the name painted on the sky */
@@ -466,8 +463,7 @@ function applyLang(lang){
   });
   try { localStorage.setItem('sb-lang', lang); } catch(e){}
   /* labels of the little buttons */
-  const tb = $('time-btn'), sb = $('sound-btn');
-  if (sb) { sb.setAttribute('aria-label', ui().sound || 'Sound'); sb.title = ui().sound || 'Sound'; }
+  const tb = $('time-btn');
   if (tb && window.setTimeLabel) window.setTimeLabel();
 }
 
@@ -603,7 +599,6 @@ function start(){
       const l = btn.dataset.lang;
       if (l === LANG) return;
       try { localStorage.setItem('sb-lang', l); } catch(e){}
-      if (window.SB_SOUND) SB_SOUND.page();
       location.href = ROOT + (l === 'en' ? '' : l + '/') + PAGE_PATHS[PAGE] + location.hash;
     });
   });
@@ -626,23 +621,8 @@ function start(){
   const timeBtn = $('time-btn');
   timeBtn.addEventListener('click', function(){
     applyTime(currentTime() === 'night' ? 'day' : 'night', true);
-    if (window.SB_SOUND) SB_SOUND.chime('time');
   });
   window.setTimeLabel();
-
-  /* ---- sound: off until you switch it on ---- */
-  const soundBtn = $('sound-btn');
-  if (window.SB_SOUND) {
-    soundBtn.setAttribute('aria-pressed', String(SB_SOUND.wanted()));
-    soundBtn.addEventListener('click', function(){
-      soundBtn.setAttribute('aria-pressed', String(SB_SOUND.toggle()));
-    });
-    SB_SOUND.arm();    // starts at the first touch if it was left on
-    document.addEventListener('pointerdown', function(e){
-      const a = e.target.closest && e.target.closest('a[href]');
-      if (a && !a.hasAttribute('download') && a.origin === location.origin) SB_SOUND.page();
-    }, true);
-  } else { soundBtn.hidden = true; }
 
   /* ---- Text size (accessibility): normal / large / extra-large ---- */
   const FONT_SIZES = ['normal', 'large', 'xlarge'];

@@ -365,20 +365,20 @@ const FACTS_UI = {
     intro: "Every creature on this site knows a few facts. Click on them, or wait: they also speak up on their own. Each new fact you hear is written down here.",
     found: "facts found", locked: "Not found yet", all: "You have found every fact. Splendid!",
     reset: "Forget my progress", day: "Fact of the day", more: "All facts in the Bestiary →",
-    sound: "Sound", toNight: "Switch to night", toDay: "Switch to day"
+    toNight: "Switch to night", toDay: "Switch to day"
   },
   ru: {
     title: "Бестиарий",
     intro: "Каждое существо на этом сайте знает несколько фактов. Нажимайте на них или подождите: они заговорят сами. Каждый новый услышанный факт записывается здесь.",
     found: "фактов найдено", locked: "Ещё не найден", all: "Вы нашли все факты. Великолепно!",
     reset: "Забыть мой прогресс", day: "Факт дня", more: "Все факты в Бестиарии →",
-    sound: "Звук", toNight: "Включить ночь", toDay: "Включить день"
+    toNight: "Включить ночь", toDay: "Включить день"
   },
   sr: {
     title: "Bestijarijum",
     intro: "Svako stvorenje na ovom sajtu zna nekoliko činjenica. Kliknite na njih ili sačekajte: oglasiće se i same. Svaka nova činjenica koju čujete upisuje se ovde.",
     found: "pronađenih činjenica", locked: "Još nije pronađena", all: "Pronašli ste sve činjenice. Sjajno!",
     reset: "Zaboravi moj napredak", day: "Činjenica dana", more: "Sve činjenice u Bestijarijumu →",
-    sound: "Zvuk", toNight: "Uključi noć", toDay: "Uključi dan"
+    toNight: "Uključi noć", toDay: "Uključi dan"
   }
 };

@@ -134,7 +134,6 @@ $template = @'
 <script src="{{ROOT}}i18n.{{LANG}}.js"></script>
 <script src="{{ROOT}}scenes.js"></script>
 <script src="{{ROOT}}facts.js"></script>
-<script src="{{ROOT}}sound.js"></script>
 <script src="{{ROOT}}app.js"></script>
 </body>
 </html>
