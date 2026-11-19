@@ -479,7 +479,7 @@ $pages = [ordered]@{
   }
   'education' = @{
     grid = @(
-      @('','fox-monk','','goose-cap'),
+      @('fox-monk','fox-monk','fox-monk','goose-cap'),
       @('bell','candle','cloud-a','cloud-b'))
     paper = @(); crop = @{}
   }

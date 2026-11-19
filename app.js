@@ -319,8 +319,7 @@ const PAGER = PAGE_INDEX < 0 ? '' :
 
 const FOOTER =
   '<div class="scene scene--strip" aria-hidden="true"><div class="scene-stage" id="strip-stage"></div></div>' +
-  '<footer><span id="footer-text"></span><a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a>' +
-  '<small class="credit">' + ({ en:'Music', ru:'Музыка', sr:'Muzika' }[LANG] || 'Music') + ': «Dread Castle» — Scott Elliott (Scrabbit), <a href="https://opengameart.org/content/dread-castle" rel="noopener">CC BY 4.0</a></small></footer>';
+  '<footer><span id="footer-text"></span><a href="mailto:hello@saveliybyzov.ru">hello@saveliybyzov.ru</a></footer>';
 
 const main = $('main');
 BODY.insertAdjacentHTML('afterbegin', LANGBAR);

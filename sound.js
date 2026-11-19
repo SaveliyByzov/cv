@@ -1,7 +1,9 @@
 /* =====================================================================
-   Quiet sound: a dungeon-synth track in the background (assets/audio, `Dread Castle` by Scott Elliott, CC BY 4.0), a soft pluck made in the browser when a character speaks, a page rustle when you follow a link. Where the browser cannot play Ogg, a slow plucked melody is made in the browser instead. It is OFF until the visitor presses the note button,
-   and the choice is remembered. Browsers only allow sound after a touch or
-   key press, so a "left on" setting starts at the first touch.
+   Quiet sound effects, made in the browser (no audio files): a soft pluck
+   when a character speaks, a page rustle when you follow a link. It is OFF
+   until the visitor presses the note button, and the choice is remembered.
+   Browsers only allow sound after a touch or key press, so a left-on setting
+   starts at the first touch.
    ===================================================================== */
 (function(){
 'use strict';
@@ -10,7 +12,7 @@ const KEY = 'sb-sound';
 /* D dorian, D3 .. A4: a gentle, medieval-sounding mode */
 const SCALE = [146.83, 164.81, 174.61, 196.00, 220.00, 246.94, 261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
 
-let ctx = null, master = null, on = false, melT = 0, idx = 4, armed = false, track = null, fadeT = 0;
+let ctx = null, master = null, on = false, melT = 0, idx = 4, armed = false;
 const cache = {};
 
 function wanted(){ try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
@@ -60,17 +62,6 @@ function pluck(freq, gain){
   src.start();
 }
 
-function melody(){
-  clearTimeout(melT);
-  if (on && ctx && !document.hidden && ctx.state === 'running' && Math.random() > .2) {
-    const step = [-2, -1, -1, 1, 1, 2][Math.floor(Math.random() * 6)];
-    idx = Math.max(0, Math.min(SCALE.length - 1, idx + step));
-    pluck(SCALE[idx], .2 + Math.random() * .1);
-    if (Math.random() < .25) pluck(SCALE[Math.max(0, idx - 2)], .11);
-  }
-  melT = setTimeout(melody, 520 + Math.random() * 800);
-}
-
 function fade(to, secs){
   if (!ctx || !master) return;
   const t = ctx.currentTime;
@@ -79,48 +70,18 @@ function fade(to, secs){
   master.gain.linearRampToValueAtTime(to, t + secs);
 }
 
-/* the background track (Ogg Vorbis); its place is kept from page to page */
-const TRACK_VOL = .4;
-function trackSrc(){ return (document.body.dataset.root || '') + 'assets/audio/dread-castle.ogg'; }
-function canTrack(){ const a = document.createElement('audio'); return !!(a.canPlayType && a.canPlayType('audio/ogg; codecs="vorbis"')); }
-function fadeTrack(to, ms, done){
-  clearInterval(fadeT);
-  if (!track) return;
-  const from = track.volume, t0 = Date.now();
-  fadeT = setInterval(function(){
-    const k = Math.min(1, (Date.now() - t0) / ms);
-    try { track.volume = from + (to - from) * k; } catch (e) {}
-    if (k >= 1) { clearInterval(fadeT); if (done) done(); }
-  }, 40);
-}
-function startTrack(){
-  if (!canTrack()) return false;
-  if (!track) {
-    track = new Audio(trackSrc());
-    track.loop = true; track.volume = 0;
-    let at = 0; try { at = parseFloat(sessionStorage.getItem('sb-music-t') || '0') || 0; } catch (e) {}
-    if (at) track.addEventListener('loadedmetadata', function(){ try { track.currentTime = at % (track.duration || 1e9); } catch (e) {} }, { once:true });
-  }
-  const pr = track.play();
-  if (pr && pr.catch) pr.catch(function(){});
-  fadeTrack(TRACK_VOL, 1800);
-  return true;
-}
-
 function start(){
   const c = ensure();
   if (!c) return false;
   if (c.state === 'suspended') c.resume();
   on = true;
   fade(.5, .9);
-  if (!startTrack()) melody();
   return true;
 }
 function stop(){
   on = false;
   fade(0, .4);
   clearTimeout(melT);
-  fadeTrack(0, 500, function(){ if (track) track.pause(); });
 }
 
 function hash(s){ let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
@@ -164,13 +125,8 @@ window.SB_SOUND = {
 };
 
 document.addEventListener('visibilitychange', function(){
-  if (document.hidden) { if (track) track.pause(); }
-  else if (on && track) { const pr = track.play(); if (pr && pr.catch) pr.catch(function(){}); }
   if (!ctx) return;
   if (document.hidden) ctx.suspend();
   else if (on) ctx.resume();
-});
-window.addEventListener('pagehide', function(){
-  if (track && on) { try { sessionStorage.setItem('sb-music-t', String(track.currentTime)); } catch (e) {} }
 });
 })();

@@ -208,7 +208,7 @@ const SCENES = {
       ground: 'Охристая дорога к воротам, лопухи.'
     }, 'experience/ground.webp', { far:20, mid:11.25, ground:0 }),
     sprites: [
-      { say:'fox', id:'fox-monk',  file:'education/fox-monk.webp',  frames:1, fps:1, w:150, x:22, y:20, plane:'mid', move:'pace', dur:26, range:420,
+      { say:'fox', id:'fox-monk',  file:'education/fox-monk.webp',  frames:3, fps:6, w:150, x:22, y:20, plane:'mid', move:'pace', dur:26, range:420,
         note:'Лис-монах несёт стопку книг выше головы: шаг левой → середина → шаг правой.' },
       { say:'goose', id:'goose-cap', file:'education/goose-cap.webp', frames:1, fps:1, w:110, x:72, y:20, plane:'mid', move:'hop', dur:5,
         note:'Гусь в академической шапочке с важным видом.' },
@@ -308,7 +308,7 @@ const SCENES = {
 const CARD_ART = {
   experience: { file:'experience/owl-magister.webp',   frames:3 },
   research:   { file:'research/cat-astrologer.webp',   frames:3 },
-  education:  { file:'education/fox-monk.webp',        frames:1 },
+  education:  { file:'education/fox-monk.webp',        frames:3 },
   skillslang: { file:'skills/dragon-interpreter.webp', frames:3 },
   festivals:  { file:'festivals/bear-stilts.webp',     frames:3 }
 };

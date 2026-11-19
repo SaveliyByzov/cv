@@ -175,7 +175,7 @@ h1,h2,h3,h4{font-synthesis:none;}
   border-bottom:var(--line) solid var(--ink);
 }
 .scene--hero{height:min(100svh, 860px);min-height:600px;}
-.scene--chapter{--u:clamp(7px, 1vw, 14px);height:clamp(440px, calc(var(--u) * 48), 660px);--k:.95;}
+.scene--chapter{--u:clamp(7px, 1vw, max(14px, .7vw));height:clamp(440px, calc(var(--u) * 48), 1300px);--k:.95;}
 @media (max-width:1100px){.scene--chapter{--k:.8;}}
 .scene--strip{height:150px;border-top:var(--line) solid var(--ink);background:var(--vellum) var(--grain);}
 .scene-stage{position:absolute;inset:0;z-index:0;}
@@ -225,7 +225,7 @@ h1,h2,h3,h4{font-synthesis:none;}
 /* a single building, not a band: keep its proportions and centre it */
 .layer--fit.has-art{background-size:auto 100%;}
 /* chapter layers that keep their own proportions (nothing cropped), own height of the scene */
-.scene--chapter[style*="--hu"]{height:clamp(440px, calc(var(--u) * var(--hu)), 760px);}
+.scene--chapter[style*="--hu"]{height:clamp(440px, calc(var(--u) * var(--hu)), 1500px);}
 .scene--chapter .layer--b{bottom:calc(var(--u) * var(--b));}
 .scene--chapter .layer--full.has-art{height:auto; aspect-ratio:var(--ar, 4.6);}
 @media (max-width:700px){.scene--chapter .layer--full{left:50%; right:auto; width:max(108%, 720px); translate:-50% 0;}}
@@ -1356,7 +1356,6 @@ footer::before{
 /* the fox has one pose only: it walks with a little waddle (a step, a lean) */
 .sprite[data-move="pace"] .sprite-img[style*="--frames: 1;"]{transform-origin:50% 100%;animation:mv-waddle .62s ease-in-out infinite alternate;}
 @keyframes mv-waddle{from{transform:translateY(0) rotate(-2.2deg);}to{transform:translateY(-5px) rotate(2.2deg);}}
-footer .credit{display:block;margin-top:8px;font:400 .82rem/1.3 var(--body);letter-spacing:0;opacity:.8;}
 /* =====================================================================
    Second batch of painted details: photo frames, heading tags, seals,
    initials per section, fleur bullets, cursors, monogram, page turn
@@ -1485,7 +1484,7 @@ footer::after{
 @media (max-width:700px){
   .plate img{width:190px;height:250px;border-width:28px;border-image-width:28px;}
   .campus-photo img{border-width:36px 22px 22px;border-image-width:36px 22px 22px 22px;}
-  .sub-label{padding:.34em 1.8em .46em;}
+  .sub-label,:lang(ru) .sub-label{padding:.34em 1.5em .46em;font-size:1.3rem;overflow-wrap:anywhere;hyphens:auto;}
   .print-btn{padding-left:30px;}
 }
 @media print{
