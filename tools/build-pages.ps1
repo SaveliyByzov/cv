@@ -197,7 +197,8 @@ foreach ($pg in $pages) {
     # the pictures of this page's scene
     $pre = New-Object System.Collections.Generic.List[string]
     foreach ($n in 'far', 'mid', 'ground') { $pre.Add('<link rel="preload" as="image" href="' + $rootRel + 'assets/art/' + $pg.art + '/' + $n + '.webp" type="image/webp">') }
-    $pre.Add('<link rel="preload" as="image" href="' + $rootRel + 'assets/art/sky.webp" type="image/webp">')
+    $skyFile = switch ($pg.key) { 'experience' { 'sky-dawn' } 'research' { 'sky-night' } 'education' { 'sky-noon' } 'skillslang' { 'sky-gold' } 'festivals' { 'sky-sunset' } default { 'sky-day' } }
+    $pre.Add('<link rel="preload" as="image" href="' + $rootRel + 'assets/art/' + $skyFile + '.webp" type="image/webp">')
     if ($pg.water) { $pre.Add('<link rel="preload" as="image" href="' + $rootRel + 'assets/art/water.webp" type="image/webp">') }
 
     # the markup of <main>: the same in every language; relative links get one more '../' under /ru/ and /sr/

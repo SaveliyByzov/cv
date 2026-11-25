@@ -347,7 +347,7 @@ if (TALK.items.length) startAuto(5000);
    built-in CSS ones as soon as the files exist */
 if (HAS_SCENES) {
   const WATER_PAGES = ['home', 'cv', 'festivals'];
-  ['sky'].concat(WATER_PAGES.indexOf(PAGE) >= 0 ? ['water'] : []).forEach(function(n){
+  (WATER_PAGES.indexOf(PAGE) >= 0 ? ['water'] : []).forEach(function(n){
     const im = new Image();
     const href = new URL(ROOT + ART_DIR + n + '.webp', document.baseURI).href;
     im.onload = function(){

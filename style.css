@@ -1312,7 +1312,7 @@ html[data-time="night"] body:not([data-page="research"]) .chapter-num{color:var(
    corners, bookmark, inkwell, wood footer, the map
    ===================================================================== */
 body{
-  background:var(--vellum) url("assets/art/extras/tex-parchment.webp") 0 0 / 900px auto;
+  background:var(--vellum) url("assets/art/tex-vellum.webp") 0 0 / 760px auto;
   background-blend-mode:multiply;
 }
 .home-rule,.rule{
@@ -1355,7 +1355,7 @@ body{
 }
 footer{
   position:relative;
-  background:linear-gradient(rgba(46,29,18,.66), rgba(46,29,18,.66)), url("assets/art/extras/tex-wood.webp") 0 0 / 340px auto, var(--ink);
+  background:linear-gradient(rgba(46,29,18,.66), rgba(46,29,18,.66)), url("assets/art/tex-oak.webp") 0 0 / 420px auto, var(--ink);
 }
 footer::before{
   content:"";
@@ -1510,12 +1510,37 @@ footer::after{
   margin:34px 0 0;
   padding:14px 20px 16px;
   border-left:5px solid var(--ochre);
-  background:color-mix(in srgb, var(--vellum-deep) 55%, transparent);
+  background:linear-gradient(rgba(241,228,192,.45), rgba(241,228,192,.45)), url("assets/art/tex-vellum-stain.webp") center / cover;
   font-style:italic;
   font-size:1.08rem;
   line-height:1.55;
 }
 .winenote strong{font-style:normal;font-family:var(--caps);letter-spacing:.04em;}
+/* =====================================================================
+   Painted skies: one per chapter, the starry one for night mode
+   ===================================================================== */
+body[data-page="home"],body[data-page="cv"]{--sky-img:url("assets/art/sky-day.webp");}
+body[data-page="experience"]{--sky-img:url("assets/art/sky-dawn.webp");}
+body[data-page="education"]{--sky-img:url("assets/art/sky-noon.webp");}
+body[data-page="festivals"]{--sky-img:url("assets/art/sky-sunset.webp");}
+.scene--hero,.scene--chapter{background:var(--sky-img, none) center / 100% 100% no-repeat, var(--c-sky);}
+/* the gold ground of a Gothic panel and the star ceiling are patterns: they tile, they are not stretched */
+body[data-page="skillslang"] .scene--chapter{background:url("assets/art/sky-gold.webp") 0 0 / 640px auto repeat, var(--c-sky);}
+html[data-time="night"] body[data-page] .scene--hero,
+html[data-time="night"] body[data-page] .scene--chapter{background:url("assets/art/sky-night.webp") 0 0 / 720px auto repeat, #1b2f6b;}
+/* a pale wash lifts the dark top of the day skies so the title stays readable; none at night */
+body[data-page="home"],body[data-page="cv"]{--sky-lift:rgba(255,247,226,.5);}
+body[data-page="experience"]{--sky-lift:rgba(255,247,226,.14);}
+body[data-page="education"]{--sky-lift:rgba(255,247,226,.2);}
+body[data-page="festivals"]{--sky-lift:rgba(255,247,226,.45);}
+.scene--hero::before,.scene--chapter::before,
+html.tex-sky .scene--hero::before,html.tex-sky .scene--chapter::before{
+  background:linear-gradient(to bottom, var(--sky-lift, transparent), transparent 72%);
+  mix-blend-mode:normal;
+  opacity:1;
+}
+html[data-time="night"] .scene--hero::before,html[data-time="night"] .scene--chapter::before{display:none;}
+.scene--hero .scene-stage::before,.scene--chapter .scene-stage::before{opacity:.5;}
 .print-note{display:none;}
 @media print{
   :root{--ink:#111;--ink-soft:#555;--accent:#111;}

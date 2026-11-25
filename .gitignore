@@ -4,3 +4,6 @@ assets/art/**/*.png
 assets/art/sky.jpg
 assets/art/water.jpg
 assets/art/extras/*.jpg
+assets/art/sky-*.jpg
+assets/art/tex-*.jpg
+assets/art/_raw/textures/
