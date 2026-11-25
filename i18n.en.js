@@ -47,16 +47,9 @@ T.en = {
         "Led guided tours and thematic excursions on regional history and architecture for Russian-speaking and international visitors"
       ]
     },
-    "exp3": {
-      "title": "Wine Shop Consultant",
-      "place": "Wine shop",
-      "date": "4 years",
-      "blurb": "Still on the wish list: gruit. Before hops took over, ale was flavoured with herbs such as bog myrtle, yarrow and marsh rosemary, and in the Middle Ages selling that herb mix was a monopoly that earned lords and bishops good money. Anyone who loves both ale and Old English poetry can hardly walk past it. And Vinho Verde means “green wine” in Portuguese: green as in young, not as in colour.",
-      "li": [
-        "Four years advising customers in a wine shop and helping them choose wine and beer",
-        "Beer: ales, both heavily hopped and light; my favourite style is the New England Pale Ale",
-        "Wine: New Zealand and Chile above all; depending on mood and weather, a Riesling from Rhineland-Palatinate, a Vinho Verde or a Sangiovese from Sicily"
-      ]
+    "wineNote": {
+      "lead": "Wine and beer.",
+      "text": "I know them well and spent four years advising people on what to pour. In beer I like ales, both heavily hopped and light, and my favourite style is the New England Pale Ale. In wine, New Zealand and Chile; depending on mood and weather I might open a Riesling from Rhineland-Palatinate, a Vinho Verde or a Sangiovese from Sicily. Still on the wish list: gruit. Before hops took over, ale was flavoured with herbs such as bog myrtle, yarrow and marsh rosemary, and in the Middle Ages selling that herb mix was a monopoly that earned lords and bishops good money. Anyone who loves both ale and Old English poetry can hardly walk past it. And Vinho Verde means “green wine” in Portuguese: green as in young, not as in colour."
     },
     "edu1": {
       "title": "Master&rsquo;s Degree in Pedagogy",

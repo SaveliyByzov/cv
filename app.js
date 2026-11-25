@@ -444,7 +444,7 @@ function applyLang(lang){
 
   fillEntry('exp1', t.exp1);
   fillEntry('exp2', t.exp2);
-  fillEntry('exp3', t.exp3);
+  if (t.wineNote && $('wine-lead')) { setText('wine-lead', t.wineNote.lead); setText('wine-text', t.wineNote.text); }
   fillEdu('edu1', t.edu1);
   fillEdu('edu2', t.edu2);
   fillList('activity', t.activity);

@@ -47,16 +47,9 @@ T.sr = {
         "Vodio ture i tematske obilaske o regionalnoj istoriji i arhitekturi za rusko govorne i strane posetioce"
       ]
     },
-    "exp3": {
-      "title": "Konsultant u vinoteci",
-      "place": "Vinoteka",
-      "date": "4 godine",
-      "blurb": "Na listi želja i dalje je gruit. Pre pobede hmelja ejl se začinjao biljem, poput barskog mirta, hajdučke trave i barskog ružmarina, a u srednjem veku prodaja te mešavine bila je monopol koji je donosio dobar novac vlastelinima i biskupima. Ko voli i ejl i staroenglesku poeziju, teško može da ga mimoiđe. A „vinho verde“ na portugalskom znači „zeleno vino“: zeleno u smislu mlado, a ne po boji.",
-      "li": [
-        "Četiri godine savetovao kupce u vinoteci i pomagao im pri izboru vina i piva",
-        "Pivo: ejlovi, i jako hmeljeni i laki; omiljeni stil je New England Pale Ale",
-        "Vino: najviše Novi Zeland i Čile; zavisno od raspoloženja i vremena uzmem rizling iz Rajnland-Pfalca, vinjo verde ili sanđovese sa Sicilije"
-      ]
+    "wineNote": {
+      "lead": "Vino i pivo.",
+      "text": "Dobro se razumem u njih i četiri godine sam savetovao ljude šta da sipaju u čašu. Od piva volim ejlove, i jako hmeljene i lake; omiljeni stil je New England Pale Ale. Od vina najviše Novi Zeland i Čile; zavisno od raspoloženja i vremena uzmem rizling iz Rajnland-Pfalca, vinjo verde ili sanđovese sa Sicilije. Na listi želja i dalje je gruit. Pre pobede hmelja ejl se začinjao biljem, poput barskog mirta, hajdučke trave i barskog ružmarina, a u srednjem veku prodaja te mešavine bila je monopol koji je donosio dobar novac vlastelinima i biskupima. Ko voli i ejl i staroenglesku poeziju, teško može da ga mimoiđe. A „vinho verde“ na portugalskom znači „zeleno vino“: zeleno u smislu mlado, a ne po boji."
     },
     "edu1": {
       "title": "Master studije pedagogije",

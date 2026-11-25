@@ -7,7 +7,7 @@
    VERSION is stamped by tools/build-pages.ps1 on every build; a new
    version clears the old cache.
    ===================================================================== */
-const VERSION = '202611251436';
+const VERSION = '202611251438';
 const CACHE = 'sb-' + VERSION;
 
 self.addEventListener('install', function(){ self.skipWaiting(); });
