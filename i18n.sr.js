@@ -47,6 +47,16 @@ T.sr = {
         "Vodio ture i tematske obilaske o regionalnoj istoriji i arhitekturi za rusko govorne i strane posetioce"
       ]
     },
+    "exp3": {
+      "title": "Konsultant u vinoteci",
+      "place": "Vinoteka",
+      "date": "4 godine",
+      "blurb": "",
+      "li": [
+        "Četiri godine savetovao kupce u vinoteci i pomagao im pri izboru vina i piva",
+        "Dobro se razumem u vino i pivo"
+      ]
+    },
     "edu1": {
       "title": "Master studije pedagogije",
       "place": "Severni arktički federalni univerzitet, Arhangelsk",

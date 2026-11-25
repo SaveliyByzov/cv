@@ -47,6 +47,16 @@ T.en = {
         "Led guided tours and thematic excursions on regional history and architecture for Russian-speaking and international visitors"
       ]
     },
+    "exp3": {
+      "title": "Wine Shop Consultant",
+      "place": "Wine shop",
+      "date": "4 years",
+      "blurb": "",
+      "li": [
+        "Advised customers in a wine shop for four years and helped them choose wine and beer",
+        "Good knowledge of wine and beer"
+      ]
+    },
     "edu1": {
       "title": "Master&rsquo;s Degree in Pedagogy",
       "place": "Northern (Arctic) Federal University, Arkhangelsk",
