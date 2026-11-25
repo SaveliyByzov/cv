@@ -1492,7 +1492,9 @@ footer::after{
   .print-btn{padding-left:30px;}
 }
 @media print{
-  .print-btn::before,.pub-read::before,footer::after,.dc{display:none;}
+  .print-btn::before,.pub-read::before,footer::after{display:none;}
+  .dc{float:none;display:inline;width:auto;height:auto;margin:0;background:none;color:inherit;font:inherit;}
+  .reveal{opacity:1 !important;transform:none !important;animation:none !important;}
 }
 /* the campus photo sits to the left of the Master's entry */
 .entry.has-photo .campus-photo{float:left;width:250px;max-width:none;margin:6px 30px 14px 4px;}

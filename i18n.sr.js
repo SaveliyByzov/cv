@@ -51,10 +51,11 @@ T.sr = {
       "title": "Konsultant u vinoteci",
       "place": "Vinoteka",
       "date": "4 godine",
-      "blurb": "",
+      "blurb": "Na listi želja i dalje je gruit. Pre pobede hmelja ejl se začinjao biljem, poput barskog mirta, hajdučke trave i barskog ružmarina, a u srednjem veku prodaja te mešavine bila je monopol koji je donosio dobar novac vlastelinima i biskupima. Ko voli i ejl i staroenglesku poeziju, teško može da ga mimoiđe. A „vinho verde“ na portugalskom znači „zeleno vino“: zeleno u smislu mlado, a ne po boji.",
       "li": [
         "Četiri godine savetovao kupce u vinoteci i pomagao im pri izboru vina i piva",
-        "Dobro se razumem u vino i pivo"
+        "Pivo: ejlovi, i jako hmeljeni i laki; omiljeni stil je New England Pale Ale",
+        "Vino: najviše Novi Zeland i Čile; zavisno od raspoloženja i vremena uzmem rizling iz Rajnland-Pfalca, vinjo verde ili sanđovese sa Sicilije"
       ]
     },
     "edu1": {

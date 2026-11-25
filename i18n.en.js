@@ -51,10 +51,11 @@ T.en = {
       "title": "Wine Shop Consultant",
       "place": "Wine shop",
       "date": "4 years",
-      "blurb": "",
+      "blurb": "Still on the wish list: gruit. Before hops took over, ale was flavoured with herbs such as bog myrtle, yarrow and marsh rosemary, and in the Middle Ages selling that herb mix was a monopoly that earned lords and bishops good money. Anyone who loves both ale and Old English poetry can hardly walk past it. And Vinho Verde means “green wine” in Portuguese: green as in young, not as in colour.",
       "li": [
-        "Advised customers in a wine shop for four years and helped them choose wine and beer",
-        "Good knowledge of wine and beer"
+        "Four years advising customers in a wine shop and helping them choose wine and beer",
+        "Beer: ales, both heavily hopped and light; my favourite style is the New England Pale Ale",
+        "Wine: New Zealand and Chile above all; depending on mood and weather, a Riesling from Rhineland-Palatinate, a Vinho Verde or a Sangiovese from Sicily"
       ]
     },
     "edu1": {

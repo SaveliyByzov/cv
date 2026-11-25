@@ -7,6 +7,6 @@ if (-not (Test-Path $edge)) { $edge = "C:\Program Files\Microsoft\Edge\Applicati
 $out  = Join-Path $PSScriptRoot "..\assets\cv"
 $paths = @{ en = '/cv/'; ru = '/ru/cv/'; sr = '/sr/cv/' }
 foreach ($l in 'en','ru','sr') {
-  Start-Process -Wait -FilePath $edge -ArgumentList "--headless=new","--user-data-dir=`"$env:TEMP\cv-pdf-profile`"","--no-first-run","--disable-gpu","--virtual-time-budget=15000","--print-to-pdf=`"$out\Byzov-CV-$l.pdf`"","--no-pdf-header-footer","http://localhost:8150$($paths[$l])"
+  Start-Process -Wait -FilePath $edge -ArgumentList "--headless=new","--user-data-dir=`"$env:TEMP\cv-pdf-profile`"","--no-first-run","--disable-gpu","--virtual-time-budget=40000","--print-to-pdf=`"$out\Byzov-CV-$l.pdf`"","--no-pdf-header-footer","http://localhost:8150$($paths[$l])"
   Write-Host ("{0}: {1} KB" -f $l, [int]((Get-Item "$out\Byzov-CV-$l.pdf").Length / 1KB))
 }
