@@ -198,7 +198,8 @@ T.sr = {
       { "icon": "drawing", "title": "Crtanje", "desc": "Godine umetničke škole ostavile su trag — i dalje volim da sednem i crtam kad mi se ukaže prilika." },
       { "icon": "hiking", "title": "Planinarenje i pešačenje", "desc": "Čitavu mladost sam proveo u planinarskom klubu i i dalje redovno idem na ekspedicije." },
       { "icon": "travel", "title": "Putovanja", "desc": "Sledeće sanjam o Skandinaviji i Aljasci — Srbija je bila san, sve dok nije postala dom." },
-      { "icon": "woodwork", "title": "Rezbarenje i stolarstvo", "desc": "U slobodno vreme sopstvenim rukama pravim štitove i gradim staklenike." }
+      { "icon": "woodwork", "title": "Rezbarenje i stolarstvo", "desc": "U slobodno vreme sopstvenim rukama pravim štitove i gradim staklenike." },
+      { "icon": "wine", "title": "Vino i pivo", "desc": "Dobro se razumem u njih. Od piva volim ejlove, i hmeljne i lake, a omiljeni je New England Pale Ale; od vina Novi Zeland i Čile. A gruit, srednjovekovni biljni ejl, flaša je koju još sanjam da probam." }
     ],
     "footer": "Saveliy Byzov // Beograd, Srbija // "
 };

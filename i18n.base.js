@@ -12,6 +12,7 @@ const ICONS = {
   hiking: '<path d="M2 20 8 8l3.5 6L14 10l8 10Z"/><circle cx="8" cy="4" r="1.6"/>',
   travel: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2Z"/>',
   woodwork: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.4"/>',
+  wine: '<path d="M7 3h10l-1 6a4 4 0 0 1-8 0L7 3Z"/><line x1="12" y1="13" x2="12" y2="20"/><line x1="8" y1="21" x2="16" y2="21"/>',
   drawing: '<path d="M4 20l1.5-5.5L14 6l4 4-8.5 8.5L4 20Z"/><path d="M12.5 7.5l4 4"/><path d="M3 21h5"/>'
 };
 

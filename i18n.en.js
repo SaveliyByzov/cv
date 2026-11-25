@@ -198,7 +198,8 @@ T.en = {
       { "icon": "drawing", "title": "Drawing", "desc": "Years of art-school training left their mark — I still like to sit down and draw when I get the chance." },
       { "icon": "hiking", "title": "Hiking &amp; trekking", "desc": "I spent my whole youth in a local hiking club, and I still head out on expeditions regularly." },
       { "icon": "travel", "title": "Travel", "desc": "I dream of seeing Scandinavia and Alaska next — Serbia used to be the dream before it became home." },
-      { "icon": "woodwork", "title": "Woodworking &amp; carpentry", "desc": "In my spare time, I make shields and build greenhouses by hand." }
+      { "icon": "woodwork", "title": "Woodworking &amp; carpentry", "desc": "In my spare time, I make shields and build greenhouses by hand." },
+      { "icon": "wine", "title": "Wine &amp; beer", "desc": "I know them well. In beer I lean towards ales, hoppy and light alike, with the New England Pale Ale as my favourite; in wine, New Zealand and Chile. And gruit, a medieval herbal ale, is the bottle I still dream of trying." }
     ],
     "footer": "Savely Byzov // Belgrade, Serbia // "
 };
